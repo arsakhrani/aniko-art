@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SideMenu from "./SideMenu";
 
 export default function Header() {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -39,6 +40,7 @@ export default function Header() {
       justifyContent: "space-around",
       alignItems: "flex-end",
       cursor: "pointer",
+      zIndex: 2,
     },
     topLine: {
       width: "100%",
@@ -83,6 +85,7 @@ export default function Header() {
         <span style={styles.midLine}></span>
         <span style={styles.bottomLine}></span>
       </span>
+      <SideMenu visible={toggleMenu} />
     </header>
   );
 }
