@@ -1,0 +1,202 @@
+:root {
+  --color-one: #aa8a6d;
+  --color-one-alt: #6383e9;
+  --color-two: #d4c4b5;
+  --color-two-alt: #94b0ff;
+  --color-three: #eae2db;
+  --color-three-alt: #c3d2ff;
+  --color-four: #593825;
+  --color-four-alt: #1b41c9;
+  --color-five: #bba18a;
+  --color-five-alt: #3761e4;
+  --color-six: #ccb9a7;
+  --color-six-alt: #94b0ff;
+  --color-seven: #ddd0c5;
+  --color-seven-alt: #c3d2ff;
+  --color-eight: #e3d8cf;
+  --color-eight-alt: #94b0ff;
+  --color-nine: #f2e6d8;
+  --color-nine-alt: #94b0ff;
+  --color-ten: #b4987f;
+  --color-ten-alt: #5c9cf2;
+  --color-eleven: #c5ae9a;
+  --color-eleven-alt: #6383e9;
+  --color-twelve: #e6dcd4;
+  --color-twelve-alt: #c3d2ff;
+  --color-thirteen: #f2efe9;
+  --color-thirteen-alt: #f2efe9;
+  --color-fourteen: #b69a81;
+  --color-fourteen-alt: #6383e9;
+}
+
+.country:hover {
+  cursor: pointer;
+}
+
+.country .map path {
+  fill: #f2efe9;
+}
+
+.country:hover .map path {
+  fill: #002952;
+}
+
+.country .circle > g {
+  stroke: #343331;
+}
+
+.country .circle > path {
+  fill: #343331;
+}
+
+.country:hover .circle > g {
+  stroke: #fff;
+}
+
+.country:hover .circle > path,
+.country:hover text {
+  fill: #fff;
+  transition: fill 1s linear;
+}
+
+.animated .circle > g {
+  animation: blink 3s infinite;
+  stroke: #002952;
+  opacity: 0.7;
+}
+
+.animated .circle > path {
+    fill: #002952;
+    transition: fill 1s linear;
+  }
+
+@keyframes blink {
+  0% {
+    stroke-width: 3px;
+  }
+  20% {
+    stroke-width: 20px;
+  }
+  40%{
+    stroke-width: 15px;
+  }
+  70%{
+    stroke-width: 40px;
+  }
+}
+
+.country text {
+  fill: rgba(255, 255, 255, 0);
+}
+
+.color-one {
+  fill: var(--color-one);
+}
+
+.country:hover .color-one {
+  fill: var(--color-one-alt);
+}
+
+.color-two {
+  fill: var(--color-two);
+}
+
+.country:hover .color-two {
+  fill: var(--color-two-alt);
+}
+
+.color-three {
+  fill: var(--color-three);
+}
+
+.country:hover .color-three {
+  fill: var(--color-three-alt);
+}
+
+.color-four {
+  fill: var(--color-four);
+}
+
+.country:hover .color-four {
+  fill: var(--color-four-alt);
+}
+
+.color-five {
+  fill: var(--color-five);
+}
+
+.country:hover .color-five {
+  fill: var(--color-five-alt);
+}
+
+.color-six {
+  fill: var(--color-six);
+}
+
+.country:hover .color-six {
+  fill: var(--color-six-alt);
+}
+
+.color-seven {
+  fill: var(--color-seven);
+}
+
+.country:hover .color-seven {
+  fill: var(--color-seven-alt);
+}
+
+.color-eight {
+  fill: var(--color-eight);
+}
+
+.country:hover .color-eight {
+  fill: var(--color-eight-alt);
+}
+
+.color-nine {
+  fill: var(--color-nine);
+}
+
+.country:hover .color-nine {
+  fill: var(--color-nine-alt);
+}
+
+.color-ten {
+  fill: var(--color-ten);
+}
+
+.country:hover .color-ten {
+  fill: var(--color-ten-alt);
+}
+
+.color-eleven {
+  fill: var(--color-eleven);
+}
+
+.country:hover .color-eleven {
+  fill: var(--color-eleven-alt);
+}
+
+.color-twelve {
+  fill: var(--color-twelve);
+}
+
+.country:hover .color-twelve {
+  fill: var(--color-twelve-alt);
+}
+
+.color-thirteen {
+  fill: var(--color-thirteen);
+}
+
+.country:hover .color-thirteen {
+  fill: var(--color-thirteen-alt);
+}
+
+.color-fourteen {
+  fill: var(--color-fourteen);
+}
+
+.country:hover .color-fourteen {
+  fill: var(--color-fourteen-alt);
+}
