@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { ReactComponent as Continent } from "../../../assets/icons/map/countries/continent.svg";
+import { ReactComponent as Continent } from "../../../../assets/icons/map/continent.svg";
 import "./interactiveMap.css";
 
-export default function InteractiveMapTwo() {
+export default function InteractiveMap() {
   const [flag, setFlag] = useState(true);
   const [allowAnimation, setAllowAnimation] = useState(true);
 
@@ -46,7 +46,7 @@ export default function InteractiveMapTwo() {
 
 const styles = {
   container: {
-    height: "100vh",
+    height: "106vh",
   },
   titleBox: {
     position: "absolute",
