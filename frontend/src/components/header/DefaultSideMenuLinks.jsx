@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
+import { Link } from "react-router-dom"
 
 export default function DefaultSideMenuLinks() {
-  const [linkHover, setLinkHover] = useState("");
+  const [linkHover, setLinkHover] = useState("")
 
   return (
     <div style={styles.container}>
-      <a
+      <Link
+        to={"/discover"}
         onMouseEnter={() => setLinkHover("Discover")}
         onMouseLeave={() => setLinkHover(null)}
         style={styles.link}
       >
         Discover
-      </a>
+      </Link>
       <div
         style={{
           ...styles.lineBlocker,
@@ -70,7 +72,7 @@ export default function DefaultSideMenuLinks() {
         }}
       ></div>
     </div>
-  );
+  )
 }
 
 const styles = {
@@ -79,7 +81,6 @@ const styles = {
     paddingLeft: "3em",
   },
   link: {
-    fontFamily: "'Crimson Text', serif",
     fontSize: "3em",
     cursor: "pointer",
     borderBottom: "2px solid black",
@@ -92,4 +93,4 @@ const styles = {
     top: -2,
     transition: "transform .3s cubic-bezier(0, .52, 0, 1)",
   },
-};
+}

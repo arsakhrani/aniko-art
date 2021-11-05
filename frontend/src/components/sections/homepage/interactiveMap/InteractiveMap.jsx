@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { ReactComponent as Continent } from "../../../../assets/icons/map/continent.svg";
-import "./interactiveMap.css";
+import React, { useEffect, useState } from "react"
+import { ReactComponent as Continent } from "../../../../assets/icons/map/continent.svg"
+import "./interactiveMap.css"
 
 export default function InteractiveMap() {
-  const [flag, setFlag] = useState(true);
-  const [allowAnimation, setAllowAnimation] = useState(true);
+  const [flag, setFlag] = useState(true)
+  const [allowAnimation, setAllowAnimation] = useState(true)
 
   useEffect(() => {
-    const countries = document.getElementsByClassName("country");
-    const animated = document.getElementsByClassName("animated");
+    const countries = document.getElementsByClassName("country")
+    const animated = document.getElementsByClassName("animated")
     if (animated.length > 0) {
-      animated[0].classList.remove("animated");
+      animated[0].classList.remove("animated")
     }
     if (allowAnimation) {
-      const randomIndex = Math.floor(Math.random() * (countries.length - 1));
-      countries[randomIndex].classList.add("animated");
+      const randomIndex = Math.floor(Math.random() * (countries.length - 1))
+      countries[randomIndex].classList.add("animated")
     }
     setTimeout(() => {
-      setFlag(!flag);
-    }, 3000);
-  }, [flag]);
+      setFlag(!flag)
+    }, 3000)
+  }, [flag])
 
   return (
     <div style={styles.container}>
@@ -39,9 +39,13 @@ export default function InteractiveMap() {
           style={{ height: 1, width: 135, backgroundColor: "#F2A16B" }}
         ></div>
       </div>
-      <Continent width="100vw" onMouseLeave={()=> setAllowAnimation(true)} onMouseEnter={() => setAllowAnimation(false)}/>
+      <Continent
+        width="100vw"
+        onMouseLeave={() => setAllowAnimation(true)}
+        onMouseEnter={() => setAllowAnimation(false)}
+      />
     </div>
-  );
+  )
 }
 
 const styles = {
@@ -56,6 +60,5 @@ const styles = {
     flexDirection: "column",
     paddingLeft: "6em",
     justifyContent: "space-around",
-    fontFamily: "'Crimson Text', serif",
   },
-};
+}

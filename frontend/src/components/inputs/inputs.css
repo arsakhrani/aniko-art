@@ -1,7 +1,6 @@
 .text-input {
   width: 100%;
   color: #707070;
-  font-family: "Crimson Text", serif;
   position: relative;
   border-bottom: 1px solid #707070;
   height: 44px;
@@ -18,42 +17,42 @@
 }
 
 .text-input input:focus {
-    outline: none;
+  outline: none;
 }
 
 .text-input label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: all 0.1s linear;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all 0.1s linear;
 }
 
 .text-input input:focus + label,
 .text-input input:not(:focus):valid + label {
-    padding-left: 10px;
-    transition: all 0.1s linear;
-    font-size: 14px;
+  padding-left: 10px;
+  transition: all 0.1s linear;
+  font-size: 14px;
 }
 
 .checkbox-input input {
-    display: none;
+  display: none;
 }
 
 .checkbox-input .checkbox-box {
-    height: 12px;
-    width: 12px;
-    display: inline-block;
-    cursor: pointer;
-    position: relative;
-    top: 5px;
+  height: 12px;
+  width: 12px;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  top: 5px;
 }
 
 .checkbox-input label {
-    padding-left: 8px;
-    cursor: pointer;
+  padding-left: 8px;
+  cursor: pointer;
 }
 
 .checkbox-input svg {
-    color: white;
-    margin-bottom: 4px;
+  color: white;
+  margin-bottom: 4px;
 }

@@ -1,6 +1,6 @@
-import React from "react";
-import { ReactComponent as Google } from "../../assets/icons/google-logo.svg";
-import { ReactComponent as Facebook } from "../../assets/icons/social-facebook-logo.svg";
+import React from "react"
+import { ReactComponent as Google } from "../../assets/icons/google-logo.svg"
+import { ReactComponent as Facebook } from "../../assets/icons/social-facebook-logo.svg"
 
 export default function TransparentButton({ buttonText, logo }) {
   return (
@@ -20,7 +20,7 @@ export default function TransparentButton({ buttonText, logo }) {
       )}
       {buttonText}
     </button>
-  );
+  )
 }
 
 const styles = {
@@ -29,7 +29,6 @@ const styles = {
     backgroundColor: "transparent",
     borderRadius: 5,
     color: "#707070",
-    fontFamily: "'Crimson Text', serif",
     paddingTop: "1em",
     paddingBottom: "1em",
     display: "flex",
@@ -37,4 +36,4 @@ const styles = {
     width: "49%",
     cursor: "pointer",
   },
-};
+}

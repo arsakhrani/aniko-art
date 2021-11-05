@@ -1,19 +1,25 @@
-import React, { useState } from "react";
-import PrimaryButton from "../../../atoms/PrimaryButton";
-import TransparentButton from "../../../atoms/TransparentButton";
-import CheckboxInput from "../../../inputs/CheckboxInput";
-import TextInput from "../../../inputs/TextInput";
+import React, { useState } from "react"
+import PrimaryButton from "../../../atoms/PrimaryButton"
+import TransparentButton from "../../../atoms/TransparentButton"
+import CheckboxInput from "../../../inputs/CheckboxInput"
+import TextInput from "../../../inputs/TextInput"
 
 export default function RegistrationForm({ sell, leftFrame }) {
-  const [privateSalesBuy, setPrivateSalesBuy] = useState(false);
-  const [gallerySalesBuy, setGallerySalesBuy] = useState(false);
-  const [artistSalesBuy, setArtistSalesBuy] = useState(false);
-  const [privateSalesSell, setPrivateSalesSell] = useState(false);
-  const [gallerySalesSell, setGallerySalesSell] = useState(false);
-  const [artistSalesSell, setArtistSalesSell] = useState(false);
+  const [privateSalesBuy, setPrivateSalesBuy] = useState(false)
+  const [gallerySalesBuy, setGallerySalesBuy] = useState(false)
+  const [artistSalesBuy, setArtistSalesBuy] = useState(false)
+  const [privateSalesSell, setPrivateSalesSell] = useState(false)
+  const [gallerySalesSell, setGallerySalesSell] = useState(false)
+  const [artistSalesSell, setArtistSalesSell] = useState(false)
 
   return (
-    <div style={{...styles.containter, borderRight: leftFrame ? "0.5px solid #F2A16B" : "", borderLeft: !leftFrame ? "0.5px solid #F2A16B" : ""}}>
+    <div
+      style={{
+        ...styles.containter,
+        borderRight: leftFrame ? "0.5px solid #F2A16B" : "",
+        borderLeft: !leftFrame ? "0.5px solid #F2A16B" : "",
+      }}
+    >
       <div style={styles.form}>
         {sell ? (
           <h2 style={styles.title}>Sell</h2>
@@ -98,18 +104,17 @@ export default function RegistrationForm({ sell, leftFrame }) {
             buttonText={"Continue with Facebook"}
           />
         </div>
-        <p style={{ marginTop: "2em"}}>
-          ALREADY HAVE AN ACCOUNT? <a style={{ color: "#F2A16B"}}>SIGN IN</a>
+        <p style={{ marginTop: "2em" }}>
+          ALREADY HAVE AN ACCOUNT? <a style={{ color: "#F2A16B" }}>SIGN IN</a>
         </p>
       </div>
     </div>
-  );
+  )
 }
 
 const styles = {
   containter: {
     width: "50vw",
-    fontFamily: "'Crimson Text', serif",
     display: "flex",
     justifyContent: "center",
   },
@@ -132,4 +137,4 @@ const styles = {
     height: "23%",
     paddingTop: "7%",
   },
-};
+}

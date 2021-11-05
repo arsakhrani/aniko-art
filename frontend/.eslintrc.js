@@ -1,9 +1,8 @@
 module.exports = {
   extends: [
-    "@strv/eslint-config-react/v16",
-    "@strv/eslint-config-react/optional",
+    // "@strv/eslint-config-react/",
+    // "@strv/eslint-config-react/optional",
     "prettier",
-    "prettier/react",
   ],
   root: true,
   env: {
@@ -21,8 +20,8 @@ module.exports = {
       jsx: true,
     },
   },
-  rules: {
-    "prefer-named-capture-group": 0,
-    "react/no-did-mount-set-state": 1,
-  },
+  // rules: {
+  //   "prefer-named-capture-group": 0,
+  //   "react/no-did-mount-set-state": 1,
+  // },
 }

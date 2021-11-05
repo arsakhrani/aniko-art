@@ -1,16 +1,31 @@
+@import url(sanitize.css);
+
 @font-face {
-  font-family: 'Crimson Text';
-  src: local('Crimson Text'), url(./assets/fonts/Crimson_Text/CrimsonText-Regular.ttf) format('truetype');
+  font-family: "Crimson Text";
+  src: local("Crimson Text"),
+    url(./assets/fonts/Crimson_Text/CrimsonText-Regular.ttf) format("truetype");
 }
 
 @font-face {
-  font-family: 'Nunito';
-  src: local('Nunito'), url(./assets/fonts/Nunito/Nunito-Regular.ttf) format('truetype');
+  font-family: "Nunito";
+  src: local("Nunito"),
+    url(./assets/fonts/Nunito/Nunito-Regular.ttf) format("truetype");
 }
 
 body {
   box-sizing: border-box;
   margin: 0;
+  font-family: "Crimson Text", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
 }
 
 .loader:empty {
@@ -22,8 +37,7 @@ body {
 }
 
 .loader:empty::after {
-  content: 'Aniko.Art';
-  font-family: 'Crimson Text', serif;
+  content: "Aniko.Art";
   font-size: 5rem;
   color: white;
   animation: fadeIn linear 3s infinite;
@@ -33,25 +47,49 @@ body {
 }
 
 @keyframes fadeIn {
-  0%   { opacity:1; }
-  50%  { opacity:0; }
-  100% { opacity:1; }
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
-@-o-keyframes fadeIn{
-  0%   { opacity:1; }
-  50%  { opacity:0; }
-  100% { opacity:1; }
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
-@-moz-keyframes fadeIn{
-  0%   { opacity:1; }
-  50%  { opacity:0; }
-  100% { opacity:1; }
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
-@-webkit-keyframes fadeIn{
-  0%   { opacity:1; }
-  50%  { opacity:0; }
-  100% { opacity:1; }
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

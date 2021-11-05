@@ -1,32 +1,38 @@
-import React, { useState } from "react";
-import SideMenu from "./SideMenu";
+import React, { useState } from "react"
+import SideMenu from "./SideMenu"
+import { useHistory } from "react-router-dom"
+import DiscoverHeader from "./DiscoverHeader"
 
-export default function Header() {
-  const [toggleMenu, setToggleMenu] = useState(false);
+export default function Header({ discover }) {
+  const [toggleMenu, setToggleMenu] = useState(false)
 
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(false)
 
   const toggleMenuIcon = () => {
-    setToggleMenu(!toggleMenu);
-  };
+    setToggleMenu(!toggleMenu)
+  }
 
   const expandIcon = () => {
-    setExpanded(true);
-  };
+    setExpanded(true)
+  }
 
   const deflateIcon = () => {
-    setExpanded(false);
-  };
+    setExpanded(false)
+  }
+
+  const history = useHistory()
 
   const styles = {
     container: {
       height: "3em",
+      display: "flex",
+      alignItems: "center",
     },
     h1: {
       fontSize: "1.5em",
       paddingLeft: "1em",
       paddingTop: "0.1em",
-      fontFamily: "'Crimson Text', serif",
+      cursor: "pointer",
     },
     menuContainer: {
       position: "absolute",
@@ -70,11 +76,14 @@ export default function Header() {
       bottom: toggleMenu ? 22.5 : 0,
       transition: "all 0.3s linear, width 0.3s linear",
     },
-  };
+  }
 
   return (
     <header style={styles.container}>
-      <h1 style={styles.h1}>Aniko.Art</h1>
+      <h1 onClick={() => history.push("/")} style={styles.h1}>
+        Aniko.Art
+      </h1>
+      {discover && <DiscoverHeader />}
       <span
         onMouseEnter={() => expandIcon()}
         onMouseLeave={() => deflateIcon()}
@@ -87,5 +96,5 @@ export default function Header() {
       </span>
       <SideMenu visible={toggleMenu} />
     </header>
-  );
+  )
 }

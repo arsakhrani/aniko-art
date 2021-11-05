@@ -1,5 +1,5 @@
-import React from "react";
-import SocialMediaIconSet from "../atoms/SocialMediaIconSet";
+import React from "react"
+import SocialMediaIconSet from "../atoms/SocialMediaIconSet"
 
 export default function Footer() {
   return (
@@ -30,7 +30,7 @@ export default function Footer() {
         <SocialMediaIconSet />
       </div>
     </footer>
-  );
+  )
 }
 
 const styles = {
@@ -43,7 +43,6 @@ const styles = {
     display: "flex",
     justifyContent: "space-around",
     alignItems: "flex-start",
-    fontFamily: "'Crimson Text', serif",
   },
   column: {
     display: "flex",
@@ -54,4 +53,4 @@ const styles = {
     marginBottom: 10,
     cursor: "pointer",
   },
-};
+}
