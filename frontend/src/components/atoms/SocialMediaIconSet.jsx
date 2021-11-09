@@ -1,43 +1,25 @@
-import React from "react";
-import { ReactComponent as Instagram } from "../../assets/icons/social-instagram-logo.svg";
-import { ReactComponent as Facebook } from "../../assets/icons/social-facebook-logo.svg";
-import { ReactComponent as Linkedin } from "../../assets/icons/social-linkedin-logo.svg";
-import { ReactComponent as Wechat } from "../../assets/icons/social-wechat-logo.svg";
+import React from "react"
+import { ReactComponent as Instagram } from "../../assets/icons/social-instagram-logo.svg"
+import { ReactComponent as Facebook } from "../../assets/icons/social-facebook-logo.svg"
+import { ReactComponent as Linkedin } from "../../assets/icons/social-linkedin-logo.svg"
+import { ReactComponent as Wechat } from "../../assets/icons/social-wechat-logo.svg"
+import { Container, Icon } from "./styles/SocialMediaIconSet.styled"
 
 export default function SocialMediaIconSet() {
   return (
-    <div style={styles.container}>
-      <div style={styles.icon}>
+    <Container>
+      <Icon>
         <Instagram />
-      </div>
-      <div style={styles.icon}>
+      </Icon>
+      <Icon>
         <Linkedin />
-      </div>
-      <div style={styles.icon}>
+      </Icon>
+      <Icon>
         <Facebook />
-      </div>
-      <div style={styles.icon}>
+      </Icon>
+      <Icon>
         <Wechat />
-      </div>
-    </div>
-  );
+      </Icon>
+    </Container>
+  )
 }
-
-const styles = {
-  container: {
-    alignSelf: "flex-end",
-    justifySelf: "flex-end",
-    display: "flex"
-  },
-  icon: {
-      width: "2em",
-      height: "2em",
-      backgroundColor: "white",
-      margin: 5,
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      borderRadius: 10,
-      cursor: "pointer"
-  }
-};

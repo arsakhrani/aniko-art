@@ -44,7 +44,6 @@
   display: inline-block;
   cursor: pointer;
   position: relative;
-  top: 5px;
 }
 
 .checkbox-input label {
@@ -54,5 +53,5 @@
 
 .checkbox-input svg {
   color: white;
-  margin-bottom: 4px;
+  margin-bottom: 16px;
 }

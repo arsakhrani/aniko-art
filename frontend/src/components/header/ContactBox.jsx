@@ -1,39 +1,16 @@
 import React from "react"
 import SocialMediaIconSet from "../atoms/SocialMediaIconSet"
+import { Container, Text } from "./styles/ContactBox.styled"
 
 export default function ContactBox() {
   return (
-    <div style={styles.container}>
+    <Container>
       <div>
-        <p
-          style={{
-            ...styles.text,
-            textDecorationColor: "#F2A16B",
-            textDecorationThickness: 2,
-            textDecoration: "underline",
-            cursor: "pointer",
-          }}
-        >
-          REQUEST PROJECT BROCHURE
-        </p>
-        <p style={styles.text}>aniko_n@live.nl</p>
-        <p style={styles.text}>+31 070 157 856</p>
+        <Text>REQUEST PROJECT BROCHURE</Text>
+        <Text>aniko_n@live.nl</Text>
+        <Text>+31 070 157 856</Text>
       </div>
       <SocialMediaIconSet />
-    </div>
+    </Container>
   )
-}
-
-const styles = {
-  container: {
-    display: "flex",
-    justifyContent: "space-between",
-    margin: "3em",
-  },
-  text: {
-    color: "#F2A16B",
-    fontSize: 18,
-    marginTop: 5,
-    marginBottom: 5,
-  },
 }

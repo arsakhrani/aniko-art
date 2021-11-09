@@ -1,19 +1,6 @@
 import React from "react"
+import { Button } from "./styles/PrimaryButton.styled"
 
 export default function PrimaryButton({ buttonText }) {
-  return <button style={styles.button}>{buttonText}</button>
-}
-
-const styles = {
-  button: {
-    border: 0,
-    backgroundColor: "#F2A16B",
-    borderRadius: 5,
-    color: "white",
-    paddingTop: "1.1em",
-    paddingBottom: "1.1em",
-    paddingLeft: "3em",
-    paddingRight: "3em",
-    cursor: "pointer",
-  },
+  return <Button>{buttonText}</Button>
 }

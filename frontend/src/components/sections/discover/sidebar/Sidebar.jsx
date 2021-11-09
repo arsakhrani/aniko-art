@@ -1,18 +1,11 @@
 import React from "react"
 import CountryFilter from "./CountryFilter"
+import { Container } from "./styles/Sidebar.styled"
 
 export default function Sidebar() {
   return (
-    <div style={styles.container}>
+    <Container>
       <CountryFilter />
-    </div>
+    </Container>
   )
-}
-
-const styles = {
-  container: {
-    width: "15%",
-    display: "sticky",
-    height: "100vh",
-  },
 }

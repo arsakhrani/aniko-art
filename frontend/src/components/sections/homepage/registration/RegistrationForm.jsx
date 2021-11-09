@@ -3,6 +3,11 @@ import PrimaryButton from "../../../atoms/PrimaryButton"
 import TransparentButton from "../../../atoms/TransparentButton"
 import CheckboxInput from "../../../inputs/CheckboxInput"
 import TextInput from "../../../inputs/TextInput"
+import {
+  CheckboxContainer,
+  Container,
+  Form,
+} from "./styles/RegistrationForm.styled"
 
 export default function RegistrationForm({ sell, leftFrame }) {
   const [privateSalesBuy, setPrivateSalesBuy] = useState(false)
@@ -13,26 +18,16 @@ export default function RegistrationForm({ sell, leftFrame }) {
   const [artistSalesSell, setArtistSalesSell] = useState(false)
 
   return (
-    <div
-      style={{
-        ...styles.containter,
-        borderRight: leftFrame ? "0.5px solid #F2A16B" : "",
-        borderLeft: !leftFrame ? "0.5px solid #F2A16B" : "",
-      }}
-    >
-      <div style={styles.form}>
-        {sell ? (
-          <h2 style={styles.title}>Sell</h2>
-        ) : (
-          <h2 style={styles.title}>Buy</h2>
-        )}
-        <p on style={styles.subtitle}>
+    <Container $leftFrame={leftFrame}>
+      <Form>
+        {sell ? <h2>Sell</h2> : <h2>Buy</h2>}
+        <p>
           INTERESTED IN {sell ? <span>SELLING</span> : <span>BUYING</span>}{" "}
           ARTWORKS?
         </p>
         <TextInput label={"Email address"} type={"email"} />
         {sell ? (
-          <div style={styles.checkboxContainer}>
+          <CheckboxContainer>
             <div
               style={{ paddingBottom: "1em" }}
               onClick={() => setPrivateSalesSell(!privateSalesSell)}
@@ -57,9 +52,9 @@ export default function RegistrationForm({ sell, leftFrame }) {
             >
               <CheckboxInput checked={artistSalesSell} label={"Artist Sales"} />
             </div>
-          </div>
+          </CheckboxContainer>
         ) : (
-          <div style={styles.checkboxContainer}>
+          <CheckboxContainer>
             <div
               style={{ paddingBottom: "1em" }}
               onClick={() => setPrivateSalesBuy(!privateSalesBuy)}
@@ -84,7 +79,7 @@ export default function RegistrationForm({ sell, leftFrame }) {
             >
               <CheckboxInput checked={artistSalesBuy} label={"Artist Sales"} />
             </div>
-          </div>
+          </CheckboxContainer>
         )}
         <PrimaryButton buttonText={"REGISTER"} />
         <div
@@ -107,34 +102,7 @@ export default function RegistrationForm({ sell, leftFrame }) {
         <p style={{ marginTop: "2em" }}>
           ALREADY HAVE AN ACCOUNT? <a style={{ color: "#F2A16B" }}>SIGN IN</a>
         </p>
-      </div>
-    </div>
+      </Form>
+    </Container>
   )
-}
-
-const styles = {
-  containter: {
-    width: "50vw",
-    display: "flex",
-    justifyContent: "center",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    width: "65%",
-  },
-  title: {
-    fontSize: 60,
-    marginBottom: 0,
-  },
-  subtitle: {
-    marginTop: 0,
-    marginBottom: 20,
-  },
-  checkboxContainer: {
-    width: "100%",
-    height: "23%",
-    paddingTop: "7%",
-  },
 }

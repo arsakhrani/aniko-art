@@ -1,46 +1,32 @@
 import React from "react"
+import { Container } from "./styles/CountryFilter.styled"
 
 export default function CountryFilter() {
   return (
-    <div style={styles.container}>
-      <h5 style={styles.h5}>COUNTRIES</h5>
+    <Container>
+      <h5>COUNTRIES</h5>
       <ul>
-        <li style={styles.country}>Albania</li>
-        <li style={styles.country}>Belarus</li>
-        <li style={styles.country}>Bosnia and Hercegovina</li>
-        <li style={styles.country}>Bulgaria</li>
-        <li style={styles.country}>Croatia</li>
-        <li style={styles.country}>Czech Republic</li>
-        <li style={styles.country}>Greece</li>
-        <li style={styles.country}>Hungary</li>
-        <li style={styles.country}>Kosovo</li>
-        <li style={styles.country}>Macedonia</li>
-        <li style={styles.country}>Moldova</li>
-        <li style={styles.country}>Montenegro</li>
-        <li style={styles.country}>Poland</li>
-        <li style={styles.country}>Romania</li>
-        <li style={styles.country}>Russia</li>
-        <li style={styles.country}>Serbia</li>
-        <li style={styles.country}>Slovakia</li>
-        <li style={styles.country}>Slovenia</li>
-        <li style={styles.country}>Turkey</li>
-        <li style={styles.country}>Ukraine</li>
+        <li>Albania</li>
+        <li>Belarus</li>
+        <li>Bosnia and Hercegovina</li>
+        <li>Bulgaria</li>
+        <li>Croatia</li>
+        <li>Czech Republic</li>
+        <li>Greece</li>
+        <li>Hungary</li>
+        <li>Kosovo</li>
+        <li>Macedonia</li>
+        <li>Moldova</li>
+        <li>Montenegro</li>
+        <li>Poland</li>
+        <li>Romania</li>
+        <li>Russia</li>
+        <li>Serbia</li>
+        <li>Slovakia</li>
+        <li>Slovenia</li>
+        <li>Turkey</li>
+        <li>Ukraine</li>
       </ul>
-    </div>
+    </Container>
   )
-}
-
-const styles = {
-  container: {
-    marginLeft: "1em",
-    marginRight: "1em",
-  },
-  h5: {
-    borderBottom: "1px solid black",
-    paddingBottom: 2,
-  },
-  country: {
-    opacity: 0.6,
-    cursor: "pointer",
-  },
 }
