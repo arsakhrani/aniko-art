@@ -34,13 +34,15 @@ export default function DefaultSideMenuLinks() {
         Sign Up
       </StyledLink>
       <LineBlocker $number={number} />
-      <StyledLink
-        to={"/"}
-        onMouseEnter={() => setNumber(4)}
-        onMouseLeave={() => setNumber(0)}
-      >
-        How to Bid
-      </StyledLink>
+      {false && (
+        <StyledLink
+          to={"/"}
+          onMouseEnter={() => setNumber(4)}
+          onMouseLeave={() => setNumber(0)}
+        >
+          How to Bid
+        </StyledLink>
+      )}
       <LineBlocker $number={number} />
     </Container>
   )

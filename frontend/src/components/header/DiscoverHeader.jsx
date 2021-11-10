@@ -28,7 +28,7 @@ export default function DiscoverHeader() {
       >
         Galleries
       </MenuItem>
-      <Search style={{ marginLeft: "1em" }} />
+      <Search style={{ marginLeft: "1em", cursor: "pointer" }} />
     </Container>
   )
 }

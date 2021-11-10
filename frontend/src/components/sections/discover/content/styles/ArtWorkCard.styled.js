@@ -1,13 +1,9 @@
 import styled from "styled-components"
 import theme from "../../../../common/theme"
 
-export const Container = styled.div`
-  height: 58vh;
-`
-
-export const FeatureImage = styled.img`
-  height: 80%;
+export const CoverPicture = styled.img`
   width: 100%;
+  cursor: pointer;
 `
 
 export const WrittenContent = styled.div`
@@ -28,9 +24,13 @@ export const WrittenContent = styled.div`
     }
 
     p {
-      font-size: ${theme.fontSize.xSmall};
+      font-size: ${theme.fontSize.small};
       color: rgba(0, 0, 0, 0.6);
       margin: 0;
+    }
+
+    span {
+      font-size: ${theme.fontSize.small};
     }
   }
 `

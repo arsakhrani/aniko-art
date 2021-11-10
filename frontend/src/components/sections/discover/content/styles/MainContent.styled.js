@@ -18,3 +18,17 @@ export const ArtistsAndGalleriesContainer = styled.div`
   -ms-overflow-style: none;
   scrollbar-width: none;
 `
+
+export const ArtworksContainer = styled.div`
+  grid-area: content;
+  height: 100vh;
+  padding-bottom: 4em;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+`

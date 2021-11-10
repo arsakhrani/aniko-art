@@ -10,7 +10,7 @@ export const Container = styled.div`
   }
 
   li {
-    opacity: 0.6;
+    color: rgba(0, 0, 0, 0.6);
     cursor: pointer;
   }
 `

@@ -15,7 +15,7 @@ export default function ArtistAndGalleryCard({ cardInfo }) {
           <h4>{cardInfo.name}</h4>
           <p>{cardInfo.location}</p>
         </div>
-        <a target="blank" href={cardInfo.website}>
+        <a target="_blank" href={cardInfo.website}>
           <PrimaryButton buttonText={"VIEW WEBSITE"} />
         </a>
       </WrittenContent>

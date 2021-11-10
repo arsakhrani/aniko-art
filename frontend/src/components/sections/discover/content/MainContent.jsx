@@ -1,9 +1,16 @@
 import React from "react"
 import { artists } from "../../../../dummy-data/artists"
 import { galleries } from "../../../../dummy-data/galleries"
-import { ArtistsAndGalleriesContainer } from "./styles/MainContent.styled"
+import { artworks } from "../../../../dummy-data/artworks"
+import {
+  ArtistsAndGalleriesContainer,
+  ArtworksContainer,
+} from "./styles/MainContent.styled"
 import ArtistAndGalleryCard from "./ArtistAndGalleryCard"
 import { useSelector } from "react-redux"
+import Masonry from "react-masonry-css"
+import ArtWorkCard from "./ArtWorkCard"
+import "./styles/masonry.css"
 
 export default function MainContent() {
   const filterType = useSelector((state) => state.discoverFilters.value)
@@ -29,6 +36,18 @@ export default function MainContent() {
   }
 
   if (filterType === "artworks") {
-    return <h4>HI</h4>
+    return (
+      <ArtworksContainer>
+        <Masonry
+          breakpointCols={{ default: 2, 900: 1 }}
+          className="artworks-masonry-grid"
+          columnClassName="artworks-masonry-grid_column"
+        >
+          {artworks.map((artwork) => (
+            <ArtWorkCard key={artwork.id} cardInfo={artwork} />
+          ))}
+        </Masonry>
+      </ArtworksContainer>
+    )
   }
 }
