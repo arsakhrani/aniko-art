@@ -26,7 +26,7 @@ export const MenuContainer = styled.span`
   justify-content: space-around;
   align-items: flex-end;
   cursor: pointer;
-  z-index: 2;
+  z-index: 3;
 `
 
 const MenuLine = styled.span`

@@ -27,7 +27,7 @@ export default function DefaultSideMenuLinks() {
       </StyledLink>
       <LineBlocker $number={number} />
       <StyledLink
-        to={"/"}
+        to={"/register"}
         onMouseEnter={() => setNumber(3)}
         onMouseLeave={() => setNumber(0)}
       >

@@ -1,10 +1,10 @@
 import React from "react"
 import { ReactComponent as Checkmark } from "../../assets/icons/check-solid.svg"
 
-export default function CheckboxInput({ label, checked }) {
+export default function CheckboxInput({ label, checked, name }) {
   return (
     <div className="checkbox-input">
-      <input type="checkbox" />
+      <input name={name} type="checkbox" />
       <div
         style={{
           border: checked ? "1px solid #F2A16B" : "1px solid black",

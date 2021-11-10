@@ -8,6 +8,9 @@ import {
   Container,
   Form,
 } from "./styles/RegistrationForm.styled"
+import { Link, useHistory } from "react-router-dom"
+import { saveInfo } from "../../../../state/registration/registrationInfoSlice"
+import { useDispatch } from "react-redux"
 
 export default function RegistrationForm({ sell, leftFrame }) {
   const [privateSalesBuy, setPrivateSalesBuy] = useState(false)
@@ -16,16 +19,54 @@ export default function RegistrationForm({ sell, leftFrame }) {
   const [privateSalesSell, setPrivateSalesSell] = useState(false)
   const [gallerySalesSell, setGallerySalesSell] = useState(false)
   const [artistSalesSell, setArtistSalesSell] = useState(false)
+  const [isSell] = useState(sell)
+
+  const dispatch = useDispatch()
+
+  const history = useHistory()
+
+  const saveDetails = (e) => {
+    e.preventDefault()
+    let interests = {}
+    if (isSell) {
+      interests = {
+        privateSales: privateSalesSell,
+        gallerySales: gallerySalesSell,
+        artistSales: artistSalesSell,
+      }
+    } else {
+      interests = {
+        privateSales: privateSalesBuy,
+        gallerySales: gallerySalesBuy,
+        artistSales: artistSalesBuy,
+      }
+    }
+    const details = {
+      type: isSell ? "seller" : "buyer",
+      email: e.target.email.value,
+      interests,
+    }
+    dispatch(saveInfo(details))
+    history.push("/manage-profile")
+  }
 
   return (
     <Container $leftFrame={leftFrame}>
-      <Form>
+      <Form
+        onSubmit={(e, sell) => saveDetails(e, sell)}
+        id={sell ? "seller-form" : "buyer-form"}
+      >
         {sell ? <h2>Sell</h2> : <h2>Buy</h2>}
         <p>
           INTERESTED IN {sell ? <span>SELLING</span> : <span>BUYING</span>}{" "}
           ARTWORKS?
         </p>
-        <TextInput label={"Email address"} type={"email"} />
+        <TextInput
+          name={"email"}
+          id={sell ? "seller-email" : "buyer-email"}
+          label={"Email address"}
+          type={"email"}
+        />
         {sell ? (
           <CheckboxContainer>
             <div
@@ -35,6 +76,7 @@ export default function RegistrationForm({ sell, leftFrame }) {
               <CheckboxInput
                 checked={privateSalesSell}
                 label={"Private Sales"}
+                name={"privateSales"}
               />
             </div>
             <div
@@ -44,13 +86,18 @@ export default function RegistrationForm({ sell, leftFrame }) {
               <CheckboxInput
                 checked={gallerySalesSell}
                 label={"Gallery Sales"}
+                name={"gallerySales"}
               />
             </div>
             <div
               style={{ paddingBottom: "1em" }}
               onClick={() => setArtistSalesSell(!artistSalesSell)}
             >
-              <CheckboxInput checked={artistSalesSell} label={"Artist Sales"} />
+              <CheckboxInput
+                checked={artistSalesSell}
+                label={"Artist Sales"}
+                name={"artistSales"}
+              />
             </div>
           </CheckboxContainer>
         ) : (
@@ -62,6 +109,7 @@ export default function RegistrationForm({ sell, leftFrame }) {
               <CheckboxInput
                 checked={privateSalesBuy}
                 label={"Private Sales"}
+                name={"privateSales"}
               />
             </div>
             <div
@@ -71,17 +119,26 @@ export default function RegistrationForm({ sell, leftFrame }) {
               <CheckboxInput
                 checked={gallerySalesBuy}
                 label={"Gallery Sales"}
+                name={"gallerySales"}
               />
             </div>
             <div
               style={{ paddingBottom: "1em" }}
               onClick={() => setArtistSalesBuy(!artistSalesBuy)}
             >
-              <CheckboxInput checked={artistSalesBuy} label={"Artist Sales"} />
+              <CheckboxInput
+                checked={artistSalesBuy}
+                label={"Artist Sales"}
+                name={"artistSales"}
+              />
             </div>
           </CheckboxContainer>
         )}
-        <PrimaryButton buttonText={"REGISTER"} />
+        <PrimaryButton
+          submit={true}
+          id={sell ? "seller-register-button" : "buyer-register-button"}
+          buttonText={"REGISTER"}
+        />
         <div
           style={{
             display: "flex",
@@ -100,7 +157,10 @@ export default function RegistrationForm({ sell, leftFrame }) {
           />
         </div>
         <p style={{ marginTop: "2em" }}>
-          ALREADY HAVE AN ACCOUNT? <a style={{ color: "#F2A16B" }}>SIGN IN</a>
+          ALREADY HAVE AN ACCOUNT?{" "}
+          <Link to="/" style={{ color: "#F2A16B" }}>
+            SIGN IN
+          </Link>
         </p>
       </Form>
     </Container>
