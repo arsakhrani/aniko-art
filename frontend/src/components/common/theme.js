@@ -6,6 +6,7 @@ const theme = {
     darkGrey: "#707070",
   },
   fontSize: {
+    xSmall: "0.8em",
     small: "1.2rem",
     normal: "1.4rem",
     medium: "1.6rem",

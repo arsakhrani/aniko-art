@@ -1,20 +1,56 @@
-import React from "react"
+import React, { useState } from "react"
+import { Container } from "./styles/CountryFilter.styled"
+import { Range } from "rc-slider"
+import "rc-slider/assets/index.css"
+import {
+  FilteredRangeContainer,
+  PriceRangeContainer,
+} from "./styles/PriceFilter.styled"
+
+import { dummyPriceRange } from "../../../../dummy-data/priceRange" //to delete
 
 export default function PriceFilter() {
-  return (
-    <div style={styles.container}>
-      <h5 style={styles.h5}>PRICE</h5>
-    </div>
-  )
-}
+  const [filterRange, setFilterRange] = useState([
+    dummyPriceRange.minPrice,
+    dummyPriceRange.maxPrice,
+  ])
 
-const styles = {
-  container: {
-    marginLeft: "1em",
-    marginRight: "1em",
-  },
-  h5: {
-    borderBottom: "1px solid black",
-    paddingBottom: 2,
-  },
+  return (
+    <Container>
+      <h5>PRICE</h5>
+      <PriceRangeContainer>
+        <span>
+          $
+          {dummyPriceRange.minPrice
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+        </span>
+        <span>
+          $
+          {dummyPriceRange.maxPrice
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+        </span>
+      </PriceRangeContainer>
+      <Range
+        min={dummyPriceRange.minPrice}
+        max={dummyPriceRange.maxPrice}
+        step={1}
+        handleStyle={[
+          { backgroundColor: "#F2A16B", borderColor: "#F2A16B" },
+          { backgroundColor: "#F2A16B", borderColor: "#F2A16B" },
+        ]}
+        trackStyle={[{ backgroundColor: "#F2A16B" }]}
+        value={filterRange}
+        allowCross={false}
+        onChange={(values) => setFilterRange(values)}
+      />
+      <FilteredRangeContainer>
+        <span>
+          ${filterRange[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} - $
+          {filterRange[1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+        </span>
+      </FilteredRangeContainer>
+    </Container>
+  )
 }

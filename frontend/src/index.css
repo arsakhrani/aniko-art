@@ -28,6 +28,10 @@ ul {
   padding: 0;
 }
 
+.rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {
+  box-shadow: 0 0 0 5px rgba(242, 161, 107, 0.5) !important;
+}
+
 .loader:empty {
   display: flex;
   justify-content: center;

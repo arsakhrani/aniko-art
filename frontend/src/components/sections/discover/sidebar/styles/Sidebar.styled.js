@@ -1,7 +1,6 @@
 import styled from "styled-components"
 
 export const Container = styled.div`
-  width: 15%;
-  display: sticky;
+  grid-area: sidebar;
   height: 100vh;
 `
