@@ -2,11 +2,6 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema({
-  isAdmin: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
   email: {
     type: String,
     required: true,

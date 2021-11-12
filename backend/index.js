@@ -24,8 +24,8 @@ mongoose
   });
 
 const apiRouter = express.Router();
-// app.use("/api", apiRouter);
-// apiRouter.use("/user", routes.userRoutes);
+app.use("/api", apiRouter);
+apiRouter.use("/user", routes.userRoutes);
 
 app.listen(port, () => {
   console.log(`Aniko-art backend listening at ${port}`);
