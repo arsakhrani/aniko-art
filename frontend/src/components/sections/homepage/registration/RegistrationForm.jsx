@@ -12,7 +12,12 @@ import { Link, useHistory } from "react-router-dom"
 import { saveInfo } from "../../../../state/registration/registrationInfoSlice"
 import { useDispatch } from "react-redux"
 
-export default function RegistrationForm({ sell, leftFrame }) {
+export default function RegistrationForm({
+  sell,
+  leftFrame,
+  focusLeft,
+  focusRight,
+}) {
   const [privateSalesBuy, setPrivateSalesBuy] = useState(false)
   const [gallerySalesBuy, setGallerySalesBuy] = useState(false)
   const [artistSalesBuy, setArtistSalesBuy] = useState(false)
@@ -51,7 +56,11 @@ export default function RegistrationForm({ sell, leftFrame }) {
   }
 
   return (
-    <Container $leftFrame={leftFrame}>
+    <Container
+      $focusLeft={focusLeft}
+      $focusRight={focusRight}
+      $leftFrame={leftFrame}
+    >
       <Form
         onSubmit={(e, sell) => saveDetails(e, sell)}
         id={sell ? "seller-form" : "buyer-form"}
@@ -158,7 +167,7 @@ export default function RegistrationForm({ sell, leftFrame }) {
         </div>
         <p style={{ marginTop: "2em" }}>
           ALREADY HAVE AN ACCOUNT?{" "}
-          <Link to="/" style={{ color: "#F2A16B" }}>
+          <Link to="/login" style={{ color: "#F2A16B" }}>
             SIGN IN
           </Link>
         </p>

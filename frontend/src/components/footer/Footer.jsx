@@ -15,9 +15,9 @@ export default function Footer() {
         <p style={{ color: theme.color.orange, margin: 0 }}>+31 070 157 856</p>
       </Column>
       <Column>
-        <StyledLink>Discover</StyledLink>
-        <StyledLink>Login</StyledLink>
-        <StyledLink>Sign Up</StyledLink>
+        <StyledLink to="/discover">Discover</StyledLink>
+        <StyledLink to="/login">Login</StyledLink>
+        <StyledLink to="/register">Sign Up</StyledLink>
         <StyledLink>How to Bid</StyledLink>
       </Column>
       <Column>

@@ -6,35 +6,44 @@ import {
   FilteredRangeContainer,
   PriceRangeContainer,
 } from "./styles/PriceFilter.styled"
+import { useDispatch } from "react-redux"
+import {
+  changeMaxPrice,
+  changeMinPrice,
+} from "../../../../state/discover/artworkFilterSlice"
 
-import { dummyPriceRange } from "../../../../dummy-data/priceRange" //to delete
+import { artworks } from "../../../../dummy-data/artworks"
 
 export default function PriceFilter() {
-  const [filterRange, setFilterRange] = useState([
-    dummyPriceRange.minPrice,
-    dummyPriceRange.maxPrice,
-  ])
+  const priceArray = []
+  artworks.forEach((artwork) => priceArray.push(artwork.price))
+  const minPrice = Math.min(...priceArray)
+  const maxPrice = Math.max(...priceArray)
+
+  const [filterRange, setFilterRange] = useState([minPrice, maxPrice])
+
+  const dispatch = useDispatch()
+
+  const adjustFilters = (values) => {
+    setFilterRange(values)
+    dispatch(changeMinPrice(values[0]))
+    dispatch(changeMaxPrice(values[1]))
+  }
 
   return (
     <Container>
       <h5>PRICE</h5>
       <PriceRangeContainer>
         <span>
-          $
-          {dummyPriceRange.minPrice
-            .toString()
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+          ${minPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
         </span>
         <span>
-          $
-          {dummyPriceRange.maxPrice
-            .toString()
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+          ${maxPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
         </span>
       </PriceRangeContainer>
       <Range
-        min={dummyPriceRange.minPrice}
-        max={dummyPriceRange.maxPrice}
+        min={minPrice}
+        max={maxPrice}
         step={1}
         handleStyle={[
           { backgroundColor: "#F2A16B", borderColor: "#F2A16B" },
@@ -43,7 +52,7 @@ export default function PriceFilter() {
         trackStyle={[{ backgroundColor: "#F2A16B" }]}
         value={filterRange}
         allowCross={false}
-        onChange={(values) => setFilterRange(values)}
+        onChange={(values) => adjustFilters(values)}
       />
       <FilteredRangeContainer>
         <span>

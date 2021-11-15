@@ -35,8 +35,10 @@ export default function ArtWorkCard({ cardInfo }) {
           </p>
           <span>{cardInfo.gallery}</span>
         </div>
-        <Link>
-          <PrimaryButton buttonText={"BUY FOR $" + cardInfo.price + ", -"} />
+        <Link to={cardInfo.website}>
+          <PrimaryButton
+            buttonText={"BID FROM $" + cardInfo.minimumBid + ", -"}
+          />
         </Link>
       </WrittenContent>
     </div>

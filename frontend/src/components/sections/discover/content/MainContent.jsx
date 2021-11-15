@@ -11,9 +11,26 @@ import { useSelector } from "react-redux"
 import Masonry from "react-masonry-css"
 import ArtWorkCard from "./ArtWorkCard"
 import "./styles/masonry.css"
+import {
+  filterArtists,
+  filterArtworks,
+  filterGalleries,
+} from "../../../../services/helperFunctions"
 
 export default function MainContent() {
   const filterType = useSelector((state) => state.discoverFilters.value)
+  const countryFilter = useSelector(
+    (state) => state.artistAndGalleryFilter.value
+  )
+  const artworkFilters = useSelector((state) => state.artworkFilter)
+
+  const filteredAritsts = filterArtists(artists, countryFilter)
+
+  const filteredGalleries = filterGalleries(galleries, countryFilter)
+
+  const filteredArtworks = filterArtworks(artworks, artworkFilters)
+
+  console.log(filteredArtworks)
 
   if (filterType === "artists") {
     return (

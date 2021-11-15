@@ -5,11 +5,19 @@ export const Container = styled.header`
   height: 3em;
   display: flex;
   align-items: center;
+  background-color: ${(props) => (props.$grey ? theme.color.grey : "")};
 
   h1 {
     font-size: ${theme.fontSize.medium};
     padding-left: 1em;
     padding-top: 0.1em;
+    cursor: pointer;
+  }
+
+  p {
+    margin-right: 6em;
+    color: ${theme.color.orange};
+    border-bottom: 1px solid ${theme.color.orange};
     cursor: pointer;
   }
 `

@@ -18,6 +18,8 @@ export const artworks = [
     medium: "Transfer on polyester",
     dimensionsIn: "657/10 x 471/5 x 39/10",
     dimensionsCm: "167 x 120 x 10",
+    size: 1049,
+    minimumBid: 400,
   },
   {
     id: 2,
@@ -38,6 +40,8 @@ export const artworks = [
     medium: "Transfer on polyester",
     dimensionsIn: "657/10 x 471/5 x 39/10",
     dimensionsCm: "167 x 120 x 10",
+    size: 10478,
+    minimumBid: 700,
   },
   {
     id: 3,
@@ -58,6 +62,8 @@ export const artworks = [
     medium: "Transfer on polyester",
     dimensionsIn: "657/10 x 471/5 x 39/10",
     dimensionsCm: "167 x 120 x 10",
+    size: 3458,
+    minimumBid: 450,
   },
   {
     id: 4,
@@ -78,5 +84,7 @@ export const artworks = [
     medium: "Transfer on polyester",
     dimensionsIn: "657/10 x 471/5 x 39/10",
     dimensionsCm: "167 x 120 x 10",
+    size: 19340,
+    minimumBid: 560,
   },
 ]

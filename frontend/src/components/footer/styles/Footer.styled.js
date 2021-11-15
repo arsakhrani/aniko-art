@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import theme from "../../common/theme"
+import { Link } from "react-router-dom"
 
 export const Container = styled.footer`
   position: relative;
@@ -22,7 +23,7 @@ export const Column = styled.div`
   }
 `
 
-export const StyledLink = styled.a`
+export const StyledLink = styled(Link)`
   margin-bottom: 10px;
   cursor: pointer;
 `

@@ -5,7 +5,7 @@ import {
   LineBlocker,
 } from "./styles/DefaultSideMenuLinks.styled"
 
-export default function DefaultSideMenuLinks() {
+export default function SellerSideMenuLinks() {
   const [number, setNumber] = useState(0)
 
   return (
@@ -19,30 +19,28 @@ export default function DefaultSideMenuLinks() {
       </StyledLink>
       <LineBlocker $number={number} />
       <StyledLink
-        to={"/login"}
+        to={"/"}
         onMouseEnter={() => setNumber(2)}
         onMouseLeave={() => setNumber(0)}
       >
-        Login
+        Manage Profile
       </StyledLink>
       <LineBlocker $number={number} />
       <StyledLink
-        to={"/register"}
+        to={"/"}
         onMouseEnter={() => setNumber(3)}
         onMouseLeave={() => setNumber(0)}
       >
-        Sign Up
+        Upload Artwork
       </StyledLink>
       <LineBlocker $number={number} />
-      {false && (
-        <StyledLink
-          to={"/"}
-          onMouseEnter={() => setNumber(4)}
-          onMouseLeave={() => setNumber(0)}
-        >
-          How to Bid
-        </StyledLink>
-      )}
+      <StyledLink
+        to={"/"}
+        onMouseEnter={() => setNumber(4)}
+        onMouseLeave={() => setNumber(0)}
+      >
+        Request Artwork
+      </StyledLink>
       <LineBlocker $number={number} />
     </Container>
   )
