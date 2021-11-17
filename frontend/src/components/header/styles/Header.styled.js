@@ -14,11 +14,13 @@ export const Container = styled.header`
     cursor: pointer;
   }
 
-  p {
+  p.logout-button {
     margin-right: 6em;
     color: ${theme.color.orange};
     border-bottom: 1px solid ${theme.color.orange};
     cursor: pointer;
+    position: absolute;
+    right: 1em;
   }
 `
 

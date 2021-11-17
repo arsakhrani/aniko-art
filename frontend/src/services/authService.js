@@ -6,9 +6,15 @@ export default {
       headers: {
         "Content-Type": "application/json",
       },
+    }).then((res) => {
+      if (res.status !== 401) return res.json().then((data) => data)
+      else
+        return {
+          isAuthenticated: false,
+          user: {},
+          message: "Username or password is incorrect",
+        }
     })
-      .then((res) => res.json())
-      .then((data) => data)
   },
   register: (user) => {
     return fetch("/api/user/register", {
@@ -17,9 +23,15 @@ export default {
       headers: {
         "Content-Type": "application/json",
       },
+    }).then((res) => {
+      if (res.status !== 401) return res.json().then((data) => data)
+      else
+        return {
+          isAuthenticated: false,
+          user: {},
+          message: "Email address is already taken",
+        }
     })
-      .then((res) => res.json())
-      .then((data) => data)
   },
   logout: () => {
     return fetch("/api/user/logout")
@@ -32,7 +44,22 @@ export default {
       else
         return {
           isAuthenticated: false,
-          user: { firstName: "", lastName: "", email: "" },
+          user: {},
+        }
+    })
+  },
+  update: (user, id) => {
+    return fetch(`/api/user/update/${id}`, {
+      method: "put",
+      body: JSON.stringify(user),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status !== 401) return res.json().then((data) => data)
+      else
+        return {
+          message: "Something went wrong",
         }
     })
   },

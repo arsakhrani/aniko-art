@@ -16,9 +16,12 @@ export default function InteractiveMap() {
       const randomIndex = Math.floor(Math.random() * (countries.length - 1))
       countries[randomIndex].classList.add("animated")
     }
-    setTimeout(() => {
+    const timeOut = setTimeout(() => {
       setFlag(!flag)
     }, 3000)
+    return () => {
+      clearTimeout(timeOut)
+    }
   }, [flag])
 
   return (

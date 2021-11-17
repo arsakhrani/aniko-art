@@ -18,17 +18,17 @@ export default function Footer() {
         <StyledLink to="/discover">Discover</StyledLink>
         <StyledLink to="/login">Login</StyledLink>
         <StyledLink to="/register">Sign Up</StyledLink>
-        <StyledLink>How to Bid</StyledLink>
+        <StyledLink to="/">How to Bid</StyledLink>
       </Column>
       <Column>
-        <StyledLink>Terms of Use</StyledLink>
-        <StyledLink>Bying on Aniko.Art</StyledLink>
-        <StyledLink>Selling on Aniko.Art</StyledLink>
+        <StyledLink to="/">Terms of Use</StyledLink>
+        <StyledLink to="/">Bying on Aniko.Art</StyledLink>
+        <StyledLink to="/">Selling on Aniko.Art</StyledLink>
       </Column>
       <Column>
-        <StyledLink>Privacy Policy</StyledLink>
-        <StyledLink>Security</StyledLink>
-        <StyledLink>Conditions of Sales</StyledLink>
+        <StyledLink to="/">Privacy Policy</StyledLink>
+        <StyledLink to="/">Security</StyledLink>
+        <StyledLink to="/">Conditions of Sales</StyledLink>
       </Column>
       <Column>
         <SocialMediaIconSet />

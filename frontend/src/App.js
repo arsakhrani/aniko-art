@@ -27,7 +27,11 @@ function App() {
         </Route>
         <Route path="/manage-profile" exact>
           {!isAuthenticated ? (
-            !registrationDetails && <Redirect to="/" />
+            !registrationDetails ? (
+              <Redirect to="/" />
+            ) : (
+              <ManageProfilePage />
+            )
           ) : (
             <ManageProfilePage />
           )}

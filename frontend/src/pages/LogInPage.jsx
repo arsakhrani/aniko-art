@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext, useState } from "react"
 import Header from "../components/header/Header"
 import Footer from "../components/footer/Footer"
 import { Container } from "./styles/LogInPage.styled"
@@ -7,19 +7,28 @@ import PrimaryButton from "../components/atoms/PrimaryButton"
 import TransparentButton from "../components/atoms/TransparentButton"
 import { Link, useHistory } from "react-router-dom"
 import authService from "../services/authService"
+import { AuthContext } from "../context/authContext"
+import ErrorMessage from "../components/atoms/ErrorMessage"
 
 export default function LogInPage() {
   const history = useHistory()
+  const authContext = useContext(AuthContext)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   const login = async (e) => {
     e.preventDefault()
-    const user = {
+    const userCreds = {
       email: e.target.email.value,
       password: e.target.password.value,
     }
-    const loginUser = await authService.login(user)
-    if (loginUser) {
+    const loginUser = await authService.login(userCreds)
+    const { isAuthenticated, user, message } = loginUser
+    if (isAuthenticated) {
+      authContext.setUser(user)
+      authContext.setIsAuthenticated(isAuthenticated)
       history.push("/discover")
+    } else {
+      setErrorMessage(message)
     }
   }
 
@@ -38,6 +47,7 @@ export default function LogInPage() {
           <div style={{ marginTop: "3em" }}>
             <PrimaryButton submit={true} buttonText={"LOG IN"} />
           </div>
+          {errorMessage && <ErrorMessage messageBody={errorMessage} />}
           <div
             style={{
               display: "flex",

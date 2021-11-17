@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import SideMenu from "./SideMenu"
 import { useHistory } from "react-router-dom"
 import DiscoverHeader from "./DiscoverHeader"
@@ -17,9 +17,16 @@ export default function Header({ discover, grey }) {
 
   const [expanded, setExpanded] = useState(false)
 
+  useEffect(() => {
+    return () => {
+      const body = document.getElementsByTagName("body")
+      body[0].classList.remove("modal-open")
+    }
+  }, [])
+
   const history = useHistory()
 
-  const { isAuthenticated } = useContext(AuthContext)
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext)
 
   const openMenu = () => {
     setToggleMenu(!toggleMenu)
@@ -32,15 +39,23 @@ export default function Header({ discover, grey }) {
   }
 
   const logOutUser = async () => {
-    await authService.logout()
-    history.push("/")
+    const loggedOutUser = await authService.logout()
+    const { success } = loggedOutUser
+    if (success) {
+      setIsAuthenticated(false)
+      history.push("/")
+    }
   }
 
   return (
     <Container $grey={grey}>
       <h1 onClick={() => history.push("/")}>Aniko.Art</h1>
       {discover && <DiscoverHeader />}
-      {isAuthenticated && <p onClick={() => logOutUser()}>LOGOUT</p>}
+      {isAuthenticated && (
+        <p className={"logout-button"} onClick={() => logOutUser()}>
+          LOGOUT
+        </p>
+      )}
       <MenuContainer
         onMouseEnter={() => setExpanded(true)}
         onMouseLeave={() => setExpanded(false)}
