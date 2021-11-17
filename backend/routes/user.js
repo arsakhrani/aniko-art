@@ -60,11 +60,17 @@ router.get(
   wrapAsync(userController.logOutUser)
 );
 
-router.put("", wrapAsync(userController.editUser));
+router.get(
+  "/authenticated",
+  passport.authenticate("jwt", { session: false }),
+  wrapAsync(userController.authenticated)
+);
 
-router.delete("", wrapAsync(userController.deleteUser));
+router.put("/update/:id", wrapAsync(userController.editUser));
 
-router.get("/:id", wrapAsync(userController.getUserInfo));
+// router.delete("", wrapAsync(userController.deleteUser));
+
+// router.get("/:id", wrapAsync(userController.getUserInfo));
 
 //router.get('/confirm-email/:id', wrapAsync(userController.confirmEmail));
 

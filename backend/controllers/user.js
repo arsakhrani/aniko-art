@@ -14,23 +14,18 @@ const signToken = (userID) => {
 
 module.exports.newUser = async (req, res) => {
   try {
-    const { email, firstName, lastName, password } = req.body;
-    const emailCheck = await User.findOne({ email });
+    const user = req.body;
+    const emailCheck = await User.findOne({ email: user.email });
     if (emailCheck) {
       res
         .status(401)
         .json({ message: { msgBody: "Email is taken", msgError: true } });
     } else {
-      const newUser = new User({
-        email,
-        firstName,
-        lastName,
-        password,
-      });
-      newUser.save(() => {
-        res
-          .status(201)
-          .json({ message: { msgBody: "Account created", msgError: false } });
+      const newUser = new User(user);
+      await newUser.save(() => {
+        const token = signToken(newUser._id);
+        res.cookie("access_token", token, { httpOnly: true, sameSite: true });
+        res.status(201).json({ user: newUser, isAuthenticated: true });
       });
     }
   } catch (e) {
@@ -43,12 +38,12 @@ module.exports.newUser = async (req, res) => {
 module.exports.logInUser = async (req, res) => {
   try {
     if (req.isAuthenticated()) {
-      const { _id, email, firstName, lastName } = req.user;
+      const user = req.user;
       const token = signToken(_id);
       res.cookie("access_token", token, { httpOnly: true, sameSite: true });
       res.status(200).json({
         isAuthenticated: true,
-        user: { firstName, email, lastName },
+        user,
       });
     }
   } catch (e) {
@@ -60,9 +55,30 @@ module.exports.logOutUser = async (req, res) => {
   try {
     res.clearCookie("access_token");
     res.json({
-      user: { firstName: "", email: "", lastName: "" },
+      user: {},
       success: true,
     });
+  } catch (e) {
+    res.status(400).send({ message: "Something went wrong!" });
+  }
+};
+
+module.exports.authenticated = async (req, res) => {
+  try {
+    const user = req.user;
+    res.status(200).json({ isAuthenticated: true, user });
+  } catch (e) {
+    res.status(400).send({ message: "Something went wrong!" });
+  }
+};
+
+module.exports.editUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const user = req.body;
+    await User.findByIdAndUpdate(id, user);
+    const updatedUser = await User.findById(id);
+    res.status(201).json({ user: updatedUser, isAuthenticated: true });
   } catch (e) {
     res.status(400).send({ message: "Something went wrong!" });
   }
@@ -79,23 +95,5 @@ module.exports.logOutUser = async (req, res) => {
 //     }
 //   } catch (err) {
 //     res.status(400).send({ message: "user not found" });
-//   }
-// };
-
-// module.exports.editUser = async (req, res, next) => {
-//   try {
-//     const { id, email, name, location, lastName } = req.body;
-//     const editedUser = {
-//       email,
-//       name,
-//       location,
-//       lastName,
-//     };
-//     const userUpdate = await User.findByIdAndUpdate(id, editedUser);
-//     const sessionUser = helper.sessionizeUser(userUpdate);
-//     req.session.user = sessionUser;
-//     res.send(sessionUser);
-//   } catch (e) {
-//     res.status(400).send({ message: "Something went wrong!" });
 //   }
 // };

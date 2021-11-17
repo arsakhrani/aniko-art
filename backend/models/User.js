@@ -7,19 +7,13 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  firstName: {
-    type: String,
-  },
-  lastName: {
-    type: String,
-  },
-  userName: {
+  fullName: {
     type: String,
   },
   phoneNumber: {
     type: Number,
   },
-  address: {
+  shippingAddress: {
     street: String,
     city: String,
     country: String,
@@ -32,11 +26,11 @@ const userSchema = new mongoose.Schema({
   },
   paymentMethod: {
     type: String,
-    enum: ["VISA/DELTA/ELECTRON", "MASTERCARD/EUROCARD", "OTHER"],
+    enum: ["VISA/DELTA/ELECTRON", "MASTERCARD/EUROCARD", "OTHER", ""],
   },
   insuranceMethod: {
     type: String,
-    enum: ["AXA", "LOREM", "IPSUM", "HAVE-NONE", "NONE-NEEDED"],
+    enum: ["AXA", "LOREM", "IPSUM", "HAVE-NONE", "NONE-NEEDED", ""],
   },
   profilePicture: {
     type: String,
@@ -70,7 +64,12 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ["BUYER", "PRIVATE-SELLER", "ARTIST-SELLER", "GALLERY-SELLER"],
+    enum: ["buyer", "seller"],
+  },
+  interests: {
+    privateSales: Boolean,
+    gallerySales: Boolean,
+    artistSales: Boolean,
   },
   isVerified: {
     type: Boolean,
