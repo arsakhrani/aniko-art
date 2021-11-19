@@ -11,14 +11,29 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
   phoneNumber: {
-    type: Number,
+    type: String,
   },
   shippingAddress: {
-    street: String,
-    city: String,
-    country: String,
-    postCode: String,
-    specialInstructions: String,
+    street: {
+      type: String,
+      default: "",
+    },
+    city: {
+      type: String,
+      default: "",
+    },
+    country: {
+      type: String,
+      default: "",
+    },
+    postCode: {
+      type: String,
+      default: "",
+    },
+    specialInstructions: {
+      type: String,
+      default: "",
+    },
   },
   password: {
     type: String,
@@ -36,18 +51,74 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
   favoriteMedium: {
-    type: [String],
+    painting: {
+      type: Boolean,
+      default: false,
+    },
+    sculpture: {
+      type: Boolean,
+      default: false,
+    },
+    drawing: {
+      type: Boolean,
+      default: false,
+    },
+    prints: {
+      type: Boolean,
+      default: false,
+    },
+    workOnPaper: {
+      type: Boolean,
+      default: false,
+    },
+    design: {
+      type: Boolean,
+      default: false,
+    },
+    photography: {
+      type: Boolean,
+      default: false,
+    },
+    installation: {
+      type: Boolean,
+      default: false,
+    },
+    filmVideo: {
+      type: Boolean,
+      default: false,
+    },
   },
   favoriteArtist: {
-    fullName: String,
-    country: String,
+    fullName: {
+      type: String,
+      default: "",
+    },
+    country: {
+      type: String,
+      default: "",
+    },
   },
   favoriteStyle: {
-    style: String,
-    size: String,
-    aesthetic: String,
-    material: String,
-    other: String,
+    style: {
+      type: String,
+      default: "",
+    },
+    size: {
+      type: String,
+      default: "",
+    },
+    aesthetics: {
+      type: String,
+      default: "",
+    },
+    material: {
+      type: String,
+      default: "",
+    },
+    other: {
+      type: String,
+      default: "",
+    },
   },
   requestedArtWork: {
     type: [
@@ -56,7 +127,7 @@ const userSchema = new mongoose.Schema({
         country: String,
         style: String,
         size: String,
-        aethetic: String,
+        aethetics: String,
         material: String,
         other: String,
       },
@@ -67,9 +138,18 @@ const userSchema = new mongoose.Schema({
     enum: ["buyer", "seller"],
   },
   interests: {
-    privateSales: Boolean,
-    gallerySales: Boolean,
-    artistSales: Boolean,
+    privateSales: {
+      type: Boolean,
+      default: false,
+    },
+    gallerySales: {
+      type: Boolean,
+      default: false,
+    },
+    artistSales: {
+      type: Boolean,
+      default: false,
+    },
   },
   isVerified: {
     type: Boolean,

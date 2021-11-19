@@ -68,6 +68,8 @@ router.get(
 
 router.put("/update/:id", wrapAsync(userController.editUser));
 
+router.put("/request-artwork/:id", wrapAsync(userController.requestArtWork));
+
 // router.delete("", wrapAsync(userController.deleteUser));
 
 // router.get("/:id", wrapAsync(userController.getUserInfo));

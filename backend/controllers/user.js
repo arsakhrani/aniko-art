@@ -39,7 +39,8 @@ module.exports.logInUser = async (req, res) => {
   try {
     if (req.isAuthenticated()) {
       const user = req.user;
-      const token = signToken(_id);
+      console.log(user);
+      const token = signToken(user._id);
       res.cookie("access_token", token, { httpOnly: true, sameSite: true });
       res.status(200).json({
         isAuthenticated: true,
@@ -79,6 +80,19 @@ module.exports.editUser = async (req, res, next) => {
     await User.findByIdAndUpdate(id, user);
     const updatedUser = await User.findById(id);
     res.status(201).json({ user: updatedUser, isAuthenticated: true });
+  } catch (e) {
+    res.status(400).send({ message: "Something went wrong!" });
+  }
+};
+
+module.exports.requestArtWork = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const request = req.body;
+    const user = await User.findById(id, user);
+    user.requestedArtWork.push(request);
+    await user.save();
+    res.status(201).json({ success: true });
   } catch (e) {
     res.status(400).send({ message: "Something went wrong!" });
   }
