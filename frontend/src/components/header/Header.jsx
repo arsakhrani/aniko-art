@@ -26,7 +26,8 @@ export default function Header({ discover, grey }) {
 
   const history = useHistory()
 
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext)
+  const { isAuthenticated, setIsAuthenticated, setUser } =
+    useContext(AuthContext)
 
   const openMenu = () => {
     setToggleMenu(!toggleMenu)
@@ -42,6 +43,7 @@ export default function Header({ discover, grey }) {
     const loggedOutUser = await authService.logout()
     const { success } = loggedOutUser
     if (success) {
+      setUser({})
       setIsAuthenticated(false)
       history.push("/")
     }

@@ -4,13 +4,15 @@ import HomePage from "./pages/HomePage"
 import DiscoverPage from "./pages/DiscoverPage"
 import RegisterPage from "./pages/RegisterPage"
 import ManageProfilePage from "./pages/ManageProfilePage"
+import ManagePreferencesPage from "./pages/ManagePreferencesPage"
 import NotFoundPage from "./pages/NotFoundPage"
 import LogInPage from "./pages/LogInPage"
 import { AuthContext } from "./context/authContext"
 import { useSelector } from "react-redux"
+import RequestArtworkPage from "./pages/RequestArtworkPage"
 
 function App() {
-  const { isAuthenticated } = useContext(AuthContext)
+  const { isAuthenticated, user } = useContext(AuthContext)
   const registrationDetails = useSelector(
     (state) => state.registrationInfo.value
   )
@@ -28,13 +30,23 @@ function App() {
         <Route path="/manage-profile" exact>
           {!isAuthenticated ? (
             !registrationDetails ? (
-              <Redirect to="/" />
+              <Redirect to="/login" />
             ) : (
               <ManageProfilePage />
             )
           ) : (
             <ManageProfilePage />
           )}
+        </Route>
+        <Route path="/manage-preferences" exact>
+          {isAuthenticated && user.role === "buyer" ? (
+            <ManagePreferencesPage />
+          ) : (
+            <Redirect to="/login" />
+          )}
+        </Route>
+        <Route path="/request-artwork" exact component={RequestArtworkPage}>
+          {!isAuthenticated && <Redirect to="/login" />}
         </Route>
         <Route path="*" component={NotFoundPage} />
       </Switch>

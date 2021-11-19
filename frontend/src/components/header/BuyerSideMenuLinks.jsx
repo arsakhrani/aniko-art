@@ -19,7 +19,7 @@ export default function BuyerSideMenuLinks() {
       </StyledLink>
       <LineBlocker $number={number} />
       <StyledLink
-        to={"/"}
+        to={"/manage-profile"}
         onMouseEnter={() => setNumber(2)}
         onMouseLeave={() => setNumber(0)}
       >
@@ -27,7 +27,7 @@ export default function BuyerSideMenuLinks() {
       </StyledLink>
       <LineBlocker $number={number} />
       <StyledLink
-        to={"/"}
+        to={"/manage-preferences"}
         onMouseEnter={() => setNumber(3)}
         onMouseLeave={() => setNumber(0)}
       >
@@ -35,7 +35,7 @@ export default function BuyerSideMenuLinks() {
       </StyledLink>
       <LineBlocker $number={number} />
       <StyledLink
-        to={"/"}
+        to={"/request-artwork"}
         onMouseEnter={() => setNumber(4)}
         onMouseLeave={() => setNumber(0)}
       >

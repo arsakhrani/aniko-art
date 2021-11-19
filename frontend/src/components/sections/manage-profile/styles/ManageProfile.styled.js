@@ -9,6 +9,7 @@ export const Container = styled.div`
   padding: 3em 7em;
   background-color: ${theme.color.grey};
   width: 100vw;
+  min-height: 100vh;
 
   h1 {
     font-weight: 100;

@@ -1,17 +1,17 @@
 import React from "react"
-import { Button } from "./styles/PrimaryButton.styled"
+import { Button } from "./styles/MediumButton.styled"
 
-export default function PrimaryButton({
+export default function MediumButton({
   buttonText,
   id,
   submit,
+  selected,
   onClick,
-  disabled,
 }) {
   return (
     <Button
-      disabled={disabled}
       onClick={onClick}
+      $selected={selected}
       type={submit ? "submit" : "button"}
       id={id}
     >

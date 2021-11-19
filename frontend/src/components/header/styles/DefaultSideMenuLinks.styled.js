@@ -15,7 +15,7 @@ export const StyledLink = styled(Link)`
 
 export const LineBlocker = styled.div`
   height: 3px;
-  width: 40%;
+  width: 60%;
   background-color: ${theme.color.grey};
   position: relative;
   top: -5px;

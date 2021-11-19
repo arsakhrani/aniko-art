@@ -18,7 +18,6 @@ export default function Footer() {
         <StyledLink to="/discover">Discover</StyledLink>
         <StyledLink to="/login">Login</StyledLink>
         <StyledLink to="/register">Sign Up</StyledLink>
-        <StyledLink to="/">How to Bid</StyledLink>
       </Column>
       <Column>
         <StyledLink to="/">Terms of Use</StyledLink>

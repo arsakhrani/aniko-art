@@ -102,7 +102,7 @@ export default function ManageProfile() {
         insuranceMethod,
       }
       const updateUser = await authService.update(user, authContext.user._id)
-      authContext.setUser(updateUser)
+      authContext.setUser(updateUser.user)
       history.push("/discover")
     }
   }
@@ -243,7 +243,7 @@ export default function ManageProfile() {
           {registrationDetails ? (
             <p>{registrationDetails.email}</p>
           ) : (
-            <p>email</p>
+            <p>{authContext.user.email}</p>
           )}
         </ProfileBox>
         <StepLabel>
@@ -313,14 +313,16 @@ export default function ManageProfile() {
           />
         </RadialsContainer>
         <div
-          onClick={() => validate()}
           style={{
             display: "flex",
             width: "100%",
             flexDirection: "row-reverse",
           }}
         >
-          <PrimaryButton buttonText={"Save and continue"} />
+          <PrimaryButton
+            onClick={() => validate()}
+            buttonText={"Save and continue"}
+          />
         </div>
       </div>
     </Container>

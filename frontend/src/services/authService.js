@@ -63,4 +63,19 @@ export default {
         }
     })
   },
+  requestArtwork: (request, id) => {
+    return fetch(`/api/user/request-artwork/${id}`, {
+      method: "put",
+      body: JSON.stringify(request),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status !== 401) return res.json().then((data) => data)
+      else
+        return {
+          message: "Something went wrong",
+        }
+    })
+  },
 }
