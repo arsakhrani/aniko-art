@@ -10,6 +10,7 @@ import LogInPage from "./pages/LogInPage"
 import { AuthContext } from "./context/authContext"
 import { useSelector } from "react-redux"
 import RequestArtworkPage from "./pages/RequestArtworkPage"
+import UploadArtworkPage from "./pages/UploadArtworkPage"
 
 function App() {
   const { isAuthenticated, user } = useContext(AuthContext)
@@ -47,6 +48,13 @@ function App() {
         </Route>
         <Route path="/request-artwork" exact component={RequestArtworkPage}>
           {!isAuthenticated && <Redirect to="/login" />}
+        </Route>
+        <Route path="/upload-artwork" exact>
+          {isAuthenticated && user.role === "seller" ? (
+            <UploadArtworkPage />
+          ) : (
+            <Redirect to="/login" />
+          )}
         </Route>
         <Route path="*" component={NotFoundPage} />
       </Switch>

@@ -103,3 +103,29 @@
   bottom: 5px;
   margin-right: 0.5em;
 }
+
+div.file-input {
+  width: 100%;
+  background-color: white;
+  height: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.file-input > p {
+  margin-right: 1em;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+label.file-input {
+  border: 1px solid #343331;
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #343331;
+}

@@ -151,6 +151,11 @@ const userSchema = new mongoose.Schema({
       default: false,
     },
   },
+  sellerType: {
+    type: String,
+    enum: ["private", "artist", "gallery", ""],
+    default: "",
+  },
   isVerified: {
     type: Boolean,
     default: false,

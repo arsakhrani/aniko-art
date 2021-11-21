@@ -80,6 +80,7 @@ export default function ManageProfile() {
           shippingAddress,
           role: registrationDetails.type,
           interests: registrationDetails.interests,
+          sellerType: registrationDetails.sellerType,
           phoneNumber,
           paymentMethod,
           insuranceMethod,

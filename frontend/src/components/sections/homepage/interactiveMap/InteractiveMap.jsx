@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import { ReactComponent as Continent } from "../../../../assets/icons/map/continent.svg"
 import "./interactiveMap.css"
 
@@ -28,16 +29,18 @@ export default function InteractiveMap() {
     <div style={styles.container}>
       <div style={styles.titleBox}>
         <h1 style={{ fontSize: 44, marginBottom: 0 }}>Showroom</h1>
-        <p
-          style={{
-            color: "#F2A16B",
-            marginBottom: -10,
-            cursor: "pointer",
-            fontSize: 13,
-          }}
-        >
-          X VIEW ALL ARTWORKS
-        </p>
+        <Link to="/discover">
+          <p
+            style={{
+              color: "#F2A16B",
+              marginBottom: -10,
+              cursor: "pointer",
+              fontSize: 13,
+            }}
+          >
+            X VIEW ALL ARTWORKS
+          </p>
+        </Link>
         <div
           style={{ height: 1, width: 135, backgroundColor: "#F2A16B" }}
         ></div>
@@ -53,7 +56,7 @@ export default function InteractiveMap() {
 
 const styles = {
   container: {
-    height: "106vh",
+    height: "109vh",
   },
   titleBox: {
     position: "absolute",

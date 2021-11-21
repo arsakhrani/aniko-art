@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import PrimaryButton from "../../../atoms/PrimaryButton"
 import TransparentButton from "../../../atoms/TransparentButton"
 import CheckboxInput from "../../../inputs/CheckboxInput"
+import RadialInput from "../../../inputs/RadialInput"
 import TextInput from "../../../inputs/TextInput"
 import {
   CheckboxContainer,
@@ -21,9 +22,8 @@ export default function RegistrationForm({
   const [privateSalesBuy, setPrivateSalesBuy] = useState(false)
   const [gallerySalesBuy, setGallerySalesBuy] = useState(false)
   const [artistSalesBuy, setArtistSalesBuy] = useState(false)
-  const [privateSalesSell, setPrivateSalesSell] = useState(false)
-  const [gallerySalesSell, setGallerySalesSell] = useState(false)
-  const [artistSalesSell, setArtistSalesSell] = useState(false)
+  const [sellerType, setSellerType] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
   const [isSell] = useState(sell)
 
   const dispatch = useDispatch()
@@ -32,27 +32,23 @@ export default function RegistrationForm({
 
   const saveDetails = (e) => {
     e.preventDefault()
-    let interests = {}
-    if (isSell) {
-      interests = {
-        privateSales: privateSalesSell,
-        gallerySales: gallerySalesSell,
-        artistSales: artistSalesSell,
-      }
+    if (isSell && !sellerType) {
+      setErrorMessage("Please select the type of seller you are")
     } else {
-      interests = {
+      const interests = {
         privateSales: privateSalesBuy,
         gallerySales: gallerySalesBuy,
         artistSales: artistSalesBuy,
       }
+      const details = {
+        type: isSell ? "seller" : "buyer",
+        email: e.target.email.value,
+        interests,
+        sellerType: isSell ? sellerType : "",
+      }
+      dispatch(saveInfo(details))
+      history.push("/manage-profile")
     }
-    const details = {
-      type: isSell ? "seller" : "buyer",
-      email: e.target.email.value,
-      interests,
-    }
-    dispatch(saveInfo(details))
-    history.push("/manage-profile")
   }
 
   return (
@@ -78,36 +74,35 @@ export default function RegistrationForm({
         />
         {sell ? (
           <CheckboxContainer>
-            <div
-              style={{ paddingBottom: "1em" }}
-              onClick={() => setPrivateSalesSell(!privateSalesSell)}
-            >
-              <CheckboxInput
-                checked={privateSalesSell}
+            <div style={{ paddingBottom: "1em" }}>
+              <RadialInput
+                checked={sellerType === "private"}
+                onClick={() => setSellerType("private")}
                 label={"Private Sales"}
-                name={"privateSales"}
+                name={"sellerType"}
               />
             </div>
-            <div
-              style={{ paddingBottom: "1em" }}
-              onClick={() => setGallerySalesSell(!gallerySalesSell)}
-            >
-              <CheckboxInput
-                checked={gallerySalesSell}
+            <div style={{ paddingBottom: "1em" }}>
+              <RadialInput
+                checked={sellerType === "gallery"}
+                onClick={() => setSellerType("gallery")}
                 label={"Gallery Sales"}
-                name={"gallerySales"}
+                name={"sellerType"}
               />
             </div>
-            <div
-              style={{ paddingBottom: "1em" }}
-              onClick={() => setArtistSalesSell(!artistSalesSell)}
-            >
-              <CheckboxInput
-                checked={artistSalesSell}
+            <div style={{ paddingBottom: "1em" }}>
+              <RadialInput
+                checked={sellerType === "artist"}
+                onClick={() => setSellerType("artist")}
                 label={"Artist Sales"}
-                name={"artistSales"}
+                name={"sellerType"}
               />
             </div>
+            {errorMessage && (
+              <p style={{ color: "red", marginTop: "-0.6em" }}>
+                {errorMessage}
+              </p>
+            )}
           </CheckboxContainer>
         ) : (
           <CheckboxContainer>

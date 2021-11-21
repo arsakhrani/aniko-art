@@ -27,7 +27,7 @@ export default function SellerSideMenuLinks() {
       </StyledLink>
       <LineBlocker $number={number} />
       <StyledLink
-        to={"/"}
+        to={"/upload-artwork"}
         onMouseEnter={() => setNumber(3)}
         onMouseLeave={() => setNumber(0)}
       >

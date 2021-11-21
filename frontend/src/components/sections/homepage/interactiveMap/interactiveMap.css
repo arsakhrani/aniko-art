@@ -66,9 +66,9 @@
 }
 
 .animated .circle > path {
-    fill: #002952;
-    transition: fill 1s linear;
-  }
+  fill: #002952;
+  transition: fill 1s linear;
+}
 
 @keyframes blink {
   0% {
@@ -77,10 +77,10 @@
   20% {
     stroke-width: 20px;
   }
-  40%{
+  40% {
     stroke-width: 15px;
   }
-  70%{
+  70% {
     stroke-width: 40px;
   }
 }

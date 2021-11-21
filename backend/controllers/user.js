@@ -91,7 +91,7 @@ module.exports.requestArtWork = async (req, res, next) => {
     const request = req.body;
     const user = await User.findById(id, user);
     user.requestedArtWork.push(request);
-    await user.save();
+    await user.save(); //should send email with nodemailer here
     res.status(201).json({ success: true });
   } catch (e) {
     res.status(400).send({ message: "Something went wrong!" });

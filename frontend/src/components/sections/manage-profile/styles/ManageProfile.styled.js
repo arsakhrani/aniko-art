@@ -20,6 +20,48 @@ export const Container = styled.div`
   }
 `
 
+export const UploadContainer = styled.div`
+  font-family: "Arial", sans-serif;
+  background-color: ${theme.color.grey};
+  width: 100vw;
+  min-height: 80vh;
+
+  h1 {
+    font-weight: 100;
+  }
+
+  .password-container {
+    width: 90%;
+  }
+`
+
+export const StepContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10em;
+  width: 100%;
+  padding-left: 7em;
+
+  h4 {
+    color: black;
+  }
+`
+
+export const Para = styled.p`
+  color: ${theme.color.darkGrey};
+`
+
+export const Header = styled.div`
+  font-family: "Arial", sans-serif;
+  padding: 3em 7em;
+  background-color: ${theme.color.grey};
+  width: 100vw;
+
+  h1 {
+    font-weight: 100;
+  }
+`
+
 export const BubbleCounter = styled.div`
   color: white;
   background-color: ${theme.color.orange};
