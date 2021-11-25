@@ -1,46 +1,191 @@
-import React from "react"
+import React, { useEffect, useState, useContext } from "react"
 import TextInput from "../inputs/TextInput"
-import { StepContainer } from "../sections/manage-profile/styles/ManageProfile.styled"
+import {
+  Detail,
+  Para,
+  StepContainer,
+} from "../sections/manage-profile/styles/ManageProfile.styled"
 import CheckboxInput from "../inputs/CheckboxInput"
 import PrimaryButton from "../atoms/PrimaryButton"
+import { useSelector } from "react-redux"
+import discoverService from "../../services/discoverService"
+import { useHistory } from "react-router-dom"
+import { AuthContext } from "../../context/authContext"
 
 export default function StepTwo() {
+  const uploadDetails = useSelector((state) => state.uploadDetails.value)
+  const [convertedLength, setConvertedLength] = useState(0)
+  const [convertedWidth, setConvertedWidth] = useState(0)
+  const [convertedDepth, setConvertedDepth] = useState(0)
+  const [price, setPrice] = useState(1000)
+  const [errorMessage, setErrorMessage] = useState("")
+
+  let futureFeature = false
+
+  const authContext = useContext(AuthContext)
+
+  const history = useHistory()
+
+  useEffect(() => {
+    if (uploadDetails.unit === "cm") {
+      setConvertedLength(
+        Math.round((uploadDetails.length / 2.54 + Number.EPSILON) * 10) / 10
+      )
+      setConvertedWidth(
+        Math.round((uploadDetails.width / 2.54 + Number.EPSILON) * 10) / 10
+      )
+      setConvertedDepth(
+        Math.round((uploadDetails.depth / 2.54 + Number.EPSILON) * 10) / 10
+      )
+    } else {
+      setConvertedLength(Math.round(uploadDetails.length * 2.54))
+      setConvertedWidth(Math.round(uploadDetails.width * 2.54))
+      setConvertedDepth(Math.round(uploadDetails.depth * 2.54))
+    }
+    return () => {}
+  }, [])
+
+  const uploadCert = async () => {
+    if (uploadDetails.certificateArray.length === 1) {
+      const upload = await discoverService.uploadImages(
+        uploadDetails.certificateArray
+      )
+      return upload
+    } else {
+      return []
+    }
+  }
+
+  const uploadImages = async () => {
+    const artImageUpload = await discoverService.uploadImages(
+      uploadDetails.imagesArray
+    )
+
+    const certImageUpload = await uploadCert()
+
+    return {
+      artImageUpload,
+      certImageUpload,
+    }
+  }
+
+  const validateAndSubmit = async () => {
+    if (price < 1000) {
+      setErrorMessage(
+        "Minimum price is 1000 euros. Please adjust the asking price accordingly."
+      )
+    } else {
+      const images = await uploadImages()
+
+      const convertedMeasurements = {
+        length: convertedLength,
+        width: convertedWidth,
+        depth: convertedDepth,
+      }
+      const enteredMeasurements = {
+        length: uploadDetails.length,
+        width: uploadDetails.width,
+        depth: uploadDetails.depth,
+      }
+
+      const artwork = {
+        artist: uploadDetails.artist,
+        gallery: uploadDetails.gallery,
+        country: uploadDetails.country,
+        title: uploadDetails.title,
+        medium: uploadDetails.medium,
+        year: uploadDetails.year,
+        dimensionsCm:
+          uploadDetails.unit === "cm"
+            ? enteredMeasurements
+            : convertedMeasurements,
+        dimensionsIn:
+          uploadDetails.unit === "in"
+            ? enteredMeasurements
+            : convertedMeasurements,
+        price,
+        pictures: images.artImageUpload,
+        certificateOfAuthenticity: images.certImageUpload,
+        owner: authContext.user._id,
+      }
+      const artUpload = await discoverService.uploadArt(artwork)
+      if (artUpload.success) {
+        history.push("discover")
+      }
+    }
+  }
+
   return (
-    <StepContainer>
-      <div>
-        <h1>Title of the artwork</h1>
-        <p>IMAGE</p>
-        <p>imaaaaaage</p>
-      </div>
-      <div>
-        <p>DETAILS</p>
+    uploadDetails && (
+      <StepContainer>
         <div>
-          <p>Year</p>
-          <span>2010</span>
+          <h1>{uploadDetails.title}</h1>
+          <Para>IMAGE</Para>
+          <img
+            width="100%"
+            src={URL.createObjectURL(uploadDetails.imagesArray[0])}
+          />
         </div>
         <div>
-          <p>Category</p>
-          <span>Painting</span>
+          <Para>DETAILS</Para>
+          <Detail>
+            <p>Year</p>
+            <Para>{uploadDetails.year}</Para>
+          </Detail>
+          <Detail>
+            <p>Category</p>
+            <Para>{uploadDetails.medium}</Para>
+          </Detail>
+          <Detail>
+            <p>Dimension (l/w/d)</p>
+            {uploadDetails.unit === "cm" ? (
+              <Para>
+                {uploadDetails.length}x{uploadDetails.width}x
+                {uploadDetails.depth} cm | {convertedLength}x{convertedWidth}x
+                {convertedDepth} inch
+              </Para>
+            ) : (
+              <Para>
+                {convertedLength}x{convertedWidth}x{convertedDepth} cm |{" "}
+                {uploadDetails.length}x{uploadDetails.width}x
+                {uploadDetails.depth} inch
+              </Para>
+            )}
+          </Detail>
+          <Para>PRICE</Para>
+          <p style={{ marginBottom: "2em" }}>
+            Do you already know the price you would like to sell this artwork?*
+          </p>
+          <div style={{ width: "90%" }}>
+            <TextInput
+              min={1000}
+              step={50}
+              type="number"
+              label={"Asking Price"}
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
+          <Para>*We only offer from 1000 euro and up</Para>
+          {futureFeature && (
+            <Para>
+              <CheckboxInput label={"Let Aniko.Art decide the price for you"} />
+            </Para>
+          )}
+          <Para>
+            ( The price will include{" "}
+            <span style={{ cursor: "pointer" }}>insurance</span> and{" "}
+            <span style={{ cursor: "pointer" }}>shipping</span> )
+          </Para>
+          {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+          <div>
+            <PrimaryButton
+              onClick={() => validateAndSubmit()}
+              buttonText={"SUBMIT"}
+            />
+          </div>
         </div>
-        <div>
-          <p>Dimension (h/w/d)</p>
-          <span>5.0x3.0x1.0cm | 2.0x1.2x0.4 inch</span>
-        </div>
-        <p>PRICE</p>
-        <p>
-          Do you already know the price you would like to sell this artwork?*
-        </p>
-        <TextInput label={"Asking Price"} />
-        <p>*We only offer from 1000 euro and up</p>
-        <CheckboxInput label={"Let Aniko.Art decide the price for you"} />
-        <p>
-          ( The price will include <span>insurance</span> and{" "}
-          <span>shipping</span>
-        </p>
-        <div>
-          <PrimaryButton buttonText={"SUBMIT"} />
-        </div>
-      </div>
-    </StepContainer>
+      </StepContainer>
+    )
   )
 }

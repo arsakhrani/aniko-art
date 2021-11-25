@@ -1,38 +1,33 @@
 import React, { useState } from "react"
 import { ReactComponent as Search } from "../../assets/icons/search-icon.svg"
 import { Container, MenuItem } from "./styles/DiscoverHeader.styled"
-import { change } from "../../state/discover/discoverFiltersSlice"
 import {
   setCountryFilter,
   setCountryIndex,
 } from "../../state/discover/artistAndGalleryFilterSlice"
 import { useDispatch } from "react-redux"
+import { Link, useParams } from "react-router-dom"
 
 export default function DiscoverHeader() {
   const dispatch = useDispatch()
 
-  const [activeTab, setActiveTab] = useState(1)
+  const { type } = useParams()
 
-  const selectTab = (number, filter) => {
-    setActiveTab(number)
-    dispatch(change(filter))
+  const selectTab = () => {
     dispatch(setCountryFilter(""))
     dispatch(setCountryIndex(0))
   }
 
   return (
     <Container>
-      <MenuItem $activeTab={activeTab} onClick={() => selectTab(1, "artists")}>
-        Artists
+      <MenuItem $activeTab={type === "artists"} onClick={() => selectTab()}>
+        <Link to={"/discover/artists"}>Artists</Link>
       </MenuItem>
-      <MenuItem $activeTab={activeTab} onClick={() => selectTab(2, "artworks")}>
-        Artworks
+      <MenuItem $activeTab={type === "artworks"} onClick={() => selectTab()}>
+        <Link to={"/discover/artworks"}>Artworks</Link>
       </MenuItem>
-      <MenuItem
-        $activeTab={activeTab}
-        onClick={() => selectTab(3, "galleries")}
-      >
-        Galleries
+      <MenuItem $activeTab={type === "galleries"} onClick={() => selectTab()}>
+        <Link to={"/discover/galleries"}>Galleries</Link>
       </MenuItem>
       <Search style={{ marginLeft: "1em", cursor: "pointer" }} />
     </Container>

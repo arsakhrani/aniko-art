@@ -1,7 +1,6 @@
-import React from "react"
+import React, { useContext } from "react"
 import { artists } from "../../../../dummy-data/artists"
 import { galleries } from "../../../../dummy-data/galleries"
-import { artworks } from "../../../../dummy-data/artworks"
 import {
   ArtistsAndGalleriesContainer,
   ArtworksContainer,
@@ -16,12 +15,16 @@ import {
   filterArtworks,
   filterGalleries,
 } from "../../../../services/helperFunctions"
+import { ArtworkContext } from "../../../../context/artworkContext"
 
-export default function MainContent() {
+export default function MainContent({ type }) {
   const filterType = useSelector((state) => state.discoverFilters.value)
   const countryFilter = useSelector(
     (state) => state.artistAndGalleryFilter.value
   )
+
+  const { artworks } = useContext(ArtworkContext)
+
   const artworkFilters = useSelector((state) => state.artworkFilter)
 
   const filteredAritsts = filterArtists(artists, countryFilter)
@@ -30,29 +33,35 @@ export default function MainContent() {
 
   const filteredArtworks = filterArtworks(artworks, artworkFilters)
 
-  console.log(filteredArtworks)
-
-  if (filterType === "artists") {
+  if (type === "artists") {
     return (
       <ArtistsAndGalleriesContainer>
         {artists.map((artist) => (
-          <ArtistAndGalleryCard key={artist.id} cardInfo={artist} />
+          <ArtistAndGalleryCard
+            artist={true}
+            key={artist._id}
+            cardInfo={artist}
+          />
         ))}
       </ArtistsAndGalleriesContainer>
     )
   }
 
-  if (filterType === "galleries") {
+  if (type === "galleries") {
     return (
       <ArtistsAndGalleriesContainer>
         {galleries.map((gallery) => (
-          <ArtistAndGalleryCard key={gallery.id} cardInfo={gallery} />
+          <ArtistAndGalleryCard
+            gallery={true}
+            key={gallery._id}
+            cardInfo={gallery}
+          />
         ))}
       </ArtistsAndGalleriesContainer>
     )
   }
 
-  if (filterType === "artworks") {
+  if (type === "artworks") {
     return (
       <ArtworksContainer>
         <Masonry
@@ -61,7 +70,7 @@ export default function MainContent() {
           columnClassName="artworks-masonry-grid_column"
         >
           {artworks.map((artwork) => (
-            <ArtWorkCard key={artwork.id} cardInfo={artwork} />
+            <ArtWorkCard key={artwork._id} cardInfo={artwork} />
           ))}
         </Masonry>
       </ArtworksContainer>

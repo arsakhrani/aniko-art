@@ -14,5 +14,5 @@ export const Container = styled.nav`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  z-index: 2;
+  z-index: 3;
 `

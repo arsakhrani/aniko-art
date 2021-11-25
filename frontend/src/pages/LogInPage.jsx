@@ -26,7 +26,7 @@ export default function LogInPage() {
     if (isAuthenticated) {
       authContext.setUser(user)
       authContext.setIsAuthenticated(isAuthenticated)
-      history.push("/discover")
+      history.push("/discover/artworks")
     } else {
       setErrorMessage(message)
     }

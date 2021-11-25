@@ -5,25 +5,27 @@ export const ModalContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 3;
+  z-index: 4;
   height: 100vh;
   width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.7);
 `
 
 export const Modal = styled.div`
-  width: 90vw;
-  min-height: 50vh;
-  max-height: 95vh;
-  background-color: black;
+  width: 98vw;
+  height: 98vh;
+  background-color: rgba(0, 0, 0, 0.7);
   padding-top: 1em;
   padding-right: 1em;
   padding-left: 3em;
+  border-radius: 5px;
   display: grid;
   grid-template-columns: 1fr 4fr 5fr;
+  grid-template-rows: 90% 10%;
+  gap: 1em;
 `
 
 export const Gallery = styled.div`
@@ -45,8 +47,9 @@ export const FeaturePicture = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
+  align-self: end;
 
   img {
     max-height: 85vh;
@@ -56,7 +59,7 @@ export const FeaturePicture = styled.div`
 
 export const Info = styled.div`
   color: white;
-  padding-left: 1em;
+  padding-left: 3em;
 
   h1 {
     margin: 0;
@@ -133,6 +136,8 @@ export const ImageSelector = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  align-self: center;
+  padding-bottom: 2em;
 
   div {
     margin-left: 0.5em;
@@ -143,7 +148,7 @@ export const ImageSelector = styled.div`
     border: 1px solid white;
     cursor: pointer;
 
-    &:nth-of-type(${(props) => props.$number}) {
+    &:nth-of-type(${(props) => props.$number + 1}) {
       background-color: white;
     }
   }

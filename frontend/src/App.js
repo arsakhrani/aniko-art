@@ -2,6 +2,7 @@ import React, { useContext } from "react"
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom"
 import HomePage from "./pages/HomePage"
 import DiscoverPage from "./pages/DiscoverPage"
+import ArtistPortfolioPage from "./pages/ArtistPortfolioPage"
 import RegisterPage from "./pages/RegisterPage"
 import ManageProfilePage from "./pages/ManageProfilePage"
 import ManagePreferencesPage from "./pages/ManagePreferencesPage"
@@ -21,7 +22,15 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={HomePage} />
-        <Route path="/discover" exact component={DiscoverPage} />
+        <Route path="/discover/:type" exact component={DiscoverPage} />
+        <Route path="/discover/" exact>
+          <Redirect to="/discover/artworks" />
+        </Route>
+        <Route
+          path="/artist-portfolio/:id"
+          exact
+          component={ArtistPortfolioPage}
+        />
         <Route path="/register" exact component={RegisterPage}>
           {isAuthenticated && <Redirect to="/" />}
         </Route>

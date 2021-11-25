@@ -29,7 +29,7 @@ export default function InteractiveMap() {
     <div style={styles.container}>
       <div style={styles.titleBox}>
         <h1 style={{ fontSize: 44, marginBottom: 0 }}>Showroom</h1>
-        <Link to="/discover">
+        <Link to="/discover/artworks">
           <p
             style={{
               color: "#F2A16B",

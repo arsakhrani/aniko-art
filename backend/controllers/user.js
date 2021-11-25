@@ -1,4 +1,6 @@
 const User = require("../models/User");
+const Artist = require("../models/Artist");
+const Gallery = require("../models/Gallery");
 const JWT = require("jsonwebtoken");
 
 const signToken = (userID) => {
@@ -22,6 +24,25 @@ module.exports.newUser = async (req, res) => {
         .json({ message: { msgBody: "Email is taken", msgError: true } });
     } else {
       const newUser = new User(user);
+
+      if (user.sellerType === "artist") {
+        const artist = {
+          fullName: user.fullName,
+          email: user.email,
+        };
+        const newArtist = new Artist(artist);
+        await newArtist.save();
+      }
+
+      if (user.sellerType === "gallery") {
+        const gallery = {
+          email: user.email,
+          name: user.fullName,
+        };
+        const newGallery = new Gallery(gallery);
+        await newGallery.save();
+      }
+
       await newUser.save(() => {
         const token = signToken(newUser._id);
         res.cookie("access_token", token, { httpOnly: true, sameSite: true });
@@ -39,7 +60,6 @@ module.exports.logInUser = async (req, res) => {
   try {
     if (req.isAuthenticated()) {
       const user = req.user;
-      console.log(user);
       const token = signToken(user._id);
       res.cookie("access_token", token, { httpOnly: true, sameSite: true });
       res.status(200).json({
@@ -89,7 +109,7 @@ module.exports.requestArtWork = async (req, res, next) => {
   try {
     const { id } = req.params;
     const request = req.body;
-    const user = await User.findById(id, user);
+    const user = await User.findById(id);
     user.requestedArtWork.push(request);
     await user.save(); //should send email with nodemailer here
     res.status(201).json({ success: true });
@@ -98,16 +118,14 @@ module.exports.requestArtWork = async (req, res, next) => {
   }
 };
 
-// module.exports.getUserInfo = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const user = await User.findById(id);
-//     if (!user) {
-//       res.send("user not found");
-//     } else {
-//       res.send(user);
-//     }
-//   } catch (err) {
-//     res.status(400).send({ message: "user not found" });
-//   }
-// };
+module.exports.verifyArtist = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const idUrl = req.body;
+    const user = await User.findById(id);
+    //should send email idUrl and user details with nodemailer here
+    res.status(201).json({ success: true });
+  } catch (e) {
+    res.status(400).send({ message: "Something went wrong!" });
+  }
+};

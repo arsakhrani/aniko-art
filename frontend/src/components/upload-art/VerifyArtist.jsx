@@ -7,7 +7,7 @@ export default function VerifyArtist({ id }) {
   return (
     <VerifyBox>
       <p>Upload artist ID / Passport ( JPG, PNG, PDF )</p>
-      <FileInput />
+      <FileInput id={id} />
       <div>
         <PrimaryButton buttonText={"VERIFY ME"} />
       </div>

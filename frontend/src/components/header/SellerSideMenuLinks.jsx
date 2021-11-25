@@ -11,7 +11,7 @@ export default function SellerSideMenuLinks() {
   return (
     <Container>
       <StyledLink
-        to={"/discover"}
+        to={"/discover/artworks"}
         onMouseEnter={() => setNumber(1)}
         onMouseLeave={() => setNumber(0)}
       >

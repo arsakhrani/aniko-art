@@ -1,5 +1,9 @@
 import React, { useState } from "react"
-import { CoverPicture, WrittenContent } from "./styles/ArtWorkCard.styled"
+import {
+  CoverPicture,
+  WrittenContent,
+  PriceLink,
+} from "./styles/ArtWorkCard.styled"
 import PrimaryButton from "../../../atoms/PrimaryButton"
 import { Link } from "react-router-dom"
 import ArtWorkModal from "./ArtWorkModal"
@@ -26,12 +30,12 @@ export default function ArtWorkCard({ cardInfo }) {
         <ArtWorkModal closeModal={() => closeModal()} artInfo={cardInfo} />
       )}
       <p>LOT {cardInfo.lot}</p>
-      <CoverPicture src={cardInfo.coverPicture} onClick={() => showModal()} />
+      <CoverPicture src={cardInfo.pictures[0]} onClick={() => showModal()} />
       <WrittenContent>
         <div>
           <h4>{cardInfo.artist}</h4>
           <p>
-            {cardInfo.name}, {cardInfo.year}
+            {cardInfo.title}, {cardInfo.year}
           </p>
           <span>{cardInfo.gallery}</span>
         </div>
@@ -41,6 +45,11 @@ export default function ArtWorkCard({ cardInfo }) {
           />
         </Link>
       </WrittenContent>
+      <PriceLink onClick={() => showModal()}>
+        <div>SHOW</div>
+        <span></span>
+        <div>PRICE</div>
+      </PriceLink>
     </div>
   )
 }

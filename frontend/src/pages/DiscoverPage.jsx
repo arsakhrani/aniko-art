@@ -6,9 +6,12 @@ import Sidebar from "../components/sections/discover/sidebar/Sidebar"
 import Footer from "../components/footer/Footer"
 import { useDispatch } from "react-redux"
 import { saveInfo } from "../state/registration/registrationInfoSlice"
+import { useParams } from "react-router"
 
 export default function DiscoverPage() {
   const dispatch = useDispatch()
+
+  const { type } = useParams()
 
   useEffect(() => {
     dispatch(saveInfo(null))
@@ -20,7 +23,7 @@ export default function DiscoverPage() {
       <Header discover={true} />
       <Container>
         <Sidebar />
-        <MainContent />
+        <MainContent type={type} />
       </Container>
       <Footer />
     </div>

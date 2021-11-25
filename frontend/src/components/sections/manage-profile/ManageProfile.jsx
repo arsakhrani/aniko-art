@@ -31,6 +31,7 @@ export default function ManageProfile() {
   const [confirmPassword, setConfirmPassword] = useState("")
   const [termsAndConditions, setTermsAndConditions] = useState(false)
   const [fullName, setFullName] = useState(authContext.user.fullName || "")
+  const [website, setWebsite] = useState(authContext.user.website || "")
   const [shippingAddress, setShippingAddress] = useState({
     street: authContext.user.shippingAddress
       ? authContext.user.shippingAddress.street
@@ -84,6 +85,7 @@ export default function ManageProfile() {
           phoneNumber,
           paymentMethod,
           insuranceMethod,
+          website,
         }
         const registerUser = await authService.register(user)
         if (!registerUser.isAuthenticated) {
@@ -91,7 +93,7 @@ export default function ManageProfile() {
         } else {
           authContext.setUser(registerUser.user)
           authContext.setIsAuthenticated(true)
-          history.push("/discover")
+          history.push("/discover/artworks")
         }
       }
     } else {
@@ -101,10 +103,17 @@ export default function ManageProfile() {
         phoneNumber,
         paymentMethod,
         insuranceMethod,
+        website,
       }
       const updateUser = await authService.update(user, authContext.user._id)
       authContext.setUser(updateUser.user)
-      history.push("/discover")
+      if (authContext.user.sellerType === "artist") {
+        history.push("/discover/artists")
+      } else if (authContext.user.sellerType === "gallery") {
+        history.push("/discover/galleries")
+      } else {
+        history.push("/discover/artworks")
+      }
     }
   }
 
@@ -153,7 +162,12 @@ export default function ManageProfile() {
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               type={"text"}
-              label={"Full name"}
+              label={
+                registrationDetails.sellerType === "gallery" ||
+                authContext.user.sellerType === "gallery"
+                  ? "Gallery name"
+                  : "Full name"
+              }
               name={"full-name"}
             />
           </div>
@@ -220,6 +234,13 @@ export default function ManageProfile() {
               type={"text"}
               label={"Phone number"}
               name={"phone-number"}
+            />
+            <TextInput
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+              type={"text"}
+              label={"Website"}
+              name={"website"}
             />
           </div>
           <div>

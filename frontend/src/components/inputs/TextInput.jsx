@@ -9,10 +9,20 @@ export default function TextInput({
   value,
   onChange,
   defaultValue,
+  step,
+  max,
+  minLength,
+  maxLength,
+  min,
 }) {
   return (
     <div className="text-input">
       <input
+        minLength={minLength}
+        maxLength={maxLength}
+        min={min}
+        max={max}
+        step={step}
         defaultValue={defaultValue}
         onChange={onChange}
         id={id}

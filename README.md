@@ -10,7 +10,7 @@ The project is still in production.
 Milestones:
 [x] Complete front end skeleton
 [] Complete front end functionality
-[] Add image upload
+[x] Add image upload
 [] Add automatic email functions
 [] Add stripe payments
 [] Add mobile responsiveness

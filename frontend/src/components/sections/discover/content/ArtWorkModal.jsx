@@ -11,29 +11,22 @@ import {
 } from "./styles/ArtWorkModal.styled"
 
 export default function ArtWorkModal({ artInfo, closeModal }) {
-  const [selectorNumber, setSelectorNumber] = useState(1)
+  const [selectorNumber, setSelectorNumber] = useState(0)
 
   return (
     <ModalContainer>
       <Modal>
         <Gallery>
-          <GalleryPicture
-            src={artInfo.coverPicture}
-            onClick={() => setSelectorNumber(1)}
-          />
           {artInfo.pictures.map((pic, index) => (
             <GalleryPicture
-              onClick={() => setSelectorNumber(index + 2)}
+              onClick={() => setSelectorNumber(index)}
               key={pic}
               src={pic}
             />
           ))}
         </Gallery>
         <FeaturePicture>
-          {selectorNumber === 1 && <img src={artInfo.coverPicture} />}
-          {selectorNumber !== 1 && (
-            <img src={artInfo.pictures[selectorNumber - 2]} />
-          )}
+          <img src={artInfo.pictures[selectorNumber]} />
         </FeaturePicture>
         <Info>
           <h1>
@@ -44,10 +37,16 @@ export default function ArtWorkModal({ artInfo, closeModal }) {
           <a target="_blank" href={artInfo.website}>
             <span>+ FOLLOW ARTIS</span>T
           </a>
-          <p>{artInfo.name}</p>
+          <p>{artInfo.title}</p>
           <p>{artInfo.medium}</p>
-          {artInfo.dimensionsIn && <p>{artInfo.dimensionsIn} in</p>}
-          {artInfo.dimensionsCm && <p>{artInfo.dimensionsCm} cm</p>}
+          <p>
+            {artInfo.dimensionsIn.length}x{artInfo.dimensionsIn.width}x
+            {artInfo.dimensionsIn.depth} in
+          </p>
+          <p>
+            {artInfo.dimensionsCm.length}x{artInfo.dimensionsCm.width}x
+            {artInfo.dimensionsCm.depth} cm
+          </p>
           <div className="buy-art-container">
             <h2>$ {artInfo.price}</h2>
             <PrimaryButton buttonText={"BUY DIRECTLY"} />
@@ -62,11 +61,10 @@ export default function ArtWorkModal({ artInfo, closeModal }) {
           </div>
         </Info>
         <ImageSelector $number={selectorNumber}>
-          <div onClick={() => setSelectorNumber(1)}></div>
           {artInfo.pictures.map((pic, index) => (
             <div
               key={"selector-" + pic}
-              onClick={() => setSelectorNumber(index + 2)}
+              onClick={() => setSelectorNumber(index)}
             ></div>
           ))}
         </ImageSelector>

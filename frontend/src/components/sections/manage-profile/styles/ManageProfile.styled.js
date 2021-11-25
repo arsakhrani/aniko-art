@@ -49,6 +49,10 @@ export const StepContainer = styled.div`
 
 export const Para = styled.p`
   color: ${theme.color.darkGrey};
+
+  span {
+    text-decoration: underline solid black;
+  }
 `
 
 export const Header = styled.div`
@@ -123,5 +127,34 @@ export const RadialsContainer = styled.div`
     label {
       color: ${theme.color.darkGrey};
     }
+  }
+`
+
+export const Detail = styled.div`
+  display: grid;
+  grid-template-columns: 1.3fr 2fr;
+  width: 90%;
+  margin-bottom: 1em;
+  border-bottom: 1px solid ${theme.color.darkGrey};
+
+  &:nth-of-type(3) {
+    border-bottom: none;
+    margin-bottom: 5em;
+  }
+
+  p {
+    margin: 0;
+    margin-bottom: 5px;
+  }
+`
+
+export const FileDetails = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 8fr 2fr 1fr;
+  width: 100%;
+  align-items: center;
+
+  span {
+    cursor: pointer;
   }
 `

@@ -36,7 +36,7 @@ export const MenuContainer = styled.span`
   justify-content: space-around;
   align-items: flex-end;
   cursor: pointer;
-  z-index: 3;
+  z-index: 4;
 `
 
 const MenuLine = styled.span`

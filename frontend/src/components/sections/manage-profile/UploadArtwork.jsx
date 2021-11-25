@@ -21,12 +21,7 @@ export default function UploadArtwork() {
         <StepCounter step={step} />
       </Header>
       <UploadContainer>
-        {step === 1 && (
-          <StepOne
-            changeStep={(n) => changeStep(n)}
-            type={authContext.user.sellerType}
-          />
-        )}
+        {step === 1 && <StepOne changeStep={(n) => changeStep(n)} />}
         {step === 2 && <StepTwo changeStep={(n) => changeStep(n)} />}
       </UploadContainer>
     </div>

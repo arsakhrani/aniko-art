@@ -34,3 +34,21 @@ export const WrittenContent = styled.div`
     }
   }
 `
+
+export const PriceLink = styled.div`
+  color: ${theme.color.orange};
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+
+  div {
+    font-size: ${theme.fontSize.small};
+    font-family: "Arial", sans-serif;
+  }
+
+  span {
+    width: 4em;
+    height: 1px;
+    background-color: ${theme.color.orange};
+  }
+`

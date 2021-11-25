@@ -15,8 +15,8 @@ export const MenuItem = styled.span`
     cursor: pointer;
     font-size: ${theme.fontSize.small};
 
-    &:nth-of-type(${(props) => props.$activeTab}) {
-        color: ${theme.color.orange};
+    a {
+      color: ${(props) => props.$activeTab && theme.color.orange};
     }
   }
 `

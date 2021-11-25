@@ -85,7 +85,7 @@ export default function ManagePreferences() {
     }
     const updateUser = await authService.update(user, authContext.user._id)
     authContext.setUser(updateUser.user)
-    history.push("/discover")
+    history.push("/discover/artworks")
   }
 
   return (
