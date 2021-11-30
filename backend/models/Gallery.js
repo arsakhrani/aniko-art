@@ -18,7 +18,6 @@ const gallerySchema = new mongoose.Schema({
   },
   featurePicture: {
     type: String,
-    default: "a picture",
   },
   artworks: [
     {
@@ -28,7 +27,7 @@ const gallerySchema = new mongoose.Schema({
   ],
   activated: {
     type: Boolean,
-    default: false,
+    default: true,
   },
 });
 

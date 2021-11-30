@@ -1,15 +1,19 @@
-import React, { useEffect } from "react"
+import React, { useContext, useEffect } from "react"
 import { Container } from "./styles/CountryFilter.styled"
 import { useDispatch, useSelector } from "react-redux"
 import {
   setCountryFilter,
   setCountryIndex,
 } from "../../../../state/discover/artistAndGalleryFilterSlice"
-import { artists } from "../../../../dummy-data/artists"
-import { galleries } from "../../../../dummy-data/galleries"
+import { ArtistContext } from "../../../../context/artistContext"
+import { GalleryContext } from "../../../../context/galleryContext"
+import { useParams } from "react-router"
 
 export default function CountryFilter() {
   const dispatch = useDispatch()
+  const { artists } = useContext(ArtistContext)
+  const { galleries } = useContext(GalleryContext)
+  const { type } = useParams()
 
   useEffect(() => {
     return () => {
@@ -17,19 +21,20 @@ export default function CountryFilter() {
     }
   }, [])
 
-  const filterType = useSelector((state) => state.discoverFilters.value)
   const countryStyleIndex = useSelector(
     (state) => state.artistAndGalleryFilter.index
   )
 
   const availableArtistCountries = []
-  artists.forEach((artist) => availableArtistCountries.push(artist.location))
+  artists.forEach((artist) =>
+    availableArtistCountries.push(artist.birthCountry)
+  )
   let uniqueArtistCountries = [...new Set(availableArtistCountries)]
   uniqueArtistCountries.sort((a, b) => a.localeCompare(b))
 
   const availableGalleryCountries = []
   galleries.forEach((gallery) =>
-    availableGalleryCountries.push(gallery.location)
+    availableGalleryCountries.push(gallery.country)
   )
   let uniqueGalleryCountries = [...new Set(availableGalleryCountries)]
   uniqueGalleryCountries.sort((a, b) => a.localeCompare(b))
@@ -43,13 +48,13 @@ export default function CountryFilter() {
     <Container $index={countryStyleIndex}>
       <h5>COUNTRIES</h5>
       <ul>
-        {filterType === "artists" &&
+        {type === "artists" &&
           uniqueArtistCountries.map((country, index) => (
             <li key={country} onClick={() => selectCountry(country, index)}>
               {country}
             </li>
           ))}
-        {filterType === "galleries" &&
+        {type === "galleries" &&
           uniqueGalleryCountries.map((country, index) => (
             <li key={country} onClick={() => selectCountry(country, index)}>
               {country}

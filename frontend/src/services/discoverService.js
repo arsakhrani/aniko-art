@@ -40,4 +40,30 @@ export default {
       if (res.status === 200) return res.json().then((data) => data.artworks)
     })
   },
+  editArtist: async (artist, id) => {
+    return fetch(`/api/artist/edit/${id}`, {
+      method: "put",
+      body: JSON.stringify(artist),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status === 201) return res.json().then((data) => data)
+      else return { message: "A problem occured!" }
+    })
+  },
+  getAllArtists: async () => {
+    return fetch("/api/artist/get-all", {
+      method: "get",
+    }).then((res) => {
+      if (res.status === 200) return res.json().then((data) => data.artists)
+    })
+  },
+  getAllGalleries: async () => {
+    return fetch("/api/gallery/get-all", {
+      method: "get",
+    }).then((res) => {
+      if (res.status === 200) return res.json().then((data) => data.galleries)
+    })
+  },
 }

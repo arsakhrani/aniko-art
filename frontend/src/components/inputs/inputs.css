@@ -114,6 +114,10 @@ div.file-input {
   position: relative;
 }
 
+div.file-input.dark {
+  background-color: #f2efe9;
+}
+
 div.file-input > p {
   margin-right: 1em;
 }

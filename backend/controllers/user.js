@@ -29,6 +29,10 @@ module.exports.newUser = async (req, res) => {
         const artist = {
           fullName: user.fullName,
           email: user.email,
+          currentCountry: user.shippingAddress
+            ? user.shippingAddress.country
+            : "",
+          currentCity: user.shippingAddress ? user.shippingAddress.city : "",
         };
         const newArtist = new Artist(artist);
         await newArtist.save();
@@ -38,6 +42,8 @@ module.exports.newUser = async (req, res) => {
         const gallery = {
           email: user.email,
           name: user.fullName,
+          country: user.shippingAddress ? user.shippingAddress.country : "",
+          city: user.shippingAddress ? user.shippingAddress.city : "",
         };
         const newGallery = new Gallery(gallery);
         await newGallery.save();

@@ -11,11 +11,11 @@ module.exports.getAllArtists = async (req, res) => {
 
 module.exports.editArtist = async (req, res, next) => {
   try {
-    // const { id } = req.params;
-    // const user = req.body;
-    // await User.findByIdAndUpdate(id, user);
-    // const updatedUser = await User.findById(id);
-    // res.status(201).json({ user: updatedUser, isAuthenticated: true });
+    const { id } = req.params;
+    const artist = req.body;
+    await Artist.findByIdAndUpdate(id, artist);
+    const updatedArtist = await Artist.findById(id);
+    res.status(201).json({ artist: updatedArtist, success: true });
   } catch (e) {
     res.status(400).send({ message: "Something went wrong!" });
   }

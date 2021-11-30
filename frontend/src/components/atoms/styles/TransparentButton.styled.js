@@ -6,10 +6,8 @@ export const Button = styled.button`
   background-color: transparent;
   border-radius: 5px;
   color: ${theme.color.darkGrey};
-  padding-top: 1em;
-  padding-bottom: 1em;
+  padding: 1em 2em;
   display: flex;
   justify-content: center;
-  width: 49%;
   cursor: pointer;
 `

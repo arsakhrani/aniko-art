@@ -1,6 +1,4 @@
 import React, { useContext } from "react"
-import { artists } from "../../../../dummy-data/artists"
-import { galleries } from "../../../../dummy-data/galleries"
 import {
   ArtistsAndGalleriesContainer,
   ArtworksContainer,
@@ -16,6 +14,8 @@ import {
   filterGalleries,
 } from "../../../../services/helperFunctions"
 import { ArtworkContext } from "../../../../context/artworkContext"
+import { ArtistContext } from "../../../../context/artistContext"
+import { GalleryContext } from "../../../../context/galleryContext"
 
 export default function MainContent({ type }) {
   const filterType = useSelector((state) => state.discoverFilters.value)
@@ -24,6 +24,10 @@ export default function MainContent({ type }) {
   )
 
   const { artworks } = useContext(ArtworkContext)
+
+  const { artists } = useContext(ArtistContext)
+
+  const { galleries } = useContext(GalleryContext)
 
   const artworkFilters = useSelector((state) => state.artworkFilter)
 

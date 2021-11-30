@@ -6,15 +6,26 @@ import {
 } from "./styles/ArtistCard.styled"
 import PrimaryButton from "../../../atoms/PrimaryButton"
 import { Link } from "react-router-dom"
+import defaultFeatureImage from "../../../../assets/images/default-feature.png"
 
 export default function ArtistAndGalleryCard({ cardInfo, artist, gallery }) {
+  console.log(cardInfo, artist)
+
   return (
     <Container>
-      <FeatureImage src={cardInfo.featureWork} />
+      <FeatureImage
+        src={
+          cardInfo.featureWork
+            ? cardInfo.featurePicture
+            : cardInfo.artworks[0]
+            ? cardInfo.artworks[0]
+            : defaultFeatureImage
+        }
+      />
       <WrittenContent>
         <div>
-          <h4>{cardInfo.name}</h4>
-          <p>{cardInfo.location}</p>
+          <h4>{artist ? cardInfo.fullName : cardInfo.name}</h4>
+          <p>{artist ? cardInfo.currentCountry : cardInfo.country}</p>
         </div>
         {artist && (
           <Link to={`/artist-portfolio/${cardInfo._id}`}>

@@ -5,6 +5,8 @@ import { store } from "./store"
 import { Provider } from "react-redux"
 import AuthProvider from "./context/authContext"
 import ArtworksProvider from "./context/artworkContext"
+import ArtistsProvider from "./context/artistContext"
+import GalleriesProvider from "./context/galleryContext"
 import "./index.css"
 
 ReactDOM.render(
@@ -12,7 +14,11 @@ ReactDOM.render(
     <Provider store={store}>
       <AuthProvider>
         <ArtworksProvider>
-          <App />
+          <ArtistsProvider>
+            <GalleriesProvider>
+              <App />
+            </GalleriesProvider>
+          </ArtistsProvider>
         </ArtworksProvider>
       </AuthProvider>
     </Provider>

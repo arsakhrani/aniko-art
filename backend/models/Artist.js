@@ -7,6 +7,9 @@ const artistSchema = new mongoose.Schema({
   birthCountry: {
     type: String,
   },
+  birthYear: {
+    type: Number,
+  },
   currentCity: {
     type: String,
   },
@@ -19,12 +22,14 @@ const artistSchema = new mongoose.Schema({
   website: {
     type: String,
   },
+  soundDescription: {
+    type: String,
+  },
   email: {
     type: String,
   },
   bannerPicture: {
     type: String,
-    default: "a picture",
   },
   artworks: [
     {
@@ -34,7 +39,10 @@ const artistSchema = new mongoose.Schema({
   ],
   activated: {
     type: Boolean,
-    default: false,
+    default: true,
+  },
+  featurePicture: {
+    type: String,
   },
 });
 

@@ -3,9 +3,14 @@ import { ReactComponent as Google } from "../../assets/icons/social-media/google
 import { ReactComponent as Facebook } from "../../assets/icons/social-media/social-facebook-logo.svg"
 import { Button } from "./styles/TransparentButton.styled"
 
-export default function TransparentButton({ buttonText, logo, submit }) {
+export default function TransparentButton({
+  buttonText,
+  logo,
+  submit,
+  onClick,
+}) {
   return (
-    <Button type={submit ? "submit" : "button"}>
+    <Button onClick={onClick} type={submit ? "submit" : "button"}>
       {logo === "google" && (
         <Google
           width={26}

@@ -2,17 +2,15 @@ import React from "react"
 import CountryFilter from "./CountryFilter"
 import OtherFilters from "./OtherFilters"
 import { Container } from "./styles/Sidebar.styled"
-import { useSelector } from "react-redux"
+import { useParams } from "react-router"
 
 export default function Sidebar() {
-  const filterType = useSelector((state) => state.discoverFilters.value)
+  const { type } = useParams()
 
   return (
     <Container>
-      {(filterType === "artists" || filterType === "galleries") && (
-        <CountryFilter />
-      )}
-      {filterType === "artworks" && <OtherFilters />}
+      {(type === "artists" || type === "galleries") && <CountryFilter />}
+      {type === "artworks" && <OtherFilters />}
     </Container>
   )
 }

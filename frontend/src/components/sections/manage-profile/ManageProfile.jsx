@@ -72,6 +72,8 @@ export default function ManageProfile() {
         )
       } else if (!termsAndConditions) {
         setErrorMessage("you must agree to terms and conditions")
+      } else if (!fullName) {
+        setErrorMessage("Please enter a name")
       } else {
         setErrorMessage("")
         const user = {
@@ -163,10 +165,11 @@ export default function ManageProfile() {
               onChange={(e) => setFullName(e.target.value)}
               type={"text"}
               label={
-                registrationDetails.sellerType === "gallery" ||
+                (registrationDetails &&
+                  registrationDetails.sellerType === "gallery") ||
                 authContext.user.sellerType === "gallery"
-                  ? "Gallery name"
-                  : "Full name"
+                  ? "Gallery name *"
+                  : "Full name *"
               }
               name={"full-name"}
             />
