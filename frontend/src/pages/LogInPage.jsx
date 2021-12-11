@@ -52,7 +52,7 @@ export default function LogInPage() {
             style={{
               display: "flex",
               justifyContent: "space-between",
-              width: "30%",
+              width: "35%",
               marginTop: "3em",
             }}
           >

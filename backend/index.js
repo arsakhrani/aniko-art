@@ -29,6 +29,7 @@ apiRouter.use("/user", routes.userRoutes);
 apiRouter.use("/artwork", routes.artworkRoutes);
 apiRouter.use("/artist", routes.artistRoutes);
 apiRouter.use("/gallery", routes.galleryRoutes);
+apiRouter.use("/checkout", routes.stripeRoutes);
 
 app.listen(port, () => {
   console.log(`Aniko-art backend listening at ${port}`);

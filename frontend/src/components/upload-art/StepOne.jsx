@@ -22,22 +22,43 @@ import { saveDetails } from "../../state/upload/uploadArtSlice"
 export default function StepOne({ changeStep }) {
   const maxFileSize = 2000000
   const date = new Date()
+
   const authContext = useContext(AuthContext)
-  const [artist, setArtist] = useState("")
-  const [gallery, setGallery] = useState("")
-  const [country, setCountry] = useState("")
-  const [title, setTitle] = useState("")
-  const [unit, setUnit] = useState("cm")
-  const [width, setWidth] = useState(0)
-  const [length, setLength] = useState(0)
-  const [depth, setDepth] = useState(0)
-  const [medium, setMedium] = useState("")
-  const [year, setYear] = useState(date.getFullYear())
+
+  const uploadDetails = useSelector((state) => state.uploadDetails.value)
+
+  const [artist, setArtist] = useState(
+    uploadDetails.artist ||
+      (authContext.user.sellerType === "artist"
+        ? authContext.user.fullName
+        : "")
+  )
+  const [gallery, setGallery] = useState(
+    uploadDetails.gallery ||
+      (authContext.user.sellerType === "gallery"
+        ? authContext.user.fullName
+        : "")
+  )
+  console.log(authContext.user.sellerType)
+  const [country, setCountry] = useState(uploadDetails.country || "")
+  const [title, setTitle] = useState(uploadDetails.title || "")
+  const [unit, setUnit] = useState(uploadDetails.unit || "cm")
+  const [width, setWidth] = useState(uploadDetails.width || 0)
+  const [length, setLength] = useState(uploadDetails.length || 0)
+  const [depth, setDepth] = useState(uploadDetails.depth || 0)
+  const [medium, setMedium] = useState(uploadDetails.medium || "")
+  const [year, setYear] = useState(uploadDetails.year || date.getFullYear())
   const [errorMessage, setErrorMessage] = useState("")
-  const [images, setImages] = useState({})
-  const [certificate, setCertificate] = useState({})
-  const [imagesArray, setImagesArray] = useState([])
-  const [certificateArray, setCertificateArray] = useState([])
+  const [images, setImages] = useState(uploadDetails.images || {})
+  const [certificate, setCertificate] = useState(
+    uploadDetails.certificate || {}
+  )
+  const [imagesArray, setImagesArray] = useState(
+    uploadDetails.imagesArray || []
+  )
+  const [certificateArray, setCertificateArray] = useState(
+    uploadDetails.certificateArray || []
+  )
 
   const dispatch = useDispatch()
 
@@ -73,6 +94,8 @@ export default function StepOne({ changeStep }) {
         year,
         imagesArray,
         certificateArray,
+        images,
+        certificate,
       }
       dispatch(saveDetails(details))
       changeStep(2)

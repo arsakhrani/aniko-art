@@ -34,7 +34,7 @@ const artistSchema = new mongoose.Schema({
   artworks: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Artwork",
+      ref: "artwork",
     },
   ],
   activated: {

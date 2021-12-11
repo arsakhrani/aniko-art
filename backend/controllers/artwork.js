@@ -14,13 +14,15 @@ module.exports.uploadArt = async (req, res) => {
     await newArtwork.save(async () => {
       const user = await User.findById(artwork.owner);
       if (user.sellerType === "artist") {
-        const artist = Artist.findOne({ email: user.email });
+        const artist = await Artist.findOne({ email: user.email });
         artist.artworks.push(newArtwork._id);
+        await artist.save();
       }
 
       if (user.sellerType === "gallery") {
-        const gallery = Gallery.findOne({ email: user.email });
+        const gallery = await Gallery.findOne({ email: user.email });
         gallery.artworks.push(newArtwork._id);
+        await gallery.save();
       }
 
       res.status(201).json({ success: true, uploadedArtwork: newArtwork });

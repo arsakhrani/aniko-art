@@ -2,7 +2,7 @@ const Artist = require("../models/Artist");
 
 module.exports.getAllArtists = async (req, res) => {
   try {
-    const artists = await Artist.find({ activated: true });
+    const artists = await Artist.find({ activated: true }).populate("artworks");
     res.status(200).json({ artists });
   } catch (e) {
     res.status(400).send({ message: "Something went wrong!" });

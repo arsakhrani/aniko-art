@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react"
 import SideMenu from "./SideMenu"
-import { useHistory } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import DiscoverHeader from "./DiscoverHeader"
 import {
   Container,
@@ -53,10 +53,14 @@ export default function Header({ discover, grey }) {
     <Container $grey={grey}>
       <h1 onClick={() => history.push("/")}>Aniko.Art</h1>
       {discover && <DiscoverHeader />}
-      {isAuthenticated && (
-        <p className={"logout-button"} onClick={() => logOutUser()}>
+      {isAuthenticated ? (
+        <p className={"logout-login-button"} onClick={() => logOutUser()}>
           LOGOUT
         </p>
+      ) : (
+        <Link to={"/login"}>
+          <p className={"logout-login-button"}>LOGIN</p>
+        </Link>
       )}
       <MenuContainer
         onMouseEnter={() => setExpanded(true)}

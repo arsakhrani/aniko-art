@@ -12,9 +12,11 @@ export default function ArtWorkCard({ cardInfo }) {
   const [showArtModal, setShowArtModal] = useState(false)
 
   const showModal = () => {
-    setShowArtModal(true)
-    const body = document.getElementsByTagName("body")
-    body[0].classList.add("modal-open")
+    if (!cardInfo.sold) {
+      setShowArtModal(true)
+      const body = document.getElementsByTagName("body")
+      body[0].classList.add("modal-open")
+    }
   }
 
   const closeModal = () => {
@@ -30,7 +32,11 @@ export default function ArtWorkCard({ cardInfo }) {
         <ArtWorkModal closeModal={() => closeModal()} artInfo={cardInfo} />
       )}
       <p>LOT {cardInfo.lot}</p>
-      <CoverPicture src={cardInfo.pictures[0]} onClick={() => showModal()} />
+      <CoverPicture
+        $pointer={!cardInfo.sold}
+        src={cardInfo.pictures[0]}
+        onClick={() => showModal()}
+      />
       <WrittenContent>
         <div>
           <h4>{cardInfo.artist}</h4>
@@ -39,17 +45,21 @@ export default function ArtWorkCard({ cardInfo }) {
           </p>
           <span>{cardInfo.gallery}</span>
         </div>
-        <Link to={cardInfo.website}>
+        {!cardInfo.sold && cardInfo.minimumBid > 0 ? (
           <PrimaryButton
             buttonText={"BID FROM $" + cardInfo.minimumBid + ", -"}
           />
-        </Link>
+        ) : (
+          <div></div>
+        )}
       </WrittenContent>
-      <PriceLink onClick={() => showModal()}>
-        <div>SHOW</div>
-        <span></span>
-        <div>PRICE</div>
-      </PriceLink>
+      {!cardInfo.sold && (
+        <PriceLink>
+          <div onClick={() => showModal()}>SHOW</div>
+          <span></span>
+          <div onClick={() => showModal()}>PRICE</div>
+        </PriceLink>
+      )}
     </div>
   )
 }

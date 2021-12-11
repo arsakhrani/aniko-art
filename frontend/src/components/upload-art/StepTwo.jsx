@@ -7,10 +7,11 @@ import {
 } from "../sections/manage-profile/styles/ManageProfile.styled"
 import CheckboxInput from "../inputs/CheckboxInput"
 import PrimaryButton from "../atoms/PrimaryButton"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import discoverService from "../../services/discoverService"
 import { useHistory } from "react-router-dom"
 import { AuthContext } from "../../context/authContext"
+import { saveDetails } from "../../state/upload/uploadArtSlice"
 
 export default function StepTwo() {
   const uploadDetails = useSelector((state) => state.uploadDetails.value)
@@ -19,6 +20,8 @@ export default function StepTwo() {
   const [convertedDepth, setConvertedDepth] = useState(0)
   const [price, setPrice] = useState(1000)
   const [errorMessage, setErrorMessage] = useState("")
+
+  const dispatch = useDispatch()
 
   let futureFeature = false
 
@@ -111,6 +114,7 @@ export default function StepTwo() {
       const artUpload = await discoverService.uploadArt(artwork)
       if (artUpload.success) {
         history.push("discover")
+        dispatch(saveDetails({}))
       }
     }
   }

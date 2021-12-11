@@ -18,7 +18,6 @@ import { ArtistContext } from "../../../../context/artistContext"
 import { GalleryContext } from "../../../../context/galleryContext"
 
 export default function MainContent({ type }) {
-  const filterType = useSelector((state) => state.discoverFilters.value)
   const countryFilter = useSelector(
     (state) => state.artistAndGalleryFilter.value
   )
@@ -37,10 +36,12 @@ export default function MainContent({ type }) {
 
   const filteredArtworks = filterArtworks(artworks, artworkFilters)
 
+  console.log(filteredArtworks)
+
   if (type === "artists") {
     return (
       <ArtistsAndGalleriesContainer>
-        {artists.map((artist) => (
+        {filteredAritsts.map((artist) => (
           <ArtistAndGalleryCard
             artist={true}
             key={artist._id}
@@ -54,7 +55,7 @@ export default function MainContent({ type }) {
   if (type === "galleries") {
     return (
       <ArtistsAndGalleriesContainer>
-        {galleries.map((gallery) => (
+        {filteredGalleries.map((gallery) => (
           <ArtistAndGalleryCard
             gallery={true}
             key={gallery._id}
@@ -80,4 +81,6 @@ export default function MainContent({ type }) {
       </ArtworksContainer>
     )
   }
+
+  return <div></div>
 }

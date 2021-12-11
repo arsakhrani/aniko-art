@@ -18,15 +18,15 @@ export default function MediumFilter() {
       <h5>MEDIUM</h5>
       <ul>
         <li onClick={() => selectMedium("", 1)}>All</li>
-        <li onClick={() => selectMedium("painting", 2)}>Painting</li>
-        <li onClick={() => selectMedium("sculpture", 3)}>Sculpture</li>
-        <li onClick={() => selectMedium("drawing", 4)}>Drawing</li>
-        <li onClick={() => selectMedium("prints", 5)}>Prints</li>
-        <li onClick={() => selectMedium("work-on-paper", 6)}>Work on paper</li>
-        <li onClick={() => selectMedium("design", 7)}>Design</li>
-        <li onClick={() => selectMedium("photography", 8)}>Photography</li>
-        <li onClick={() => selectMedium("installation", 9)}>Installation</li>
-        <li onClick={() => selectMedium("film-video", 10)}>Film/Video</li>
+        <li onClick={() => selectMedium("Painting", 2)}>Painting</li>
+        <li onClick={() => selectMedium("Sculpture", 3)}>Sculpture</li>
+        <li onClick={() => selectMedium("Drawing", 4)}>Drawing</li>
+        <li onClick={() => selectMedium("Prints", 5)}>Prints</li>
+        <li onClick={() => selectMedium("Work On Paper", 6)}>Work on paper</li>
+        <li onClick={() => selectMedium("Design", 7)}>Design</li>
+        <li onClick={() => selectMedium("Photography", 8)}>Photography</li>
+        <li onClick={() => selectMedium("Installation", 9)}>Installation</li>
+        <li onClick={() => selectMedium("Film/Video", 10)}>Film/Video</li>
       </ul>
     </Container>
   )

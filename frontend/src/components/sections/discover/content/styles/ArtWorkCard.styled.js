@@ -3,7 +3,7 @@ import theme from "../../../../common/theme"
 
 export const CoverPicture = styled.img`
   width: 100%;
-  cursor: pointer;
+  cursor: ${(props) => props.$pointer && "pointer"};
 `
 
 export const WrittenContent = styled.div`
@@ -39,11 +39,11 @@ export const PriceLink = styled.div`
   color: ${theme.color.orange};
   display: flex;
   flex-direction: column;
-  cursor: pointer;
 
   div {
     font-size: ${theme.fontSize.small};
     font-family: "Arial", sans-serif;
+    cursor: pointer;
   }
 
   span {

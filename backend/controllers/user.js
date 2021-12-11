@@ -105,6 +105,24 @@ module.exports.editUser = async (req, res, next) => {
     const user = req.body;
     await User.findByIdAndUpdate(id, user);
     const updatedUser = await User.findById(id);
+
+    if (updatedUser.sellerType === "gallery") {
+      const formattedUser = {
+        city: user.shippingAddress.city,
+        country: user.shippingAddress.country,
+        name: user.fullName,
+        website: user.website,
+      };
+      await Gallery.findOneAndUpdate(
+        { email: updatedUser.email },
+        formattedUser
+      );
+    }
+
+    if (updatedUser.sellerType === "artist") {
+      await Artist.findOneAndUpdate({ email: updatedUser.email }, user);
+    }
+
     res.status(201).json({ user: updatedUser, isAuthenticated: true });
   } catch (e) {
     res.status(400).send({ message: "Something went wrong!" });

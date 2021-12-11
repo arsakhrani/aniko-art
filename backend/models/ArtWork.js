@@ -60,11 +60,19 @@ const artworkSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  bidHolder: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
   sold: {
     type: Boolean,
     default: false,
   },
   owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+  highestBidHolder: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },

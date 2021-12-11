@@ -19,12 +19,14 @@ import { AuthContext } from "../context/authContext"
 import { useState } from "react"
 import TextInput from "../components/inputs/TextInput"
 import FileInput from "../components/inputs/FileInput"
+import DropdownInput from "../components/inputs/DropdownInput"
 import discoverService from "../services/discoverService"
 import { ReactComponent as GreenDot } from "../assets/icons/green-dot.svg"
 import {
   FileDetails,
   Para,
 } from "../components/sections/manage-profile/styles/ManageProfile.styled"
+import { countries } from "../services/dropdownValues"
 
 export default function ArtistPortfolioPage() {
   const history = useHistory()
@@ -50,10 +52,6 @@ export default function ArtistPortfolioPage() {
   const [bannerObject, setBannerObject] = useState({})
   const [audioFile, setAudioFile] = useState()
   const [errorMessage, setErrorMessage] = useState("")
-
-  const applicableArtworks = artworks.filter((art) =>
-    artist.artworks.includes(art._id)
-  )
 
   const userPortfolio = user.email === artist.email
 
@@ -116,7 +114,6 @@ export default function ArtistPortfolioPage() {
         audioFile,
       }
       const artistEdit = await discoverService.editArtist(editedArtist, id)
-      console.log(artistEdit)
       if (artistEdit.success) {
         const allArtists = await discoverService.getAllArtists()
         setArtists(allArtists)
@@ -147,9 +144,10 @@ export default function ArtistPortfolioPage() {
                     value={birthCity}
                     label={"Birth city"}
                   />
-                  <TextInput
-                    onChange={(e) => setBirthCountry(e.target.value)}
+                  <DropdownInput
                     value={birthCountry}
+                    options={countries}
+                    onChange={(e) => setBirthCountry(e.target.value)}
                     label={"Birth country"}
                   />
                   <TextInput
@@ -255,13 +253,13 @@ export default function ArtistPortfolioPage() {
               </div>
             </InfoBox>
           )}
-          {applicableArtworks.length ? (
+          {artist.artworks.length ? (
             <Masonry
               breakpointCols={{ default: 2, 900: 1 }}
               className="artworks-masonry-grid"
               columnClassName="artworks-masonry-grid_column"
             >
-              {applicableArtworks.map((artwork) => (
+              {artist.artworks.map((artwork) => (
                 <ArtWorkCard key={artwork._id} cardInfo={artwork} />
               ))}
             </Masonry>

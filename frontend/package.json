@@ -4,7 +4,10 @@
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
+    "@stripe/react-stripe-js": "^1.6.0",
+    "@stripe/stripe-js": "^1.21.1",
     "cra-template": "1.1.2",
+    "lodash.throttle": "^4.1.1",
     "rc-slider": "^9.7.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

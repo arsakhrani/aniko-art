@@ -18,7 +18,7 @@ export default function ArtistAndGalleryCard({ cardInfo, artist, gallery }) {
           cardInfo.featureWork
             ? cardInfo.featurePicture
             : cardInfo.artworks[0]
-            ? cardInfo.artworks[0]
+            ? cardInfo.artworks[0].pictures[0]
             : defaultFeatureImage
         }
       />
@@ -33,7 +33,7 @@ export default function ArtistAndGalleryCard({ cardInfo, artist, gallery }) {
           </Link>
         )}
         {gallery && (
-          <a target="_blank" href={cardInfo.website}>
+          <a target="_blank" href={`http://${cardInfo.website}`}>
             <PrimaryButton buttonText={"VIEW WEBSITE"} />
           </a>
         )}

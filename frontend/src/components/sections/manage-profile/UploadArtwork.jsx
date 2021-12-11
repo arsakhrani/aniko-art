@@ -18,7 +18,7 @@ export default function UploadArtwork() {
     <div>
       <Header>
         <h1>{authContext.user.sellerType.toUpperCase()} SELLER</h1>
-        <StepCounter step={step} />
+        <StepCounter changeStep={(n) => changeStep(n)} step={step} />
       </Header>
       <UploadContainer>
         {step === 1 && <StepOne changeStep={(n) => changeStep(n)} />}

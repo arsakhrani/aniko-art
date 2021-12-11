@@ -17,6 +17,11 @@ import PrimaryButton from "../../atoms/PrimaryButton"
 import authService from "../../../services/authService"
 import { AuthContext } from "../../../context/authContext"
 import { useHistory } from "react-router"
+import discoverService from "../../../services/discoverService"
+import { ArtistContext } from "../../../context/artistContext"
+import { GalleryContext } from "../../../context/galleryContext"
+import DropdownInput from "../../inputs/DropdownInput"
+import { countries } from "../../../services/dropdownValues"
 
 export default function ManageProfile() {
   const registrationDetails = useSelector(
@@ -26,6 +31,10 @@ export default function ManageProfile() {
   const history = useHistory()
 
   const authContext = useContext(AuthContext)
+
+  const { setArtists } = useContext(ArtistContext)
+
+  const { setGalleries } = useContext(GalleryContext)
 
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
@@ -95,7 +104,18 @@ export default function ManageProfile() {
         } else {
           authContext.setUser(registerUser.user)
           authContext.setIsAuthenticated(true)
-          history.push("/discover/artworks")
+
+          if (registrationDetails.sellerType === "artist") {
+            const allArtists = await discoverService.getAllArtists()
+            setArtists(allArtists)
+            history.push("/discover/artists")
+          } else if (registrationDetails.sellerType === "gallery") {
+            const allGalleries = await discoverService.getAllGalleries()
+            setGalleries(allGalleries)
+            history.push("/discover/galleries")
+          } else {
+            history.push("/discover/artworks")
+          }
         }
       }
     } else {
@@ -203,18 +223,36 @@ export default function ManageProfile() {
             />
           </div>
           <div>
-            <TextInput
-              value={shippingAddress.country}
-              onChange={(e) =>
-                setShippingAddress({
-                  ...shippingAddress,
-                  country: e.target.value,
-                })
-              }
-              type={"text"}
-              label={"Country"}
-              name={"country"}
-            />
+            {(registrationDetails &&
+              registrationDetails.sellerType === "gallery") ||
+            authContext.user.sellerType === "gallery" ? (
+              <DropdownInput
+                value={shippingAddress.country}
+                onChange={(e) =>
+                  setShippingAddress({
+                    ...shippingAddress,
+                    country: e.target.value,
+                  })
+                }
+                options={countries}
+                label={"Country"}
+                htmlFor={"country-select"}
+                id={"country-select"}
+              />
+            ) : (
+              <TextInput
+                value={shippingAddress.country}
+                onChange={(e) =>
+                  setShippingAddress({
+                    ...shippingAddress,
+                    country: e.target.value,
+                  })
+                }
+                type={"text"}
+                label={"Country"}
+                name={"country"}
+              />
+            )}
           </div>
           <div>
             <TextInput

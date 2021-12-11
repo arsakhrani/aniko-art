@@ -31,7 +31,7 @@ export default function CountryFilter() {
   )
   let uniqueArtistCountries = [...new Set(availableArtistCountries)]
   uniqueArtistCountries.sort((a, b) => a.localeCompare(b))
-
+  console.log(galleries)
   const availableGalleryCountries = []
   galleries.forEach((gallery) =>
     availableGalleryCountries.push(gallery.country)
@@ -41,22 +41,31 @@ export default function CountryFilter() {
 
   const selectCountry = (country, index) => {
     dispatch(setCountryFilter(country))
-    dispatch(setCountryIndex(index + 1))
+    dispatch(setCountryIndex(index + 2))
   }
 
   return (
     <Container $index={countryStyleIndex}>
       <h5>COUNTRIES</h5>
       <ul>
+        <li onClick={() => selectCountry("", -1)}>All Countries</li>
         {type === "artists" &&
           uniqueArtistCountries.map((country, index) => (
-            <li key={country} onClick={() => selectCountry(country, index)}>
+            <li
+              style={{ textTransform: "capitalize" }}
+              key={country}
+              onClick={() => selectCountry(country, index)}
+            >
               {country}
             </li>
           ))}
         {type === "galleries" &&
           uniqueGalleryCountries.map((country, index) => (
-            <li key={country} onClick={() => selectCountry(country, index)}>
+            <li
+              style={{ textTransform: "capitalize" }}
+              key={country}
+              onClick={() => selectCountry(country, index)}
+            >
               {country}
             </li>
           ))}

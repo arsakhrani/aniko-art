@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import PrimaryButton from "../../../atoms/PrimaryButton"
 import {
   ModalContainer,
@@ -9,9 +9,31 @@ import {
   GalleryPicture,
   ImageSelector,
 } from "./styles/ArtWorkModal.styled"
+import { AuthContext } from "../../../../context/authContext"
 
 export default function ArtWorkModal({ artInfo, closeModal }) {
   const [selectorNumber, setSelectorNumber] = useState(0)
+  const { user } = useContext(AuthContext)
+
+  const redirectToStripe = () => {
+    return fetch("/api/checkout/create-checkout-buy-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        artworkId: artInfo._id,
+        userId: user._id,
+      }),
+    })
+      .then((res) => {
+        if (res.ok) return res.json()
+      })
+      .then(({ url }) => {
+        window.location = url
+      })
+      .catch((e) => console.error(e))
+  }
 
   return (
     <ModalContainer>
@@ -49,7 +71,10 @@ export default function ArtWorkModal({ artInfo, closeModal }) {
           </p>
           <div className="buy-art-container">
             <h2>$ {artInfo.price}</h2>
-            <PrimaryButton buttonText={"BUY DIRECTLY"} />
+            <PrimaryButton
+              onClick={() => redirectToStripe()}
+              buttonText={"BUY DIRECTLY"}
+            />
           </div>
           <div className="sale-info-container">
             <p>Including</p>
