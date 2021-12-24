@@ -1,9 +1,9 @@
 import React from "react"
 import { ReactComponent as Checkmark } from "../../assets/icons/check-solid.svg"
 
-export default function CheckboxInput({ label, checked, name }) {
+export default function CheckboxInput({ label, checked, name, onClick }) {
   return (
-    <div className="checkbox-input">
+    <div onClick={onClick} className="checkbox-input">
       <input name={name} type="checkbox" />
       <div
         style={{

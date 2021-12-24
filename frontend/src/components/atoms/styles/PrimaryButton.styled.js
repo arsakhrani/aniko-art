@@ -11,4 +11,9 @@ export const Button = styled.button`
   padding-left: 3em;
   padding-right: 3em;
   cursor: pointer;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
 `

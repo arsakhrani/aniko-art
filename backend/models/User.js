@@ -172,6 +172,12 @@ const userSchema = new mongoose.Schema({
   website: {
     type: String,
   },
+  stripeId: {
+    type: String,
+  },
+  paymentMethodId: {
+    type: String,
+  },
 });
 
 userSchema.pre("save", function (next) {

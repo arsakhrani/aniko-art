@@ -20,6 +20,8 @@ export default function StepTwo() {
   const [convertedDepth, setConvertedDepth] = useState(0)
   const [price, setPrice] = useState(1000)
   const [errorMessage, setErrorMessage] = useState("")
+  const [showBidInput, setShowBidInput] = useState(false)
+  const [minimumBid, setMinimumBid] = useState(100)
 
   const dispatch = useDispatch()
 
@@ -110,6 +112,7 @@ export default function StepTwo() {
         pictures: images.artImageUpload,
         certificateOfAuthenticity: images.certImageUpload,
         owner: authContext.user._id,
+        minimumBid: showBidInput ? minimumBid - 50 : 0,
       }
       const artUpload = await discoverService.uploadArt(artwork)
       if (artUpload.success) {
@@ -182,6 +185,25 @@ export default function StepTwo() {
             <span style={{ cursor: "pointer" }}>shipping</span> )
           </Para>
           {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+          <Para>
+            <CheckboxInput
+              onClick={() => setShowBidInput(!showBidInput)}
+              checked={showBidInput}
+              label={"Allow bidding?"}
+            />
+          </Para>
+          {showBidInput && (
+            <div style={{ width: "90%", marginBottom: "1em" }}>
+              <TextInput
+                min={100}
+                step={50}
+                type="number"
+                label={"Minimum Bid"}
+                value={minimumBid}
+                onChange={(e) => setMinimumBid(e.target.value)}
+              />
+            </div>
+          )}
           <div>
             <PrimaryButton
               onClick={() => validateAndSubmit()}

@@ -43,17 +43,22 @@ module.exports.getAllArt = async (req, res) => {
   }
 };
 
-// module.exports.editArt = async (req, res, next) => {
-//   try {
-//     const { id } = req.params;
-//     const user = req.body;
-//     await User.findByIdAndUpdate(id, user);
-//     const updatedUser = await User.findById(id);
-//     res.status(201).json({ user: updatedUser, isAuthenticated: true });
-//   } catch (e) {
-//     res.status(400).send({ message: "Something went wrong!" });
-//   }
-// };
+module.exports.setNewBid = async (req, res) => {
+  try {
+    const { artworkId, minimumBid, userId } = req.body;
+    const artwork = await Artwork.findById(artworkId);
+    if (minimumBid > artwork.minimumBid) {
+      artwork.minimumBid = minimumBid;
+      artwork.highestBidHolder = userId;
+      artwork.save();
+      res.status(200).json({ success: true });
+    } else {
+      res.status(401).send({ message: "Something went wrong!" });
+    }
+  } catch (e) {
+    res.status(400).send({ message: "Something went wrong!" });
+  }
+};
 
 // module.exports.deleteArt = async (req, res, next) => {
 //   try {

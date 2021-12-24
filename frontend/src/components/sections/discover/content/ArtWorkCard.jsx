@@ -1,15 +1,20 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import {
   CoverPicture,
   WrittenContent,
   PriceLink,
 } from "./styles/ArtWorkCard.styled"
 import PrimaryButton from "../../../atoms/PrimaryButton"
-import { Link } from "react-router-dom"
 import ArtWorkModal from "./ArtWorkModal"
+import { AuthContext } from "../../../../context/authContext"
+import { useHistory } from "react-router"
 
 export default function ArtWorkCard({ cardInfo }) {
   const [showArtModal, setShowArtModal] = useState(false)
+
+  const history = useHistory()
+
+  const { user } = useContext(AuthContext)
 
   const showModal = () => {
     if (!cardInfo.sold) {
@@ -24,6 +29,21 @@ export default function ArtWorkCard({ cardInfo }) {
     const body = document.getElementsByTagName("body")
     if (body[0].classList.contains("modal-open"))
       body[0].classList.remove("modal-open")
+  }
+
+  const setupBid = async () => {
+    const response = await fetch(
+      `/api/checkout/create-checkout-save-session/${user._id}`
+    )
+    const secret = await response.json()
+    history.push({
+      pathname: "/create-bid",
+      state: {
+        secret: secret.client_secret,
+        minimumBid: cardInfo.minimumBid + 50,
+        artworkId: cardInfo._id,
+      },
+    })
   }
 
   return (
@@ -47,7 +67,8 @@ export default function ArtWorkCard({ cardInfo }) {
         </div>
         {!cardInfo.sold && cardInfo.minimumBid > 0 ? (
           <PrimaryButton
-            buttonText={"BID FROM $" + cardInfo.minimumBid + ", -"}
+            onClick={() => setupBid()}
+            buttonText={"BID FROM $" + (cardInfo.minimumBid + 50) + ", -"}
           />
         ) : (
           <div></div>

@@ -12,6 +12,8 @@ import { AuthContext } from "./context/authContext"
 import { useSelector } from "react-redux"
 import RequestArtworkPage from "./pages/RequestArtworkPage"
 import UploadArtworkPage from "./pages/UploadArtworkPage"
+import CollectBidPage from "./pages/CollectBidPage"
+import BidStatusPage from "./pages/BidStatusPage"
 
 function App() {
   const { isAuthenticated, user } = useContext(AuthContext)
@@ -64,6 +66,12 @@ function App() {
           ) : (
             <Redirect to="/login" />
           )}
+        </Route>
+        <Route path="/create-bid" exact>
+          {isAuthenticated ? <CollectBidPage /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/bid-state" exact>
+          {isAuthenticated ? <BidStatusPage /> : <Redirect to="/login" />}
         </Route>
         <Route path="*" component={NotFoundPage} />
       </Switch>

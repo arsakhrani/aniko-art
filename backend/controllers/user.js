@@ -1,3 +1,5 @@
+const stripeKey = process.env.STRIPE_SECRET_KEY;
+const stripe = require("stripe")(stripeKey);
 const User = require("../models/User");
 const Artist = require("../models/Artist");
 const Gallery = require("../models/Gallery");
@@ -24,6 +26,8 @@ module.exports.newUser = async (req, res) => {
         .json({ message: { msgBody: "Email is taken", msgError: true } });
     } else {
       const newUser = new User(user);
+      const customer = await stripe.customers.create();
+      newUser.stripeId = customer.id;
 
       if (user.sellerType === "artist") {
         const artist = {

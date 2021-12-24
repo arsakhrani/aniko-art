@@ -7,8 +7,8 @@ router.post("/upload", wrapAsync(artworkController.uploadArt));
 
 router.get("/get-all", wrapAsync(artworkController.getAllArt));
 
-router.put("/edit", wrapAsync(artworkController.editArt));
+router.put("/set-new-bid", wrapAsync(artworkController.setNewBid));
 
-router.delete("", wrapAsync(artworkController.deleteArt));
+router.delete("/:id", wrapAsync(artworkController.deleteArt));
 
 module.exports = router;

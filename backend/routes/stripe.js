@@ -1,4 +1,3 @@
-require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync");
@@ -9,8 +8,8 @@ router.post(
   wrapAsync(stripeController.createCheckoutBuySession)
 );
 
-router.post(
-  "/create-checkout-save-session",
+router.get(
+  "/create-checkout-save-session/:userId",
   wrapAsync(stripeController.createCheckoutSaveSession)
 );
 
