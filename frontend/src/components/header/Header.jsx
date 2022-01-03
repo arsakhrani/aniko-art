@@ -8,23 +8,34 @@ import {
   MidLine,
   TopLine,
   BottomLine,
+  SearchBarContainer,
 } from "./styles/Header.styled"
 import { AuthContext } from "../../context/authContext"
 import authService from "../../services/authService"
+import TextInput from "../inputs/TextInput"
+import { changeSearchParams } from "../../state/discover/artworkFilterSlice"
+import { useDispatch } from "react-redux"
 
 export default function Header({ discover, grey }) {
   const [toggleMenu, setToggleMenu] = useState(false)
 
   const [expanded, setExpanded] = useState(false)
 
+  const [searchBar, setSearchBar] = useState(false)
+
   useEffect(() => {
+    const searchInput = document.getElementById("search-input")
+    searchInput && searchInput.focus()
+    !searchInput && clearSearchParams()
     return () => {
       const body = document.getElementsByTagName("body")
       body[0].classList.remove("modal-open")
     }
-  }, [])
+  }, [searchBar])
 
   const history = useHistory()
+
+  const dispatch = useDispatch()
 
   const { isAuthenticated, setIsAuthenticated, setUser } =
     useContext(AuthContext)
@@ -49,10 +60,22 @@ export default function Header({ discover, grey }) {
     }
   }
 
+  const toggleSearchBar = () => {
+    setSearchBar(!searchBar)
+  }
+
+  const setSearchParams = (e) => {
+    dispatch(changeSearchParams(e.target.value))
+  }
+
+  const clearSearchParams = () => {
+    dispatch(changeSearchParams(""))
+  }
+
   return (
-    <Container $grey={grey}>
+    <Container $searchBar={searchBar} $discover={discover} $grey={grey}>
       <h1 onClick={() => history.push("/")}>Aniko.Art</h1>
-      {discover && <DiscoverHeader />}
+      {discover && <DiscoverHeader toggleSearch={toggleSearchBar} />}
       {isAuthenticated ? (
         <p className={"logout-login-button"} onClick={() => logOutUser()}>
           LOGOUT
@@ -71,6 +94,15 @@ export default function Header({ discover, grey }) {
         <MidLine $toggleMenu={toggleMenu} $expanded={expanded} />
         <BottomLine $toggleMenu={toggleMenu} $expanded={expanded} />
       </MenuContainer>
+      {searchBar && (
+        <SearchBarContainer>
+          <TextInput
+            onChange={(e) => setSearchParams(e)}
+            id={"search-input"}
+            label={"Search for artist or artwork"}
+          />
+        </SearchBarContainer>
+      )}
       <SideMenu visible={toggleMenu} />
     </Container>
   )

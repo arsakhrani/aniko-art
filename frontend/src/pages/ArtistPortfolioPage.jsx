@@ -140,17 +140,20 @@ export default function ArtistPortfolioPage() {
               <div>
                 <InputContainer>
                   <TextInput
+                    id={"birth-city"}
                     onChange={(e) => setBirthCity(e.target.value)}
                     value={birthCity}
                     label={"Birth city"}
                   />
                   <DropdownInput
+                    id={"birth-country"}
                     value={birthCountry}
                     options={countries}
                     onChange={(e) => setBirthCountry(e.target.value)}
                     label={"Birth country"}
                   />
                   <TextInput
+                    id={"birth-year"}
                     onChange={(e) => setBirthYear(e.target.value)}
                     value={birthYear}
                     type={"number"}
@@ -159,11 +162,13 @@ export default function ArtistPortfolioPage() {
                 </InputContainer>
                 <InputContainer>
                   <TextInput
+                    id={"current-city"}
                     onChange={(e) => setCurrentCity(e.target.value)}
                     value={currentCity}
                     label={"Current city"}
                   />
                   <TextInput
+                    id={"current-country"}
                     onChange={(e) => setCurrentCountry(e.target.value)}
                     value={currentCountry}
                     label={"Current country"}
@@ -171,6 +176,7 @@ export default function ArtistPortfolioPage() {
                 </InputContainer>
                 <InputContainer>
                   <TextInput
+                    id={"audio-description"}
                     onChange={(e) => setSoundDescription(e.target.value)}
                     value={soundDescription}
                     label={"Audio Description"}
@@ -185,6 +191,7 @@ export default function ArtistPortfolioPage() {
               <div>
                 <InputContainer>
                   <TextInput
+                    id={"website"}
                     value={website}
                     onChange={(e) => setWebsite(e.target.value)}
                     label={"Website"}

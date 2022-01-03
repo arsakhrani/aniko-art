@@ -31,7 +31,7 @@ export default function TextInput({
         value={value}
         required
       />
-      <label>{label}</label>
+      <label htmlFor={id}>{label}</label>
     </div>
   )
 }

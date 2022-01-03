@@ -2,9 +2,11 @@ import styled from "styled-components"
 import theme from "../../common/theme"
 
 export const Container = styled.header`
-  height: 3em;
-  display: flex;
-  align-items: center;
+  display: ${(props) => props.$discover && "grid"};
+  grid-template-columns: ${(props) => props.$discover && "1fr 4fr"};
+  grid-template-areas:
+    "brand discover"
+    "searchbar searchbar";
   background-color: ${(props) => (props.$grey ? theme.color.grey : "")};
 
   h1 {
@@ -12,6 +14,9 @@ export const Container = styled.header`
     padding-left: 1em;
     padding-top: 0.1em;
     cursor: pointer;
+    margin: 0;
+    grid-area: brand;
+    display: inline-block;
   }
 
   p.logout-login-button {
@@ -22,6 +27,23 @@ export const Container = styled.header`
     position: absolute;
     right: 1em;
     top: 0;
+    margin-top: 10px;
+  }
+
+  @media (max-width: ${theme.mediaSize.tablet}) {
+    grid-template-areas: ${(props) =>
+      props.$discover &&
+      `
+      "discover discover"
+      "searchbar searchbar"`};
+
+    h1 {
+      display: ${(props) => props.$discover && "none"};
+    }
+
+    p.logout-login-button {
+      font-size: ${(props) => props.$discover && "0.8rem"};
+    }
   }
 `
 
@@ -67,4 +89,18 @@ export const BottomLine = styled(MenuLine)`
   position: ${(props) => (props.$toggleMenu ? "absolute" : "relative")};
   bottom: ${(props) => (props.$toggleMenu ? "22.5" : "0")};
   transition: all 0.3s linear, width 0.3s linear;
+`
+
+export const SearchBarContainer = styled.div`
+  width: 100%;
+  grid-area: searchbar;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 0.3em;
+  box-shadow: 0px 5px 5px silver;
+  z-index: 2;
+
+  div {
+    width: 25%;
+  }
 `

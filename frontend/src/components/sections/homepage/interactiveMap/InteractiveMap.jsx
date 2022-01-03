@@ -1,15 +1,32 @@
 import React, { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { ReactComponent as Continent } from "../../../../assets/icons/map/continent.svg"
 import "./interactiveMap.css"
 
 export default function InteractiveMap() {
   const [flag, setFlag] = useState(true)
   const [allowAnimation, setAllowAnimation] = useState(true)
+  const [firstCycle, setFirstCycle] = useState(true)
+
+  const history = useHistory()
+
+  const vw = Math.max(
+    document.documentElement.clientWidth || 0,
+    window.innerWidth || 0
+  )
 
   useEffect(() => {
     const countries = document.getElementsByClassName("country")
     const animated = document.getElementsByClassName("animated")
+
+    if (firstCycle) {
+      for (let country of countries) {
+        country.addEventListener("click", () => {
+          history.push(`/discover/artists/?country=${country.id}`)
+        })
+      }
+    }
+
     if (animated.length > 0) {
       animated[0].classList.remove("animated")
     }
@@ -18,6 +35,7 @@ export default function InteractiveMap() {
       countries[randomIndex].classList.add("animated")
     }
     const timeOut = setTimeout(() => {
+      setFirstCycle(false)
       setFlag(!flag)
     }, 3000)
     return () => {
@@ -26,7 +44,7 @@ export default function InteractiveMap() {
   }, [flag])
 
   return (
-    <div style={styles.container}>
+    <div style={{ height: "101vh", display: vw < 1000 && "none" }}>
       <div style={styles.titleBox}>
         <h1 style={{ fontSize: 44, marginBottom: 0 }}>Showroom</h1>
         <Link to="/discover/artworks">
@@ -47,6 +65,7 @@ export default function InteractiveMap() {
       </div>
       <Continent
         width="100vw"
+        height="100vh"
         onMouseLeave={() => setAllowAnimation(true)}
         onMouseEnter={() => setAllowAnimation(false)}
       />
@@ -55,9 +74,6 @@ export default function InteractiveMap() {
 }
 
 const styles = {
-  container: {
-    height: "109vh",
-  },
   titleBox: {
     position: "absolute",
     width: "35%",

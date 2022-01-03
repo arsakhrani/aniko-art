@@ -5,6 +5,10 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 3em;
+
+  @media (max-width: ${theme.mediaSize.tablet}) {
+    flex-direction: column;
+  }
 `
 
 export const Text = styled.p`

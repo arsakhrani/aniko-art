@@ -155,11 +155,13 @@ export default function ManagePreferences() {
         </StepLabel>
         <ShippingContainer>
           <TextInput
+            id={"full-name"}
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             label={"Full name"}
           />
           <TextInput
+            id={"country"}
             value={country}
             onChange={(e) => setCountry(e.target.value)}
             label={"Country"}
@@ -171,26 +173,31 @@ export default function ManagePreferences() {
         </StepLabel>
         <ShippingContainer>
           <TextInput
+            id={"style"}
             value={style}
             onChange={(e) => setStyle(e.target.value)}
             label={"Style"}
           />
           <TextInput
+            id={"size"}
             value={size}
             onChange={(e) => setSize(e.target.value)}
             label={"Size"}
           />
           <TextInput
+            id={"aesthetics"}
             value={aesthetics}
             onChange={(e) => setAesthetics(e.target.value)}
             label={"Aesthetics"}
           />
           <TextInput
+            id={"material"}
             value={material}
             onChange={(e) => setMaterial(e.target.value)}
             label={"Material"}
           />
           <TextInput
+            id={"other"}
             value={other}
             onChange={(e) => setOther(e.target.value)}
             label={"Other"}
@@ -206,6 +213,7 @@ export default function ManagePreferences() {
           <PrimaryButton
             onClick={() => validate()}
             buttonText={"Save and continue"}
+            loading={true}
           />
         </div>
       </div>

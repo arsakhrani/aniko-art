@@ -4,16 +4,15 @@ import { ReactComponent as Checkmark } from "../../assets/icons/check-solid.svg"
 export default function CheckboxInput({ label, checked, name, onClick }) {
   return (
     <div onClick={onClick} className="checkbox-input">
-      <input name={name} type="checkbox" />
+      <input name={name} type="checkbox" checked={checked} />
       <div
         style={{
-          border: checked ? "1px solid #F2A16B" : "1px solid black",
+          border: checked ? "2px solid #F2A16B" : "2px solid #707070",
           backgroundColor: checked ? "#F2A16B" : "transparent",
-          top: checked ? 5.85 : 0,
         }}
         className="checkbox-box"
       >
-        {checked && <Checkmark />}
+        {checked && <Checkmark style={{ position: "absolute" }} />}
       </div>
       <label>{label}</label>
     </div>

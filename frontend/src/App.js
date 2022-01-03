@@ -70,7 +70,7 @@ function App() {
         <Route path="/create-bid" exact>
           {isAuthenticated ? <CollectBidPage /> : <Redirect to="/login" />}
         </Route>
-        <Route path="/bid-state" exact>
+        <Route path="/bid-state/:artworkId/:userId/:price" exact>
           {isAuthenticated ? <BidStatusPage /> : <Redirect to="/login" />}
         </Route>
         <Route path="*" component={NotFoundPage} />

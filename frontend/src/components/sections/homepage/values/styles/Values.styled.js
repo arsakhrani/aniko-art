@@ -7,6 +7,7 @@ export const Container = styled.div`
   background-color: ${theme.color.grey};
   display: grid;
   grid-template-rows: 1fr 5fr 1fr;
+  border-bottom: 1px solid white;
 
   h1 {
     text-align: right;
@@ -18,6 +19,10 @@ export const Container = styled.div`
     position: relative;
     bottom: 0.4em;
     font-weight: 500;
+
+    @media (max-width: ${theme.mediaSize.mobileL}) {
+      font-size: 4em;
+    }
   }
 `
 
@@ -44,6 +49,18 @@ export const ValueContainer = styled.div`
     span {
       color: ${theme.color.orange};
     }
+
+    @media (max-width: ${theme.mediaSize.laptop}) {
+      font-size: 2.5em;
+    }
+
+    @media (max-width: ${theme.mediaSize.tablet}) {
+      font-size: 2.2em;
+    }
+
+    @media (max-width: ${theme.mediaSize.mobileL}) {
+      font-size: 2em;
+    }
   }
 
   div {
@@ -55,6 +72,21 @@ export const ValueContainer = styled.div`
     opacity: ${(props) => props.$fade && 0};
     transition: all 0.3s linear;
     transition-delay: 0.6s;
+
+    @media (max-width: ${theme.mediaSize.laptop}) {
+      width: 6em;
+      margin-left: 1em;
+    }
+
+    @media (max-width: ${theme.mediaSize.tablet}) {
+      width: 5em;
+      margin-left: 2em;
+    }
+
+    @media (max-width: ${theme.mediaSize.mobileL}) {
+      width: 4em;
+      margin-left: 2em;
+    }
   }
 
   p {
@@ -63,7 +95,7 @@ export const ValueContainer = styled.div`
       props.$slide ? "translate3d(0, 5em, 0)" : "translate3d(0, 0, 0)"};
     padding-left: 3rem;
     padding-top: 0.5em;
-    width: 25em;
+    max-width: 25em;
     font-size: 1.5em;
     color: ${theme.color.darkGrey};
     opacity: ${(props) => props.$fade && 0};
@@ -78,6 +110,18 @@ export const ValueContainer = styled.div`
         ${theme.color.orange} 60%
       );
     }
+
+    @media (max-width: ${theme.mediaSize.tablet}) {
+      font-size: 1.3em;
+    }
+
+    @media (max-width: ${theme.mediaSize.mobileL}) {
+      font-size: 1em;
+    }
+  }
+
+  @media (max-width: ${theme.mediaSize.mobileM}) {
+    margin-top: 3em;
   }
 `
 
@@ -87,6 +131,7 @@ export const DotContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-end;
 `
 
 export const Dot = styled.div`

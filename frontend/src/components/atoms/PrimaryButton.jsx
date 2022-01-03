@@ -1,5 +1,6 @@
 import React from "react"
-import { Button } from "./styles/PrimaryButton.styled"
+import { Button, SpinnerContainer } from "./styles/PrimaryButton.styled"
+import { ReactComponent as LoadingSpinner } from "../../assets/icons/loading-spinner.svg"
 
 export default function PrimaryButton({
   buttonText,
@@ -7,6 +8,7 @@ export default function PrimaryButton({
   submit,
   onClick,
   disabled,
+  loading,
 }) {
   return (
     <Button
@@ -14,7 +16,13 @@ export default function PrimaryButton({
       onClick={onClick}
       type={submit ? "submit" : "button"}
       id={id}
+      $loading={loading}
     >
+      {loading && (
+        <SpinnerContainer>
+          <LoadingSpinner height="100%" />
+        </SpinnerContainer>
+      )}
       {buttonText}
     </Button>
   )

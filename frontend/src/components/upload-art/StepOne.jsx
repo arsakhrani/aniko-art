@@ -157,17 +157,20 @@ export default function StepOne({ changeStep }) {
         <ShippingContainer>
           {authContext.user.sellerType === "gallery" && (
             <TextInput
+              id={"gallery"}
               value={gallery}
               onChange={(e) => setGallery(e.target.value)}
               label={"Gallery name"}
             />
           )}
           <TextInput
+            id={"artist"}
             value={artist}
             onChange={(e) => setArtist(e.target.value)}
             label={"Artist name"}
           />
           <DropdownInput
+            id={"country"}
             value={country}
             options={countries}
             onChange={(e) => setCountry(e.target.value)}
@@ -183,6 +186,7 @@ export default function StepOne({ changeStep }) {
               </Para>
             )}
           <TextInput
+            id={"title"}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             label={"Title artwork"}
@@ -196,6 +200,7 @@ export default function StepOne({ changeStep }) {
             }}
           >
             <TextInput
+              id={"length"}
               value={length}
               step={0.1}
               onChange={(e) => setLength(e.target.value)}
@@ -203,6 +208,7 @@ export default function StepOne({ changeStep }) {
               label={"Length"}
             />
             <TextInput
+              id={"width"}
               value={width}
               step={0.1}
               onChange={(e) => setWidth(e.target.value)}
@@ -210,6 +216,7 @@ export default function StepOne({ changeStep }) {
               label={"Width"}
             />
             <TextInput
+              id={"depth"}
               value={depth}
               step={0.1}
               onChange={(e) => setDepth(e.target.value)}
@@ -217,6 +224,7 @@ export default function StepOne({ changeStep }) {
               label={"Depth"}
             />
             <DropdownInput
+              id={"unit"}
               value={unit}
               onChange={(e) => setUnit(e.target.value)}
               options={[
@@ -226,12 +234,14 @@ export default function StepOne({ changeStep }) {
             />
           </div>
           <DropdownInput
+            id={"medium"}
             value={medium}
             onChange={(e) => setMedium(e.target.value)}
             options={mediums}
             label={"Type"}
           />
           <TextInput
+            id={"year"}
             value={year}
             type={"number"}
             step={1}

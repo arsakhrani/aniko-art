@@ -39,10 +39,20 @@ export default function LogInPage() {
         <Container>
           <h1>Log In</h1>
           <div>
-            <TextInput name={"email"} label={"Email address"} type={"email"} />
+            <TextInput
+              id={"email"}
+              name={"email"}
+              label={"Email address"}
+              type={"email"}
+            />
           </div>
           <div>
-            <TextInput name={"password"} label={"Password"} type={"password"} />
+            <TextInput
+              id={"password"}
+              name={"password"}
+              label={"Password"}
+              type={"password"}
+            />
           </div>
           <div style={{ marginTop: "3em" }}>
             <PrimaryButton submit={true} buttonText={"LOG IN"} />

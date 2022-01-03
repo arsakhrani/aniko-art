@@ -40,11 +40,13 @@
 }
 
 .checkbox-input .checkbox-box {
-  height: 12px;
-  width: 12px;
+  height: 15px;
+  width: 15px;
+  border-radius: 3px;
   display: inline-block;
   cursor: pointer;
   position: relative;
+  top: 2px;
 }
 
 .checkbox-input label {
@@ -150,6 +152,7 @@ label.file-input {
   border: none;
   font-size: 1em;
   color: #707070;
+  cursor: pointer;
 }
 
 .dropdown-input select:focus {

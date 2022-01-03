@@ -3,7 +3,6 @@ import "./inputs.css"
 
 export default function DropdownInput({
   label,
-  htmlFor,
   options,
   name,
   onChange,
@@ -12,7 +11,7 @@ export default function DropdownInput({
 }) {
   return (
     <div className="dropdown-input">
-      {label && <label htmlFor={htmlFor}>{label}</label>}
+      {label && <label htmlFor={id}>{label}</label>}
       <select value={value} onChange={onChange} name={name} id={id}>
         {options.map((option) => (
           <option key={option.value} value={option.value}>

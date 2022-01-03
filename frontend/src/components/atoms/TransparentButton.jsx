@@ -8,21 +8,17 @@ export default function TransparentButton({
   logo,
   submit,
   onClick,
+  disabled,
 }) {
   return (
-    <Button onClick={onClick} type={submit ? "submit" : "button"}>
-      {logo === "google" && (
-        <Google
-          width={26}
-          style={{ paddingRight: 8, position: "relative", bottom: 2 }}
-        />
-      )}
+    <Button
+      disabled={disabled}
+      onClick={onClick}
+      type={submit ? "submit" : "button"}
+    >
+      {logo === "google" && <Google width={26} style={{ paddingRight: 8 }} />}
       {logo === "facebook" && (
-        <Facebook
-          width={17}
-          fill={"#1b76f2"}
-          style={{ paddingRight: 5, position: "relative", top: 1 }}
-        />
+        <Facebook width={17} fill={"#1b76f2"} style={{ paddingRight: 5 }} />
       )}
       <span style={{ marginTop: 2 }}>{buttonText}</span>
     </Button>

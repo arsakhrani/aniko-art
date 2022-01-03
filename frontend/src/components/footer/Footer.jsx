@@ -1,18 +1,13 @@
 import React from "react"
 import SocialMediaIconSet from "../atoms/SocialMediaIconSet"
 import { Container, Column, StyledLink } from "./styles/Footer.styled"
-import theme from "../common/theme"
 
 export default function Footer() {
   return (
     <Container>
       <Column>
-        <p
-          style={{ color: theme.color.orange, marginTop: 0, marginBottom: 10 }}
-        >
-          aniko_n@live.nl
-        </p>
-        <p style={{ color: theme.color.orange, margin: 0 }}>+31 070 157 856</p>
+        <p>aniko_n@live.nl</p>
+        <p>+31 070 157 856</p>
       </Column>
       <Column>
         <StyledLink to="/discover/artworks">Discover</StyledLink>

@@ -14,10 +14,11 @@ export default function Values() {
   const [fade, setFade] = useState(false)
 
   const changeValue = (e) => {
-    setFade(true)
+    !(index === 4 && e.nativeEvent.wheelDelta < 0) &&
+      !(index === 0 && e.nativeEvent.wheelDelta > 0) &&
+      setFade(true)
     setTimeout(() => {
       index < 4 && e.nativeEvent.wheelDelta < 0 && setIndex(index + 1)
-      index > 0 && e.nativeEvent.wheelDelta > 0 && setIndex(index - 1)
       index > 0 && e.nativeEvent.wheelDelta > 0 && setIndex(index - 1)
       if (
         (index === 0 && e.nativeEvent.wheelDelta > 0) ||
@@ -27,7 +28,7 @@ export default function Values() {
         body[0].classList.remove("modal-open")
       }
       setFade(false)
-    }, 1500)
+    }, 1200)
   }
 
   const stopBodyScroll = () => {

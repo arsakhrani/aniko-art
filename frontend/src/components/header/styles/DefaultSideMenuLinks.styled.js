@@ -11,11 +11,15 @@ export const StyledLink = styled(Link)`
   font-size: 3em;
   cursor: pointer;
   border-bottom: 2px solid black;
+
+  @media (max-width: ${theme.mediaSize.tablet}) {
+    font-size: 2em;
+  }
 `
 
 export const LineBlocker = styled.div`
   height: 3px;
-  width: 60%;
+  width: 100%;
   background-color: ${theme.color.grey};
   position: relative;
   top: -5px;

@@ -30,26 +30,19 @@ export default function CollectBidForm({ minimumBid, artworkId }) {
 
   const submitBid = async (e) => {
     e.preventDefault()
-    const updateBid = await paymentService.submitNewBid(
-      artworkId,
-      bidAmount,
-      user._id
-    )
-    if (updateBid.success) {
-      if (!stripe || !elements) {
-        return
-      }
+    if (!stripe || !elements) {
+      return
+    }
 
-      const { error } = await stripe.confirmSetup({
-        elements,
-        confirmParams: {
-          return_url: "http://localhost:3000/bid-state",
-        },
-      })
+    const { error } = await stripe.confirmSetup({
+      elements,
+      confirmParams: {
+        return_url: `http://localhost:3000/bid-state/${artworkId}/${user._id}/${bidAmount}`,
+      },
+    })
 
-      if (error) {
-        setStripeError(error.message)
-      }
+    if (error) {
+      setStripeError(error.message)
     }
   }
 
@@ -59,6 +52,7 @@ export default function CollectBidForm({ minimumBid, artworkId }) {
       <p>Please enter bid amount.</p>
       <div style={{ marginBottom: "1em" }}>
         <TextInput
+          id={"bid-amount"}
           type={"number"}
           onChange={(e) => changeBid(e)}
           value={bidAmount}

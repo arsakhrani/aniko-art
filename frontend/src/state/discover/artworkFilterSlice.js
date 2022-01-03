@@ -6,6 +6,7 @@ const initialState = {
   medium: "",
   size: "",
   color: "",
+  searchParams: "",
 }
 
 export const artworkFilterSlice = createSlice({
@@ -27,6 +28,9 @@ export const artworkFilterSlice = createSlice({
     changeColor: (state, action) => {
       state.color = action.payload
     },
+    changeSearchParams: (state, action) => {
+      state.searchParams = action.payload
+    },
   },
 })
 
@@ -36,6 +40,7 @@ export const {
   changeMedium,
   changeSize,
   changeColor,
+  changeSearchParams,
 } = artworkFilterSlice.actions
 
 export default artworkFilterSlice.reducer

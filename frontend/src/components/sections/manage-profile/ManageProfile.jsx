@@ -146,6 +146,7 @@ export default function ManageProfile() {
           <div className={"password-container"}>
             <div style={{ marginBottom: "1em" }}>
               <TextInput
+                id={"password"}
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 name={"password"}
@@ -155,6 +156,7 @@ export default function ManageProfile() {
             </div>
             <div style={{ marginBottom: "1em" }}>
               <TextInput
+                id={"password-confirm"}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 value={confirmPassword}
                 name={"password-confirm"}
@@ -181,6 +183,7 @@ export default function ManageProfile() {
         <ShippingContainer>
           <div>
             <TextInput
+              id={"full-name"}
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               type={"text"}
@@ -196,6 +199,7 @@ export default function ManageProfile() {
           </div>
           <div>
             <TextInput
+              id={"street"}
               value={shippingAddress.street}
               onChange={(e) =>
                 setShippingAddress({
@@ -210,6 +214,7 @@ export default function ManageProfile() {
           </div>
           <div>
             <TextInput
+              id={"city"}
               value={shippingAddress.city}
               onChange={(e) =>
                 setShippingAddress({
@@ -236,11 +241,11 @@ export default function ManageProfile() {
                 }
                 options={countries}
                 label={"Country"}
-                htmlFor={"country-select"}
                 id={"country-select"}
               />
             ) : (
               <TextInput
+                id={"country"}
                 value={shippingAddress.country}
                 onChange={(e) =>
                   setShippingAddress({
@@ -256,6 +261,7 @@ export default function ManageProfile() {
           </div>
           <div>
             <TextInput
+              id={"postcode"}
               value={shippingAddress.postCode}
               onChange={(e) =>
                 setShippingAddress({
@@ -270,6 +276,7 @@ export default function ManageProfile() {
           </div>
           <div>
             <TextInput
+              id={"phone-number"}
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
               type={"text"}
@@ -277,6 +284,7 @@ export default function ManageProfile() {
               name={"phone-number"}
             />
             <TextInput
+              id={"website"}
               value={website}
               onChange={(e) => setWebsite(e.target.value)}
               type={"text"}
@@ -286,6 +294,7 @@ export default function ManageProfile() {
           </div>
           <div>
             <TextInput
+              id={"specia;-instructions"}
               value={shippingAddress.specialInstructions}
               onChange={(e) =>
                 setShippingAddress({

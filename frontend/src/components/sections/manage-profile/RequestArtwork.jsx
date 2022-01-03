@@ -59,6 +59,7 @@ export default function RequestArtwork() {
         <h1>REQUEST ARTWORK</h1>
         <div style={{ marginBottom: "1em" }}>
           <TextInput
+            id={"artist"}
             value={artist}
             onChange={(e) => setArtist(e.target.value)}
             label={"Artist"}
@@ -66,6 +67,7 @@ export default function RequestArtwork() {
         </div>
         <div style={{ marginBottom: "1em" }}>
           <TextInput
+            id={"size"}
             value={country}
             onChange={(e) => setCountry(e.target.value)}
             label={"Size"}
@@ -73,6 +75,7 @@ export default function RequestArtwork() {
         </div>
         <div style={{ marginBottom: "1em" }}>
           <TextInput
+            id={"aesthetics"}
             value={style}
             onChange={(e) => setStyle(e.target.value)}
             label={"Aesthetics"}
@@ -80,6 +83,7 @@ export default function RequestArtwork() {
         </div>
         <div style={{ marginBottom: "1em" }}>
           <TextInput
+            id={"material"}
             value={size}
             onChange={(e) => setSize(e.target.value)}
             label={"Material"}
@@ -87,6 +91,7 @@ export default function RequestArtwork() {
         </div>
         <div style={{ marginBottom: "1em" }}>
           <TextInput
+            id={"other"}
             value={aesthetics}
             onChange={(e) => setAesthetics(e.target.value)}
             label={"Other"}
@@ -94,6 +99,7 @@ export default function RequestArtwork() {
         </div>
         <div style={{ marginBottom: "1em" }}>
           <TextInput
+            id={"material"}
             value={material}
             onChange={(e) => setMaterial(e.target.value)}
             label={"Material"}
@@ -101,6 +107,7 @@ export default function RequestArtwork() {
         </div>
         <div style={{ marginBottom: "1em" }}>
           <TextInput
+            id={"other"}
             value={other}
             onChange={(e) => setOther(e.target.value)}
             label={"Other"}

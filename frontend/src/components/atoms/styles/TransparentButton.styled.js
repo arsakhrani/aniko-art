@@ -9,5 +9,6 @@ export const Button = styled.button`
   padding: 1em 2em;
   display: flex;
   justify-content: center;
+  align-items: center;
   cursor: pointer;
 `

@@ -165,6 +165,7 @@ export default function StepTwo() {
           </p>
           <div style={{ width: "90%" }}>
             <TextInput
+              id={"price"}
               min={1000}
               step={50}
               type="number"
@@ -195,6 +196,7 @@ export default function StepTwo() {
           {showBidInput && (
             <div style={{ width: "90%", marginBottom: "1em" }}>
               <TextInput
+                id={"bid-amount"}
                 min={100}
                 step={50}
                 type="number"
