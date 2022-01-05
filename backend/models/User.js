@@ -178,6 +178,12 @@ const userSchema = new mongoose.Schema({
   paymentMethodId: {
     type: String,
   },
+  googleId: {
+    type: String,
+  },
+  facebookId: {
+    type: String,
+  },
 });
 
 userSchema.pre("save", function (next) {

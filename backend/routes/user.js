@@ -1,12 +1,18 @@
+const googleClientId = process.env.GOOGLE_AUTH_CLIENT_ID;
+const googleClientSecret = process.env.GOOGLE_AUTH_CLIENT_SECRET;
+const facebookClientId = process.env.FACEBOOK_AUTH_CLIENT_ID;
+const facebookClientSecret = process.env.FACEBOOK_AUTH_CLIENT_SECRET;
+const stripeKey = process.env.STRIPE_SECRET_KEY;
+const stripe = require("stripe")(stripeKey);
 const express = require("express");
 const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync");
 const userController = require("../controllers/user");
 const passport = require("passport");
-const passportConfig = require("../utils/passport");
-const JWT = require("jsonwebtoken");
 const LocalStrategy = require("passport-local").Strategy;
 const JwtStrategy = require("passport-jwt").Strategy;
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const FacebookStrategy = require("passport-facebook").Strategy;
 const User = require("../models/User");
 
 const cookieExtractor = (req) => {
@@ -46,6 +52,136 @@ passport.use(
   )
 );
 
+passport.use(
+  "google-buy",
+  new GoogleStrategy(
+    {
+      clientID: googleClientId,
+      clientSecret: googleClientSecret,
+      callbackURL: "http://localhost:5000/api/user/auth/google/buy/callback",
+    },
+    async (accessToken, refreshToken, profile, cb) => {
+      const existingUser = await User.findOne({
+        email: profile.emails[0].value,
+      });
+      if (existingUser) {
+        return cb(null, existingUser);
+      } else {
+        const customer = await stripe.customers.create();
+        const user = {
+          fullName: profile.displayName,
+          email: profile.emails[0].value,
+          password: profile.id,
+          googleId: profile.id,
+          role: "buyer",
+          stripeId: customer.id,
+        };
+        const newUser = new User(user);
+        const savedUser = await newUser.save();
+        return cb(null, savedUser);
+      }
+    }
+  )
+);
+
+passport.use(
+  "google-sell",
+  new GoogleStrategy(
+    {
+      clientID: googleClientId,
+      clientSecret: googleClientSecret,
+      callbackURL: "http://localhost:5000/api/user/auth/google/sell/callback",
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      const existingUser = await User.findOne({
+        email: profile.emails[0].value,
+      });
+      if (existingUser) {
+        done(null, existingUser);
+      } else {
+        const customer = await stripe.customers.create();
+        const user = {
+          fullName: profile.displayName,
+          email: profile.emails[0].value,
+          password: profile.id,
+          googleId: profile.id,
+          role: "seller",
+          sellerType: "private",
+          stripeId: customer.id,
+        };
+        const newUser = await User.save(user);
+        done(null, newUser);
+      }
+    }
+  )
+);
+
+passport.use(
+  "facebook-buy",
+  new FacebookStrategy(
+    {
+      clientID: facebookClientId,
+      clientSecret: facebookClientSecret,
+      callbackURL: "http://localhost:5000/api/user/auth/facebook/buy/callback",
+      profileFields: ["id", "displayName", "email"],
+    },
+    async (accessToken, refreshToken, profile, cb) => {
+      const existingUser = await User.findOne({
+        email: profile.emails[0].value,
+      });
+      if (existingUser) {
+        return cb(null, existingUser);
+      } else {
+        const customer = await stripe.customers.create();
+        const user = {
+          fullName: profile.displayName,
+          email: profile.emails[0].value,
+          password: profile.id,
+          facebookId: profile.id,
+          role: "buyer",
+          stripeId: customer.id,
+        };
+        const newUser = new User(user);
+        const savedUser = await newUser.save();
+        return cb(null, savedUser);
+      }
+    }
+  )
+);
+
+passport.use(
+  "facebook-sell",
+  new FacebookStrategy(
+    {
+      clientID: facebookClientId,
+      clientSecret: facebookClientSecret,
+      callbackURL: "http://localhost:5000/api/user/auth/facebook/sell/callback",
+      profileFields: ["id", "displayName", "email"],
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      const existingUser = await User.findOne({
+        email: profile.emails[0].value,
+      });
+      if (existingUser) {
+        done(null, existingUser);
+      } else {
+        const customer = await stripe.customers.create();
+        const user = {
+          fullName: profile.displayName,
+          email: profile.emails[0].value,
+          password: profile.id,
+          facebookId: profile.id,
+          role: "seller",
+          sellerType: "private",
+          stripeId: customer.id,
+        };
+        const newUser = await User.save(user);
+        done(null, newUser);
+      }
+    }
+  )
+);
+
 router.post("/register", wrapAsync(userController.newUser));
 
 router.post(
@@ -70,7 +206,61 @@ router.put("/update/:id", wrapAsync(userController.editUser));
 
 router.put("/request-artwork/:id", wrapAsync(userController.requestArtWork));
 
-// router.delete("", wrapAsync(userController.deleteUser));
+router.get(
+  "/auth/google/buy",
+  passport.authenticate("google-buy", {
+    scope: ["profile", "email"],
+    session: false,
+  })
+);
+
+router.get(
+  "/auth/google/buy/callback",
+  passport.authenticate("google-buy", { session: false }),
+  wrapAsync(userController.socialLogin)
+);
+
+router.get(
+  "/auth/google/sell",
+  passport.authenticate("google-sell", {
+    scope: ["profile", "email"],
+    session: false,
+  })
+);
+
+router.get(
+  "/auth/google/sell/callback",
+  passport.authenticate("google-sell", { session: false }),
+  wrapAsync(userController.socialLogin)
+);
+
+router.get(
+  "/auth/facebook/buy",
+  passport.authenticate("facebook-buy", {
+    scope: ["email"],
+    session: false,
+  })
+);
+
+router.get(
+  "/auth/facebook/buy/callback",
+  passport.authenticate("facebook-buy", { session: false }),
+  wrapAsync(userController.socialLogin)
+);
+
+router.get(
+  "/auth/facebook/sell",
+  passport.authenticate("facebook-sell", {
+    scope: ["email"],
+    session: false,
+  })
+);
+
+router.get(
+  "/auth/facebook/sell/callback",
+  passport.authenticate("facebook-sell", { session: false }),
+  wrapAsync(userController.socialLogin)
+);
 
 // router.get("/:id", wrapAsync(userController.getUserInfo));
 

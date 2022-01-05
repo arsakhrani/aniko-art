@@ -51,6 +51,20 @@ export default function RegistrationForm({
     }
   }
 
+  const googleLogin = (leftFrame) => {
+    leftFrame &&
+      window.open("http://localhost:5000/api/user/auth/google/buy", "_self")
+    !leftFrame &&
+      window.open("http://localhost:5000/api/user/auth/google/sell", "_self")
+  }
+
+  const facebookLogin = (leftFrame) => {
+    leftFrame &&
+      window.open("http://localhost:5000/api/user/auth/facebook/buy", "_self")
+    !leftFrame &&
+      window.open("http://localhost:5000/api/user/auth/facebook/sell", "_self")
+  }
+
   return (
     <Container
       $focusLeft={focusLeft}
@@ -146,6 +160,10 @@ export default function RegistrationForm({
         <div
           style={{
             display: "flex",
+            opacity:
+              (focusLeft && !leftFrame && 0.1) ||
+              (focusRight && leftFrame && 0.1),
+            transition: "0.8s opacity linear",
             justifyContent: "space-between",
             width: "100%",
             marginTop: "4em",
@@ -154,10 +172,12 @@ export default function RegistrationForm({
           <TransparentButton
             logo={"google"}
             buttonText={"Continue with Google"}
+            onClick={() => googleLogin(leftFrame)}
           />
           <TransparentButton
             logo={"facebook"}
             buttonText={"Continue with Facebook"}
+            onClick={() => facebookLogin(leftFrame)}
           />
         </div>
         <p style={{ marginTop: "2em" }}>

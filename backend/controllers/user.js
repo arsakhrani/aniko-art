@@ -82,6 +82,19 @@ module.exports.logInUser = async (req, res) => {
   }
 };
 
+module.exports.socialLogin = async (req, res) => {
+  try {
+    if (req.isAuthenticated()) {
+      const user = req.user;
+      const token = signToken(user._id);
+      res.cookie("access_token", token, { httpOnly: true, sameSite: true });
+      res.redirect("http://localhost:3000/discover/artworks");
+    }
+  } catch (e) {
+    res.redirect("http://localhost:3000/error"); //make error page
+  }
+};
+
 module.exports.logOutUser = async (req, res) => {
   try {
     res.clearCookie("access_token");

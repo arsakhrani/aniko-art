@@ -23,6 +23,7 @@ export const Form = styled.form`
   flex-direction: column;
   align-items: center;
   width: 65%;
+  max-width: calc(50vw * 0.65);
 
   h2 {
     font-size: 60px;
