@@ -26,7 +26,7 @@ module.exports.createCheckoutBuySession = async (req, res) => {
     customer_email: user.email,
     mode: "payment",
     success_url: "http://localhost:3000/success", //to make
-    cancel_url: "http://localhost:3000/cancel", //to make
+    cancel_url: "http://localhost:3000/discover/artworks",
   });
 
   res.json({ url: session.url });

@@ -31,6 +31,9 @@ const artistSchema = new mongoose.Schema({
   bannerPicture: {
     type: String,
   },
+  audioFile: {
+    type: String,
+  },
   artworks: [
     {
       type: mongoose.Schema.Types.ObjectId,

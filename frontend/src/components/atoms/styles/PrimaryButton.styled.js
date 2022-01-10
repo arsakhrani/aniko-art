@@ -14,6 +14,14 @@ export const Button = styled.button`
     opacity: 0.6;
     cursor: default;
   }
+
+  @media (max-width: ${theme.mediaSize.tablet}) {
+    padding: 1.1em 2em;
+  }
+
+  @media (max-width: ${theme.mediaSize.mobileL}) {
+    padding: 1.1em 1.1em;
+  }
 `
 
 export const SpinnerContainer = styled.div`
@@ -25,4 +33,12 @@ export const SpinnerContainer = styled.div`
   align-items: center;
   margin-left: -3em;
   margin-top: -1.1em;
+
+  @media (max-width: ${theme.mediaSize.tablet}) {
+    margin-left: -2em;
+  }
+
+  @media (max-width: ${theme.mediaSize.mobileL}) {
+    margin-left: -1.1em;
+  }
 `

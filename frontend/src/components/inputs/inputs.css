@@ -153,6 +153,8 @@ label.file-input {
   font-size: 1em;
   color: #707070;
   cursor: pointer;
+  margin-top: -1em;
+  border-bottom: 1px solid #707070;
 }
 
 .dropdown-input select:focus {

@@ -8,10 +8,12 @@ import {
   CheckboxContainer,
   Container,
   Form,
+  SocialContainer,
 } from "./styles/RegistrationForm.styled"
 import { Link, useHistory } from "react-router-dom"
 import { saveInfo } from "../../../../state/registration/registrationInfoSlice"
 import { useDispatch } from "react-redux"
+import ErrorMessage from "../../../atoms/ErrorMessage"
 
 export default function RegistrationForm({
   sell,
@@ -30,10 +32,15 @@ export default function RegistrationForm({
 
   const history = useHistory()
 
+  const chooseSellerType = (type) => {
+    setSellerType(type)
+    setErrorMessage("")
+  }
+
   const saveDetails = (e) => {
     e.preventDefault()
     if (isSell && !sellerType) {
-      setErrorMessage("Please select the type of seller you are")
+      setErrorMessage("Please specify the type of seller you are.")
     } else {
       const interests = {
         privateSales: privateSalesBuy,
@@ -52,17 +59,59 @@ export default function RegistrationForm({
   }
 
   const googleLogin = (leftFrame) => {
-    leftFrame &&
+    if (leftFrame) {
       window.open("http://localhost:5000/api/user/auth/google/buy", "_self")
-    !leftFrame &&
-      window.open("http://localhost:5000/api/user/auth/google/sell", "_self")
+    }
+
+    if (!leftFrame) {
+      if (sellerType) {
+        sellerType === "private" &&
+          window.open(
+            "http://localhost:5000/api/user/auth/google/sell/private",
+            "_self"
+          )
+        sellerType === "gallery" &&
+          window.open(
+            "http://localhost:5000/api/user/auth/google/sell/gallery",
+            "_self"
+          )
+        sellerType === "artist" &&
+          window.open(
+            "http://localhost:5000/api/user/auth/google/sell/artist",
+            "_self"
+          )
+      } else {
+        setErrorMessage("Please specify the type of seller you are.")
+      }
+    }
   }
 
   const facebookLogin = (leftFrame) => {
-    leftFrame &&
+    if (leftFrame) {
       window.open("http://localhost:5000/api/user/auth/facebook/buy", "_self")
-    !leftFrame &&
-      window.open("http://localhost:5000/api/user/auth/facebook/sell", "_self")
+    }
+
+    if (!leftFrame) {
+      if (sellerType) {
+        sellerType === "private" &&
+          window.open(
+            "http://localhost:5000/api/user/auth/facebook/sell/private",
+            "_self"
+          )
+        sellerType === "gallery" &&
+          window.open(
+            "http://localhost:5000/api/user/auth/facebook/sell/gallery",
+            "_self"
+          )
+        sellerType === "artist" &&
+          window.open(
+            "http://localhost:5000/api/user/auth/facebook/sell/artist",
+            "_self"
+          )
+      } else {
+        setErrorMessage("Please specify the type of seller you are.")
+      }
+    }
   }
 
   return (
@@ -85,13 +134,14 @@ export default function RegistrationForm({
           id={sell ? "seller-email" : "buyer-email"}
           label={"Email address"}
           type={"email"}
+          maxLength={50}
         />
         {sell ? (
           <CheckboxContainer>
             <div style={{ paddingBottom: "1em" }}>
               <RadialInput
                 checked={sellerType === "private"}
-                onClick={() => setSellerType("private")}
+                onClick={() => chooseSellerType("private")}
                 label={"Private Sales"}
                 name={"sellerType"}
               />
@@ -99,7 +149,7 @@ export default function RegistrationForm({
             <div style={{ paddingBottom: "1em" }}>
               <RadialInput
                 checked={sellerType === "gallery"}
-                onClick={() => setSellerType("gallery")}
+                onClick={() => chooseSellerType("gallery")}
                 label={"Gallery Sales"}
                 name={"sellerType"}
               />
@@ -107,16 +157,12 @@ export default function RegistrationForm({
             <div style={{ paddingBottom: "1em" }}>
               <RadialInput
                 checked={sellerType === "artist"}
-                onClick={() => setSellerType("artist")}
+                onClick={() => chooseSellerType("artist")}
                 label={"Artist Sales"}
                 name={"sellerType"}
               />
             </div>
-            {errorMessage && (
-              <p style={{ color: "red", marginTop: "-0.6em" }}>
-                {errorMessage}
-              </p>
-            )}
+            {errorMessage && <ErrorMessage messageBody={errorMessage} />}
           </CheckboxContainer>
         ) : (
           <CheckboxContainer>
@@ -157,17 +203,10 @@ export default function RegistrationForm({
           id={sell ? "seller-register-button" : "buyer-register-button"}
           buttonText={"REGISTER"}
         />
-        <div
-          style={{
-            display: "flex",
-            opacity:
-              (focusLeft && !leftFrame && 0.1) ||
-              (focusRight && leftFrame && 0.1),
-            transition: "0.8s opacity linear",
-            justifyContent: "space-between",
-            width: "100%",
-            marginTop: "4em",
-          }}
+        <SocialContainer
+          $focusLeft={focusLeft}
+          $focusRight={focusRight}
+          $leftFrame={leftFrame}
         >
           <TransparentButton
             logo={"google"}
@@ -179,7 +218,7 @@ export default function RegistrationForm({
             buttonText={"Continue with Facebook"}
             onClick={() => facebookLogin(leftFrame)}
           />
-        </div>
+        </SocialContainer>
         <p style={{ marginTop: "2em" }}>
           ALREADY HAVE AN ACCOUNT?{" "}
           <Link to="/login" style={{ color: "#F2A16B" }}>

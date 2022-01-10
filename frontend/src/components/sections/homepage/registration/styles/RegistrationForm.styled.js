@@ -16,6 +16,12 @@ export const Container = styled.div`
   border-${(props) => (props.$leftFrame ? "right" : "left")}: 0.5px solid ${
   theme.color.orange
 };
+
+  @media(max-width: ${theme.mediaSize.tablet}) {
+    width: 100vw;
+    height: 100vh;
+    border: none;
+  }
 `
 
 export const Form = styled.form`
@@ -33,11 +39,48 @@ export const Form = styled.form`
   p {
     margin-top: 0;
     margin-bottom: 20px;
+
+    @media (max-width: 900px) {
+      font-size: 0.8em;
+    }
+  }
+
+  @media (max-width: ${theme.mediaSize.tablet}) {
+    max-width: 50vw;
+  }
+
+  @media (max-width: ${theme.mediaSize.mobileL}) {
+    max-width: 95vw;
+  }
+
+  @media (max-width: ${theme.mediaSize.mobileM}) {
+    width: 98vw;
   }
 `
 
 export const CheckboxContainer = styled.div`
   width: 100%;
-  height: 23%;
+  height: 25%;
   padding-top: 7%;
+`
+
+export const SocialContainer = styled.div`
+  display: flex;
+  opacity: ${(props) =>
+    (props.$focusLeft && !props.$leftFrame && 0.1) ||
+    (props.$focusRight && props.$leftFrame && 0.1)};
+  transition: 0.8s opacity linear;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 4em;
+
+  @media (max-width: 1320px) {
+    flex-direction: column;
+    margin-top: 2em;
+    height: 7em;
+
+    button {
+      margin-bottom: 1em;
+    }
+  }
 `

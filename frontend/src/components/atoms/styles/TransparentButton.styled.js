@@ -11,4 +11,9 @@ export const Button = styled.button`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
 `

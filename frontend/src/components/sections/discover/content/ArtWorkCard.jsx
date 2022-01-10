@@ -11,6 +11,8 @@ import { useHistory } from "react-router"
 
 export default function ArtWorkCard({ cardInfo }) {
   const [showArtModal, setShowArtModal] = useState(false)
+  const [disableButton, setDisableButton] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const history = useHistory()
 
@@ -32,18 +34,27 @@ export default function ArtWorkCard({ cardInfo }) {
   }
 
   const setupBid = async () => {
-    const response = await fetch(
-      `/api/checkout/create-checkout-save-session/${user._id}`
-    )
-    const secret = await response.json()
-    history.push({
-      pathname: "/create-bid",
-      state: {
-        secret: secret.client_secret,
-        minimumBid: cardInfo.minimumBid + 50,
-        artworkId: cardInfo._id,
-      },
-    })
+    try {
+      setDisableButton(true)
+      setIsLoading(true)
+      const response = await fetch(
+        `/api/checkout/create-checkout-save-session/${user._id}`
+      )
+      const secret = await response.json()
+      history.push({
+        pathname: "/create-bid",
+        state: {
+          secret: secret.client_secret,
+          minimumBid: cardInfo.minimumBid + 50,
+          artworkId: cardInfo._id,
+        },
+      })
+    } catch (e) {
+      console.log(e)
+      alert(
+        "Sorry, the bidding service seems to be down right now. We are currently trying to fix this problem."
+      )
+    }
   }
 
   return (
@@ -69,6 +80,8 @@ export default function ArtWorkCard({ cardInfo }) {
           <PrimaryButton
             onClick={() => setupBid()}
             buttonText={"BID FROM $" + (cardInfo.minimumBid + 50) + ", -"}
+            disabled={disableButton}
+            loading={isLoading}
           />
         ) : (
           <div></div>

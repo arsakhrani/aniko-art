@@ -3,7 +3,6 @@ import { useStripe, useElements, PaymentElement } from "@stripe/react-stripe-js"
 import { FormContainer } from "../../../pages/styles/CollectBidPage.styled"
 import PrimaryButton from "../../atoms/PrimaryButton"
 import TextInput from "../../inputs/TextInput"
-import paymentService from "../../../services/paymentService"
 import { AuthContext } from "../../../context/authContext"
 
 export default function CollectBidForm({ minimumBid, artworkId }) {
@@ -16,12 +15,13 @@ export default function CollectBidForm({ minimumBid, artworkId }) {
   const [errorMessage, setErrorMessage] = useState("")
   const [bidAmount, setBidAmount] = useState(minimumBid)
   const [disableButton, setDisableButton] = useState(false && !stripe)
+  const [isLoading, setIsLoading] = useState(false)
 
   const changeBid = (e) => {
     setBidAmount(e.target.value)
     if (e.target.value < minimumBid) {
-      setErrorMessage("Bid amount must be at least " + minimumBid)
       setDisableButton(true)
+      setErrorMessage("Bid amount must be at least " + minimumBid)
     } else {
       setErrorMessage("")
       setDisableButton(false)
@@ -29,6 +29,8 @@ export default function CollectBidForm({ minimumBid, artworkId }) {
   }
 
   const submitBid = async (e) => {
+    setDisableButton(true)
+    setIsLoading(true)
     e.preventDefault()
     if (!stripe || !elements) {
       return
@@ -67,6 +69,7 @@ export default function CollectBidForm({ minimumBid, artworkId }) {
           submit={true}
           disabled={disableButton}
           buttonText={"SUBMIT"}
+          loading={isLoading}
         />
       </div>
     </FormContainer>

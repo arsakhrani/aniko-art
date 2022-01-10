@@ -33,6 +33,25 @@ export default {
     }
     return responseArray
   },
+  uploadAudio: async (audio) => {
+    const uploadPreset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
+    const formData = new FormData()
+    formData.append("file", audio[0])
+    formData.append("upload_preset", uploadPreset)
+    formData.append("resource_type", "video")
+
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dw05biri6/upload",
+      {
+        method: "post",
+        body: formData,
+      }
+    )
+    if (res.status === 200) {
+      const data = await res.json()
+      return data.url
+    }
+  },
   getAllArtworks: async () => {
     return fetch("/api/artwork/get-all", {
       method: "get",

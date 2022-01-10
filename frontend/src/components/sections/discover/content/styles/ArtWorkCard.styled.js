@@ -27,11 +27,19 @@ export const WrittenContent = styled.div`
       font-size: ${theme.fontSize.small};
       color: rgba(0, 0, 0, 0.6);
       margin: 0;
+
+      @media (max-width: ${theme.mediaSize.mobileL}) {
+        text-align: center;
+      }
     }
 
     span {
       font-size: ${theme.fontSize.small};
     }
+  }
+
+  @media (max-width: ${theme.mediaSize.mobileL}) {
+    flex-direction: column;
   }
 `
 

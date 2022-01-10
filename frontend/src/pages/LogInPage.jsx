@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react"
 import Header from "../components/header/Header"
 import Footer from "../components/footer/Footer"
-import { Container } from "./styles/LogInPage.styled"
+import { Container, SocialContainer } from "./styles/LogInPage.styled"
 import TextInput from "../components/inputs/TextInput"
 import PrimaryButton from "../components/atoms/PrimaryButton"
 import TransparentButton from "../components/atoms/TransparentButton"
@@ -32,6 +32,14 @@ export default function LogInPage() {
     }
   }
 
+  const googleLogin = () => {
+    window.open("http://localhost:5000/api/user/auth/google/buy", "_self")
+  }
+
+  const facebookLogin = () => {
+    window.open("http://localhost:5000/api/user/auth/facebook/buy", "_self")
+  }
+
   return (
     <div>
       <Header />
@@ -58,23 +66,18 @@ export default function LogInPage() {
             <PrimaryButton submit={true} buttonText={"LOG IN"} />
           </div>
           {errorMessage && <ErrorMessage messageBody={errorMessage} />}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              width: "35%",
-              marginTop: "3em",
-            }}
-          >
+          <SocialContainer>
             <TransparentButton
               logo={"google"}
               buttonText={"Continue with Google"}
+              onClick={() => googleLogin()}
             />
             <TransparentButton
               logo={"facebook"}
               buttonText={"Continue with Facebook"}
+              onClick={() => facebookLogin()}
             />
-          </div>
+          </SocialContainer>
           <p style={{ marginTop: "2em" }}>
             DON'T HAVE AN ACCOUNT?{" "}
             <Link to="/register" style={{ color: "#F2A16B" }}>

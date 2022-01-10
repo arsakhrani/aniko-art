@@ -12,7 +12,7 @@ import {
   filterArtists,
   filterArtworks,
   filterGalleries,
-} from "../../../../services/helperFunctions"
+} from "../../../../services/filterFunctions"
 import { ArtworkContext } from "../../../../context/artworkContext"
 import { ArtistContext } from "../../../../context/artistContext"
 import { GalleryContext } from "../../../../context/galleryContext"
