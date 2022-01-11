@@ -97,7 +97,6 @@ export const SearchBarContainer = styled.div`
   display: flex;
   justify-content: center;
   padding-bottom: 0.3em;
-  box-shadow: 0px 5px 5px silver;
   z-index: 2;
 
   div {

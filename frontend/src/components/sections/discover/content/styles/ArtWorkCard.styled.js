@@ -8,7 +8,7 @@ export const CoverPicture = styled.img`
 
 export const WrittenContent = styled.div`
   display: flex;
-  width: 95%;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
   height: 20%;
@@ -43,20 +43,10 @@ export const WrittenContent = styled.div`
   }
 `
 
-export const PriceLink = styled.div`
+export const PriceLink = styled.p`
   color: ${theme.color.orange};
-  display: flex;
-  flex-direction: column;
-
-  div {
-    font-size: ${theme.fontSize.small};
-    font-family: "Arial", sans-serif;
-    cursor: pointer;
-  }
-
-  span {
-    width: 4em;
-    height: 1px;
-    background-color: ${theme.color.orange};
-  }
+  font-size: ${theme.fontSize.small};
+  font-family: "Arial", sans-serif;
+  cursor: pointer;
+  margin: 0;
 `

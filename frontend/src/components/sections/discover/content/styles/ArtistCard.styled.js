@@ -12,7 +12,7 @@ export const FeatureImage = styled.img`
 
 export const WrittenContent = styled.div`
   display: flex;
-  width: 95%;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
   height: 20%;

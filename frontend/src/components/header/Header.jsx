@@ -13,7 +13,7 @@ import {
 import { AuthContext } from "../../context/authContext"
 import authService from "../../services/authService"
 import TextInput from "../inputs/TextInput"
-import { changeSearchParams } from "../../state/discover/artworkFilterSlice"
+import { changeSearchParams } from "../../state/discover/discoverFilterSlice"
 import { useDispatch } from "react-redux"
 
 export default function Header({ discover, grey }) {
@@ -27,6 +27,7 @@ export default function Header({ discover, grey }) {
     const searchInput = document.getElementById("search-input")
     searchInput && searchInput.focus()
     !searchInput && clearSearchParams()
+    !searchInput && dispatch(changeSearchParams(""))
     return () => {
       const body = document.getElementsByTagName("body")
       body[0].classList.remove("modal-open")
@@ -99,7 +100,7 @@ export default function Header({ discover, grey }) {
           <TextInput
             onChange={(e) => setSearchParams(e)}
             id={"search-input"}
-            label={"Search for artist or artwork"}
+            label={"Search for artist, artwork, or gallery"}
           />
         </SearchBarContainer>
       )}

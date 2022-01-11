@@ -9,13 +9,22 @@ export default function SocialMediaIconSet() {
   return (
     <Container>
       <Icon>
-        <Instagram />
+        <a
+          target="_blank"
+          href="https://instagram.com/anikoarts?utm_medium=copy_link"
+        >
+          <Instagram />
+        </a>
       </Icon>
       <Icon>
-        <Linkedin />
+        <a target="_blank" href="">
+          <Linkedin />
+        </a>
       </Icon>
       <Icon>
-        <Facebook />
+        <a target="_blank" href="">
+          <Facebook />
+        </a>
       </Icon>
       <Icon>
         <Wechat />

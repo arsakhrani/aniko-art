@@ -35,8 +35,6 @@ export const ValueContainer = styled.div`
   margin-top: 6em;
 
   h2 {
-    transform: ${(props) =>
-      props.$slide ? "translate3d(0, 5em, 0)" : "translate3d(0, 0, 0)"};
     font-size: 3.5em;
     font-family: "Arial", sans-serif;
     font-weight: 500;
@@ -64,14 +62,9 @@ export const ValueContainer = styled.div`
   }
 
   div {
-    transform: ${(props) =>
-      props.$slide ? "translate3d(0, 5em, 0)" : "translate3d(0, 0, 0)"};
     width: 7em;
     height: 2px;
     background-color: ${theme.color.orange};
-    opacity: ${(props) => props.$fade && 0};
-    transition: all 0.3s linear;
-    transition-delay: 0.6s;
 
     @media (max-width: ${theme.mediaSize.laptop}) {
       width: 6em;
@@ -91,8 +84,6 @@ export const ValueContainer = styled.div`
 
   p {
     font-family: "Arial", sans-serif;
-    transform: ${(props) =>
-      props.$slide ? "translate3d(0, 5em, 0)" : "translate3d(0, 0, 0)"};
     padding-left: 3rem;
     padding-top: 0.5em;
     max-width: 25em;
@@ -104,11 +95,16 @@ export const ValueContainer = styled.div`
 
     span {
       border-radius: 5px;
-      background: linear-gradient(
-        180deg,
-        ${theme.color.grey} 60%,
-        ${theme.color.orange} 60%
-      );
+      animation-name: highlight;
+      animation-duration: 3s;
+      animation-fill-mode: forwards;
+      background-size: 200%;
+      background-image: linear-gradient(
+          to right,
+          ${theme.color.grey} 50%,
+          transparent 50%
+        ),
+        linear-gradient(transparent 50%, ${theme.color.orange} 50%);
     }
 
     @media (max-width: ${theme.mediaSize.tablet}) {
@@ -122,6 +118,16 @@ export const ValueContainer = styled.div`
 
   @media (max-width: ${theme.mediaSize.mobileM}) {
     margin-top: 3em;
+  }
+
+  @keyframes highlight {
+    from {
+      background-position: 0;
+    }
+
+    to {
+      background-position: -100%;
+    }
   }
 `
 

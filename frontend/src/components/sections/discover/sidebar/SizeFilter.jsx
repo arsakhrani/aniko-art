@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Container } from "./styles/CountryFilter.styled"
 import { useDispatch } from "react-redux"
-import { changeSize } from "../../../../state/discover/artworkFilterSlice"
+import { changeSize } from "../../../../state/discover/discoverFilterSlice"
 
 export default function SizeFilter() {
   const [index, setindex] = useState(1)
@@ -17,7 +17,7 @@ export default function SizeFilter() {
     <Container $index={index}>
       <h5>SIZE</h5>
       <ul>
-        <li onClick={() => selectSize("", 1)}>All</li>
+        <li onClick={() => selectSize("", 1)}>All Sizes</li>
         <li onClick={() => selectSize("small", 2)}>Small</li>
         <li onClick={() => selectSize("medium", 3)}>Medium</li>
         <li onClick={() => selectSize("large", 4)}>Large</li>

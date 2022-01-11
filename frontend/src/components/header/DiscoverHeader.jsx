@@ -1,22 +1,20 @@
-import React from "react"
+import React, { useContext } from "react"
 import { ReactComponent as Search } from "../../assets/icons/search-icon.svg"
 import { Container, MenuItem } from "./styles/DiscoverHeader.styled"
-import {
-  setCountryFilter,
-  setCountryIndex,
-} from "../../state/discover/artistAndGalleryFilterSlice"
-import { useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { Link, useParams } from "react-router-dom"
+import { ArtworkContext } from "../../context/artworkContext"
+import { ArtistContext } from "../../context/artistContext"
+import { GalleryContext } from "../../context/galleryContext"
 
 export default function DiscoverHeader({ toggleSearch }) {
-  const dispatch = useDispatch()
+  const artistCount = useSelector((state) => state.collectionCount.artists)
+
+  const artworkCount = useSelector((state) => state.collectionCount.artworks)
+
+  const galleryCount = useSelector((state) => state.collectionCount.galleries)
 
   const { type } = useParams()
-
-  const selectTab = () => {
-    dispatch(setCountryFilter(""))
-    dispatch(setCountryIndex(0))
-  }
 
   const vw = Math.max(
     document.documentElement.clientWidth || 0,
@@ -25,14 +23,14 @@ export default function DiscoverHeader({ toggleSearch }) {
 
   return (
     <Container>
-      <MenuItem $activeTab={type === "artists"} onClick={() => selectTab()}>
-        <Link to={"/discover/artists"}>Artists</Link>
+      <MenuItem $activeTab={type === "artists"}>
+        <Link to={"/discover/artists"}>Artists ({artistCount})</Link>
       </MenuItem>
-      <MenuItem $activeTab={type === "artworks"} onClick={() => selectTab()}>
-        <Link to={"/discover/artworks"}>Artworks</Link>
+      <MenuItem $activeTab={type === "artworks"}>
+        <Link to={"/discover/artworks"}>Artworks ({artworkCount})</Link>
       </MenuItem>
-      <MenuItem $activeTab={type === "galleries"} onClick={() => selectTab()}>
-        <Link to={"/discover/galleries"}>Galleries</Link>
+      <MenuItem $activeTab={type === "galleries"}>
+        <Link to={"/discover/galleries"}>Galleries ({galleryCount})</Link>
       </MenuItem>
       <Search
         onClick={() => toggleSearch()}

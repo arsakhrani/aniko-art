@@ -2,7 +2,7 @@ import styled from "styled-components"
 import theme from "../../../../common/theme"
 
 export const Container = styled.div`
-  height: 100vh;
+  height: calc(100vh - 180px);
   display: flex;
 
   @media (max-width: ${theme.mediaSize.tablet}) {

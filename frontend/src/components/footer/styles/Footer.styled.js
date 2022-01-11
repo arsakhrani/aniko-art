@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 export const Container = styled.footer`
   position: relative;
   bottom: 0;
-  height: 250px;
+  height: 180px;
   width: 100vw;
   background-color: ${theme.color.grey};
   display: flex;

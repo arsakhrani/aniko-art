@@ -18,25 +18,19 @@ import { ArtistContext } from "../../../../context/artistContext"
 import { GalleryContext } from "../../../../context/galleryContext"
 
 export default function MainContent({ type }) {
-  const countryFilter = useSelector(
-    (state) => state.artistAndGalleryFilter.value
-  )
-
   const { artworks } = useContext(ArtworkContext)
 
   const { artists } = useContext(ArtistContext)
 
   const { galleries } = useContext(GalleryContext)
 
-  const artworkFilters = useSelector((state) => state.artworkFilter)
+  const artworkFilters = useSelector((state) => state.discoverFilter)
 
-  const filteredAritsts = filterArtists(artists, countryFilter)
+  const filteredAritsts = filterArtists(artists, artworkFilters)
 
-  const filteredGalleries = filterGalleries(galleries, countryFilter)
+  const filteredGalleries = filterGalleries(galleries, artworkFilters)
 
   const filteredArtworks = filterArtworks(artworks, artworkFilters)
-
-  console.log(filteredArtworks)
 
   if (type === "artists") {
     return (
@@ -74,7 +68,7 @@ export default function MainContent({ type }) {
           className="artworks-masonry-grid"
           columnClassName="artworks-masonry-grid_column"
         >
-          {artworks.map((artwork) => (
+          {filteredArtworks.map((artwork) => (
             <ArtWorkCard key={artwork._id} cardInfo={artwork} />
           ))}
         </Masonry>

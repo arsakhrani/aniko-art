@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react"
 import { Link, useHistory } from "react-router-dom"
 import { ReactComponent as Continent } from "../../../../assets/icons/map/continent.svg"
+import { ReactComponent as Grid } from "../../../../assets/icons/grid.svg"
 import "./interactiveMap.css"
 
 export default function InteractiveMap() {
   const [flag, setFlag] = useState(true)
-  const [allowAnimation, setAllowAnimation] = useState(true)
+  //const [allowAnimation, setAllowAnimation] = useState(true)
   const [firstCycle, setFirstCycle] = useState(true)
 
   const history = useHistory()
@@ -30,10 +31,10 @@ export default function InteractiveMap() {
     if (animated.length > 0) {
       animated[0].classList.remove("animated")
     }
-    if (allowAnimation) {
-      const randomIndex = Math.floor(Math.random() * (countries.length - 1))
-      countries[randomIndex].classList.add("animated")
-    }
+    //if (allowAnimation) {
+    const randomIndex = Math.floor(Math.random() * (countries.length - 1))
+    countries[randomIndex].classList.add("animated")
+    //}
     const timeOut = setTimeout(() => {
       setFirstCycle(false)
       setFlag(!flag)
@@ -56,7 +57,7 @@ export default function InteractiveMap() {
               fontSize: 13,
             }}
           >
-            X VIEW ALL ARTWORKS
+            <Grid width={11} style={{ marginBottom: 5 }} /> VIEW ALL ARTWORKS
           </p>
         </Link>
         <div
@@ -66,8 +67,8 @@ export default function InteractiveMap() {
       <Continent
         width="100vw"
         height="100vh"
-        onMouseLeave={() => setAllowAnimation(true)}
-        onMouseEnter={() => setAllowAnimation(false)}
+        //onMouseLeave={() => setAllowAnimation(true)}
+        //onMouseEnter={() => setAllowAnimation(false)}
       />
     </div>
   )

@@ -1,29 +1,25 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Container } from "./styles/CountryFilter.styled"
-import { useDispatch, useSelector } from "react-redux"
-import {
-  setCountryFilter,
-  setCountryIndex,
-} from "../../../../state/discover/artistAndGalleryFilterSlice"
+import { useDispatch } from "react-redux"
 import { ArtistContext } from "../../../../context/artistContext"
 import { GalleryContext } from "../../../../context/galleryContext"
 import { useParams } from "react-router"
+import { ArtworkContext } from "../../../../context/artworkContext"
+import { changeCountry } from "../../../../state/discover/discoverFilterSlice"
 
 export default function CountryFilter() {
   const dispatch = useDispatch()
   const { artists } = useContext(ArtistContext)
   const { galleries } = useContext(GalleryContext)
+  const { artworks } = useContext(ArtworkContext)
   const { type } = useParams()
+  const [index, setindex] = useState(1)
 
   useEffect(() => {
     return () => {
-      dispatch(setCountryFilter(""))
+      dispatch(changeCountry(""))
     }
   }, [])
-
-  const countryStyleIndex = useSelector(
-    (state) => state.artistAndGalleryFilter.index
-  )
 
   const availableArtistCountries = []
   artists.forEach((artist) =>
@@ -31,7 +27,7 @@ export default function CountryFilter() {
   )
   let uniqueArtistCountries = [...new Set(availableArtistCountries)]
   uniqueArtistCountries.sort((a, b) => a.localeCompare(b))
-  console.log(galleries)
+
   const availableGalleryCountries = []
   galleries.forEach((gallery) =>
     availableGalleryCountries.push(gallery.country)
@@ -39,33 +35,36 @@ export default function CountryFilter() {
   let uniqueGalleryCountries = [...new Set(availableGalleryCountries)]
   uniqueGalleryCountries.sort((a, b) => a.localeCompare(b))
 
+  const availableArtworkCountries = []
+  artworks.forEach((artwork) => availableArtworkCountries.push(artwork.country))
+  let uniqueArtworkCountries = [...new Set(availableArtworkCountries)]
+  uniqueArtworkCountries.sort((a, b) => a.localeCompare(b))
+
   const selectCountry = (country, index) => {
-    dispatch(setCountryFilter(country))
-    dispatch(setCountryIndex(index + 2))
+    dispatch(changeCountry(country))
+    setindex(index)
   }
 
   return (
-    <Container $index={countryStyleIndex}>
+    <Container $index={index}>
       <h5>COUNTRIES</h5>
       <ul>
-        <li onClick={() => selectCountry("", -1)}>All Countries</li>
+        <li onClick={() => selectCountry("", 1)}>All Countries</li>
         {type === "artists" &&
           uniqueArtistCountries.map((country, index) => (
-            <li
-              style={{ textTransform: "capitalize" }}
-              key={country}
-              onClick={() => selectCountry(country, index)}
-            >
+            <li key={country} onClick={() => selectCountry(country, index + 2)}>
               {country}
             </li>
           ))}
         {type === "galleries" &&
           uniqueGalleryCountries.map((country, index) => (
-            <li
-              style={{ textTransform: "capitalize" }}
-              key={country}
-              onClick={() => selectCountry(country, index)}
-            >
+            <li key={country} onClick={() => selectCountry(country, index + 2)}>
+              {country}
+            </li>
+          ))}
+        {type === "artworks" &&
+          uniqueArtworkCountries.map((country, index) => (
+            <li key={country} onClick={() => selectCountry(country, index + 2)}>
               {country}
             </li>
           ))}

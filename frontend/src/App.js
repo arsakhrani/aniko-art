@@ -14,6 +14,7 @@ import RequestArtworkPage from "./pages/RequestArtworkPage"
 import UploadArtworkPage from "./pages/UploadArtworkPage"
 import CollectBidPage from "./pages/CollectBidPage"
 import BidStatusPage from "./pages/BidStatusPage"
+import TermsAndConditionsPage from "./pages/TermsAndConditionsPage"
 
 function App() {
   const { isAuthenticated, user } = useContext(AuthContext)
@@ -73,6 +74,11 @@ function App() {
         <Route path="/bid-state/:artworkId/:userId/:price" exact>
           {isAuthenticated ? <BidStatusPage /> : <Redirect to="/login" />}
         </Route>
+        <Route
+          path="/terms-and-conditions"
+          exact
+          component={TermsAndConditionsPage}
+        />
         <Route path="*" component={NotFoundPage} />
       </Switch>
     </BrowserRouter>

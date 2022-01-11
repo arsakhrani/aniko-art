@@ -79,8 +79,8 @@ passport.use(
           stripeId: customer.id,
         };
         const newUser = new User(user);
-        const savedUser = await newUser.save();
-        return cb(null, savedUser);
+        await newUser.save();
+        return cb(null, newUser);
       }
     }
   )
@@ -112,7 +112,8 @@ passport.use(
           sellerType: "private",
           stripeId: customer.id,
         };
-        const newUser = await User.save(user);
+        const newUser = new User(user);
+        await newUser.save();
         done(null, newUser);
       }
     }
@@ -151,7 +152,8 @@ passport.use(
         };
         const newArtist = Artist(artist);
         await newArtist.save();
-        const newUser = await User.save(user);
+        const newUser = new User(user);
+        await newUser.save();
         done(null, newUser);
       }
     }
@@ -190,7 +192,8 @@ passport.use(
         };
         const newGallery = Artist(gallery);
         await newGallery.save();
-        const newUser = await User.save(user);
+        const newUser = new User(user);
+        await newUser.save();
         done(null, newUser);
       }
     }
@@ -223,8 +226,8 @@ passport.use(
           stripeId: customer.id,
         };
         const newUser = new User(user);
-        const savedUser = await newUser.save();
-        return cb(null, savedUser);
+        await newUser.save();
+        return cb(null, newUser);
       }
     }
   )
@@ -257,7 +260,8 @@ passport.use(
           sellerType: "private",
           stripeId: customer.id,
         };
-        const newUser = await User.save(user);
+        const newUser = new User(user);
+        await newUser.save();
         done(null, newUser);
       }
     }
@@ -297,7 +301,8 @@ passport.use(
         };
         const newGallery = Artist(gallery);
         await newGallery.save();
-        const newUser = await User.save(user);
+        const newUser = new User(user);
+        await newUser.save();
         done(null, newUser);
       }
     }
@@ -337,7 +342,8 @@ passport.use(
         };
         const newArtist = Artist(artist);
         await newArtist.save();
-        const newUser = await User.save(user);
+        const newUser = new User(user);
+        await newUser.save();
         done(null, newUser);
       }
     }

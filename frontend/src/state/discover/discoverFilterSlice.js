@@ -7,10 +7,11 @@ const initialState = {
   size: "",
   color: "",
   searchParams: "",
+  country: "",
 }
 
-export const artworkFilterSlice = createSlice({
-  name: "artworkFilter",
+export const discoverFilterSlice = createSlice({
+  name: "discoverFilter",
   initialState,
   reducers: {
     changeMinPrice: (state, action) => {
@@ -28,6 +29,9 @@ export const artworkFilterSlice = createSlice({
     changeColor: (state, action) => {
       state.color = action.payload
     },
+    changeCountry: (state, action) => {
+      state.country = action.payload
+    },
     changeSearchParams: (state, action) => {
       state.searchParams = action.payload
     },
@@ -40,7 +44,8 @@ export const {
   changeMedium,
   changeSize,
   changeColor,
+  changeCountry,
   changeSearchParams,
-} = artworkFilterSlice.actions
+} = discoverFilterSlice.actions
 
-export default artworkFilterSlice.reducer
+export default discoverFilterSlice.reducer

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useContext, useState, useEffect } from "react"
 import { Container } from "./styles/CountryFilter.styled"
 import { Range } from "rc-slider"
 import "rc-slider/assets/index.css"
@@ -10,12 +10,12 @@ import { useDispatch } from "react-redux"
 import {
   changeMaxPrice,
   changeMinPrice,
-} from "../../../../state/discover/artworkFilterSlice"
-
-import { artworks } from "../../../../dummy-data/artworks"
+} from "../../../../state/discover/discoverFilterSlice"
+import { ArtworkContext } from "../../../../context/artworkContext"
 
 export default function PriceFilter() {
   const priceArray = []
+  const { artworks } = useContext(ArtworkContext)
   artworks.forEach((artwork) => priceArray.push(artwork.price))
   const minPrice = Math.min(...priceArray)
   const maxPrice = Math.max(...priceArray)
@@ -29,6 +29,12 @@ export default function PriceFilter() {
     dispatch(changeMinPrice(values[0]))
     dispatch(changeMaxPrice(values[1]))
   }
+
+  useEffect(() => {
+    dispatch(changeMinPrice(minPrice))
+    dispatch(changeMaxPrice(maxPrice))
+    return () => {}
+  }, [])
 
   return (
     <Container>

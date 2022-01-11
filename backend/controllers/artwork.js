@@ -7,10 +7,7 @@ module.exports.uploadArt = async (req, res) => {
   try {
     const artwork = req.body;
     const newArtwork = new Artwork(artwork);
-    newArtwork.size =
-      artwork.dimensionsCm.length *
-      artwork.dimensionsCm.width *
-      artwork.dimensionsCm.depth;
+    newArtwork.size = artwork.dimensionsCm.length * artwork.dimensionsCm.width;
     await newArtwork.save(async () => {
       const user = await User.findById(artwork.owner);
       if (user.sellerType === "artist") {

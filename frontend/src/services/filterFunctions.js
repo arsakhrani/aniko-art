@@ -1,33 +1,78 @@
+import { useDispatch } from "react-redux"
+import {
+  changeArtistsCount,
+  changeArtworksCount,
+  changeGalleriesCount,
+} from "../state/discover/collectionCountSlice"
+
 export const filterArtworks = (artworks, filters) => {
-  return artworks.filter((artwork) => {
+  const dispatch = useDispatch()
+  const filteredArtworks = artworks.filter((artwork) => {
     const mediumMatch = !filters.medium || filters.medium === artwork.medium
 
-    // let sizeMatch = true
-    // if (filters.size === "small") {
-    //   sizeMatch = artwork.size < 1000
-    // } else if (filters.size === "medium") {
-    //   sizeMatch = artwork.size > 999 && artwork.size < 10000
-    // } else if (filters.size === "large") {
-    //   sizeMatch = artwork.size > 9999
-    // }
+    let sizeMatch = true
+    if (filters.size === "small") {
+      sizeMatch = artwork.size < 40
+    } else if (filters.size === "medium") {
+      sizeMatch = artwork.size > 40 && artwork.size < 100
+    } else if (filters.size === "large") {
+      sizeMatch = artwork.size > 100
+    }
 
     // const colorMatch = true //todo
+
+    const searchParamMatch =
+      !filters.searchParams ||
+      artwork.artist
+        .toLowerCase()
+        .includes(filters.searchParams.toLowerCase()) ||
+      artwork.title.toLowerCase().includes(filters.searchParams.toLowerCase())
+
+    const countryMatch = !filters.country || filters.country === artwork.country
 
     const priceMatch =
       artwork.price >= filters.minPrice && artwork.price <= filters.maxPrice
 
-    return mediumMatch && priceMatch
+    return (
+      mediumMatch && priceMatch && countryMatch && searchParamMatch && sizeMatch
+    )
   })
+
+  dispatch(changeArtworksCount(filteredArtworks.length))
+  return filteredArtworks
 }
 
-export const filterArtists = (artists, countryFilter) => {
-  return !countryFilter
-    ? artists
-    : artists.filter((artist) => artist.birthCountry === countryFilter)
+export const filterArtists = (artists, filters) => {
+  const dispatch = useDispatch()
+
+  const filteredArtists = artists.filter((artist) => {
+    const countryMatch =
+      !filters.country || filters.country === artist.birthCountry
+
+    const searchParamMatch =
+      !filters.searchParams ||
+      artist.fullName.toLowerCase().includes(filters.searchParams.toLowerCase())
+
+    return countryMatch && searchParamMatch
+  })
+
+  dispatch(changeArtistsCount(filteredArtists.length))
+  return filteredArtists
 }
 
-export const filterGalleries = (galleries, countryFilter) => {
-  return !countryFilter
-    ? galleries
-    : galleries.filter((gallery) => gallery.country === countryFilter)
+export const filterGalleries = (galleries, filters) => {
+  const dispatch = useDispatch()
+
+  const filteredGalleries = galleries.filter((gallery) => {
+    const countryMatch = !filters.country || filters.country === gallery.country
+
+    const searchParamMatch =
+      !filters.searchParams ||
+      gallery.name.toLowerCase().includes(filters.searchParams.toLowerCase())
+
+    return countryMatch && searchParamMatch
+  })
+
+  dispatch(changeGalleriesCount(filteredGalleries.length))
+  return filteredGalleries
 }

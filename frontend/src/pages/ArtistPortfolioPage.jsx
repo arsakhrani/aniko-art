@@ -42,7 +42,6 @@ import {
 
 export default function ArtistPortfolioPage() {
   const history = useHistory()
-  const maxFileSize = 2000000
   const { id } = useParams()
   const { artists, setArtists } = useContext(ArtistContext)
   const { user } = useContext(AuthContext)

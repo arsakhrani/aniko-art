@@ -206,6 +206,7 @@ export default function StepOne({ changeStep }) {
               onChange={(e) => setLength(e.target.value)}
               type={"number"}
               label={"Length"}
+              min={0.1}
             />
             <TextInput
               id={"width"}
@@ -214,6 +215,7 @@ export default function StepOne({ changeStep }) {
               onChange={(e) => setWidth(e.target.value)}
               type={"number"}
               label={"Width"}
+              min={0.1}
             />
             <TextInput
               id={"depth"}
@@ -222,6 +224,7 @@ export default function StepOne({ changeStep }) {
               onChange={(e) => setDepth(e.target.value)}
               type={"number"}
               label={"Depth"}
+              min={0.1}
             />
             <DropdownInput
               id={"unit"}

@@ -65,12 +65,6 @@ export const Info = styled.div`
     margin: 0;
     margin-top: -0.5em;
     text-align: right;
-    font-family: "Arial", sans-serif;
-    font-weight: 100;
-
-    span {
-      cursor: pointer;
-    }
   }
 
   h2 {

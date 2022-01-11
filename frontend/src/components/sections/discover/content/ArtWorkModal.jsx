@@ -10,6 +10,7 @@ import {
   ImageSelector,
 } from "./styles/ArtWorkModal.styled"
 import { AuthContext } from "../../../../context/authContext"
+import { ReactComponent as Close } from "../../../../assets/icons/close.svg"
 
 export default function ArtWorkModal({ artInfo, closeModal }) {
   const [selectorNumber, setSelectorNumber] = useState(0)
@@ -52,7 +53,7 @@ export default function ArtWorkModal({ artInfo, closeModal }) {
         </FeaturePicture>
         <Info>
           <h1>
-            <span onClick={() => closeModal()}>x</span>
+            <Close style={{ cursor: "pointer" }} onClick={() => closeModal()} />
           </h1>
           <h2>{artInfo.artist}</h2>
           <h3>LOT {artInfo.lot}</h3>

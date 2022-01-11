@@ -62,9 +62,12 @@ export default function Values() {
             onMouseLeave={() => allowBodyScroll()}
           >
             {valuesArray[index].detailsStart}
-            <span>{valuesArray[index].detailsHighlight}</span>
-            {valuesArray[index].detailsMid}
-            <span>{valuesArray[index].detailsHighlightTwo}</span>
+            <span key={index + "a"}>{valuesArray[index].detailsHighlight}</span>
+            {valuesArray[index].detailsMid && valuesArray[index].detailsMid}
+            <span key={index + "b"}>
+              {valuesArray[index].detailsHighlightTwo &&
+                valuesArray[index].detailsHighlightTwo}
+            </span>
             {valuesArray[index].detailsEnd}
           </p>
         </ValueContainer>

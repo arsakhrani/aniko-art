@@ -1,7 +1,7 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Container } from "./styles/CountryFilter.styled"
 import { useDispatch } from "react-redux"
-import { changeMedium } from "../../../../state/discover/artworkFilterSlice"
+import { changeMedium } from "../../../../state/discover/discoverFilterSlice"
 
 export default function MediumFilter() {
   const [index, setindex] = useState(1)
@@ -13,11 +13,16 @@ export default function MediumFilter() {
     dispatch(changeMedium(value))
   }
 
+  useEffect(() => {
+    dispatch(changeMedium(""))
+    return () => {}
+  }, [])
+
   return (
     <Container $index={index}>
       <h5>MEDIUM</h5>
       <ul>
-        <li onClick={() => selectMedium("", 1)}>All</li>
+        <li onClick={() => selectMedium("", 1)}>All Mediums</li>
         <li onClick={() => selectMedium("Painting", 2)}>Painting</li>
         <li onClick={() => selectMedium("Sculpture", 3)}>Sculpture</li>
         <li onClick={() => selectMedium("Drawing", 4)}>Drawing</li>

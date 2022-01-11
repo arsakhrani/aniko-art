@@ -1,8 +1,9 @@
 import React from "react"
-import ColorFilter from "./ColorFilter"
+import ColorFilter from "./ColorFilter" //maybe??
 import MediumFilter from "./MediumFilter"
 import PriceFilter from "./PriceFilter"
 import SizeFilter from "./SizeFilter"
+import CountryFilter from "./CountryFilter"
 
 export default function OtherFilters() {
   return (
@@ -10,7 +11,7 @@ export default function OtherFilters() {
       <PriceFilter />
       <MediumFilter />
       <SizeFilter />
-      <ColorFilter />
+      <CountryFilter />
     </div>
   )
 }

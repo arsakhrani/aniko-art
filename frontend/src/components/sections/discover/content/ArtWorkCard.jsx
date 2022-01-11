@@ -87,13 +87,7 @@ export default function ArtWorkCard({ cardInfo }) {
           <div></div>
         )}
       </WrittenContent>
-      {!cardInfo.sold && (
-        <PriceLink>
-          <div onClick={() => showModal()}>SHOW</div>
-          <span></span>
-          <div onClick={() => showModal()}>PRICE</div>
-        </PriceLink>
-      )}
+      {!cardInfo.sold && <PriceLink>$ {cardInfo.price}, -</PriceLink>}
     </div>
   )
 }
