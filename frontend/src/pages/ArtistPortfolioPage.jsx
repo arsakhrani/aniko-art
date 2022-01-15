@@ -27,6 +27,7 @@ import discoverService from "../services/discoverService"
 import { ReactComponent as GreenDot } from "../assets/icons/green-dot.svg"
 import { ReactComponent as AudioIcon } from "../assets/icons/audio.svg"
 import { ReactComponent as MuteIcon } from "../assets/icons/mute.svg"
+import { ReactComponent as Close } from "../assets/icons/close.svg"
 import {
   FileDetails,
   Para,
@@ -37,16 +38,26 @@ import {
   convertNestedObjectToArray,
   convertBytesToKB,
   addNewFiles,
-  removeFile,
+  shortenString,
+  uploadImage,
+  uploadCv,
+  uploadAudio,
 } from "../services/uploadFunctions"
+import { filterArtworks } from "../services/filterFunctions"
+import { useSelector } from "react-redux"
 
 export default function ArtistPortfolioPage() {
   const history = useHistory()
-  const { id } = useParams()
+  const { artistId } = useParams()
+  const { section } = useParams()
   const { artists, setArtists } = useContext(ArtistContext)
   const { user } = useContext(AuthContext)
 
-  const artist = artists.find((a) => a._id === id)
+  const artworkFilters = useSelector((state) => state.discoverFilter)
+
+  const artist = artists.find((a) => a._id === artistId)
+
+  console.log(artist)
 
   const [editMode, setEditMode] = useState(false)
   const [birthCity, setBirthCity] = useState(artist && artist.birthCity)
@@ -61,37 +72,30 @@ export default function ArtistPortfolioPage() {
   const [soundDescription, setSoundDescription] = useState(
     artist && artist.soundDescription
   )
-  const [website, setWebsite] = useState(
-    (artist && artist.website) || "https://"
-  )
+  const [website, setWebsite] = useState(artist && artist.website)
   const [bannerPicture, setBannerPicture] = useState([])
   const [bannerObject, setBannerObject] = useState({})
   const [audioObject, setAudioObject] = useState({})
   const [audioFile, setAudioFile] = useState([])
+  const [cvObject, setCvObject] = useState({})
+  const [cvFile, setCvFile] = useState([])
   const [errorMessage, setErrorMessage] = useState("")
   const [disableButton, setDisableButton] = useState(false)
   const [muteAudio, setMuteAudio] = useState(false)
+  const [featurePicture, setFeaturePicture] = useState("")
+  const [featurePictureIndex, setFeaturePictureIndex] = useState(
+    artist && artist.featurePicture
+  )
 
   const userPortfolio = artist && user.email === artist.email
 
   const currentYear = new Date().getFullYear()
 
-  const uploadImage = async () => {
-    if (bannerPicture.length === 1) {
-      const upload = await discoverService.uploadImages(bannerPicture)
-      return upload[0]
-    } else {
-      return ""
-    }
-  }
+  const filteredArtworks = filterArtworks(artist.artworks, artworkFilters)
 
-  const uploadAudio = async () => {
-    if (audioFile.length === 1) {
-      const upload = await discoverService.uploadAudio(audioFile)
-      return upload
-    } else {
-      return ""
-    }
+  const selectFeaturePicture = (i, src) => {
+    setFeaturePictureIndex(i)
+    setFeaturePicture(src)
   }
 
   const preloadBanner = (e) => {
@@ -122,16 +126,43 @@ export default function ArtistPortfolioPage() {
     }
   }
 
+  const preloadCv = (e) => {
+    setErrorMessage("")
+    const { files: newFiles } = e.target
+    if (newFiles.length) {
+      if (newFiles[0].size > 1048576) {
+        setErrorMessage("Please make sure the CV file size is under 1MB.")
+      } else {
+        const updatedCv = addNewFiles(newFiles, e, cvObject)
+        setCvObject(updatedCv)
+        setCvFile(convertNestedObjectToArray(updatedCv))
+      }
+    }
+  }
+
+  const removeFile = (fileName, state) => {
+    delete state[fileName]
+    if (state === bannerObject) {
+      setBannerObject({ ...state })
+      setBannerPicture(convertNestedObjectToArray({ ...state }))
+    } else if (state === audioObject) {
+      setAudioObject({ ...state })
+      setAudioFile(convertNestedObjectToArray({ ...state }))
+    } else if (state === cvObject) {
+      setCvObject({ ...state })
+      setCvFile(convertNestedObjectToArray({ ...state }))
+    }
+  }
+
   const validateAndSubmit = async () => {
     setDisableButton(true)
-    if (!website.includes("https://")) {
-      setErrorMessage(
-        "Please make sure your website is prefixed with 'https://'"
-      )
+    if (!website.includes("www.")) {
+      setErrorMessage("Please make sure your website is prefixed with 'www.'")
       setDisableButton(false)
     } else {
-      const image = await uploadImage()
-      const audio = await uploadAudio()
+      const image = await uploadImage(bannerPicture)
+      const audio = await uploadAudio(audioFile)
+      const { cvUrl, cvFileName } = await uploadCv(cvFile)
 
       const editedArtist = {
         birthCity,
@@ -141,10 +172,16 @@ export default function ArtistPortfolioPage() {
         currentCountry,
         soundDescription,
         website,
-        bannerPicture: image,
-        audioFile: audio,
+        bannerPicture: image || artist.bannerPicture,
+        audioFile: audio || artist.audioFile,
+        cvFile: cvUrl || artist.cvFile,
+        cvFileName: cvFileName || artist.cvFileName,
+        featurePicture: featurePicture,
       }
-      const artistEdit = await discoverService.editArtist(editedArtist, id)
+      const artistEdit = await discoverService.editArtist(
+        editedArtist,
+        artistId
+      )
       if (artistEdit.success) {
         const allArtists = await discoverService.getAllArtists()
         setArtists(allArtists)
@@ -155,7 +192,7 @@ export default function ArtistPortfolioPage() {
 
   return (
     <div>
-      <Header />
+      <Header portfolio={true} />
       {!artist && (
         <NoArtistContainer>
           <h1>
@@ -244,6 +281,7 @@ export default function ArtistPortfolioPage() {
                     label={"Audio Description"}
                   />
                 </InputContainer>
+                <h3>Select an artwork below to make it your feature image</h3>
                 {errorMessage && <ErrorMessage messageBody={errorMessage} />}
                 <TransparentButton
                   onClick={() => validateAndSubmit()}
@@ -274,11 +312,14 @@ export default function ArtistPortfolioPage() {
                   return (
                     <FileDetails key={pic}>
                       <GreenDot />
-                      <Para>{file.name}</Para>
+                      <Para>{shortenString(file.name)}</Para>
                       <Para>{convertBytesToKB(file.size)} KB</Para>
-                      <span onClick={() => removeFile(pic, bannerObject)}>
-                        x
-                      </span>
+                      <Close
+                        width={10}
+                        style={{ cursor: "pointer" }}
+                        stroke={"black"}
+                        onClick={() => removeFile(pic, bannerObject)}
+                      />
                     </FileDetails>
                   )
                 })}
@@ -299,11 +340,40 @@ export default function ArtistPortfolioPage() {
                   return (
                     <FileDetails key={audio}>
                       <GreenDot />
-                      <Para>{file.name}</Para>
+                      <Para>{shortenString(file.name)}</Para>
                       <Para>{convertBytesToKB(file.size)} KB</Para>
-                      <span onClick={() => removeFile(audio, audioObject)}>
-                        x
-                      </span>
+                      <Close
+                        width={10}
+                        style={{ cursor: "pointer" }}
+                        stroke={"black"}
+                        onClick={() => removeFile(audio, audioObject)}
+                      />
+                    </FileDetails>
+                  )
+                })}
+                <InfoText>Upload your CV:</InfoText>
+                <InputContainer>
+                  <FileInput
+                    cv={true}
+                    onChange={(e) => preloadCv(e)}
+                    id={"cv"}
+                    multiple={false}
+                    dark={true}
+                  />
+                </InputContainer>
+                {Object.keys(cvObject).map((cv) => {
+                  let file = cvObject[cv]
+                  return (
+                    <FileDetails key={cv}>
+                      <GreenDot />
+                      <Para>{shortenString(file.name)}</Para>
+                      <Para>{convertBytesToKB(file.size)} KB</Para>
+                      <Close
+                        width={10}
+                        style={{ cursor: "pointer" }}
+                        stroke={"black"}
+                        onClick={() => removeFile(cv, cvObject)}
+                      />
                     </FileDetails>
                   )
                 })}
@@ -346,7 +416,9 @@ export default function ArtistPortfolioPage() {
                   </InfoText>
                 )}
                 {artist.soundDescription && (
-                  <InfoText style={{ textTransform: "capitalize" }}>
+                  <InfoText
+                    style={{ textTransform: "capitalize", color: "black" }}
+                  >
                     {artist.soundDescription}
                   </InfoText>
                 )}
@@ -373,19 +445,34 @@ export default function ArtistPortfolioPage() {
               </WebsiteButtonContainer>
             </InfoBox>
           )}
-          {artist.artworks.length ? (
-            <Masonry
-              breakpointCols={{ default: 2, 900: 1 }}
-              className="artworks-masonry-grid"
-              columnClassName="artworks-masonry-grid_column"
-            >
-              {artist.artworks.map((artwork) => (
-                <ArtWorkCard key={artwork._id} cardInfo={artwork} />
-              ))}
-            </Masonry>
-          ) : (
-            <h3>There are currently no artworks to display.</h3>
-          )}
+          {section === "artworks" &&
+            (filteredArtworks.length ? (
+              <Masonry
+                breakpointCols={{ default: 2, 900: 1 }}
+                className="artworks-masonry-grid"
+                columnClassName="artworks-masonry-grid_column"
+              >
+                {filteredArtworks.map((artwork, index) => (
+                  <ArtWorkCard
+                    editMode={editMode}
+                    key={artwork._id}
+                    cardInfo={artwork}
+                    selectImage={() =>
+                      selectFeaturePicture(index, artwork.pictures[0])
+                    }
+                    featureBorder={index === featurePictureIndex}
+                  />
+                ))}
+              </Masonry>
+            ) : (
+              <h3>There are currently no artworks to display.</h3>
+            ))}
+          {section === "exhibitions" &&
+            (artist.exhibitions ? (
+              <h3>here are some exhibitions</h3>
+            ) : (
+              <h3>There are currently no exhibitions to display.</h3>
+            ))}
         </Container>
       )}
       <Footer />

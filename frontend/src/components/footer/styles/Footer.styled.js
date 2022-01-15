@@ -5,12 +5,13 @@ import { Link } from "react-router-dom"
 export const Container = styled.footer`
   position: relative;
   bottom: 0;
-  height: 180px;
+  height: 150px;
   width: 100vw;
   background-color: ${theme.color.grey};
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
+  border-top: 5px solid ${theme.color.orange};
 
   @media (max-width: ${theme.mediaSize.tablet}) {
     flex-wrap: wrap;
@@ -25,7 +26,7 @@ export const Container = styled.footer`
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 40px;
+  padding-top: 30px;
 
   &:last-of-type {
     margin-top: 20px;

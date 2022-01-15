@@ -49,7 +49,9 @@ export default function CountryFilter() {
     <Container $index={index}>
       <h5>COUNTRIES</h5>
       <ul>
-        <li onClick={() => selectCountry("", 1)}>All Countries</li>
+        <li key={"all-countries"} onClick={() => selectCountry("", 1)}>
+          All Countries
+        </li>
         {type === "artists" &&
           uniqueArtistCountries.map((country, index) => (
             <li key={country} onClick={() => selectCountry(country, index + 2)}>

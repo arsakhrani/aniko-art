@@ -34,6 +34,12 @@ const artistSchema = new mongoose.Schema({
   audioFile: {
     type: String,
   },
+  cvFile: {
+    type: String,
+  },
+  cvFileName: {
+    type: String,
+  },
   artworks: [
     {
       type: mongoose.Schema.Types.ObjectId,

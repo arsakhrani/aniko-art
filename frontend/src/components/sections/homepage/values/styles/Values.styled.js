@@ -7,7 +7,6 @@ export const Container = styled.div`
   background-color: ${theme.color.grey};
   display: grid;
   grid-template-rows: 1fr 5fr 1fr;
-  border-bottom: 1px solid white;
 
   h1 {
     text-align: right;

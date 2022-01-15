@@ -20,7 +20,7 @@ export default function PrimaryButton({
     >
       {loading && (
         <SpinnerContainer>
-          <LoadingSpinner width="100%" />
+          <LoadingSpinner width="60" />
         </SpinnerContainer>
       )}
       {buttonText}

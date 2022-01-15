@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react"
 import SideMenu from "./SideMenu"
 import { Link, useHistory } from "react-router-dom"
 import DiscoverHeader from "./DiscoverHeader"
+import ArtistHeader from "./ArtistHeader"
 import {
   Container,
   MenuContainer,
@@ -16,8 +17,10 @@ import TextInput from "../inputs/TextInput"
 import { changeSearchParams } from "../../state/discover/discoverFilterSlice"
 import { useDispatch } from "react-redux"
 
-export default function Header({ discover, grey }) {
+export default function Header({ discover, portfolio, grey }) {
   const [toggleMenu, setToggleMenu] = useState(false)
+
+  const [labelType, setLabelType] = useState("")
 
   const [expanded, setExpanded] = useState(false)
 
@@ -61,7 +64,8 @@ export default function Header({ discover, grey }) {
     }
   }
 
-  const toggleSearchBar = () => {
+  const toggleSearchBar = (searchType) => {
+    setLabelType(searchType)
     setSearchBar(!searchBar)
   }
 
@@ -74,9 +78,26 @@ export default function Header({ discover, grey }) {
   }
 
   return (
-    <Container $searchBar={searchBar} $discover={discover} $grey={grey}>
+    <Container
+      $searchBar={searchBar}
+      $discover={discover || portfolio}
+      $grey={grey}
+    >
       <h1 onClick={() => history.push("/")}>Aniko.Art</h1>
-      {discover && <DiscoverHeader toggleSearch={toggleSearchBar} />}
+      {discover && (
+        <DiscoverHeader
+          toggleSearch={() =>
+            toggleSearchBar("Search for artist, artwork, or gallery")
+          }
+        />
+      )}
+      {portfolio && (
+        <ArtistHeader
+          toggleSearch={() =>
+            toggleSearchBar("Search for artwork or exhibition")
+          }
+        />
+      )}
       {isAuthenticated ? (
         <p className={"logout-login-button"} onClick={() => logOutUser()}>
           LOGOUT
@@ -100,7 +121,7 @@ export default function Header({ discover, grey }) {
           <TextInput
             onChange={(e) => setSearchParams(e)}
             id={"search-input"}
-            label={"Search for artist, artwork, or gallery"}
+            label={labelType}
           />
         </SearchBarContainer>
       )}

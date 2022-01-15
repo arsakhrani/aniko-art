@@ -11,29 +11,17 @@ import {
 } from "./styles/ArtWorkModal.styled"
 import { AuthContext } from "../../../../context/authContext"
 import { ReactComponent as Close } from "../../../../assets/icons/close.svg"
+import paymentService from "../../../../services/paymentService"
 
 export default function ArtWorkModal({ artInfo, closeModal }) {
   const [selectorNumber, setSelectorNumber] = useState(0)
+  const [isLoading, setIsLoading] = useState(false)
+
   const { user } = useContext(AuthContext)
 
-  const redirectToStripe = () => {
-    return fetch("/api/checkout/create-checkout-buy-session", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        artworkId: artInfo._id,
-        userId: user._id,
-      }),
-    })
-      .then((res) => {
-        if (res.ok) return res.json()
-      })
-      .then(({ url }) => {
-        window.location = url
-      })
-      .catch((e) => console.error(e))
+  const checkOut = () => {
+    setIsLoading(true)
+    paymentService.redirectToStrip(user, artInfo)
   }
 
   return (
@@ -53,7 +41,12 @@ export default function ArtWorkModal({ artInfo, closeModal }) {
         </FeaturePicture>
         <Info>
           <h1>
-            <Close style={{ cursor: "pointer" }} onClick={() => closeModal()} />
+            <Close
+              width={24}
+              stroke={"white"}
+              style={{ cursor: "pointer" }}
+              onClick={() => closeModal()}
+            />
           </h1>
           <h2>{artInfo.artist}</h2>
           <h3>LOT {artInfo.lot}</h3>
@@ -73,8 +66,10 @@ export default function ArtWorkModal({ artInfo, closeModal }) {
           <div className="buy-art-container">
             <h2>$ {artInfo.price}</h2>
             <PrimaryButton
-              onClick={() => redirectToStripe()}
+              onClick={() => checkOut()}
               buttonText={"BUY DIRECTLY"}
+              loading={isLoading}
+              disabled={isLoading}
             />
           </div>
           <div className="sale-info-container">

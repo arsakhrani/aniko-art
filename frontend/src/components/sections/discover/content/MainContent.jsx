@@ -2,6 +2,7 @@ import React, { useContext } from "react"
 import {
   ArtistsAndGalleriesContainer,
   ArtworksContainer,
+  EmptyContainer,
 } from "./styles/MainContent.styled"
 import ArtistAndGalleryCard from "./ArtistAndGalleryCard"
 import { useSelector } from "react-redux"
@@ -32,7 +33,7 @@ export default function MainContent({ type }) {
 
   const filteredArtworks = filterArtworks(artworks, artworkFilters)
 
-  if (type === "artists") {
+  if (type === "artists" && filteredAritsts.length) {
     return (
       <ArtistsAndGalleriesContainer>
         {filteredAritsts.map((artist) => (
@@ -46,7 +47,7 @@ export default function MainContent({ type }) {
     )
   }
 
-  if (type === "galleries") {
+  if (type === "galleries" && filteredGalleries.length) {
     return (
       <ArtistsAndGalleriesContainer>
         {filteredGalleries.map((gallery) => (
@@ -60,7 +61,7 @@ export default function MainContent({ type }) {
     )
   }
 
-  if (type === "artworks") {
+  if (type === "artworks" && filteredArtworks.length) {
     return (
       <ArtworksContainer>
         <Masonry
@@ -76,5 +77,12 @@ export default function MainContent({ type }) {
     )
   }
 
-  return <div></div>
+  return (
+    <EmptyContainer>
+      <h2>
+        Sorry, no {type} match the applied filters. Try using different values
+        for your filters.
+      </h2>
+    </EmptyContainer>
+  )
 }

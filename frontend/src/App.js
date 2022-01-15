@@ -30,7 +30,7 @@ function App() {
           <Redirect to="/discover/artworks" />
         </Route>
         <Route
-          path="/artist-portfolio/:id"
+          path="/artist-portfolio/:artistId/:section"
           exact
           component={ArtistPortfolioPage}
         />

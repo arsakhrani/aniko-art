@@ -3,26 +3,38 @@ import {
   CoverPicture,
   WrittenContent,
   PriceLink,
+  GradientContainer,
+  SoldLabel,
 } from "./styles/ArtWorkCard.styled"
 import PrimaryButton from "../../../atoms/PrimaryButton"
 import ArtWorkModal from "./ArtWorkModal"
 import { AuthContext } from "../../../../context/authContext"
 import { useHistory } from "react-router"
+import paymentService from "../../../../services/paymentService"
 
-export default function ArtWorkCard({ cardInfo }) {
+export default function ArtWorkCard({
+  cardInfo,
+  editMode,
+  selectImage,
+  featureBorder,
+}) {
   const [showArtModal, setShowArtModal] = useState(false)
-  const [disableButton, setDisableButton] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [isHovering, setIsHovering] = useState(false)
 
   const history = useHistory()
 
   const { user } = useContext(AuthContext)
 
   const showModal = () => {
-    if (!cardInfo.sold) {
-      setShowArtModal(true)
-      const body = document.getElementsByTagName("body")
-      body[0].classList.add("modal-open")
+    if (!editMode) {
+      if (!cardInfo.sold) {
+        setShowArtModal(true)
+        const body = document.getElementsByTagName("body")
+        body[0].classList.add("modal-open")
+      }
+    } else {
+      selectImage()
     }
   }
 
@@ -34,27 +46,16 @@ export default function ArtWorkCard({ cardInfo }) {
   }
 
   const setupBid = async () => {
-    try {
-      setDisableButton(true)
-      setIsLoading(true)
-      const response = await fetch(
-        `/api/checkout/create-checkout-save-session/${user._id}`
-      )
-      const secret = await response.json()
-      history.push({
-        pathname: "/create-bid",
-        state: {
-          secret: secret.client_secret,
-          minimumBid: cardInfo.minimumBid + 50,
-          artworkId: cardInfo._id,
-        },
-      })
-    } catch (e) {
-      console.log(e)
-      alert(
-        "Sorry, the bidding service seems to be down right now. We are currently trying to fix this problem."
-      )
-    }
+    setIsLoading(true)
+    const secret = await paymentService.createCheckoutSaveSession(user._id)
+    history.push({
+      pathname: "/create-bid",
+      state: {
+        secret: secret.client_secret,
+        minimumBid: cardInfo.minimumBid + 50,
+        artworkId: cardInfo._id,
+      },
+    })
   }
 
   return (
@@ -63,11 +64,18 @@ export default function ArtWorkCard({ cardInfo }) {
         <ArtWorkModal closeModal={() => closeModal()} artInfo={cardInfo} />
       )}
       <p>LOT {cardInfo.lot}</p>
-      <CoverPicture
-        $pointer={!cardInfo.sold}
-        src={cardInfo.pictures[0]}
+      <GradientContainer
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
+        $sold={cardInfo.sold}
+        $hover={isHovering}
         onClick={() => showModal()}
-      />
+        $pointer={!cardInfo.sold}
+        $featureBorder={featureBorder}
+      >
+        <CoverPicture src={cardInfo.pictures[0]} />
+        {cardInfo.sold && isHovering && <SoldLabel>SOLD!</SoldLabel>}
+      </GradientContainer>
       <WrittenContent>
         <div>
           <h4>{cardInfo.artist}</h4>
@@ -80,7 +88,7 @@ export default function ArtWorkCard({ cardInfo }) {
           <PrimaryButton
             onClick={() => setupBid()}
             buttonText={"BID FROM $" + (cardInfo.minimumBid + 50) + ", -"}
-            disabled={disableButton}
+            disabled={isLoading}
             loading={isLoading}
           />
         ) : (

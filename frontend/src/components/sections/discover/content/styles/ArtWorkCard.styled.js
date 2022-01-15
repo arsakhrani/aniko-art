@@ -2,8 +2,33 @@ import styled from "styled-components"
 import theme from "../../../../common/theme"
 
 export const CoverPicture = styled.img`
+  position: relative;
+  z-index: -1;
   width: 100%;
+`
+
+export const GradientContainer = styled.div`
+  width: 100%;
+  display: inline-block;
+  position: relative;
   cursor: ${(props) => props.$pointer && "pointer"};
+  border: ${(props) =>
+    props.$featureBorder && `5px solid ${theme.color.orange}`};
+  background: ${(props) =>
+    props.$sold &&
+    props.$hover &&
+    "linear-gradient(to bottom, transparent 0%, black 100%)"};
+  }
+`
+
+export const SoldLabel = styled.h2`
+  color: white;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 2em;
 `
 
 export const WrittenContent = styled.div`
@@ -47,6 +72,5 @@ export const PriceLink = styled.p`
   color: ${theme.color.orange};
   font-size: ${theme.fontSize.small};
   font-family: "Arial", sans-serif;
-  cursor: pointer;
   margin: 0;
 `

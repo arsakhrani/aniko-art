@@ -3,6 +3,8 @@ import { Link, useHistory } from "react-router-dom"
 import { ReactComponent as Continent } from "../../../../assets/icons/map/continent.svg"
 import { ReactComponent as Grid } from "../../../../assets/icons/grid.svg"
 import "./interactiveMap.css"
+import { useDispatch } from "react-redux"
+import { changeCountry } from "../../../../state/discover/discoverFilterSlice"
 
 export default function InteractiveMap() {
   const [flag, setFlag] = useState(true)
@@ -16,6 +18,8 @@ export default function InteractiveMap() {
     window.innerWidth || 0
   )
 
+  const dispatch = useDispatch()
+
   useEffect(() => {
     const countries = document.getElementsByClassName("country")
     const animated = document.getElementsByClassName("animated")
@@ -23,7 +27,9 @@ export default function InteractiveMap() {
     if (firstCycle) {
       for (let country of countries) {
         country.addEventListener("click", () => {
-          history.push(`/discover/artists/?country=${country.id}`)
+          const newId = country.id.replaceAll("-", " ")
+          dispatch(changeCountry(newId))
+          history.push(`/discover/artworks/?country=${country.id}`)
         })
       }
     }

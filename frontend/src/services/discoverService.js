@@ -12,15 +12,42 @@ export default {
     })
   },
   uploadImages: async (images) => {
-    const responseArray = []
-    const uploadPreset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
-    for (const image of images) {
+    try {
+      const responseArray = []
+      const uploadPreset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
+      for (const image of images) {
+        const formData = new FormData()
+        formData.append("file", image)
+        formData.append("upload_preset", uploadPreset)
+
+        const res = await fetch(
+          "https://api.cloudinary.com/v1_1/dw05biri6/image/upload",
+          {
+            method: "post",
+            body: formData,
+          }
+        )
+        if (res.status === 200) {
+          const data = await res.json()
+          responseArray.push(data.url)
+        }
+      }
+      return responseArray
+    } catch (e) {
+      console.log(e)
+      return null
+    }
+  },
+  uploadAudio: async (audio) => {
+    try {
+      const uploadPreset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
       const formData = new FormData()
-      formData.append("file", image)
+      formData.append("file", audio[0])
       formData.append("upload_preset", uploadPreset)
+      formData.append("resource_type", "video")
 
       const res = await fetch(
-        "https://api.cloudinary.com/v1_1/dw05biri6/image/upload",
+        "https://api.cloudinary.com/v1_1/dw05biri6/upload",
         {
           method: "post",
           body: formData,
@@ -28,28 +55,35 @@ export default {
       )
       if (res.status === 200) {
         const data = await res.json()
-        responseArray.push(data.url)
+        return data.url
       }
+    } catch (e) {
+      console.log(e)
+      return null
     }
-    return responseArray
   },
-  uploadAudio: async (audio) => {
-    const uploadPreset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
-    const formData = new FormData()
-    formData.append("file", audio[0])
-    formData.append("upload_preset", uploadPreset)
-    formData.append("resource_type", "video")
+  uploadCv: async (cv) => {
+    try {
+      const uploadPreset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
+      const formData = new FormData()
+      formData.append("file", cv[0])
+      formData.append("upload_preset", uploadPreset)
+      formData.append("resource_type", "image")
 
-    const res = await fetch(
-      "https://api.cloudinary.com/v1_1/dw05biri6/upload",
-      {
-        method: "post",
-        body: formData,
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dw05biri6/upload",
+        {
+          method: "post",
+          body: formData,
+        }
+      )
+      if (res.status === 200) {
+        const data = await res.json()
+        return { cvUrl: data.url, cvFileName: data.original_filename }
       }
-    )
-    if (res.status === 200) {
-      const data = await res.json()
-      return data.url
+    } catch (e) {
+      console.log(e)
+      return null
     }
   },
   getAllArtworks: async () => {

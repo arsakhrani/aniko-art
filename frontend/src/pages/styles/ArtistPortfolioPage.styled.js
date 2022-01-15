@@ -63,7 +63,7 @@ export const InfoText = styled.p`
   margin: 0;
   color: ${theme.color.darkGrey};
 
-  &:nth-of-type(3) {
+  &:nth-of-type(4) {
     color: black;
   }
 `

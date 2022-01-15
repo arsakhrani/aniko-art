@@ -9,13 +9,11 @@ import { Link } from "react-router-dom"
 import defaultFeatureImage from "../../../../assets/images/default-feature.png"
 
 export default function ArtistAndGalleryCard({ cardInfo, artist, gallery }) {
-  console.log(cardInfo, artist)
-
   return (
     <Container>
       <FeatureImage
         src={
-          cardInfo.featureWork
+          cardInfo.featurePicture
             ? cardInfo.featurePicture
             : cardInfo.artworks[0]
             ? cardInfo.artworks[0].pictures[0]
@@ -28,7 +26,7 @@ export default function ArtistAndGalleryCard({ cardInfo, artist, gallery }) {
           <p>{artist ? cardInfo.currentCountry : cardInfo.country}</p>
         </div>
         {artist && (
-          <Link to={`/artist-portfolio/${cardInfo._id}`}>
+          <Link to={`/artist-portfolio/${cardInfo._id}/artworks`}>
             <PrimaryButton buttonText={"VIEW PORTFOLIO"} />
           </Link>
         )}

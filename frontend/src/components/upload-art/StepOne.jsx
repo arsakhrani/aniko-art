@@ -39,7 +39,7 @@ export default function StepOne({ changeStep }) {
         ? authContext.user.fullName
         : "")
   )
-  console.log(authContext.user.sellerType)
+
   const [country, setCountry] = useState(uploadDetails.country || "")
   const [title, setTitle] = useState(uploadDetails.title || "")
   const [unit, setUnit] = useState(uploadDetails.unit || "cm")
