@@ -18,8 +18,19 @@ import VerifyArtist from "./VerifyArtist"
 import { ReactComponent as CheckMark } from "../../assets/icons/verification-check.svg"
 import { ReactComponent as GreenDot } from "../../assets/icons/green-dot.svg"
 import { saveDetails } from "../../state/upload/uploadArtSlice"
+import {
+  convertNestedObjectToArray,
+  convertBytesToKB,
+  addNewFiles,
+  shortenString,
+} from "../../services/uploadFunctions"
 
 export default function StepOne({ changeStep }) {
+  const vw = Math.max(
+    document.documentElement.clientWidth || 0,
+    window.innerWidth || 0
+  )
+
   const maxFileSize = 2000000
   const date = new Date()
 
@@ -102,21 +113,6 @@ export default function StepOne({ changeStep }) {
     }
   }
 
-  const convertNestedObjectToArray = (nestedObj) =>
-    Object.keys(nestedObj).map((key) => nestedObj[key])
-
-  const convertBytesToKB = (bytes) => Math.round(bytes / 1000)
-
-  const addNewFiles = (newFiles, e, state) => {
-    for (let file of newFiles) {
-      if (file.size <= maxFileSize && !e.target.multiple) {
-        return { file }
-      }
-      state[file.name] = file
-    }
-    return { ...state }
-  }
-
   const removeFile = (fileName, state) => {
     delete state[fileName]
     if (state === images) {
@@ -132,18 +128,26 @@ export default function StepOne({ changeStep }) {
   const uploadImage = (e) => {
     const { files: newFiles } = e.target
     if (newFiles.length) {
-      const updatedImages = addNewFiles(newFiles, e, images)
-      setImages(updatedImages)
-      setImagesArray(convertNestedObjectToArray(updatedImages))
+      if (newFiles[0].size > 2097152) {
+        setErrorMessage("Please make sure the image file size is under 2MB.")
+      } else {
+        const updatedImages = addNewFiles(newFiles, e, images)
+        setImages(updatedImages)
+        setImagesArray(convertNestedObjectToArray(updatedImages))
+      }
     }
   }
 
   const uploadCertificate = (e) => {
     const { files: newFiles } = e.target
     if (newFiles.length) {
-      const updatedCertificate = addNewFiles(newFiles, e, certificate)
-      setCertificate(updatedCertificate)
-      setCertificateArray(convertNestedObjectToArray(updatedCertificate))
+      if (newFiles[0].size > 2097152) {
+        setErrorMessage("Please make sure the image file size is under 2MB.")
+      } else {
+        const updatedCertificate = addNewFiles(newFiles, e, certificate)
+        setCertificate(updatedCertificate)
+        setCertificateArray(convertNestedObjectToArray(updatedCertificate))
+      }
     }
   }
 
@@ -195,7 +199,7 @@ export default function StepOne({ changeStep }) {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr 1fr 1fr",
+              gridTemplateColumns: vw > 370 ? "1fr 1fr 1fr 1fr" : "1fr 1fr",
               gap: "2em",
             }}
           >
@@ -226,15 +230,17 @@ export default function StepOne({ changeStep }) {
               label={"Depth"}
               min={0.1}
             />
-            <DropdownInput
-              id={"unit"}
-              value={unit}
-              onChange={(e) => setUnit(e.target.value)}
-              options={[
-                { value: "cm", text: "cm" },
-                { value: "in", text: "in" },
-              ]}
-            />
+            <div style={{ marginTop: "2.5em" }}>
+              <DropdownInput
+                id={"unit"}
+                value={unit}
+                onChange={(e) => setUnit(e.target.value)}
+                options={[
+                  { value: "cm", text: "cm" },
+                  { value: "in", text: "in" },
+                ]}
+              />
+            </div>
           </div>
           <DropdownInput
             id={"medium"}
@@ -272,7 +278,7 @@ export default function StepOne({ changeStep }) {
             return (
               <FileDetails key={image}>
                 <GreenDot />
-                <Para>{file.name}</Para>
+                <Para>{shortenString(file.name)}</Para>
                 <Para>{convertBytesToKB(file.size)} KB</Para>
                 <span onClick={() => removeFile(image, images)}>x</span>
               </FileDetails>
@@ -294,7 +300,7 @@ export default function StepOne({ changeStep }) {
             return (
               <FileDetails key={cert}>
                 <GreenDot />
-                <Para>{file.name}</Para>
+                <Para>{shortenString(file.name)}</Para>
                 <Para>{convertBytesToKB(file.size)} KB</Para>
                 <span onClick={() => removeFile(cert, certificate)}>x</span>
               </FileDetails>

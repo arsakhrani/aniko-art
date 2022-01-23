@@ -33,7 +33,6 @@ export default function PriceFilter() {
   useEffect(() => {
     dispatch(changeMinPrice(minPrice))
     dispatch(changeMaxPrice(maxPrice))
-    return () => {}
   }, [])
 
   return (

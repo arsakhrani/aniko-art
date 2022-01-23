@@ -8,20 +8,16 @@ import {
   BubbleCounter,
   StepLabel,
   ShippingContainer,
-  ProfileBox,
   RadialsContainer,
 } from "./styles/ManageProfile.styled"
-import { ReactComponent as ProfilePic } from "../../../assets/icons/profile-pic.svg"
 import RadialInput from "../../inputs/RadialInput"
 import PrimaryButton from "../../atoms/PrimaryButton"
 import authService from "../../../services/authService"
 import { AuthContext } from "../../../context/authContext"
 import { useHistory } from "react-router"
-import discoverService from "../../../services/discoverService"
-import { ArtistContext } from "../../../context/artistContext"
-import { GalleryContext } from "../../../context/galleryContext"
 import DropdownInput from "../../inputs/DropdownInput"
 import { countries } from "../../../services/dropdownValues"
+import theme from "../../common/theme"
 
 export default function ManageProfile() {
   const registrationDetails = useSelector(
@@ -31,10 +27,6 @@ export default function ManageProfile() {
   const history = useHistory()
 
   const authContext = useContext(AuthContext)
-
-  const { setArtists } = useContext(ArtistContext)
-
-  const { setGalleries } = useContext(GalleryContext)
 
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
@@ -61,14 +53,11 @@ export default function ManageProfile() {
   const [phoneNumber, setPhoneNumber] = useState(
     authContext.user.phoneNumber || ""
   )
-  const [profilePic, setProfilePic] = useState("")
-  const [paymentMethod, setPaymentMethod] = useState(
-    authContext.user.paymentMethod || ""
-  )
   const [insuranceMethod, setInsuranceMethod] = useState(
     authContext.user.insuranceMethod || ""
   )
   const [errorMessage, setErrorMessage] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
 
   const validate = async () => {
     if (registrationDetails) {
@@ -85,6 +74,7 @@ export default function ManageProfile() {
         setErrorMessage("Please enter a name")
       } else {
         setErrorMessage("")
+        setIsLoading(true)
         const user = {
           email: registrationDetails.email,
           password,
@@ -94,27 +84,26 @@ export default function ManageProfile() {
           interests: registrationDetails.interests,
           sellerType: registrationDetails.sellerType,
           phoneNumber,
-          paymentMethod,
           insuranceMethod,
           website,
         }
         const registerUser = await authService.register(user)
         if (!registerUser.isAuthenticated) {
           setErrorMessage("email address is already taken")
+          setIsLoading(false)
         } else {
           authContext.setUser(registerUser.user)
           authContext.setIsAuthenticated(true)
 
           if (registrationDetails.sellerType === "artist") {
-            const allArtists = await discoverService.getAllArtists()
-            setArtists(allArtists)
             history.push("/discover/artists")
+            history.go(0)
           } else if (registrationDetails.sellerType === "gallery") {
-            const allGalleries = await discoverService.getAllGalleries()
-            setGalleries(allGalleries)
             history.push("/discover/galleries")
+            history.go(0)
           } else {
             history.push("/discover/artworks")
+            history.go(0)
           }
         }
       }
@@ -310,43 +299,9 @@ export default function ManageProfile() {
         </ShippingContainer>
       </div>
       <div>
-        <ProfileBox>
-          <ProfilePic style={{ cursor: "pointer" }} />
-          {registrationDetails ? (
-            <p>{registrationDetails.email}</p>
-          ) : (
-            <p>{authContext.user.email}</p>
-          )}
-        </ProfileBox>
+        <h1 style={{ color: theme.color.grey }}>SUPRISE</h1>
         <StepLabel>
           <BubbleCounter>2</BubbleCounter>
-          <span>CHOOSE A PAYMENT METHOD</span>
-        </StepLabel>
-        <RadialsContainer>
-          <RadialInput
-            onClick={() => setPaymentMethod("VISA/DELTA/ELECTRON")}
-            visaCard={true}
-            name={"payment-method"}
-            label={"Visa/Delta/Electron"}
-            checked={paymentMethod === "VISA/DELTA/ELECTRON"}
-          />
-          <RadialInput
-            onClick={() => setPaymentMethod("MASTERCARD/EUROCARD")}
-            masterCard={true}
-            name={"payment-method"}
-            label={"Mastercard/Eurocard"}
-            checked={paymentMethod === "MASTERCARD/EUROCARD"}
-          />
-          <RadialInput
-            onClick={() => setPaymentMethod("OTHER")}
-            creditCard={true}
-            name={"payment-method"}
-            label={"Add a credit card"}
-            checked={paymentMethod === "OTHER"}
-          />
-        </RadialsContainer>
-        <StepLabel>
-          <BubbleCounter>3</BubbleCounter>
           <span>CHOOSE AN INSURANCE METHOD</span>
         </StepLabel>
         <RadialsContainer>
@@ -394,6 +349,8 @@ export default function ManageProfile() {
           <PrimaryButton
             onClick={() => validate()}
             buttonText={"Save and continue"}
+            loading={isLoading}
+            disabled={isLoading}
           />
         </div>
       </div>

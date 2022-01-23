@@ -12,17 +12,31 @@ import {
 import { AuthContext } from "../../../../context/authContext"
 import { ReactComponent as Close } from "../../../../assets/icons/close.svg"
 import paymentService from "../../../../services/paymentService"
+import discoverService from "../../../../services/discoverService"
+import { useHistory } from "react-router-dom"
 
 export default function ArtWorkModal({ artInfo, closeModal }) {
   const [selectorNumber, setSelectorNumber] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
 
+  const history = useHistory()
+
   const { user } = useContext(AuthContext)
 
   const checkOut = () => {
     setIsLoading(true)
-    paymentService.redirectToStrip(user, artInfo)
+    paymentService.redirectToStripe(user, artInfo)
   }
+
+  const deleteWork = () => {
+    setIsLoading(true)
+    const attempt = discoverService.deleteArtwork(artInfo._id)
+    if (attempt) {
+      history.go(0)
+    }
+  }
+
+  const isOwner = artInfo.owner === user._id
 
   return (
     <ModalContainer>
@@ -40,44 +54,61 @@ export default function ArtWorkModal({ artInfo, closeModal }) {
           <img src={artInfo.pictures[selectorNumber]} />
         </FeaturePicture>
         <Info>
-          <h1>
-            <Close
-              width={24}
-              stroke={"white"}
-              style={{ cursor: "pointer" }}
-              onClick={() => closeModal()}
-            />
-          </h1>
-          <h2>{artInfo.artist}</h2>
-          <h3>LOT {artInfo.lot}</h3>
-          <a target="_blank" href={artInfo.website}>
-            <span>+ FOLLOW ARTIS</span>T
-          </a>
-          <p>{artInfo.title}</p>
-          <p>{artInfo.medium}</p>
-          <p>
-            {artInfo.dimensionsIn.length}x{artInfo.dimensionsIn.width}x
-            {artInfo.dimensionsIn.depth} in
-          </p>
-          <p>
-            {artInfo.dimensionsCm.length}x{artInfo.dimensionsCm.width}x
-            {artInfo.dimensionsCm.depth} cm
-          </p>
-          <div className="buy-art-container">
-            <h2>$ {artInfo.price}</h2>
-            <PrimaryButton
-              onClick={() => checkOut()}
-              buttonText={"BUY DIRECTLY"}
-              loading={isLoading}
-              disabled={isLoading}
-            />
+          <Close
+            width={24}
+            stroke={"white"}
+            style={{
+              cursor: "pointer",
+              position: "absolute",
+              top: 20,
+              right: 25,
+            }}
+            onClick={() => closeModal()}
+          />
+
+          <div className="basic-grid">
+            <h2>{artInfo.artist}</h2>
+            <h3>LOT {artInfo.lot}</h3>
+            <a target="_blank" href={artInfo.website}>
+              <span>+ FOLLOW ARTIS</span>T
+            </a>
+            <p>{artInfo.title}</p>
+            <p>{artInfo.medium}</p>
+            <p>
+              {artInfo.dimensionsIn.length}x{artInfo.dimensionsIn.width}x
+              {artInfo.dimensionsIn.depth} in
+            </p>
+            <p>
+              {artInfo.dimensionsCm.length}x{artInfo.dimensionsCm.width}x
+              {artInfo.dimensionsCm.depth} cm
+            </p>
           </div>
-          <div className="sale-info-container">
-            <p>Including</p>
-            <div>
-              <p>Insurance & shipping</p>
-              <p>Royalty to the artist for resale rights 2%</p>
-              <p>Commission 10%</p>
+          <div className="purchase-grid">
+            <div className="buy-art-container">
+              <h2>$ {artInfo.price}</h2>
+              {!isOwner ? (
+                <PrimaryButton
+                  onClick={() => checkOut()}
+                  buttonText={"BUY DIRECTLY"}
+                  loading={isLoading}
+                  disabled={isLoading}
+                />
+              ) : (
+                <PrimaryButton
+                  onClick={() => deleteWork()}
+                  buttonText={"DELETE WORK"}
+                  loading={isLoading}
+                  disabled={isLoading}
+                />
+              )}
+            </div>
+            <div className="sale-info-container">
+              <p>Including</p>
+              <div>
+                <p>Insurance & shipping</p>
+                <p>Royalty to the artist for resale rights 2%</p>
+                <p>Commission 10%</p>
+              </div>
             </div>
           </div>
         </Info>

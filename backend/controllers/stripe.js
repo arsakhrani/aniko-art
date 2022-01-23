@@ -25,7 +25,7 @@ module.exports.createCheckoutBuySession = async (req, res) => {
     ],
     customer_email: user.email,
     mode: "payment",
-    success_url: "http://localhost:3000/success", //to make
+    success_url: `http://localhost:3000/purchase-success/${artworkId}`, //to make
     cancel_url: "http://localhost:3000/discover/artworks",
   });
 
@@ -46,18 +46,31 @@ module.exports.createCheckoutSaveSession = async (req, res) => {
 
 module.exports.chargeBid = async (req, res) => {
   try {
-    const { artworkId } = req.body;
-    const artwork = await Artwork.findById(artworkId);
+    const { artwork } = req.body;
+    const artworkToSell = await Artwork.findById(artwork._id);
     const buyer = await User.findById(artwork.highestBidHolder);
+
+    const paymentMethods = await stripe.paymentMethods.list({
+      customer: buyer.stripeId,
+      type: "card",
+    });
+
     const paymentIntent = await stripe.paymentIntents.create({
       amount: artwork.minimumBid * 100,
       currency: "eur",
       customer: buyer.stripeId,
-      payment_method: buyer.paymentMethodId,
+      payment_method: paymentMethods.data[0].id,
       off_session: true,
       confirm: true,
     });
-    console.log(paymentIntent);
+
+    if (paymentIntent.status === "succeeded") {
+      artworkToSell.sold = true;
+      artworkToSell.save();
+      res.status(200).json({ success: true });
+    } else {
+      res.status(401).json({ sucess: false });
+    }
   } catch (err) {
     console.log("Error code is: ", err.code);
     const paymentIntentRetrieved = await stripe.paymentIntents.retrieve(

@@ -17,6 +17,10 @@ export const ArtistsAndGalleriesContainer = styled.div`
 
   -ms-overflow-style: none;
   scrollbar-width: none;
+
+  @media (max-width: 950px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 export const ArtworksContainer = styled.div`

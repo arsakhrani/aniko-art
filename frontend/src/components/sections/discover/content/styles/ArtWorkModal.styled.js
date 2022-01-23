@@ -23,9 +23,28 @@ export const Modal = styled.div`
   padding-left: 3em;
   border-radius: 5px;
   display: grid;
+  grid-template-areas:
+    "gallery feature info"
+    ". selector .";
   grid-template-columns: 1fr 4fr 5fr;
   grid-template-rows: 90% 10%;
   gap: 1em;
+
+  @media (max-width: 700px) {
+    grid-template-areas:
+      "feature info"
+      "selector .";
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 640px) {
+    grid-template-areas:
+      "info"
+      "feature"
+      "selector";
+    grid-template-columns: 1fr;
+    grid-template-rows: 45% 45% 10%;
+  }
 `
 
 export const Gallery = styled.div`
@@ -34,6 +53,11 @@ export const Gallery = styled.div`
   justify-content: flex-end;
   align-items: flex-end;
   padding-right: 0.5em;
+  grid-area: gallery;
+
+  @media (max-width: 700px) {
+    display: none;
+  }
 `
 
 export const GalleryPicture = styled.img`
@@ -50,22 +74,22 @@ export const FeaturePicture = styled.div`
   align-items: flex-end;
   justify-content: center;
   align-self: end;
+  grid-area: feature;
 
   img {
     max-height: 85vh;
     width: 100%;
+
+    @media (max-width: 640px) {
+      max-height: 100%;
+    }
   }
 `
 
 export const Info = styled.div`
   color: white;
   padding-left: 3em;
-
-  h1 {
-    margin: 0;
-    margin-top: -0.5em;
-    text-align: right;
-  }
+  grid-area: info;
 
   h2 {
     font-family: "Arial", sans-serif;
@@ -105,6 +129,22 @@ export const Info = styled.div`
     }
   }
 
+  div.basic-grid {
+    @media (max-width: 640px) {
+      grid-area: basic;
+    }
+  }
+
+  div.purchase-grid {
+    @media (max-width: 640px) {
+      grid-area: purchase;
+    }
+
+    @media (max-width: 400px) {
+      display: none;
+    }
+  }
+
   div.buy-art-container {
     display: flex;
     max-height: 45px;
@@ -114,6 +154,16 @@ export const Info = styled.div`
     h2 {
       margin-right: 0.2em;
     }
+
+    @media (max-width: 850px) {
+      flex-direction: column;
+      margin-bottom: 3em;
+
+      h2 {
+        text-align: center;
+        margin: 0;
+      }
+    }
   }
 
   div.sale-info-container {
@@ -122,6 +172,25 @@ export const Info = styled.div`
     div {
       margin-left: 1.5em;
     }
+
+    @media (max-width: 850px) {
+      flex-direction: column;
+
+      div {
+        margin: 0;
+      }
+    }
+  }
+
+  @media (max-width: 640px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "basic purchase";
+  }
+
+  @media (max-width: 400px) {
+    grid-template-columns: 1fr;
+    grid-template-areas: "basic";
   }
 `
 export const ImageSelector = styled.div`
@@ -132,6 +201,7 @@ export const ImageSelector = styled.div`
   align-items: center;
   align-self: center;
   padding-bottom: 2em;
+  grid-area: selector;
 
   div {
     margin-left: 0.5em;

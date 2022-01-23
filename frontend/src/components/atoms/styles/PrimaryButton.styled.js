@@ -7,16 +7,12 @@ export const Button = styled.button`
   background-color: ${theme.color.orange};
   border-radius: 5px;
   color: ${(props) => (props.$loading ? theme.color.orange : "white")};
-  padding: 1.1em 3em;
+  padding: 1.1em 2em;
   cursor: pointer;
 
   &:disabled {
     opacity: 0.6;
     cursor: default;
-  }
-
-  @media (max-width: ${theme.mediaSize.tablet}) {
-    padding: 1.1em 2em;
   }
 
   @media (max-width: ${theme.mediaSize.mobileL}) {
@@ -31,12 +27,8 @@ export const SpinnerContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: -3em;
+  margin-left: -2em;
   margin-top: -1.1em;
-
-  @media (max-width: ${theme.mediaSize.tablet}) {
-    margin-left: -2em;
-  }
 
   @media (max-width: ${theme.mediaSize.mobileL}) {
     margin-left: -1.1em;

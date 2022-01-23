@@ -1,15 +1,35 @@
 export default {
   submitNewBid: async (artworkId, minimumBid, userId) => {
-    return fetch(`/api/artwork/set-new-bid`, {
-      method: "put",
+    const response = await fetch(`/api/artwork/set-new-bid`, {
+      method: "PUT",
       body: JSON.stringify({ artworkId, minimumBid, userId }),
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((res) => {
-      if (res.status === 200) return res.json().then((data) => data)
-      else return { message: "A problem occured!" }
     })
+
+    if (response.status === 200) {
+      const data = await response.json()
+      return data
+    } else {
+      return { message: "A problem occured!" }
+    }
+  },
+  acceptBid: async (artInfo) => {
+    const response = await fetch("/api/checkout/accept-bid", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ artwork: artInfo }),
+    })
+
+    if (response.status === 200) {
+      const data = await response.json()
+      return data.success
+    } else {
+      return { message: "A problem occured!" }
+    }
   },
   createCheckoutSaveSession: async (userId) => {
     try {
@@ -25,7 +45,7 @@ export default {
       )
     }
   },
-  redirectToStrip: async (user, artInfo) => {
+  redirectToStripe: async (user, artInfo) => {
     try {
       const response = await fetch(
         "/api/checkout/create-checkout-buy-session",

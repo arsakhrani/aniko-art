@@ -15,7 +15,6 @@ export default function DiscoverPage() {
 
   useEffect(() => {
     dispatch(saveInfo(null))
-    return () => {}
   }, [])
 
   return (

@@ -76,6 +76,10 @@ const artworkSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  created: {
+    type: Date,
+    default: Date.now(),
+  },
 });
 
 const artwork = mongoose.model("artwork", artworkSchema);

@@ -21,7 +21,6 @@ export default function MediumFilter() {
 
   useEffect(() => {
     dispatch(changeMedium(""))
-    return () => {}
   }, [])
 
   return (

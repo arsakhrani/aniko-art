@@ -5,14 +5,13 @@ import {
   BubbleCounter,
   StepLabel,
   ShippingContainer,
-  ProfileBox,
 } from "./styles/ManageProfile.styled"
 import TextInput from "../../inputs/TextInput"
-import { ReactComponent as ProfilePic } from "../../../assets/icons/profile-pic.svg"
 import { AuthContext } from "../../../context/authContext"
 import PrimaryButton from "../../atoms/PrimaryButton"
 import authService from "../../../services/authService"
 import { useHistory } from "react-router"
+import theme from "../../common/theme"
 
 export default function ManagePreferences() {
   const authContext = useContext(AuthContext)
@@ -58,7 +57,10 @@ export default function ManagePreferences() {
   )
   const [other, setOther] = useState(authContext.user.favoriteStyle.other)
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const validate = async () => {
+    setIsLoading(true)
     const user = {
       favoriteMedium: {
         painting,
@@ -86,6 +88,7 @@ export default function ManagePreferences() {
     const updateUser = await authService.update(user, authContext.user._id)
     authContext.setUser(updateUser.user)
     history.push("/discover/artworks")
+    history.go(0)
   }
 
   return (
@@ -167,6 +170,9 @@ export default function ManagePreferences() {
             label={"Country"}
           />
         </ShippingContainer>
+      </div>
+      <div>
+        <h1 style={{ color: theme.color.grey }}>SUPRISE</h1>
         <StepLabel>
           <BubbleCounter>3</BubbleCounter>
           <span>ADD YOUR FAVORITE STYLE (OPTIONAL)</span>
@@ -213,15 +219,10 @@ export default function ManagePreferences() {
           <PrimaryButton
             onClick={() => validate()}
             buttonText={"Save and continue"}
-            loading={true}
+            loading={isLoading}
+            disabled={isLoading}
           />
         </div>
-      </div>
-      <div>
-        <ProfileBox>
-          <ProfilePic />
-          <p>{authContext.user.email}</p>
-        </ProfileBox>
       </div>
     </Container>
   )

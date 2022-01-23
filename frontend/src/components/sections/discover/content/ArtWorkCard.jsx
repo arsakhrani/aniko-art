@@ -11,6 +11,7 @@ import ArtWorkModal from "./ArtWorkModal"
 import { AuthContext } from "../../../../context/authContext"
 import { useHistory } from "react-router"
 import paymentService from "../../../../services/paymentService"
+import ConfirmModal from "./ConfirmModal"
 
 export default function ArtWorkCard({
   cardInfo,
@@ -21,15 +22,22 @@ export default function ArtWorkCard({
   const [showArtModal, setShowArtModal] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
+  const [showConfirmModal, setShowConfirmModal] = useState(false)
 
   const history = useHistory()
 
   const { user } = useContext(AuthContext)
 
-  const showModal = () => {
+  const showModal = (type) => {
     if (!editMode) {
       if (!cardInfo.sold) {
-        setShowArtModal(true)
+        if (type === "art") {
+          setShowConfirmModal(false)
+          setShowArtModal(true)
+        } else if (type === "confirm") {
+          setShowArtModal(false)
+          setShowConfirmModal(true)
+        }
         const body = document.getElementsByTagName("body")
         body[0].classList.add("modal-open")
       }
@@ -40,6 +48,7 @@ export default function ArtWorkCard({
 
   const closeModal = () => {
     setShowArtModal(false)
+    setShowConfirmModal(false)
     const body = document.getElementsByTagName("body")
     if (body[0].classList.contains("modal-open"))
       body[0].classList.remove("modal-open")
@@ -58,10 +67,15 @@ export default function ArtWorkCard({
     })
   }
 
+  const isOwner = cardInfo.owner === user._id
+
   return (
     <div>
       {showArtModal && (
         <ArtWorkModal closeModal={() => closeModal()} artInfo={cardInfo} />
+      )}
+      {showConfirmModal && (
+        <ConfirmModal closeModal={() => closeModal()} artInfo={cardInfo} />
       )}
       <p>LOT {cardInfo.lot}</p>
       <GradientContainer
@@ -69,7 +83,7 @@ export default function ArtWorkCard({
         onMouseLeave={() => setIsHovering(false)}
         $sold={cardInfo.sold}
         $hover={isHovering}
-        onClick={() => showModal()}
+        onClick={() => showModal("art")}
         $pointer={!cardInfo.sold}
         $featureBorder={featureBorder}
       >
@@ -84,15 +98,19 @@ export default function ArtWorkCard({
           </p>
           <span>{cardInfo.gallery}</span>
         </div>
-        {!cardInfo.sold && cardInfo.minimumBid > 0 ? (
+        {!isOwner && !cardInfo.sold && cardInfo.minimumBid > 0 && (
           <PrimaryButton
             onClick={() => setupBid()}
             buttonText={"BID FROM $" + (cardInfo.minimumBid + 50) + ", -"}
             disabled={isLoading}
             loading={isLoading}
           />
-        ) : (
-          <div></div>
+        )}
+        {isOwner && cardInfo.highestBidHolder && !cardInfo.sold && (
+          <PrimaryButton
+            buttonText={"ACCEPT BID FOR $" + cardInfo.minimumBid + ", -"}
+            onClick={() => showModal("confirm")}
+          />
         )}
       </WrittenContent>
       {!cardInfo.sold && <PriceLink>$ {cardInfo.price}, -</PriceLink>}

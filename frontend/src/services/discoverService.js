@@ -87,11 +87,20 @@ export default {
     }
   },
   getAllArtworks: async () => {
-    return fetch("/api/artwork/get-all", {
-      method: "get",
-    }).then((res) => {
-      if (res.status === 200) return res.json().then((data) => data.artworks)
+    const response = await fetch("/api/artwork/get-all")
+    if (response.status === 200) {
+      const data = await response.json()
+      return data.artworks
+    }
+  },
+  deleteArtwork: async (id) => {
+    const response = await fetch(`/api/artwork/${id}`, {
+      method: "DELETE",
     })
+    if (response.status === 200) {
+      const data = await response.json()
+      return data.success
+    }
   },
   editArtist: async (artist, id) => {
     return fetch(`/api/artist/edit/${id}`, {

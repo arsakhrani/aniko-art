@@ -67,18 +67,14 @@ module.exports.newUser = async (req, res) => {
 };
 
 module.exports.logInUser = async (req, res) => {
-  try {
-    if (req.isAuthenticated()) {
-      const user = req.user;
-      const token = signToken(user._id);
-      res.cookie("access_token", token, { httpOnly: true, sameSite: true });
-      res.status(200).json({
-        isAuthenticated: true,
-        user,
-      });
-    }
-  } catch (e) {
-    res.status(400).send({ message: "Something went wrong!" });
+  if (req.isAuthenticated()) {
+    const user = req.user;
+    const token = signToken(user._id);
+    res.cookie("access_token", token, { httpOnly: true, sameSite: true });
+    res.status(200).json({
+      isAuthenticated: true,
+      user,
+    });
   }
 };
 
@@ -96,54 +92,39 @@ module.exports.socialLogin = async (req, res) => {
 };
 
 module.exports.logOutUser = async (req, res) => {
-  try {
-    res.clearCookie("access_token");
-    res.json({
-      user: {},
-      success: true,
-    });
-  } catch (e) {
-    res.status(400).send({ message: "Something went wrong!" });
-  }
+  res.clearCookie("access_token");
+  res.json({
+    user: {},
+    success: true,
+  });
 };
 
 module.exports.authenticated = async (req, res) => {
-  try {
-    const user = req.user;
-    res.status(200).json({ isAuthenticated: true, user });
-  } catch (e) {
-    res.status(400).send({ message: "Something went wrong!" });
-  }
+  const user = req.user;
+  res.status(200).json({ isAuthenticated: true, user });
 };
 
 module.exports.editUser = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const user = req.body;
-    await User.findByIdAndUpdate(id, user);
-    const updatedUser = await User.findById(id);
+  const { id } = req.params;
+  const user = req.body;
+  await User.findByIdAndUpdate(id, user);
+  const updatedUser = await User.findById(id);
 
-    if (updatedUser.sellerType === "gallery") {
-      const formattedUser = {
-        city: user.shippingAddress.city,
-        country: user.shippingAddress.country,
-        name: user.fullName,
-        website: user.website,
-      };
-      await Gallery.findOneAndUpdate(
-        { email: updatedUser.email },
-        formattedUser
-      );
-    }
-
-    if (updatedUser.sellerType === "artist") {
-      await Artist.findOneAndUpdate({ email: updatedUser.email }, user);
-    }
-
-    res.status(201).json({ user: updatedUser, isAuthenticated: true });
-  } catch (e) {
-    res.status(400).send({ message: "Something went wrong!" });
+  if (updatedUser.sellerType === "gallery") {
+    const formattedUser = {
+      city: user.shippingAddress.city,
+      country: user.shippingAddress.country,
+      name: user.fullName,
+      website: user.website,
+    };
+    await Gallery.findOneAndUpdate({ email: updatedUser.email }, formattedUser);
   }
+
+  if (updatedUser.sellerType === "artist") {
+    await Artist.findOneAndUpdate({ email: updatedUser.email }, user);
+  }
+
+  res.status(201).json({ user: updatedUser, isAuthenticated: true });
 };
 
 module.exports.requestArtWork = async (req, res, next) => {

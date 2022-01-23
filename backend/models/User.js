@@ -175,9 +175,6 @@ const userSchema = new mongoose.Schema({
   stripeId: {
     type: String,
   },
-  paymentMethodId: {
-    type: String,
-  },
   googleId: {
     type: String,
   },

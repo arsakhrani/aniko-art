@@ -57,8 +57,6 @@ export default function ArtistPortfolioPage() {
 
   const artist = artists.find((a) => a._id === artistId)
 
-  console.log(artist)
-
   const [editMode, setEditMode] = useState(false)
   const [birthCity, setBirthCity] = useState(artist && artist.birthCity)
   const [birthCountry, setBirthCountry] = useState(

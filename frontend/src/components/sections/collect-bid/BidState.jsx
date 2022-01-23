@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useStripe } from "@stripe/react-stripe-js"
 import paymentService from "../../../services/paymentService"
-import { Link } from "react-router-dom"
 import PrimaryButton from "../../atoms/PrimaryButton"
 import { useParams } from "react-router"
 import { Container } from "./styles/BidState.styled"
@@ -47,12 +46,6 @@ export default function PaymentStatus({}) {
           )
           break
       }
-
-      if (message.includes("Success")) {
-        await paymentService.submitNewBid(artworkId, price, userId)
-      }
-
-      setDisabled(false)
     } catch (e) {
       console.log(e)
       alert(
@@ -61,16 +54,28 @@ export default function PaymentStatus({}) {
     }
   }
 
+  const sendBidDetails = async () => {
+    if (message.includes("Success")) {
+      await paymentService.submitNewBid(artworkId, price, userId)
+    }
+
+    setDisabled(false)
+  }
+
   useEffect(() => {
     initialization()
   }, [stripe])
 
+  useEffect(() => {
+    sendBidDetails()
+  }, [message])
+
   return (
     <Container>
       <p>{message}</p>
-      <Link to={"/"}>
+      <a href={"/"}>
         <PrimaryButton disabled={disabled} buttonText={"Home"} />
-      </Link>
+      </a>
     </Container>
   )
 }

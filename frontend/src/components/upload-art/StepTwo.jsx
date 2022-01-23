@@ -47,7 +47,6 @@ export default function StepTwo() {
       setConvertedWidth(Math.round(uploadDetails.width * 2.54))
       setConvertedDepth(Math.round(uploadDetails.depth * 2.54))
     }
-    return () => {}
   }, [])
 
   const uploadCert = async () => {
@@ -118,6 +117,7 @@ export default function StepTwo() {
       if (artUpload.success) {
         history.push("discover")
         dispatch(saveDetails({}))
+        history.go(0)
       }
     }
   }
