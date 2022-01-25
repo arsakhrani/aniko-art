@@ -1,7 +1,21 @@
+const sendgridKey = process.env.TWILIO_SENDGRID_KEY;
 const stripeKey = process.env.STRIPE_SECRET_KEY;
+const devEmail = process.env.DEV_EMAIL;
 const stripe = require("stripe")(stripeKey);
 const Artwork = require("../models/Artwork");
 const User = require("../models/User");
+const nodemailer = require("nodemailer");
+const sendgridTransport = require("nodemailer-sendgrid-transport");
+const stripeEmails = require("./email-tamplates/stripeEmails");
+const adminEmails = require("./email-tamplates/adminEmails");
+
+const transport = nodemailer.createTransport(
+  sendgridTransport({
+    auth: {
+      api_key: sendgridKey,
+    },
+  })
+);
 
 module.exports.createCheckoutBuySession = async (req, res) => {
   const { artworkId, userId } = req.body;
@@ -25,7 +39,7 @@ module.exports.createCheckoutBuySession = async (req, res) => {
     ],
     customer_email: user.email,
     mode: "payment",
-    success_url: `http://localhost:3000/purchase-success/${artworkId}`, //to make
+    success_url: `http://localhost:3000/purchase-success/${artworkId}/${userId}`,
     cancel_url: "http://localhost:3000/discover/artworks",
   });
 
@@ -49,6 +63,7 @@ module.exports.chargeBid = async (req, res) => {
     const { artwork } = req.body;
     const artworkToSell = await Artwork.findById(artwork._id);
     const buyer = await User.findById(artwork.highestBidHolder);
+    const seller = await User.findById(artworkToSell.owner);
 
     const paymentMethods = await stripe.paymentMethods.list({
       customer: buyer.stripeId,
@@ -67,6 +82,44 @@ module.exports.chargeBid = async (req, res) => {
     if (paymentIntent.status === "succeeded") {
       artworkToSell.sold = true;
       artworkToSell.save();
+
+      const sellerEmailBody = stripeEmails.informSellerOfSale(
+        seller.fullName,
+        artwork,
+        artwork.minimumBid
+      );
+      transport.sendMail({
+        from: devEmail,
+        to: seller.email,
+        subject: "Your Artwork Has Been Sold!",
+        html: sellerEmailBody,
+      });
+
+      const buyerEmailBody = stripeEmails.informBuyerOfSale(
+        buyer,
+        artwork,
+        artwork.minimumBid
+      );
+      transport.sendMail({
+        from: devEmail,
+        to: buyer.email,
+        subject: "Your Purchase Details",
+        html: buyerEmailBody,
+      });
+
+      const adminEmailBody = adminEmails.informAdminOfSale(
+        buyer,
+        seller,
+        artwork,
+        artwork.minimumBid
+      );
+      transport.sendMail({
+        from: devEmail,
+        to: devEmail,
+        subject: "A Transaction Has Been Made",
+        html: adminEmailBody,
+      });
+
       res.status(200).json({ success: true });
     } else {
       res.status(401).json({ sucess: false });

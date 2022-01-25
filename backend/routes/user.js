@@ -77,6 +77,7 @@ passport.use(
           googleId: profile.id,
           role: "buyer",
           stripeId: customer.id,
+          isVerified: true,
         };
         const newUser = new User(user);
         await newUser.save();
@@ -111,6 +112,7 @@ passport.use(
           role: "seller",
           sellerType: "private",
           stripeId: customer.id,
+          isVerified: true,
         };
         const newUser = new User(user);
         await newUser.save();
@@ -145,6 +147,7 @@ passport.use(
           role: "seller",
           sellerType: "artist",
           stripeId: customer.id,
+          isVerified: true,
         };
         const artist = {
           fullName: profile.displayName,
@@ -185,12 +188,13 @@ passport.use(
           role: "seller",
           sellerType: "gallery",
           stripeId: customer.id,
+          isVerified: true,
         };
         const gallery = {
           fullName: profile.displayName,
           email: profile.emails[0].value,
         };
-        const newGallery = Artist(gallery);
+        const newGallery = Gallery(gallery);
         await newGallery.save();
         const newUser = new User(user);
         await newUser.save();
@@ -224,6 +228,7 @@ passport.use(
           facebookId: profile.id,
           role: "buyer",
           stripeId: customer.id,
+          isVerified: true,
         };
         const newUser = new User(user);
         await newUser.save();
@@ -259,6 +264,7 @@ passport.use(
           role: "seller",
           sellerType: "private",
           stripeId: customer.id,
+          isVerified: true,
         };
         const newUser = new User(user);
         await newUser.save();
@@ -294,12 +300,13 @@ passport.use(
           role: "seller",
           sellerType: "gallery",
           stripeId: customer.id,
+          isVerified: true,
         };
         const gallery = {
           fullName: profile.displayName,
           email: profile.emails[0].value,
         };
-        const newGallery = Artist(gallery);
+        const newGallery = Gallery(gallery);
         await newGallery.save();
         const newUser = new User(user);
         await newUser.save();
@@ -335,6 +342,7 @@ passport.use(
           role: "seller",
           sellerType: "artist",
           stripeId: customer.id,
+          isVerified: true,
         };
         const artist = {
           fullName: profile.displayName,
@@ -352,11 +360,25 @@ passport.use(
 
 router.post("/register", wrapAsync(userController.newUser));
 
+router.get("/verify-email/:code", wrapAsync(userController.verifyEmail));
+
 router.post(
   "/login",
   passport.authenticate("local", { session: false }),
   wrapAsync(userController.logInUser)
 );
+
+router.post(
+  "/forgot-password",
+  wrapAsync(userController.sendForgotPasswordCode)
+);
+
+router.get(
+  "/verify-code/:code",
+  wrapAsync(userController.verifyForgotPasswordCode)
+);
+
+router.put("/update-password", wrapAsync(userController.saveNewPassword));
 
 router.get(
   "/logout",
@@ -368,6 +390,16 @@ router.get(
   "/authenticated",
   passport.authenticate("jwt", { session: false }),
   wrapAsync(userController.authenticated)
+);
+
+router.post(
+  "/verify-artist-request/:id",
+  wrapAsync(userController.verifyArtistRequest)
+);
+
+router.put(
+  "/verify-artist-approve/:id",
+  wrapAsync(userController.verifyArtistApproval)
 );
 
 router.put("/update/:id", wrapAsync(userController.editUser));
@@ -485,17 +517,5 @@ router.get(
   passport.authenticate("facebook-sell-artist", { session: false }),
   wrapAsync(userController.socialLogin)
 );
-
-// router.get("/:id", wrapAsync(userController.getUserInfo));
-
-//router.get('/confirm-email/:id', wrapAsync(userController.confirmEmail));
-
-//router.get('/confirm-phone/:id', wrapAsync(userController.conformPhone));
-
-//router.post('/forgotpassword', wrapAsync(userController.sendForgotPasswordCode));
-
-//router.get('/reset/:code', wrapAsync(userController.verifyForgotPasswordCode));
-
-//router.put('/updatepassword', wrapAsync(userController.saveNewPassword));
 
 module.exports = router;

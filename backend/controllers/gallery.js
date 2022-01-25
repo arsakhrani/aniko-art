@@ -1,7 +1,9 @@
 const Gallery = require("../models/Gallery");
 
 module.exports.getAllGalleries = async (req, res) => {
-  const galleries = await Gallery.find({ activated: true });
+  const galleries = await Gallery.find({ activated: true }).sort({
+    created: -1,
+  });
   res.status(200).json({ galleries });
 };
 

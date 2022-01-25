@@ -13,6 +13,6 @@ router.get(
   wrapAsync(stripeController.createCheckoutSaveSession)
 );
 
-router.post("/accept-bid", wrapAsync(stripeController.chargeBid));
+router.put("/accept-bid", wrapAsync(stripeController.chargeBid));
 
 module.exports = router;

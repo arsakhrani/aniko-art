@@ -53,6 +53,10 @@ const artistSchema = new mongoose.Schema({
   featurePicture: {
     type: String,
   },
+  created: {
+    type: Date,
+    default: Date.now(),
+  },
 });
 
 const artist = mongoose.model("artist", artistSchema);

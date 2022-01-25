@@ -17,19 +17,15 @@ export default {
   },
   acceptBid: async (artInfo) => {
     const response = await fetch("/api/checkout/accept-bid", {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ artwork: artInfo }),
     })
 
-    if (response.status === 200) {
-      const data = await response.json()
-      return data.success
-    } else {
-      return { message: "A problem occured!" }
-    }
+    const data = await response.json()
+    return data
   },
   createCheckoutSaveSession: async (userId) => {
     try {
@@ -44,6 +40,21 @@ export default {
         "Sorry, the bidding service seems to be down right now. We are currently trying to fix this problem."
       )
     }
+  },
+  finalizeSale: async (artworkId, buyerId) => {
+    const response = await fetch("/api/artwork/finalize-sale/", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        artworkId,
+        buyerId,
+      }),
+    })
+
+    const data = await response.json()
+    return data
   },
   redirectToStripe: async (user, artInfo) => {
     try {

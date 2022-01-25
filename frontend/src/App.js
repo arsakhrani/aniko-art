@@ -15,6 +15,9 @@ import UploadArtworkPage from "./pages/UploadArtworkPage"
 import CollectBidPage from "./pages/CollectBidPage"
 import BidStatusPage from "./pages/BidStatusPage"
 import TermsAndConditionsPage from "./pages/TermsAndConditionsPage"
+import ForgotPasswordPage from "./pages/ForgotPasswordPage"
+import PasswordResetPage from "./pages/PasswordResetPage"
+import PurchaseSuccessPage from "./pages/PurchaseSuccessPage"
 
 function App() {
   const { isAuthenticated, user } = useContext(AuthContext)
@@ -79,6 +82,17 @@ function App() {
           exact
           component={TermsAndConditionsPage}
         />
+        <Route path="/forgot-password" exact>
+          {isAuthenticated ? <Redirect to="/" /> : <ForgotPasswordPage />}
+        </Route>
+        <Route
+          path="/password-reset/:code"
+          exact
+          component={PasswordResetPage}
+        />
+        <Route path="/purchase-success/:artworkId/:buyerId" exact>
+          {!isAuthenticated ? <Redirect to="/" /> : <PurchaseSuccessPage />}
+        </Route>
         <Route path="*" component={NotFoundPage} />
       </Switch>
     </BrowserRouter>

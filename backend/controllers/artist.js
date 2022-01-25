@@ -1,7 +1,9 @@
 const Artist = require("../models/Artist");
 
 module.exports.getAllArtists = async (req, res) => {
-  const artists = await Artist.find({ activated: true }).populate("artworks");
+  const artists = await Artist.find({ activated: true })
+    .populate("artworks")
+    .sort({ created: -1 });
   res.status(200).json({ artists });
 };
 

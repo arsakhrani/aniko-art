@@ -33,6 +33,33 @@ export default {
         }
     })
   },
+  forgotPassword: async (email) => {
+    const response = await fetch("/api/user/forgot-password", {
+      method: "POST",
+      body: JSON.stringify({ email }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    const data = await response.json()
+    return data
+  },
+  verifyCode: async (code) => {
+    const response = await fetch(`/api/user/verify-code/${code}`)
+    const data = await response.json()
+    return data
+  },
+  updatePassword: async (details) => {
+    const response = await fetch("/api/user/update-password", {
+      method: "PUT",
+      body: JSON.stringify(details),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    const data = await response.json()
+    return data
+  },
   logout: () => {
     return fetch("/api/user/logout")
       .then((res) => res.json())
@@ -65,7 +92,7 @@ export default {
   },
   requestArtwork: (request, id) => {
     return fetch(`/api/user/request-artwork/${id}`, {
-      method: "put",
+      method: "PUT",
       body: JSON.stringify(request),
       headers: {
         "Content-Type": "application/json",

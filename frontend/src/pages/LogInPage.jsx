@@ -14,6 +14,7 @@ export default function LogInPage() {
   const history = useHistory()
   const authContext = useContext(AuthContext)
   const [errorMessage, setErrorMessage] = useState(null)
+  const [failCount, setFailCount] = useState(0)
 
   const login = async (e) => {
     e.preventDefault()
@@ -22,13 +23,14 @@ export default function LogInPage() {
       password: e.target.password.value,
     }
     const loginUser = await authService.login(userCreds)
-    const { isAuthenticated, user, message } = loginUser
+    const { isAuthenticated, user } = loginUser
     if (isAuthenticated) {
       authContext.setUser(user)
       authContext.setIsAuthenticated(isAuthenticated)
       history.push("/discover/artworks")
     } else {
-      setErrorMessage(message)
+      setErrorMessage("Email or password incorrect.")
+      setFailCount(failCount + 1)
     }
   }
 
@@ -66,6 +68,18 @@ export default function LogInPage() {
             <PrimaryButton submit={true} buttonText={"LOG IN"} />
           </div>
           {errorMessage && <ErrorMessage messageBody={errorMessage} />}
+          {failCount > 2 && (
+            <p>
+              Forgot your password? Click{" "}
+              <Link
+                to="/forgot-password"
+                style={{ textDecoration: "underline" }}
+              >
+                here
+              </Link>{" "}
+              to reset your password.
+            </p>
+          )}
           <SocialContainer>
             <TransparentButton
               logo={"google"}

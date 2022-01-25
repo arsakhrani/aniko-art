@@ -21,7 +21,7 @@ export default function ConfirmModal({ closeModal, artInfo }) {
   const acceptBid = async () => {
     setIsLoading(true)
     const acceptance = await paymentService.acceptBid(artInfo)
-    if (acceptance) {
+    if (acceptance.success) {
       history.push("/")
     } else {
       setErrorMessage("Something went wrong, please try again later.")

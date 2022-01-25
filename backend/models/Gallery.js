@@ -29,6 +29,10 @@ const gallerySchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  created: {
+    type: Date,
+    default: Date.now(),
+  },
 });
 
 const gallery = mongoose.model("gallery", gallerySchema);

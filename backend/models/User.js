@@ -39,16 +39,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  paymentMethod: {
-    type: String,
-    enum: ["VISA/DELTA/ELECTRON", "MASTERCARD/EUROCARD", "OTHER", ""],
-  },
   insuranceMethod: {
     type: String,
     enum: ["AXA", "LOREM", "IPSUM", "HAVE-NONE", "NONE-NEEDED", ""],
-  },
-  profilePicture: {
-    type: String,
   },
   favoriteMedium: {
     painting: {
@@ -165,6 +158,10 @@ const userSchema = new mongoose.Schema({
   },
   facePicture: {
     type: String,
+  },
+  isVerifiedWithId: {
+    type: Boolean,
+    default: false,
   },
   taxNumber: {
     type: String,
