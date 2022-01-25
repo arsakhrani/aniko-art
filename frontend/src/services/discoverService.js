@@ -1,32 +1,34 @@
+const uploadPreset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
+const cloudinaryRootDomain = process.env.REACT_APP_CLOUDINARY_ROOT_DOMAIN
+
 export default {
   uploadArt: async (artwork) => {
-    return fetch("/api/artwork/upload", {
-      method: "post",
+    const response = await fetch("/api/artwork/upload", {
+      method: "POST",
       body: JSON.stringify(artwork),
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((res) => {
-      if (res.status === 201) return res.json().then((data) => data)
-      else return { message: "A problem occured!" }
     })
+    if (response.ok) {
+      const data = await response.json()
+      return data
+    } else {
+      return { success: false }
+    }
   },
   uploadImages: async (images) => {
     try {
       const responseArray = []
-      const uploadPreset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
       for (const image of images) {
         const formData = new FormData()
         formData.append("file", image)
         formData.append("upload_preset", uploadPreset)
 
-        const res = await fetch(
-          "https://api.cloudinary.com/v1_1/dw05biri6/image/upload",
-          {
-            method: "post",
-            body: formData,
-          }
-        )
+        const res = await fetch(`${cloudinaryRootDomain}/image/upload`, {
+          method: "POST",
+          body: formData,
+        })
         if (res.status === 200) {
           const data = await res.json()
           responseArray.push(data.url)
@@ -40,19 +42,15 @@ export default {
   },
   uploadAudio: async (audio) => {
     try {
-      const uploadPreset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
       const formData = new FormData()
       formData.append("file", audio[0])
       formData.append("upload_preset", uploadPreset)
       formData.append("resource_type", "video")
 
-      const res = await fetch(
-        "https://api.cloudinary.com/v1_1/dw05biri6/upload",
-        {
-          method: "post",
-          body: formData,
-        }
-      )
+      const res = await fetch(`${cloudinaryRootDomain}/upload`, {
+        method: "POST",
+        body: formData,
+      })
       if (res.status === 200) {
         const data = await res.json()
         return data.url
@@ -64,19 +62,15 @@ export default {
   },
   uploadCv: async (cv) => {
     try {
-      const uploadPreset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
       const formData = new FormData()
       formData.append("file", cv[0])
       formData.append("upload_preset", uploadPreset)
       formData.append("resource_type", "image")
 
-      const res = await fetch(
-        "https://api.cloudinary.com/v1_1/dw05biri6/upload",
-        {
-          method: "post",
-          body: formData,
-        }
-      )
+      const res = await fetch(`${cloudinaryRootDomain}/upload`, {
+        method: "POST",
+        body: formData,
+      })
       if (res.status === 200) {
         const data = await res.json()
         return { cvUrl: data.url, cvFileName: data.original_filename }
@@ -88,44 +82,55 @@ export default {
   },
   getAllArtworks: async () => {
     const response = await fetch("/api/artwork/get-all")
-    if (response.status === 200) {
+    if (response.ok) {
       const data = await response.json()
       return data.artworks
+    } else {
+      return null
     }
   },
   deleteArtwork: async (id) => {
     const response = await fetch(`/api/artwork/${id}`, {
       method: "DELETE",
     })
-    if (response.status === 200) {
+    if (response.ok) {
       const data = await response.json()
       return data.success
+    } else {
+      return null
     }
   },
   editArtist: async (artist, id) => {
-    return fetch(`/api/artist/edit/${id}`, {
-      method: "put",
+    const response = await fetch(`/api/artist/edit/${id}`, {
+      method: "PUT",
       body: JSON.stringify(artist),
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((res) => {
-      if (res.status === 201) return res.json().then((data) => data)
-      else return { message: "A problem occured!" }
     })
+    if (response.ok) {
+      const data = await response.json()
+      return data
+    } else {
+      return { success: false }
+    }
   },
   getAllArtists: async () => {
-    return fetch("/api/artist/get-all", {
-      method: "get",
-    }).then((res) => {
-      if (res.status === 200) return res.json().then((data) => data.artists)
-    })
+    const response = await fetch("/api/artist/get-all")
+    if (response.ok) {
+      const data = await response.json()
+      return data.artists
+    } else {
+      return null
+    }
   },
   getAllGalleries: async () => {
-    return fetch("/api/gallery/get-all", {
-      method: "get",
-    }).then((res) => {
-      if (res.status === 200) return res.json().then((data) => data.galleries)
-    })
+    const response = await fetch("/api/gallery/get-all")
+    if (response.ok) {
+      const data = await response.json()
+      return data.galleries
+    } else {
+      return null
+    }
   },
 }

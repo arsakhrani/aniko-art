@@ -38,7 +38,7 @@ module.exports.uploadArt = async (req, res) => {
     await gallery.save();
   }
 
-  res.status(201).json({ success: true, uploadedArtwork: newArtwork });
+  res.status(200).json({ success: true, uploadedArtwork: newArtwork });
 };
 
 module.exports.getAllArt = async (req, res) => {
@@ -158,9 +158,5 @@ module.exports.finalizeSale = async (req, res) => {
 module.exports.deleteArt = async (req, res, next) => {
   const { id } = req.params;
   const artwork = await Artwork.findByIdAndDelete(id);
-  if (artwork) {
-    res.status(200).json({ success: true });
-  } else {
-    res.status(200).json({ success: false });
-  }
+  res.status(200).json({ success: true });
 };

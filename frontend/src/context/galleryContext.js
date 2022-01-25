@@ -7,11 +7,18 @@ export default ({ children }) => {
   const [galleries, setGalleries] = useState([])
   const [isLoaded, setIsloaded] = useState(false)
 
-  useEffect(() => {
-    discoverService.getAllGalleries().then((data) => {
+  const initialize = async () => {
+    const data = await discoverService.getAllGalleries()
+    if (data) {
       setGalleries(data)
       setIsloaded(true)
-    })
+    } else {
+      //error handle
+    }
+  }
+
+  useEffect(() => {
+    initialize()
   }, [])
 
   return (

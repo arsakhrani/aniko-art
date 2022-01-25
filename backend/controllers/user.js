@@ -38,9 +38,7 @@ module.exports.newUser = async (req, res) => {
   const user = req.body;
   const emailCheck = await User.findOne({ email: user.email });
   if (emailCheck) {
-    res
-      .status(401)
-      .json({ message: { msgBody: "Email is taken", msgError: true } });
+    res.status(401).json({ message: "Email is taken", success: false });
   } else {
     const newUser = new User(user);
     const customer = await stripe.customers.create();
@@ -86,7 +84,7 @@ module.exports.newUser = async (req, res) => {
 
     const token = signToken(newUser._id);
     res.cookie("access_token", token, { httpOnly: true, sameSite: true });
-    res.status(201).json({ user: newUser, isAuthenticated: true });
+    res.status(200).json({ user: newUser, isAuthenticated: true });
   }
 };
 
@@ -111,9 +109,14 @@ module.exports.logInUser = async (req, res) => {
     res.status(200).json({
       isAuthenticated: true,
       user,
+      success: true,
     });
   } else {
-    res.status(401).json({ isAuthenticated: false, success: false });
+    res.status(401).json({
+      isAuthenticated: false,
+      user: {},
+      success: false,
+    });
   }
 };
 
@@ -214,11 +217,9 @@ module.exports.editUser = async (req, res, next) => {
       await Artist.findOneAndUpdate({ email: updatedUser.email }, user);
     }
 
-    res.status(201).json({ user: updatedUser, isAuthenticated: true });
+    res.status(200).json({ user: updatedUser, isAuthenticated: true });
   } else {
-    res
-      .status(401)
-      .json({ isAuthenticated: false, user: null, success: false });
+    res.status(401).json({ isAuthenticated: false, user: null });
   }
 };
 
@@ -242,7 +243,7 @@ module.exports.requestArtWork = async (req, res, next) => {
       html: emailBody,
     });
 
-    res.status(201).json({ success: true });
+    res.status(200).json({ success: true });
   } else {
     res.status(401).json({ success: false });
   }
@@ -272,7 +273,7 @@ module.exports.verifyArtistRequest = async (req, res, next) => {
       subject: `Verify Artist Request from ${user.fullName}`,
       html: emailBody,
     });
-    res.status(201).json({ success: true });
+    res.status(200).json({ success: true });
   } else {
     res.status(401).json({ success: false });
   }
@@ -293,7 +294,7 @@ module.exports.verifyArtistApproval = async (req, res, next) => {
       html: emailBody,
     });
 
-    res.status(201).send("Success");
+    res.status(200).send("Success");
   } else {
     res.status(400).send("Failed");
   }

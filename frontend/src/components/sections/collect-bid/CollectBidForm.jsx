@@ -36,10 +36,12 @@ export default function CollectBidForm({ minimumBid, artworkId }) {
       return
     }
 
+    const clientRootDomain = process.env.REACT_APP_CLIENT_ROOT_DOMAIN
+
     const { error } = await stripe.confirmSetup({
       elements,
       confirmParams: {
-        return_url: `http://localhost:3000/bid-state/${artworkId}/${user._id}/${bidAmount}`,
+        return_url: `${clientRootDomain}/bid-state/${artworkId}/${user._id}/${bidAmount}`,
       },
     })
 

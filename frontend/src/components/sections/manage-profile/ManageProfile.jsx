@@ -117,13 +117,17 @@ export default function ManageProfile() {
         website,
       }
       const updateUser = await authService.update(user, authContext.user._id)
-      authContext.setUser(updateUser.user)
-      if (authContext.user.sellerType === "artist") {
-        history.push("/discover/artists")
-      } else if (authContext.user.sellerType === "gallery") {
-        history.push("/discover/galleries")
+      if (updateUser.isAuthenticated) {
+        authContext.setUser(updateUser.user)
+        if (authContext.user.sellerType === "artist") {
+          history.push("/discover/artists")
+        } else if (authContext.user.sellerType === "gallery") {
+          history.push("/discover/galleries")
+        } else {
+          history.push("/discover/artworks")
+        }
       } else {
-        history.push("/discover/artworks")
+        //error handle
       }
     }
   }

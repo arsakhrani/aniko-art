@@ -87,7 +87,10 @@ export default function ArtWorkCard({
         $pointer={!cardInfo.sold}
         $featureBorder={featureBorder}
       >
-        <CoverPicture src={cardInfo.pictures[0]} />
+        <CoverPicture
+          src={cardInfo.pictures[0]}
+          alt={cardInfo.title + " cover picture"}
+        />
         {cardInfo.sold && isHovering && <SoldLabel>SOLD!</SoldLabel>}
       </GradientContainer>
       <WrittenContent>

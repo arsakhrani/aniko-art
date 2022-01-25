@@ -34,12 +34,14 @@ export default function LogInPage() {
     }
   }
 
+  const serverRootDomain = process.env.REACT_APP_SERVER_ROOT_DOMAIN
+
   const googleLogin = () => {
-    window.open("http://localhost:5000/api/user/auth/google/buy", "_self")
+    window.open(`${serverRootDomain}/api/user/auth/google/buy`, "_self")
   }
 
   const facebookLogin = () => {
-    window.open("http://localhost:5000/api/user/auth/facebook/buy", "_self")
+    window.open(`${serverRootDomain}/api/user/auth/facebook/buy`, "_self")
   }
 
   return (

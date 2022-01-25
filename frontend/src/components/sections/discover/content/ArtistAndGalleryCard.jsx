@@ -19,6 +19,7 @@ export default function ArtistAndGalleryCard({ cardInfo, artist, gallery }) {
             ? cardInfo.artworks[0].pictures[0]
             : defaultFeatureImage
         }
+        alt={(artist ? cardInfo.fullName : cardInfo.name) + " feature image"}
       />
       <WrittenContent>
         <div>

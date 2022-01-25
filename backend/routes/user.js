@@ -3,6 +3,7 @@ const googleClientSecret = process.env.GOOGLE_AUTH_CLIENT_SECRET;
 const facebookClientId = process.env.FACEBOOK_AUTH_CLIENT_ID;
 const facebookClientSecret = process.env.FACEBOOK_AUTH_CLIENT_SECRET;
 const stripeKey = process.env.STRIPE_SECRET_KEY;
+const serverRootDomain = process.env.ROOT_DOMAIN_SERVER;
 const stripe = require("stripe")(stripeKey);
 const express = require("express");
 const router = express.Router();
@@ -60,7 +61,7 @@ passport.use(
     {
       clientID: googleClientId,
       clientSecret: googleClientSecret,
-      callbackURL: "http://localhost:5000/api/user/auth/google/buy/callback",
+      callbackURL: `${serverRootDomain}/api/user/auth/google/buy/callback`,
     },
     async (accessToken, refreshToken, profile, cb) => {
       const existingUser = await User.findOne({
@@ -93,8 +94,7 @@ passport.use(
     {
       clientID: googleClientId,
       clientSecret: googleClientSecret,
-      callbackURL:
-        "http://localhost:5000/api/user/auth/google/sell/private/callback",
+      callbackURL: `${serverRootDomain}/api/user/auth/google/sell/private/callback`,
     },
     async (accessToken, refreshToken, profile, done) => {
       const existingUser = await User.findOne({
@@ -128,8 +128,7 @@ passport.use(
     {
       clientID: googleClientId,
       clientSecret: googleClientSecret,
-      callbackURL:
-        "http://localhost:5000/api/user/auth/google/sell/artist/callback",
+      callbackURL: `${serverRootDomain}/api/user/auth/google/sell/artist/callback`,
     },
     async (accessToken, refreshToken, profile, done) => {
       const existingUser = await User.findOne({
@@ -169,8 +168,7 @@ passport.use(
     {
       clientID: googleClientId,
       clientSecret: googleClientSecret,
-      callbackURL:
-        "http://localhost:5000/api/user/auth/google/sell/gallery/callback",
+      callbackURL: `${serverRootDomain}/api/user/auth/google/sell/gallery/callback`,
     },
     async (accessToken, refreshToken, profile, done) => {
       const existingUser = await User.findOne({
@@ -210,7 +208,7 @@ passport.use(
     {
       clientID: facebookClientId,
       clientSecret: facebookClientSecret,
-      callbackURL: "http://localhost:5000/api/user/auth/facebook/buy/callback",
+      callbackURL: `${serverRootDomain}/api/user/auth/facebook/buy/callback`,
       profileFields: ["id", "displayName", "email"],
     },
     async (accessToken, refreshToken, profile, cb) => {
@@ -244,8 +242,7 @@ passport.use(
     {
       clientID: facebookClientId,
       clientSecret: facebookClientSecret,
-      callbackURL:
-        "http://localhost:5000/api/user/auth/facebook/sell/private/callback",
+      callbackURL: `${serverRootDomain}/api/user/auth/facebook/sell/private/callback`,
       profileFields: ["id", "displayName", "email"],
     },
     async (accessToken, refreshToken, profile, done) => {
@@ -280,8 +277,7 @@ passport.use(
     {
       clientID: facebookClientId,
       clientSecret: facebookClientSecret,
-      callbackURL:
-        "http://localhost:5000/api/user/auth/facebook/sell/gallery/callback",
+      callbackURL: `${serverRootDomain}/api/user/auth/facebook/sell/gallery/callback`,
       profileFields: ["id", "displayName", "email"],
     },
     async (accessToken, refreshToken, profile, done) => {
@@ -322,8 +318,7 @@ passport.use(
     {
       clientID: facebookClientId,
       clientSecret: facebookClientSecret,
-      callbackURL:
-        "http://localhost:5000/api/user/auth/facebook/sell/artist/callback",
+      callbackURL: `${serverRootDomain}/api/user/auth/facebook/sell/artist/callback`,
       profileFields: ["id", "displayName", "email"],
     },
     async (accessToken, refreshToken, profile, done) => {

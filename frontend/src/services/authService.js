@@ -1,37 +1,25 @@
 export default {
-  login: (user) => {
-    return fetch("/api/user/login", {
-      method: "post",
+  login: async (user) => {
+    const response = await fetch("/api/user/login", {
+      method: "POST",
       body: JSON.stringify(user),
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((res) => {
-      if (res.status !== 401) return res.json().then((data) => data)
-      else
-        return {
-          isAuthenticated: false,
-          user: {},
-          message: "Username or password is incorrect",
-        }
     })
+    const data = await response.json()
+    return data
   },
-  register: (user) => {
-    return fetch("/api/user/register", {
-      method: "post",
+  register: async (user) => {
+    const response = await fetch("/api/user/register", {
+      method: "POST",
       body: JSON.stringify(user),
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((res) => {
-      if (res.status !== 401) return res.json().then((data) => data)
-      else
-        return {
-          isAuthenticated: false,
-          user: {},
-          message: "Email address is already taken",
-        }
     })
+    const data = await response.json()
+    return data
   },
   forgotPassword: async (email) => {
     const response = await fetch("/api/user/forgot-password", {
@@ -60,49 +48,45 @@ export default {
     const data = await response.json()
     return data
   },
-  logout: () => {
-    return fetch("/api/user/logout")
-      .then((res) => res.json())
-      .then((data) => data)
+  logout: async () => {
+    const response = await fetch("/api/user/logout")
+    const data = await response.json()
+    return data
   },
-  isAuthenticated: () => {
-    return fetch("/api/user/authenticated").then((res) => {
-      if (res.status !== 401) return res.json().then((data) => data)
-      else
-        return {
-          isAuthenticated: false,
-          user: {},
-        }
-    })
+  isAuthenticated: async () => {
+    const response = await fetch("/api/user/authenticated")
+    if (response.ok) {
+      const data = await response.json()
+      return data
+    } else {
+      return {
+        isAuthenticated: false,
+        user: {},
+      }
+    }
   },
-  update: (user, id) => {
-    return fetch(`/api/user/update/${id}`, {
-      method: "put",
+  update: async (user, id) => {
+    const response = await fetch(`/api/user/update/${id}`, {
+      method: "PUT",
       body: JSON.stringify(user),
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((res) => {
-      if (res.status !== 401) return res.json().then((data) => data)
-      else
-        return {
-          message: "Something went wrong",
-        }
     })
+    if (response.ok) {
+      const data = await response.json()
+      return data
+    }
   },
-  requestArtwork: (request, id) => {
-    return fetch(`/api/user/request-artwork/${id}`, {
+  requestArtwork: async (request, id) => {
+    const response = await fetch(`/api/user/request-artwork/${id}`, {
       method: "PUT",
       body: JSON.stringify(request),
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((res) => {
-      if (res.status !== 401) return res.json().then((data) => data)
-      else
-        return {
-          message: "Something went wrong",
-        }
     })
+    const data = await response.json()
+    return data
   },
 }

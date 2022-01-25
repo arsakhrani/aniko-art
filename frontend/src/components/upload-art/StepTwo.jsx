@@ -118,6 +118,8 @@ export default function StepTwo() {
         history.push("discover")
         dispatch(saveDetails({}))
         history.go(0)
+      } else {
+        //error handle
       }
     }
   }
@@ -131,6 +133,7 @@ export default function StepTwo() {
           <img
             width="100%"
             src={URL.createObjectURL(uploadDetails.imagesArray[0])}
+            alt={uploadDetails.title + " preview image"}
           />
         </div>
         <div>

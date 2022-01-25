@@ -86,9 +86,13 @@ export default function ManagePreferences() {
       },
     }
     const updateUser = await authService.update(user, authContext.user._id)
-    authContext.setUser(updateUser.user)
-    history.push("/discover/artworks")
-    history.go(0)
+    if (updateUser.isAuthenticated) {
+      authContext.setUser(updateUser.user)
+      history.push("/discover/artworks")
+      history.go(0)
+    } else {
+      //error handle
+    }
   }
 
   return (

@@ -37,6 +37,8 @@ export default function RegistrationForm({
     setErrorMessage("")
   }
 
+  const serverRootDomain = process.env.REACT_APP_SERVER_ROOT_DOMAIN
+
   const saveDetails = (e) => {
     e.preventDefault()
     if (isSell && !sellerType) {
@@ -60,24 +62,24 @@ export default function RegistrationForm({
 
   const googleLogin = (leftFrame) => {
     if (leftFrame) {
-      window.open("http://localhost:5000/api/user/auth/google/buy", "_self")
+      window.open(`${serverRootDomain}/api/user/auth/google/buy`, "_self")
     }
 
     if (!leftFrame) {
       if (sellerType) {
         sellerType === "private" &&
           window.open(
-            "http://localhost:5000/api/user/auth/google/sell/private",
+            `${serverRootDomain}/api/user/auth/google/sell/private`,
             "_self"
           )
         sellerType === "gallery" &&
           window.open(
-            "http://localhost:5000/api/user/auth/google/sell/gallery",
+            `${serverRootDomain}/api/user/auth/google/sell/gallery`,
             "_self"
           )
         sellerType === "artist" &&
           window.open(
-            "http://localhost:5000/api/user/auth/google/sell/artist",
+            `${serverRootDomain}/api/user/auth/google/sell/artist`,
             "_self"
           )
       } else {
@@ -88,24 +90,24 @@ export default function RegistrationForm({
 
   const facebookLogin = (leftFrame) => {
     if (leftFrame) {
-      window.open("http://localhost:5000/api/user/auth/facebook/buy", "_self")
+      window.open(`${serverRootDomain}/api/user/auth/facebook/buy`, "_self")
     }
 
     if (!leftFrame) {
       if (sellerType) {
         sellerType === "private" &&
           window.open(
-            "http://localhost:5000/api/user/auth/facebook/sell/private",
+            `${serverRootDomain}/api/user/auth/facebook/sell/private`,
             "_self"
           )
         sellerType === "gallery" &&
           window.open(
-            "http://localhost:5000/api/user/auth/facebook/sell/gallery",
+            `${serverRootDomain}/api/user/auth/facebook/sell/gallery`,
             "_self"
           )
         sellerType === "artist" &&
           window.open(
-            "http://localhost:5000/api/user/auth/facebook/sell/artist",
+            `${serverRootDomain}/api/user/auth/facebook/sell/artist`,
             "_self"
           )
       } else {

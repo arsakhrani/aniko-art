@@ -33,6 +33,8 @@ export default function ArtWorkModal({ artInfo, closeModal }) {
     const attempt = discoverService.deleteArtwork(artInfo._id)
     if (attempt) {
       history.go(0)
+    } else {
+      //error handle
     }
   }
 
@@ -47,11 +49,15 @@ export default function ArtWorkModal({ artInfo, closeModal }) {
               onClick={() => setSelectorNumber(index)}
               key={pic}
               src={pic}
+              alt={"Gallery picture " + index}
             />
           ))}
         </Gallery>
         <FeaturePicture>
-          <img src={artInfo.pictures[selectorNumber]} />
+          <img
+            src={artInfo.pictures[selectorNumber]}
+            alt={artInfo.title + " feature picture"}
+          />
         </FeaturePicture>
         <Info>
           <Close

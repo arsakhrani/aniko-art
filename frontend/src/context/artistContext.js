@@ -7,11 +7,18 @@ export default ({ children }) => {
   const [artists, setArtists] = useState([])
   const [isLoaded, setIsloaded] = useState(false)
 
-  useEffect(() => {
-    discoverService.getAllArtists().then((data) => {
+  const initialize = async () => {
+    const data = await discoverService.getAllArtists()
+    if (data) {
       setArtists(data)
       setIsloaded(true)
-    })
+    } else {
+      //error handle
+    }
+  }
+
+  useEffect(() => {
+    initialize()
   }, [])
 
   return (

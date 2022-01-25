@@ -1,6 +1,7 @@
 const sendgridKey = process.env.TWILIO_SENDGRID_KEY;
 const stripeKey = process.env.STRIPE_SECRET_KEY;
 const devEmail = process.env.DEV_EMAIL;
+const clientRootDomain = process.env.ROOT_DOMAIN_CLIENT;
 const stripe = require("stripe")(stripeKey);
 const Artwork = require("../models/Artwork");
 const User = require("../models/User");
@@ -18,44 +19,52 @@ const transport = nodemailer.createTransport(
 );
 
 module.exports.createCheckoutBuySession = async (req, res) => {
-  const { artworkId, userId } = req.body;
-  const artwork = await Artwork.findById(artworkId);
-  const user = await User.findById(userId);
+  try {
+    const { artworkId, userId } = req.body;
+    const artwork = await Artwork.findById(artworkId);
+    const user = await User.findById(userId);
 
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: ["card"],
-    line_items: [
-      {
-        price_data: {
-          currency: "eur",
-          product_data: {
-            name: `${artwork.title} by ${artwork.artist}`,
-            images: [artwork.pictures[0]],
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      line_items: [
+        {
+          price_data: {
+            currency: "eur",
+            product_data: {
+              name: `${artwork.title} by ${artwork.artist}`,
+              images: [artwork.pictures[0]],
+            },
+            unit_amount: artwork.price * 100,
           },
-          unit_amount: artwork.price * 100,
+          quantity: 1,
         },
-        quantity: 1,
-      },
-    ],
-    customer_email: user.email,
-    mode: "payment",
-    success_url: `http://localhost:3000/purchase-success/${artworkId}/${userId}`,
-    cancel_url: "http://localhost:3000/discover/artworks",
-  });
+      ],
+      customer_email: user.email,
+      mode: "payment",
+      success_url: `${clientRootDomain}/purchase-success/${artworkId}/${userId}`,
+      cancel_url: `${clientRootDomain}/discover/artworks`,
+    });
 
-  res.json({ url: session.url });
+    res.json({ url: session.url });
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 module.exports.createCheckoutSaveSession = async (req, res) => {
-  const { userId } = req.params;
-  const user = await User.findById(userId);
+  try {
+    const { userId } = req.params;
+    const user = await User.findById(userId);
 
-  const setupIntent = await stripe.setupIntents.create({
-    customer: user.stripeId,
-    payment_method_types: ["card"],
-  });
+    const setupIntent = await stripe.setupIntents.create({
+      customer: user.stripeId,
+      payment_method_types: ["card"],
+    });
 
-  res.json({ client_secret: setupIntent.client_secret });
+    res.json({ client_secret: setupIntent.client_secret });
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 module.exports.chargeBid = async (req, res) => {
@@ -124,8 +133,8 @@ module.exports.chargeBid = async (req, res) => {
     } else {
       res.status(401).json({ sucess: false });
     }
-  } catch (err) {
-    console.log("Error code is: ", err.code);
+  } catch (e) {
+    console.log("eor code is: ", e.code);
     const paymentIntentRetrieved = await stripe.paymentIntents.retrieve(
       err.raw.payment_intent.id
     );

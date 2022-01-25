@@ -8,12 +8,19 @@ export default ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoaded, setIsloaded] = useState(false)
 
-  useEffect(() => {
-    authService.isAuthenticated().then((data) => {
+  const initialize = async () => {
+    const data = await authService.isAuthenticated()
+    if (data.isAuthenticated) {
       setUser(data.user)
       setIsAuthenticated(data.isAuthenticated)
       setIsloaded(true)
-    })
+    } else {
+      //error handle
+    }
+  }
+
+  useEffect(() => {
+    initialize()
   }, [])
 
   return (

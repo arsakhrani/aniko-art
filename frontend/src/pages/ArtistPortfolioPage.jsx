@@ -184,6 +184,8 @@ export default function ArtistPortfolioPage() {
         const allArtists = await discoverService.getAllArtists()
         setArtists(allArtists)
         history.go(0)
+      } else {
+        //error handle
       }
     }
   }
