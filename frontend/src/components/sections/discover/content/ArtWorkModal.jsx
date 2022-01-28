@@ -8,16 +8,19 @@ import {
   Info,
   GalleryPicture,
   ImageSelector,
+  ChatBlock,
 } from "./styles/ArtWorkModal.styled"
 import { AuthContext } from "../../../../context/authContext"
 import { ReactComponent as Close } from "../../../../assets/icons/close.svg"
 import paymentService from "../../../../services/paymentService"
 import discoverService from "../../../../services/discoverService"
 import { useHistory } from "react-router-dom"
+import NotificationModal from "../../../atoms/NotificationModal"
 
 export default function ArtWorkModal({ artInfo, closeModal }) {
   const [selectorNumber, setSelectorNumber] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
+  const [modalMessage, setModalMessage] = useState("")
 
   const history = useHistory()
 
@@ -38,10 +41,32 @@ export default function ArtWorkModal({ artInfo, closeModal }) {
     }
   }
 
+  const sendChatRequest = async () => {
+    const response = await discoverService.sendChatRequest(
+      user._id,
+      artInfo.owner
+    )
+    if (response.success) {
+      setModalMessage(
+        "An email has been sent to the admin to approve your request."
+      )
+    } else {
+      setModalMessage(
+        "Sorry! We are unable to provide this service at the moment."
+      )
+    }
+  }
+
   const isOwner = artInfo.owner === user._id
 
   return (
     <ModalContainer>
+      {modalMessage && (
+        <NotificationModal
+          message={modalMessage}
+          closeModal={() => setModalMessage("")}
+        />
+      )}
       <Modal>
         <Gallery>
           {artInfo.pictures.map((pic, index) => (
@@ -75,9 +100,9 @@ export default function ArtWorkModal({ artInfo, closeModal }) {
           <div className="basic-grid">
             <h2>{artInfo.artist}</h2>
             <h3>LOT {artInfo.lot}</h3>
-            <a target="_blank" href={artInfo.website}>
-              <span>+ FOLLOW ARTIS</span>T
-            </a>
+            <ChatBlock onClick={() => sendChatRequest()}>
+              <span>+ CHAT WITH ARTIS</span>T
+            </ChatBlock>
             <p>{artInfo.title}</p>
             <p>{artInfo.medium}</p>
             <p>

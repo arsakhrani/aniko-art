@@ -2,7 +2,8 @@ export const valuesArray = [
   {
     firstWord: "Creating",
     heading: " an Art Community",
-    detailsStart: "Aniko.Art is an online internet platform which allows ",
+    detailsStart:
+      "Aniko van Nie Art Agency is an online internet platform which allows ",
     detailsHighlight:
       "private art collectors, private art dealers, galleries and ar",
     detailsMid: "",
@@ -12,7 +13,7 @@ export const valuesArray = [
   {
     firstWord: "Transparency",
     heading: " in costs and values",
-    detailsStart: "Aniko.Art has a set commission rate ",
+    detailsStart: "Aniko van Nie Art Agency has a set commission rate ",
     detailsHighlight: "of 20% split between buyer ",
     detailsMid: "and seller. Have the option to bid on ",
     detailsHighlightTwo: "artworks for a m",
@@ -23,7 +24,7 @@ export const valuesArray = [
     firstWord: "Accessible",
     heading: "",
     detailsStart:
-      "Quickly browse artworks through the online art catalog Aniko.Art gives you the option to buy directly without bidding a",
+      "Quickly browse artworks through the online art catalog Aniko van Nie Art Agency gives you the option to buy directly without bidding a",
     detailsHighlight: "nd offers secure payments and sustainable.",
     detailsMid: "",
     detailsHighlightTwo: "",
@@ -33,7 +34,7 @@ export const valuesArray = [
     firstWord: "Supporting",
     heading: " upcoming artists",
     detailsStart:
-      "Aniko.Art mission is to expand the international art market to support Contemporar",
+      "Aniko van Nie Art Agency mission is to expand the international art market to support Contemporar",
     detailsHighlight: "y Eastern and Southeastern",
     detailsMid: "",
     detailsHighlightTwo: "",
@@ -43,7 +44,7 @@ export const valuesArray = [
     firstWord: "Sustainability",
     heading: "",
     detailsStart:
-      "Aniko.Art focuses on artists working with natural materials in their artworks, using their work as ",
+      "Aniko van Nie Art Agency focuses on artists working with natural materials in their artworks, using their work as ",
     detailsHighlight: " a platform to raise aw",
     detailsMid: "areness and imagin",
     detailsHighlightTwo: "e a more sustaina",

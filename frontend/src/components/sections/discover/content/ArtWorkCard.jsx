@@ -61,8 +61,12 @@ export default function ArtWorkCard({
       pathname: "/create-bid",
       state: {
         secret: secret.client_secret,
-        minimumBid: cardInfo.minimumBid + 50,
+        highestBid:
+          cardInfo.highestBid > 0
+            ? cardInfo.highestBid + cardInfo.bidIncrement
+            : cardInfo.minimumBid,
         artworkId: cardInfo._id,
+        bidIncrement: cardInfo.bidIncrement,
       },
     })
   }
@@ -104,14 +108,20 @@ export default function ArtWorkCard({
         {!isOwner && !cardInfo.sold && cardInfo.minimumBid > 0 && (
           <PrimaryButton
             onClick={() => setupBid()}
-            buttonText={"BID FROM $" + (cardInfo.minimumBid + 50) + ", -"}
+            buttonText={
+              "BID FROM $" +
+              (cardInfo.highestBid > 0
+                ? cardInfo.highestBid + cardInfo.bidIncrement
+                : cardInfo.minimumBid) +
+              ", -"
+            }
             disabled={isLoading}
             loading={isLoading}
           />
         )}
-        {isOwner && cardInfo.highestBidHolder && !cardInfo.sold && (
+        {isOwner && cardInfo.highestBid > 0 && !cardInfo.sold && (
           <PrimaryButton
-            buttonText={"ACCEPT BID FOR $" + cardInfo.minimumBid + ", -"}
+            buttonText={"ACCEPT BID FOR $" + cardInfo.highestBid + ", -"}
             onClick={() => showModal("confirm")}
           />
         )}

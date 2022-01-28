@@ -135,7 +135,7 @@ module.exports.sendForgotPasswordCode = async (req, res, next) => {
     transport.sendMail({
       from: devEmail,
       to: user.email,
-      subject: "Aniko.Art Password Reset",
+      subject: "Aniko van Nie Art Agency Password Reset",
       html: emailBody,
     });
     res.status(200).json({ success: true });

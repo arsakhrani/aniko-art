@@ -15,8 +15,6 @@ export const Banner = styled.div`
 
   h1 {
     color: white;
-    font-family: "Arial", sans-serif;
-    font-weight: 400;
     font-size: 4em;
 
     @media (max-width: ${theme.mediaSize.tablet}) {

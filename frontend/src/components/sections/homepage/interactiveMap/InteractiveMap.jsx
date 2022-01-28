@@ -51,7 +51,7 @@ export default function InteractiveMap() {
   }, [flag])
 
   return (
-    <div style={{ height: "101vh", display: vw < 1000 && "none" }}>
+    <div style={{ height: "100vh", display: vw < 1000 && "none" }}>
       <div style={styles.titleBox}>
         <h1 style={{ fontSize: 44, marginBottom: 0 }}>Showroom</h1>
         <Link to="/discover/artworks">

@@ -47,7 +47,7 @@ export default function ConfirmModal({ closeModal, artInfo }) {
         )}
         <ConfirmText>
           Are you sure you would like to accept the current bid amount of $
-          {artInfo.minimumBid}?
+          {artInfo.highestBid}?
         </ConfirmText>
         {errorMessage && <ErrorMessage messageBody={errorMessage} />}
         {!errorMessage && (

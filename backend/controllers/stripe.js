@@ -80,7 +80,7 @@ module.exports.chargeBid = async (req, res) => {
     });
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: artwork.minimumBid * 100,
+      amount: artwork.highestBid * 100,
       currency: "eur",
       customer: buyer.stripeId,
       payment_method: paymentMethods.data[0].id,
@@ -90,12 +90,14 @@ module.exports.chargeBid = async (req, res) => {
 
     if (paymentIntent.status === "succeeded") {
       artworkToSell.sold = true;
+      artworkToSell.isBidActive = false;
+      artworkToSell.bidActivationTime = null;
       artworkToSell.save();
 
       const sellerEmailBody = stripeEmails.informSellerOfSale(
         seller.fullName,
         artwork,
-        artwork.minimumBid
+        artwork.highestBid
       );
       transport.sendMail({
         from: devEmail,
@@ -107,7 +109,7 @@ module.exports.chargeBid = async (req, res) => {
       const buyerEmailBody = stripeEmails.informBuyerOfSale(
         buyer,
         artwork,
-        artwork.minimumBid
+        artwork.highestBid
       );
       transport.sendMail({
         from: devEmail,
@@ -120,7 +122,7 @@ module.exports.chargeBid = async (req, res) => {
         buyer,
         seller,
         artwork,
-        artwork.minimumBid
+        artwork.highestBid
       );
       transport.sendMail({
         from: devEmail,

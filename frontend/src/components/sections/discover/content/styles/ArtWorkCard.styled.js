@@ -71,6 +71,5 @@ export const WrittenContent = styled.div`
 export const PriceLink = styled.p`
   color: ${theme.color.orange};
   font-size: ${theme.fontSize.small};
-  font-family: "Arial", sans-serif;
   margin: 0;
 `

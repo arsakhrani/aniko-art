@@ -16,8 +16,8 @@ export default function Footer() {
       </Column>
       <Column>
         <StyledLink to="/terms-and-conditions">Terms of Use</StyledLink>
-        <StyledLink to="/">Bying on Aniko.Art</StyledLink>
-        <StyledLink to="/">Selling on Aniko.Art</StyledLink>
+        <StyledLink to="/">Bying on Aniko van Nie Art Agency</StyledLink>
+        <StyledLink to="/">Selling on Aniko van Nie Art Agency</StyledLink>
       </Column>
       <Column>
         <StyledLink to="/">Privacy Policy</StyledLink>

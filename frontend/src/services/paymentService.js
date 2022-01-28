@@ -1,8 +1,8 @@
 export default {
-  submitNewBid: async (artworkId, minimumBid, userId) => {
+  submitNewBid: async (artworkId, highestBid, userId) => {
     const response = await fetch(`/api/artwork/set-new-bid`, {
       method: "PUT",
-      body: JSON.stringify({ artworkId, minimumBid, userId }),
+      body: JSON.stringify({ artworkId, highestBid, userId }),
       headers: {
         "Content-Type": "application/json",
       },

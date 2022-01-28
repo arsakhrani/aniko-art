@@ -58,3 +58,34 @@ module.exports.informAdminOfSale = (buyer, seller, artwork, price) => {
   <p>Warm Regards,</p>
   <p>Your Aniko van Nie // Art Agency Team</p>`;
 };
+
+module.exports.informAdminOfCanceledBid = (buyer, seller, artwork) => {
+  return `<p>Dear Admin,</p>
+  <br>
+  <p>The bid by ${buyer.fullName} for ${artwork.title}
+  was not accepted in time by ${seller.fullName}.
+  You can contact them as follows.</p>
+  <p>Buyer: ${buyer.email}</p>
+  <p>Seller: ${seller.email}</p>
+  <br>
+  <p>Warm Regards,</p>
+  <p>Your Aniko van Nie // Art Agency Team</p>`;
+};
+
+module.exports.informAdminOfSaleProcess = () => {
+  return `<p>Dear Admin,</p>
+  <br>
+  <p>BLAA</p>
+  <br>
+  <p>Warm Regards,</p>
+  <p>Your Aniko van Nie // Art Agency Team</p>`;
+};
+
+module.exports.chatRequest = (buyer, seller) => {
+  return `<p>Dear Admin,</p>
+  <br>
+  <p>BLAA</p>
+  <br>
+  <p>Warm Regards,</p>
+  <p>Your Aniko van Nie // Art Agency Team</p>`;
+};

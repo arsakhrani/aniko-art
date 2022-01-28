@@ -15,7 +15,9 @@ export default ({ children }) => {
       setIsAuthenticated(data.isAuthenticated)
       setIsloaded(true)
     } else {
-      //error handle
+      setUser({})
+      setIsAuthenticated(false)
+      setIsloaded(true)
     }
   }
 

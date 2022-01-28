@@ -7,15 +7,30 @@
 }
 
 @font-face {
-  font-family: "Nunito";
-  src: local("Nunito"),
-    url(./assets/fonts/Nunito/Nunito-Regular.ttf) format("truetype");
+  font-family: "Din Light";
+  src: local("Din Next Rounded"),
+    url(./assets/fonts/Din_Next_Rounded/DINNextRoundedLTPro-Light.otf)
+      format("truetype");
+}
+
+@font-face {
+  font-family: "Din Bold";
+  src: local("Din Next Rounded"),
+    url(./assets/fonts/Din_Next_Rounded/DINNextRoundedLTPro-Regular.otf)
+      format("truetype");
+}
+
+/* TEST */
+@font-face {
+  font-family: "Object Light";
+  src: local("Object Light"),
+    url(./assets/fonts/Test/Object-UltraLight.ttf) format("truetype");
 }
 
 body {
   box-sizing: border-box;
   margin: 0;
-  font-family: "Crimson Text", sans-serif;
+  font-family: "Din Light", sans-serif;
 }
 
 body.modal-open {
@@ -23,7 +38,16 @@ body.modal-open {
   overflow-y: hidden;
   box-sizing: border-box;
   margin: 0;
-  font-family: "Crimson Text", sans-serif;
+  font-family: "Din Light", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Object Light", serif;
 }
 
 a {

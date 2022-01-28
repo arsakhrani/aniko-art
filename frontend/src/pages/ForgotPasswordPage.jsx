@@ -33,7 +33,7 @@ export default function ForgotPasswordPage() {
 
   return (
     <Container>
-      <h1>Aniko.Art</h1>
+      <h1>Aniko van Nie Art Agency</h1>
       <p>Enter the email address associated with your account.</p>
       <form onSubmit={(e) => sendEmail(e)}>
         <TextInput

@@ -5,6 +5,8 @@ const artworkController = require("../controllers/artwork");
 
 router.post("/upload", wrapAsync(artworkController.uploadArt));
 
+router.post("/chat-request", wrapAsync(artworkController.chatRequest));
+
 router.get("/get-all", wrapAsync(artworkController.getAllArt));
 
 router.put("/set-new-bid", wrapAsync(artworkController.setNewBid));

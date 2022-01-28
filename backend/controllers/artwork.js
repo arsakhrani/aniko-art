@@ -23,6 +23,15 @@ module.exports.uploadArt = async (req, res) => {
   newArtwork.size = artwork.dimensionsCm.length * artwork.dimensionsCm.width;
   const number = await Artwork.countDocuments();
   newArtwork.lot = number + 1;
+  if (newArtwork.price < 1001) {
+    newArtwork.bidIncrement = 125;
+  } else if (newArtwork.price < 4001) {
+    newArtwork.bidIncrement = 250;
+  } else if (newArtwork.price < 50001) {
+    newArtwork.bidIncrement = 500;
+  } else {
+    newArtwork.bidIncrement = 1000;
+  }
   await newArtwork.save();
 
   const user = await User.findById(artwork.owner);
@@ -47,20 +56,37 @@ module.exports.getAllArt = async (req, res) => {
 };
 
 module.exports.setNewBid = async (req, res) => {
-  const { artworkId, minimumBid, userId } = req.body;
+  const { artworkId, highestBid, userId } = req.body;
   const artwork = await Artwork.findById(artworkId);
   const buyer = await User.findById(userId);
   const seller = await User.findById(artwork.owner);
-  const oldBidHolder = await User.findById(artwork.highestBidHolder);
 
-  if (minimumBid > artwork.minimumBid) {
-    artwork.minimumBid = minimumBid;
+  if (highestBid > artwork.highestBid) {
+    if (artwork.highestBidHolder) {
+      const oldBidHolder = await User.findById(artwork.highestBidHolder);
+      const oldBidHolderEmail = stripeEmails.informOldBidHolder(
+        oldBidHolder.fullName,
+        highestBid,
+        artwork
+      );
+      transport.sendMail({
+        from: devEmail,
+        to: oldBidHolder.email,
+        subject: "You Have Been Outbid!",
+        html: oldBidHolderEmail,
+      });
+    } else {
+      artwork.bidActivationTime = Date.now();
+      artwork.isBidActive = true;
+    }
+
+    artwork.highestBid = highestBid;
     artwork.highestBidHolder = userId;
     artwork.save();
 
     const sellerEmailBody = stripeEmails.setNewBidSeller(
       seller.fullName,
-      minimumBid,
+      highestBid,
       artwork
     );
     transport.sendMail({
@@ -72,7 +98,7 @@ module.exports.setNewBid = async (req, res) => {
 
     const buyerEmailBody = stripeEmails.setNewBidBuyer(
       buyer.fullName,
-      minimumBid,
+      highestBid,
       artwork
     );
     transport.sendMail({
@@ -81,20 +107,6 @@ module.exports.setNewBid = async (req, res) => {
       subject: "Your Bid Confirmation",
       html: buyerEmailBody,
     });
-
-    if (oldBidHolder) {
-      const oldBidHolderEmail = stripeEmails.informOldBidHolder(
-        oldBidHolder.fullName,
-        minimumBid,
-        artwork
-      );
-      transport.sendMail({
-        from: devEmail,
-        to: oldBidHolder.email,
-        subject: "You Have Been Outbid!",
-        html: oldBidHolderEmail,
-      });
-    }
 
     res.status(200).json({ success: true, artwork });
   } else {
@@ -110,6 +122,8 @@ module.exports.finalizeSale = async (req, res) => {
 
   if (artwork && buyer && seller) {
     artwork.sold = true;
+    artwork.saleTime = Date.now();
+    artwork.buyer = buyerId;
     artwork.save();
 
     const sellerEmailBody = stripeEmails.informSellerOfSale(
@@ -155,8 +169,26 @@ module.exports.finalizeSale = async (req, res) => {
   }
 };
 
+module.exports.chatRequest = async (req, res, next) => {
+  const { buyerId, sellerId } = req.body;
+  const buyer = await User.findById(buyerId);
+  const seller = await User.findById(sellerId);
+
+  const adminEmailBody = adminEmails.chatRequest(buyer, seller);
+
+  transport.sendMail({
+    from: devEmail,
+    to: devEmail,
+    subject: "A Chat Request Has Been Made",
+    html: adminEmailBody,
+  });
+
+  res.status(200).json({ success: true });
+};
+
 module.exports.deleteArt = async (req, res, next) => {
   const { id } = req.params;
   const artwork = await Artwork.findByIdAndDelete(id);
+  //send emails to affected parties.
   res.status(200).json({ success: true });
 };

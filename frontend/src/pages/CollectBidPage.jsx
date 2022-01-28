@@ -30,8 +30,9 @@ export default function CollectBidPage() {
   return (
     <Elements stripe={stripePromise} options={options}>
       <CollectBidForm
-        minimumBid={location.state.minimumBid}
+        highestBid={location.state.highestBid}
         artworkId={location.state.artworkId}
+        bidIncrement={location.state.bidIncrement}
       />
     </Elements>
   )

@@ -2,7 +2,6 @@ import styled from "styled-components"
 import theme from "../../../common/theme"
 
 export const Container = styled.div`
-  font-family: "Arial", sans-serif;
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 10em;
@@ -10,10 +9,6 @@ export const Container = styled.div`
   background-color: ${theme.color.grey};
   width: 100vw;
   min-height: 100vh;
-
-  h1 {
-    font-weight: 100;
-  }
 
   .password-container {
     width: 90%;
@@ -33,14 +28,9 @@ export const Container = styled.div`
 `
 
 export const UploadContainer = styled.div`
-  font-family: "Arial", sans-serif;
   background-color: ${theme.color.grey};
   width: 100vw;
   min-height: 80vh;
-
-  h1 {
-    font-weight: 100;
-  }
 
   .password-container {
     width: 90%;
@@ -78,14 +68,9 @@ export const Para = styled.p`
 `
 
 export const Header = styled.div`
-  font-family: "Arial", sans-serif;
   padding: 3em 5em;
   background-color: ${theme.color.grey};
   width: 100vw;
-
-  h1 {
-    font-weight: 100;
-  }
 
   @media (max-width: 500px) {
     padding: 3em 2em;

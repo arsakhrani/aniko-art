@@ -13,7 +13,7 @@ export default function HomePage() {
     <div>
       <Header />
       <InteractiveMap />
-      <Values />
+      {!authContext.isAuthenticated && <Values />}
       {!authContext.isAuthenticated && <Registration />}
       <Footer />
     </div>

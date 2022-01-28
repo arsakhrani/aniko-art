@@ -10,14 +10,12 @@ export const Container = styled.div`
 
   h1 {
     text-align: right;
-    font-family: "Arial", sans-serif;
     color: white;
     font-size: 6em;
     margin: 0;
     padding-right: 0.5em;
     position: relative;
-    bottom: 0.4em;
-    font-weight: 500;
+    bottom: 0.48em;
 
     @media (max-width: ${theme.mediaSize.mobileL}) {
       font-size: 4em;
@@ -35,8 +33,6 @@ export const ValueContainer = styled.div`
 
   h2 {
     font-size: 3.5em;
-    font-family: "Arial", sans-serif;
-    font-weight: 500;
     margin: 0;
     padding-left: 3rem;
     padding-bottom: 0.4em;
@@ -82,7 +78,6 @@ export const ValueContainer = styled.div`
   }
 
   p {
-    font-family: "Arial", sans-serif;
     padding-left: 3rem;
     padding-top: 0.5em;
     max-width: 25em;

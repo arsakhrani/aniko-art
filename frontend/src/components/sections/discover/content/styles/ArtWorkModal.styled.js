@@ -92,34 +92,17 @@ export const Info = styled.div`
   grid-area: info;
 
   h2 {
-    font-family: "Arial", sans-serif;
-    font-weight: 400;
     font-size: ${theme.fontSize.xxLarge};
     margin: 0;
   }
 
   h3 {
-    font-family: "Helvetica", sans-serif;
-    font-weight: 100;
     font-size: ${theme.fontSize.normal};
     margin-top: 0;
     margin-bottom: 0.5em;
   }
 
-  a {
-    color: ${theme.color.orange};
-    font-family: "Helvetica", sans-serif;
-    font-weight: 100;
-    font-size: ${theme.fontSize.xSmall};
-
-    span {
-      border-bottom: solid 1px ${theme.color.orange};
-    }
-  }
-
   p {
-    font-family: "Helvetica", sans-serif;
-    font-weight: 100;
     font-size: ${theme.fontSize.xSmall};
     margin: 0;
     opacity: 0.8;
@@ -215,5 +198,15 @@ export const ImageSelector = styled.div`
     &:nth-of-type(${(props) => props.$number + 1}) {
       background-color: white;
     }
+  }
+`
+
+export const ChatBlock = styled.div`
+  cursor: pointer;
+  color: ${theme.color.orange};
+  font-size: ${theme.fontSize.xSmall};
+
+  span {
+    border-bottom: solid 1px ${theme.color.orange};
   }
 `

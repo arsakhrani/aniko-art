@@ -133,4 +133,19 @@ export default {
       return null
     }
   },
+  sendChatRequest: async (buyerId, sellerId) => {
+    const response = await fetch("/api/artwork/chat-request", {
+      method: "POST",
+      body: JSON.stringify({ buyerId, sellerId }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    if (response.ok) {
+      const data = response.json()
+      return data
+    } else {
+      return { success: false }
+    }
+  },
 }

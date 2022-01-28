@@ -83,7 +83,7 @@ export default function Header({ discover, portfolio, grey }) {
       $discover={discover || portfolio}
       $grey={grey}
     >
-      <h1 onClick={() => history.push("/")}>Aniko.Art</h1>
+      <h1 onClick={() => history.push("/")}>Aniko</h1>
       {discover && (
         <DiscoverHeader
           toggleSearch={() =>

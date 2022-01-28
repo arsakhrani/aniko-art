@@ -113,7 +113,7 @@
         <path d="M6488.618,2122.73v-5.61h-.566v5.582c-.765,1.671-2.635,3.825-2.635,5.186a2.789,2.789,0,0,0,.765,1.955h4.336a2.976,2.976,0,0,0,.765-1.955C6491.253,2126.528,6489.355,2124.431,6488.618,2122.73Z" transform="translate(-79.403)" class="color-four"/>
       </g>
     </g>
-    <text transform="translate(1307 1093)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Moscow</tspan></text>
+    <text transform="translate(1307 1093)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Moscow</tspan></text>
     <g class="circle" transform="translate(1277 1113)">
       <g transform="translate(0 0)" fill="none" stroke-width="3">
         <circle cx="10" cy="10" r="10" stroke="none"/>
@@ -121,8 +121,8 @@
       </g>
       <path d="M5,0A5,5,0,1,1,0,5,5,5,0,0,1,5,0Z" transform="translate(5 5)"/>
     </g>
-    <text transform="translate(1305 1115)" font-size="20" font-family="Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">RUSSIA</tspan></text>
-    <text transform="translate(1365 1177)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Penza</tspan></text>
+    <text transform="translate(1305 1115)" font-size="20" font-family="Din Bold, Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">RUSSIA</tspan></text>
+    <text transform="translate(1365 1177)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Penza</tspan></text>
     <g transform="translate(1400 1220)">
       <g transform="translate(-881 -1899.55)">
         <path d="M114.622,43.728,107.67,31.686H111.4L105.36,21.229h3.207L96.311,0,84.054,21.229h3.207L81.224,31.686h3.728L78,43.728Z" transform="translate(803 1899.55)" class="color-two"/>
@@ -150,7 +150,7 @@
     <g>
       <path d="M469.9,59.239s16.021-5.34,27.6-16.808c0,0-1.462,16.808,3.148,17.82s14.84-16.976,14.84-16.976,8.6,16.021,15.627,15.515c5.228-.393,1.574-16.976,1.574-16.976S547.024,60.42,559.841,58.34c0,0-35.189-44.24-44.408-44.24C501.379,14.044,469.9,59.239,469.9,59.239Z" transform="translate(649 990)" fill="#fff"/>
     </g>
-    <text transform="translate(1053 1050)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Minsk</tspan></text>
+    <text transform="translate(1053 1050)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Minsk</tspan></text>
     <g transform="translate(1020 1032)">
       <g transform="translate(-7094.401 -2122.021)">
         <path d="M7337.006,2186.255V2167.62h-23.441v18.635H7310v44.756h30.535v-44.756Z" transform="translate(-145.115 -30.692)" class="color-six"/>
@@ -210,7 +210,7 @@
       </g>
       <path d="M5,0A5,5,0,1,1,0,5,5,5,0,0,1,5,0Z" transform="translate(5 5)"/>
     </g>
-    <text transform="translate(1005 1125)" font-size="20" font-family="Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">BELARUS</tspan></text>
+    <text transform="translate(1005 1125)" font-size="20" font-family="Din Bold, Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">BELARUS</tspan></text>
   </g>
 
   <g class="country" id="Czech-Republic" transform="translate(20 -1028)" stroke-linecap="round" stroke-linejoin="round">
@@ -225,7 +225,7 @@
       </g>
       <path d="M5,0A5,5,0,1,1,0,5,5,5,0,0,1,5,0Z" transform="translate(5 5)"/>
     </g>
-    <text transform="translate(610 1205)" font-size="20" font-family="Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">CZECHIA</tspan></text>
+    <text transform="translate(610 1205)" font-size="20" font-family="Din Bold, Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">CZECHIA</tspan></text>
     <g transform="translate(445 1190)">
       <g transform="translate(-5857.107 -6660.218)">
         <rect width="23.773" height="22.296" transform="translate(5857.107 6682.667)" class="color-eight"/>
@@ -255,7 +255,7 @@
         <path d="M5877.645,6698.524v21.116h4.861v-.149a12.081,12.081,0,1,1,24.161,0v.149h6.925a12.007,12.007,0,0,1,24.013,0h5.156v-21.116Z" transform="translate(3.236 6.291)" class="color-two"/>
       </g>
     </g>
-    <text transform="translate(497 1280)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Prague</tspan></text>
+    <text transform="translate(497 1280)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Prague</tspan></text>
   </g>
 
   <g class="country" id="Poland" transform="translate(5 -1020)" stroke-linecap="round" stroke-linejoin="round">
@@ -269,10 +269,10 @@
     <g>
       <path id="poland-mountain-two" d="M469.9,59.239s16.021-5.34,27.6-16.808c0,0-1.462,16.808,3.148,17.82s14.84-16.976,14.84-16.976,8.6,16.021,15.627,15.515c5.228-.393,1.574-16.976,1.574-16.976S547.024,60.42,559.841,58.34c0,0-35.189-44.24-44.408-44.24C501.379,14.044,469.9,59.239,469.9,59.239Z" transform="translate(245 1010)" fill="#fff"/>
     </g>
-    <text transform="translate(857 1057)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Gdansk</tspan></text>
-    <text transform="translate(595 1080)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Szczecin</tspan></text>
-    <text transform="translate(700 1087)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Poznan</tspan></text>
-    <text transform="translate(840 1100)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Warsaw</tspan></text>
+    <text transform="translate(857 1057)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Gdansk</tspan></text>
+    <text transform="translate(595 1080)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Szczecin</tspan></text>
+    <text transform="translate(700 1087)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Poznan</tspan></text>
+    <text transform="translate(840 1100)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Warsaw</tspan></text>
     <g transform="translate(595 1102)">
       <g transform="translate(-7643.765 -2244.72)">
         <path d="M7976.215,2275.12l-12.049,19.329h0v44.41h24.345v-44.41Z" transform="translate(-233.054 -22.112)" class="color-nine"/>
@@ -338,7 +338,7 @@
       </g>
       <path d="M5,0A5,5,0,1,1,0,5,5,5,0,0,1,5,0Z" transform="translate(5 5)"/>
     </g>
-    <text transform="translate(800 1127)" font-size="20" font-family="Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">POLAND</tspan></text>
+    <text transform="translate(800 1127)" font-size="20" font-family="Din Bold, Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">POLAND</tspan></text>
     <g transform="translate(885 1110)">
       <g transform="translate(-881 -1899.55)">
         <path d="M114.622,43.728,107.67,31.686H111.4L105.36,21.229h3.207L96.311,0,84.054,21.229h3.207L81.224,31.686h3.728L78,43.728Z" transform="translate(803 1899.55)" class="color-two"/>
@@ -349,7 +349,7 @@
         <rect width="1.27" height="28.917" transform="translate(899.016 1922.379)" class="color-four"/>
       </g>
     </g>
-    <text transform="translate(780 1172)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Wroclaw</tspan></text>
+    <text transform="translate(780 1172)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Wroclaw</tspan></text>
   </g>
 
   <g class="country" id="Ukraine" transform="translate(12 -1032)" stroke-linecap="round" stroke-linejoin="round">
@@ -357,8 +357,8 @@
       <path d="M 1279.801635742188 1373.398559570312 L 1279.319702148438 1372.866333007812 L 1243.659423828125 1333.488891601562 L 1139.394653320312 1284.690063476562 L 994.8075561523438 1304.722778320312 L 994.6393432617188 1304.74609375 L 994.4701538085938 1304.731079101562 L 866.925537109375 1293.4990234375 L 863.7374877929688 1293.218383789062 L 865.9928588867188 1290.94775390625 L 916.0199584960938 1240.58251953125 L 940.6676635742188 1195.921508789062 L 941.0123291015625 1195.296875 L 941.7144165039062 1195.170166015625 L 1122.113891601562 1162.597900390625 L 1122.495727539062 1162.528930664062 L 1122.863037109375 1162.653686523438 L 1292.457397460938 1220.291381835938 L 1292.891845703125 1220.439086914062 L 1293.169311523438 1220.804443359375 L 1365.276733398438 1315.745849609375 L 1365.582153320312 1316.148071289062 L 1365.582153320312 1316.653076171875 L 1365.582153320312 1367.004028320312 L 1365.582153320312 1368.41943359375 L 1364.169067382812 1368.501586914062 L 1280.518432617188 1373.35693359375 L 1279.801635742188 1373.398559570312 Z" stroke="none"/>
       <path d="M 1280.431518554688 1371.859497070312 L 1364.082153320312 1367.004028320312 L 1364.082153320312 1316.653076171875 L 1291.974731445312 1221.711669921875 L 1122.38037109375 1164.073974609375 L 941.9808959960938 1196.646240234375 L 917.2318725585938 1241.490966796875 L 867.0570678710938 1292.0048828125 L 994.6016845703125 1303.236938476562 L 1139.628540039062 1283.143310546875 L 1244.568603515625 1332.258178710938 L 1280.431518554688 1371.859497070312 M 1280.43115234375 1374.859497070312 C 1279.586791992188 1374.859497070312 1278.778198242188 1374.503173828125 1278.207885742188 1373.873291015625 L 1242.750122070312 1334.719482421875 L 1139.160888671875 1286.23681640625 L 995.013427734375 1306.20849609375 C 994.7899780273438 1306.239501953125 994.5634155273438 1306.245483398438 994.3385009765625 1306.225341796875 L 866.7938232421875 1294.993286132812 C 865.6345825195312 1294.891235351562 864.6389770507812 1294.127807617188 864.2393798828125 1293.034912109375 C 863.83984375 1291.94189453125 864.1084594726562 1290.716430664062 864.9285888671875 1289.890747070312 L 914.8079223632812 1239.67431640625 L 939.3543701171875 1195.19677734375 C 939.7905883789062 1194.406372070312 940.5594482421875 1193.854370117188 941.4478759765625 1193.693969726562 L 1121.847290039062 1161.121704101562 C 1122.348022460938 1161.031372070312 1122.863891601562 1161.06982421875 1123.345703125 1161.233520507812 L 1292.940063476562 1218.871215820312 C 1293.50634765625 1219.063720703125 1294.002075195312 1219.4208984375 1294.36376953125 1219.897216796875 L 1366.47119140625 1314.838623046875 C 1366.867553710938 1315.360473632812 1367.082153320312 1315.997680664062 1367.082153320312 1316.653076171875 L 1367.082153320312 1367.004028320312 C 1367.082153320312 1368.593383789062 1365.842651367188 1369.906982421875 1364.256103515625 1369.9990234375 L 1280.605346679688 1374.8544921875 C 1280.547241210938 1374.857788085938 1280.489013671875 1374.859497070312 1280.43115234375 1374.859497070312 Z" stroke="none"/>
     </g>
-    <text transform="translate(1129 1200)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Kyiv</tspan></text>
-    <text transform="translate(925 1240)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Lyiv</tspan></text>
+    <text transform="translate(1129 1200)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Kyiv</tspan></text>
+    <text transform="translate(925 1240)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Lyiv</tspan></text>
     <g transform="translate(965 1199)">
       <g transform="translate(-6352.483 -6637.367)">
         <path d="M6451.623,6666.214a6.565,6.565,0,0,1-.808-3.236l-4.609.05a6.724,6.724,0,0,1-.809,3.186c-1.325,1.567-4.462,2.874-4.462,6.373a5.919,5.919,0,0,0,2.769,5.466h9.635a5.922,5.922,0,0,0,2.77-5.466C6456.108,6669.082,6452.948,6667.784,6451.623,6666.214Z" transform="translate(27.098 7.848)" class="color-four"/>
@@ -456,8 +456,8 @@
       </g>
       <path d="M5,0A5,5,0,1,1,0,5,5,5,0,0,1,5,0Z" transform="translate(5 5)"/>
     </g>
-    <text transform="translate(1129 1232)" font-size="20" font-family="Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">UKRAINE</tspan></text>
-    <text transform="translate(1235 1230)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Kharkiv</tspan></text>
+    <text transform="translate(1129 1232)" font-size="20" font-family="Din Bold, Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">UKRAINE</tspan></text>
+    <text transform="translate(1235 1230)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Kharkiv</tspan></text>
     <g transform="translate(1240 1260)">
       <g transform="translate(-6424 -7020)">
         <path d="M6434.346,7020.3c6.05-.309,11.639,11.282,10.447,23.572s-1.089,21.087-10.162,21.246c-8.255.164-9.333-16.414-9.776-22.336S6426.265,7020.648,6434.346,7020.3Z" transform="translate(0)" class="color-two"/>
@@ -565,8 +565,8 @@
       </g>
       <path d="M5,0A5,5,0,1,1,0,5,5,5,0,0,1,5,0Z" transform="translate(5 5)"/>
     </g>
-    <text transform="translate(665 1275)" font-size="20" font-family="Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">SLOVAKIA</tspan></text>
-    <text transform="translate(575 1303)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Bratislava</tspan></text>
+    <text transform="translate(665 1275)" font-size="20" font-family="Din Bold, Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">SLOVAKIA</tspan></text>
+    <text transform="translate(575 1303)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Bratislava</tspan></text>
   </g>
 
   <g class="country" id="Moldova" transform="translate(15 -1038)" stroke-linecap="round" stroke-linejoin="round">
@@ -581,8 +581,8 @@
       </g>
       <path d="M5,0A5,5,0,1,1,0,5,5,5,0,0,1,5,0Z" transform="translate(5 5)"/>
     </g>
-    <text transform="translate(1105 1323)" font-size="20" font-family="Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">MOLDOVA</tspan></text>
-    <text transform="translate(1190 1360)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Chisnau</tspan></text>
+    <text transform="translate(1105 1323)" font-size="20" font-family="Din Bold, Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">MOLDOVA</tspan></text>
+    <text transform="translate(1190 1360)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Chisnau</tspan></text>
     <g transform="translate(1125 1352)">
       <g transform="translate(-6509.342 -2694.821)">
         <path d="M6564.11,2825.639v23.134h-26.1v-23.253h-20.168v37.9h66.437v-37.786Z" transform="translate(-5.979 -91.935)" class="color-nine"/>
@@ -607,7 +607,7 @@
       <path d="M 836.1632690429688 1528.156860351562 L 835.18701171875 1526.212158203125 L 812.5845336914062 1481.187133789062 L 749.0684204101562 1486.637817382812 L 748.486328125 1486.687744140625 L 748.0238037109375 1486.330810546875 L 694.5477905273438 1445.066528320312 L 692.45654296875 1443.452758789062 L 694.913818359375 1442.483520507812 L 783.7828979492188 1407.431274414062 L 908.1314086914062 1313.671142578125 L 908.5838623046875 1313.329956054688 L 909.1488647460938 1313.373168945312 L 994.43408203125 1319.896240234375 L 1044.419555664062 1313.38134765625 L 1045.09521484375 1313.293334960938 L 1045.60595703125 1313.744140625 L 1109.585205078125 1370.2099609375 L 1109.968872070312 1370.548583984375 L 1110.065551757812 1371.051025390625 L 1122.37255859375 1434.984008789062 L 1183.435668945312 1458.482421875 L 1185.107299804688 1459.125732421875 L 1184.1806640625 1460.658447265625 L 1154.19921875 1510.244873046875 L 1153.66455078125 1511.12890625 L 1152.648071289062 1510.944702148438 L 988.1429443359375 1481.130126953125 L 857.559814453125 1504.809326171875 L 837.6334838867188 1526.552612304688 L 836.1632690429688 1528.156860351562 Z" stroke="none"/>
       <path d="M 836.527587890625 1525.539184570312 L 856.7952270507812 1503.423461914062 L 988.142822265625 1479.605712890625 L 1152.91552734375 1509.46875 L 1182.89697265625 1459.88232421875 L 1121.056884765625 1436.0849609375 L 1108.592651367188 1371.334594726562 L 1044.613403320312 1314.868774414062 L 994.474365234375 1321.403686523438 L 909.0344848632812 1314.868774414062 L 784.5230712890625 1408.751831054688 L 695.4641723632812 1443.87890625 L 748.940185546875 1485.143310546875 L 813.4690551757812 1479.605712890625 L 836.527587890625 1525.539184570312 M 836.52783203125 1528.539184570312 C 836.390380859375 1528.539184570312 836.2522583007812 1528.52978515625 836.114013671875 1528.510498046875 C 835.1369018554688 1528.37451171875 834.2891235351562 1527.766845703125 833.8464965820312 1526.885131835938 L 811.7000122070312 1482.7685546875 L 749.1966552734375 1488.13232421875 C 748.447998046875 1488.196533203125 747.7022705078125 1487.977294921875 747.107421875 1487.518432617188 L 693.6314086914062 1446.254028320312 C 692.77685546875 1445.594482421875 692.3424072265625 1444.526733398438 692.4938354492188 1443.4580078125 C 692.645263671875 1442.389282226562 693.3592529296875 1441.484252929688 694.3634033203125 1441.088134765625 L 783.042724609375 1406.11083984375 L 907.2283325195312 1312.473388671875 C 907.8114013671875 1312.033813476562 908.5345458984375 1311.821044921875 909.2633056640625 1311.877563476562 L 994.3941040039062 1318.388793945312 L 1044.225708007812 1311.893920898438 C 1045.084716796875 1311.781982421875 1045.949462890625 1312.046630859375 1046.598510742188 1312.619506835938 L 1110.577758789062 1369.085327148438 C 1111.075317382812 1369.5244140625 1111.413208007812 1370.115966796875 1111.53857421875 1370.767578125 L 1123.688110351562 1433.883056640625 L 1183.974365234375 1457.08251953125 C 1184.802978515625 1457.4013671875 1185.44775390625 1458.07080078125 1185.7353515625 1458.910766601562 C 1186.022827148438 1459.750732421875 1185.923583984375 1460.6748046875 1185.464233398438 1461.4345703125 L 1155.482788085938 1511.02099609375 C 1154.838989257812 1512.085693359375 1153.60498046875 1512.643188476562 1152.380493164062 1512.420654296875 L 988.1428833007812 1482.654663085938 L 858.3244018554688 1506.195068359375 L 838.7393188476562 1527.566040039062 C 838.1670532226562 1528.190551757812 837.3624267578125 1528.539184570312 836.52783203125 1528.539184570312 Z" stroke="none"/>
     </g>
-    <text transform="translate(880 1360)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Cluj-Napoca</tspan></text>
+    <text transform="translate(880 1360)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Cluj-Napoca</tspan></text>
     <g transform="translate(1015 1335)">
       <g transform="translate(-885 -1899.55)">
         <path d="M114.622,43.728,107.67,31.686H111.4L105.36,21.229h3.207L96.311,0,84.054,21.229h3.207L81.224,31.686h3.728L78,43.728Z" transform="translate(803 1899.55)" class="color-two"/>
@@ -637,7 +637,7 @@
       </g>
       <path d="M5,0A5,5,0,1,1,0,5,5,5,0,0,1,5,0Z" transform="translate(5 5)"/>
     </g>
-    <text transform="translate(945 1400)" font-size="20" font-family="Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">ROMANIA</tspan></text>
+    <text transform="translate(945 1400)" font-size="20" font-family="Din Bold, Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">ROMANIA</tspan></text>
     <g transform="translate(735 1405)">
       <g transform="translate(-6125 -6821)">
         <path d="M6159.613,6833.961a9.97,9.97,0,0,0-19.26-5.16,9.821,9.821,0,0,0,0,5.16,14.752,14.752,0,0,0-1.677,20.8l.042.049a14.757,14.757,0,0,0,20.8,1.671l.042-.036a14.753,14.753,0,0,0,1.677-20.8l-.042-.048h0A11.911,11.911,0,0,0,6159.613,6833.961Z" class="color-two"/>
@@ -676,7 +676,7 @@
         <path d="M6237.473,6852.511h0a4.165,4.165,0,0,1,4.128,4.129v9.007h-8.256v-9.007a4.046,4.046,0,0,1,3.963-4.129C6237.363,6852.51,6237.418,6852.51,6237.473,6852.511Z" class="color-one"/>
       </g>
     </g>
-    <text transform="translate(1055 1475)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Bucharest</tspan></text>
+    <text transform="translate(1055 1475)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Bucharest</tspan></text>
   </g>
 
   <g class="country" id="Hungary" transform="translate(5 -1028)" stroke-linecap="round" stroke-linejoin="round">
@@ -696,8 +696,8 @@
         <rect width="6.744" height="1.533" transform="matrix(0.71, -0.705, 0.705, 0.71, 6149.479, 6851.728)" class="color-four"/>
       </g>
     </g>
-    <text transform="translate(520 1345)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Gyor</tspan></text>
-    <text transform="translate(615 1360)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Budapest</tspan></text>
+    <text transform="translate(520 1345)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Gyor</tspan></text>
+    <text transform="translate(615 1360)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Budapest</tspan></text>
     <g class="circle" transform="translate(597 1377)">
       <g transform="translate(0 0)" fill="none" stroke-width="3">
         <circle cx="10" cy="10" r="10" stroke="none"/>
@@ -705,7 +705,7 @@
       </g>
       <path d="M5,0A5,5,0,1,1,0,5,5,5,0,0,1,5,0Z" transform="translate(5 5)"/>
     </g>
-    <text transform="translate(625 1380)" font-size="20" font-family="Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">HUNGARY</tspan></text>
+    <text transform="translate(625 1380)" font-size="20" font-family="Din Bold, Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">HUNGARY</tspan></text>
     <g transform="translate(390 1380)">
       <g transform="translate(-5842.87 -6830.032)">
         <path d="M5927.268,6830.032h0c8.7,0,15.758,6.239,15.758,14.116h0v4.76h-31.355v-4.76C5911.671,6836.271,5918.73,6830.032,5927.268,6830.032Z" transform="translate(17.049)" class="color-four"/>
@@ -751,7 +751,7 @@
         <path d="M5927.481,6857.525,5911.8,6865.4v2.791h31.352V6865.4Z" transform="translate(17.081 6.813)" class="color-three"/>
       </g>
     </g>
-    <text transform="translate(445 1485)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Pecs</tspan></text>
+    <text transform="translate(445 1485)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Pecs</tspan></text>
   </g>
 
   <g class="country" id="Slovenia" transform="translate(-15 -1030)">
@@ -759,8 +759,8 @@
       <path d="M 81.4554443359375 1676.876342773438 L 80.84288787841797 1674.139892578125 L 46.44183731079102 1520.458251953125 L 46.36189270019531 1520.10107421875 L 46.45544815063477 1519.747314453125 L 76.82534790039062 1404.855712890625 L 20.76144599914551 1324.514892578125 L 20.49155807495117 1324.128051757812 L 20.49155807495117 1323.656494140625 L 20.49155807495117 1247.317626953125 L 20.49155807495117 1244.4345703125 L 22.85244560241699 1246.089233398438 L 191.9629211425781 1364.610717773438 L 367.6600036621094 1387.806518554688 L 368.7485046386719 1387.9501953125 L 368.9405517578125 1389.03125 L 386.4083251953125 1487.3505859375 L 386.5683898925781 1488.251342773438 L 385.8406677246094 1488.806030273438 L 340.0603942871094 1523.694458007812 L 339.8298950195312 1523.8701171875 L 339.5505981445312 1523.947265625 L 187.2837371826172 1566.01123046875 L 83.39167022705078 1674.848022460938 L 81.4554443359375 1676.876342773438 Z" stroke="none"/>
       <path d="M 21.99154663085938 1247.317626953125 L 21.99154663085938 1323.656494140625 L 78.453125 1404.567138671875 L 47.90560913085938 1520.130615234375 L 82.30661010742188 1673.812255859375 L 186.4848327636719 1564.67578125 L 339.1511840820312 1522.50146484375 L 384.9314575195312 1487.612915039062 L 367.4636840820312 1389.293579101562 L 191.4027252197266 1366.0498046875 L 21.99154663085938 1247.317626953125 M 21.99130249023438 1244.317626953125 C 22.59661865234375 1244.317626953125 23.19921875 1244.500610351562 23.71334838867188 1244.86083984375 L 192.5233154296875 1363.171752929688 L 367.8563232421875 1386.3193359375 C 369.1525573730469 1386.490478515625 370.188720703125 1387.4814453125 370.4173889160156 1388.768798828125 L 387.8851623535156 1487.088134765625 C 388.0817260742188 1488.194458007812 387.6435546875 1489.317993164062 386.7498474121094 1489.9990234375 L 340.9695434570312 1524.887573242188 C 340.6651000976562 1525.119506835938 340.3190002441406 1525.291259765625 339.9500122070312 1525.39306640625 L 188.0826110839844 1567.3466796875 L 84.47665405273438 1675.883666992188 C 83.71255493164062 1676.684326171875 82.56985473632812 1676.998779296875 81.50360107421875 1676.702880859375 C 80.4373779296875 1676.406616210938 79.62078857421875 1675.547485351562 79.37905883789062 1674.467651367188 L 44.97805786132812 1520.785888671875 C 44.87301635742188 1520.316650390625 44.88232421875 1519.828857421875 45.00521850585938 1519.363891601562 L 75.19754028320312 1405.144165039062 L 19.53134155273438 1325.373291015625 C 19.179931640625 1324.869750976562 18.99154663085938 1324.2705078125 18.99154663085938 1323.656494140625 L 18.99154663085938 1247.317626953125 C 18.99154663085938 1246.198608398438 19.61428833007812 1245.172729492188 20.60690307617188 1244.65625 C 21.04254150390625 1244.429565429688 21.51779174804688 1244.317626953125 21.99130249023438 1244.317626953125 Z" stroke="none"/>
     </g>
-    <text transform="translate(160 1450)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Ljubljana</tspan></text>
-    <text transform="translate(135 1490)" font-size="20" font-family="Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">SLOVENIA</tspan></text>
+    <text transform="translate(160 1450)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Ljubljana</tspan></text>
+    <text transform="translate(135 1490)" font-size="20" font-family="Din Bold, Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">SLOVENIA</tspan></text>
     <g transform="translate(-660 1170)">
       <path d="M777.958,189.6,763.3,231.448h28.844Z" transform="translate(0 0)" class="color-six"/>
       <path d="M786.959,194.6,772.3,236.448h28.844Z" transform="translate(10 0)" class="color-six"/>
@@ -819,9 +819,9 @@
         <rect width="1.1" height="30" transform="translate(6434.242 7047.914) rotate(-0.286)" class="color-four"/>
       </g>
     </g>
-    <text transform="translate(1100 1530)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Varna</tspan></text>
-    <text transform="translate(960 1645)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Plovdiv</tspan></text>
-    <text transform="translate(835 1590)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Sofia</tspan></text>
+    <text transform="translate(1100 1530)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Varna</tspan></text>
+    <text transform="translate(960 1645)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Plovdiv</tspan></text>
+    <text transform="translate(835 1590)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Sofia</tspan></text>
     <g class="circle" transform="translate(895 1557)">
       <g transform="translate(0 0)" fill="none" stroke-width="3">
         <circle cx="10" cy="10" r="10" stroke="none"/>
@@ -829,7 +829,7 @@
       </g>
       <path d="M5,0A5,5,0,1,1,0,5,5,5,0,0,1,5,0Z" transform="translate(5 5)"/>
     </g>
-    <text transform="translate(925 1560)" font-size="20" font-family="Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">BULGARIA</tspan></text>
+    <text transform="translate(925 1560)" font-size="20" font-family="Din Bold, Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">BULGARIA</tspan></text>
     <g transform="translate(820 1610)">
       <g transform="translate(-6230.401 -7036.147)">
         <path d="M6251.478,7073.008l50.885-.264a8.765,8.765,0,0,1,8.759,8.637l-68.3.287a8.825,8.825,0,0,1,8.652-8.66Z" class="color-four"/>
@@ -868,10 +868,10 @@
       <path d="M 571.5685424804688 1661.062744140625 L 570.8514404296875 1660.670043945312 L 538.0349731445312 1642.699584960938 L 537.5267333984375 1642.421264648438 L 537.337646484375 1641.87353515625 L 527.0509033203125 1612.087036132812 L 526.9686889648438 1611.84912109375 L 526.9686889648438 1611.597412109375 L 526.9686889648438 1597.730102539062 L 505.4566650390625 1558.237548828125 L 467.2177124023438 1532.00341796875 L 464.9511108398438 1530.448364257812 L 467.4852600097656 1529.383544921875 L 674.0630493164062 1442.584228515625 L 674.8758544921875 1442.24267578125 L 675.5696411132812 1442.78662109375 L 742.4099731445312 1495.194091796875 L 804.8306274414062 1492.256591796875 L 805.8204345703125 1492.210083007812 L 806.2516479492188 1493.102294921875 L 825.39599609375 1532.713012695312 L 825.835205078125 1533.621826171875 L 825.1588134765625 1534.370971679688 L 800.3348999023438 1561.86572265625 L 797.783935546875 1598.912841796875 L 797.76806640625 1599.143310546875 L 797.68359375 1599.358276367188 L 778.7095947265625 1647.652954101562 L 778.1942138671875 1648.964721679688 L 776.8529663085938 1648.532104492188 L 662.5983276367188 1611.677978515625 L 572.2871704101562 1660.6728515625 L 571.5685424804688 1661.062744140625 Z" stroke="none"/>
       <path d="M 674.6441040039062 1443.967041015625 L 468.0662841796875 1530.766479492188 L 506.6019287109375 1557.2041015625 L 528.4686889648438 1597.348022460938 L 528.4686889648438 1611.597412109375 L 538.7554321289062 1641.383911132812 L 571.5718994140625 1659.354370117188 L 662.4476318359375 1610.05322265625 L 777.3134155273438 1647.1044921875 L 796.2874755859375 1598.809814453125 L 798.8740844726562 1561.245361328125 L 824.04541015625 1533.36572265625 L 804.901123046875 1493.755004882812 L 741.9234008789062 1496.718627929688 L 674.6441040039062 1443.967041015625 M 674.6437377929688 1440.967041015625 C 675.30419921875 1440.967041015625 675.9579467773438 1441.184936523438 676.4951171875 1441.606201171875 L 742.8966064453125 1493.669555664062 L 804.7601318359375 1490.75830078125 C 805.960205078125 1490.7021484375 807.0791015625 1491.367309570312 807.6021728515625 1492.449584960938 L 826.7464599609375 1532.060302734375 C 827.277587890625 1533.1591796875 827.0899658203125 1534.47021484375 826.2720947265625 1535.376098632812 L 801.7957763671875 1562.485961914062 L 799.2803344726562 1599.015869140625 C 799.2593383789062 1599.3212890625 799.191650390625 1599.621826171875 799.0797119140625 1599.90673828125 L 780.1056518554688 1648.201538085938 C 779.5262451171875 1649.676025390625 777.9003295898438 1650.4462890625 776.3924560546875 1649.959594726562 L 662.7491455078125 1613.302612304688 L 573.00244140625 1661.991333007812 C 572.1065063476562 1662.477416992188 571.0250854492188 1662.475341796875 570.1309814453125 1661.985595703125 L 537.3145751953125 1644.01513671875 C 536.6604614257812 1643.657104492188 536.1632080078125 1643.068115234375 535.9197998046875 1642.363159179688 L 525.633056640625 1612.57666015625 C 525.5242309570312 1612.261596679688 525.4686889648438 1611.9306640625 525.4686889648438 1611.597412109375 L 525.4686889648438 1598.112060546875 L 504.3115844726562 1559.270874023438 L 466.369140625 1533.240234375 C 465.4640502929688 1532.619384765625 464.9702758789062 1531.5537109375 465.081787109375 1530.461791992188 C 465.193359375 1529.369750976562 465.8922729492188 1528.425903320312 466.9041748046875 1528.000732421875 L 673.4819946289062 1441.201293945312 C 673.8560791015625 1441.044067382812 674.2511596679688 1440.967041015625 674.6437377929688 1440.967041015625 Z" stroke="none"/>
     </g>
-    <text transform="translate(640 1490)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Novi Sad</tspan></text>
-    <text transform="translate(695 1510)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Belgrade</tspan></text>
-    <text transform="translate(565 1610)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Uzice</tspan></text>
-    <text transform="translate(730 1595)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Nis</tspan></text>
+    <text transform="translate(640 1490)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Novi Sad</tspan></text>
+    <text transform="translate(695 1510)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Belgrade</tspan></text>
+    <text transform="translate(565 1610)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Uzice</tspan></text>
+    <text transform="translate(730 1595)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Nis</tspan></text>
     <g transform="translate(510 1495)">
       <g transform="translate(-5909.996 -6922.678)">
         <path d="M6010.847,6982.3l-100.851,2.8,12.131-46.54,3.76-.127.142,5.667,3.51-.118-.141-5.667,3.662-.074.141,5.667,3.609-.171-.142-5.667,3.662-.074.188,5.516,3.607-.173-.186-5.515,3.76-.128.133,5.417,22.706-.968-.141-5.667,3.76-.126.141,5.667,3.609-.171-.142-5.667,3.76-.128.142,5.667,3.607-.171-.14-5.667,3.76-.127.141,5.667,3.607-.173-.141-5.667,3.663-.073Z" transform="translate(0 1.563)" class="color-eight"/>
@@ -894,7 +894,7 @@
       </g>
       <path d="M5,0A5,5,0,1,1,0,5,5,5,0,0,1,5,0Z" transform="translate(5 5)"/>
     </g>
-    <text transform="translate(668 1530)" font-size="20" font-family="Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">SERBIA</tspan></text>
+    <text transform="translate(668 1530)" font-size="20" font-family="Din Bold, Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">SERBIA</tspan></text>
     <g transform="translate(770 1505)">
       <g transform="translate(-885 -1899.55)">
         <path d="M114.622,43.728,107.67,31.686H111.4L105.36,21.229h3.207L96.311,0,84.054,21.229h3.207L81.224,31.686h3.728L78,43.728Z" transform="translate(803 1899.55)" class="color-two"/>
@@ -937,8 +937,8 @@
       </g>
       <path d="M5,0A5,5,0,1,1,0,5,5,5,0,0,1,5,0Z" transform="translate(5 5)"/>
     </g>
-    <text transform="translate(620 1668)" font-size="20" font-family="Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">KOSOVO</tspan></text>
-    <text transform="translate(615 1700)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Pristina</tspan></text>
+    <text transform="translate(620 1668)" font-size="20" font-family="Din Bold, Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">KOSOVO</tspan></text>
+    <text transform="translate(615 1700)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Pristina</tspan></text>
   </g>
 
   <g class="country" id="Macedonia" transform="translate(15 -1043)" stroke-linecap="round" stroke-linejoin="round">
@@ -946,7 +946,7 @@
       <path d="M 643.8302612304688 1814.74853515625 L 643.1576538085938 1814.169677734375 L 604.0092163085938 1780.4775390625 L 603.4876708984375 1780.028686523438 L 603.4876708984375 1779.340576171875 L 603.4876708984375 1721.970703125 L 603.4876708984375 1720.737426757812 L 604.69775390625 1720.4990234375 L 680.9176635742188 1705.483276367188 L 741.7511596679688 1656.503540039062 L 742.3784790039062 1655.998413085938 L 743.14599609375 1656.242309570312 L 779.8389892578125 1667.898071289062 L 780.4156494140625 1668.081176757812 L 780.703857421875 1668.613159179688 L 790.8894653320312 1687.416381835938 L 791.070556640625 1687.750732421875 L 791.070556640625 1688.130859375 L 791.070556640625 1722.328735351562 L 791.070556640625 1723.074584960938 L 790.4759521484375 1723.524658203125 L 739.79736328125 1761.891479492188 L 739.7935791015625 1761.894409179688 L 739.7897338867188 1761.897216796875 L 694.4934692382812 1795.73828125 L 694.3218383789062 1795.866577148438 L 694.12109375 1795.941650390625 L 644.6614990234375 1814.437744140625 L 643.8302612304688 1814.74853515625 Z" stroke="none"/>
       <path d="M 742.69189453125 1657.671875 L 681.5703735351562 1706.883544921875 L 604.9876708984375 1721.970703125 L 604.9876708984375 1779.340576171875 L 644.1361083984375 1813.03271484375 L 693.595703125 1794.53662109375 L 738.8919677734375 1760.695556640625 L 789.570556640625 1722.328735351562 L 789.570556640625 1688.130859375 L 779.3848876953125 1669.32763671875 L 742.69189453125 1657.671875 M 742.692138671875 1654.671875 C 742.9963989257812 1654.671875 743.302490234375 1654.718139648438 743.6001586914062 1654.812622070312 L 780.2930908203125 1666.468383789062 C 781.0330200195312 1666.703491210938 781.6529541015625 1667.216186523438 782.022705078125 1667.898681640625 L 792.2083740234375 1686.701904296875 C 792.4461059570312 1687.140747070312 792.570556640625 1687.6318359375 792.570556640625 1688.130859375 L 792.570556640625 1722.328735351562 C 792.570556640625 1723.268310546875 792.1304321289062 1724.153564453125 791.38134765625 1724.720581054688 L 740.7027587890625 1763.08740234375 C 740.6976928710938 1763.09130859375 740.6925659179688 1763.095092773438 740.6875 1763.098876953125 L 695.3912353515625 1796.93994140625 C 695.1635131835938 1797.110107421875 694.9127807617188 1797.246948242188 694.646484375 1797.346557617188 L 645.1869506835938 1815.842651367188 C 644.1616821289062 1816.226196289062 643.0089721679688 1816.020629882812 642.1791381835938 1815.306518554688 L 603.0307006835938 1781.614379882812 C 602.3685302734375 1781.044555664062 601.9876708984375 1780.214233398438 601.9876708984375 1779.340576171875 L 601.9876708984375 1721.970703125 C 601.9876708984375 1720.537353515625 603.0015258789062 1719.304321289062 604.4077758789062 1719.027221679688 L 680.2649536132812 1704.0830078125 L 740.8104858398438 1655.335083007812 C 741.3507080078125 1654.900146484375 742.0165405273438 1654.671875 742.692138671875 1654.671875 Z" stroke="none"/>
     </g>
-    <text transform="translate(715 1695)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Skopje</tspan></text>
+    <text transform="translate(715 1695)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Skopje</tspan></text>
     <g class="circle" transform="translate(615 1725)">
       <g transform="translate(0 0)" fill="none" stroke-width="3">
         <circle cx="10" cy="10" r="10" stroke="none"/>
@@ -954,7 +954,7 @@
       </g>
       <path d="M5,0A5,5,0,1,1,0,5,5,5,0,0,1,5,0Z" transform="translate(5 5)"/>
     </g>
-    <text transform="translate(643 1727)" font-size="20" font-family="Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">MACEDONIA</tspan></text>
+    <text transform="translate(643 1727)" font-size="20" font-family="Din Bold, Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">MACEDONIA</tspan></text>
     <g transform="translate(617 1745)">
       <g transform="translate(-6570.372 -3124.42)">
         <rect width="31.492" height="20.134" transform="translate(6597.912 3140.042)" class="color-one"/>
@@ -998,10 +998,10 @@
         <path d="M7189.779,3051.42l8.029,6.769v-6.769Z" transform="translate(-121.835 -9.447)" class="color-four"/>
       </g>
     </g>
-    <text transform="translate(320 1610)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Banja Luka</tspan></text>
-    <text transform="translate(420 1650)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Sarajevo</tspan></text>
-    <text transform="translate(280 1695)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Siroki Brijeg</tspan></text>
-    <text transform="translate(345 1730)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Trebinje</tspan></text>
+    <text transform="translate(320 1610)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Banja Luka</tspan></text>
+    <text transform="translate(420 1650)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Sarajevo</tspan></text>
+    <text transform="translate(280 1695)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Siroki Brijeg</tspan></text>
+    <text transform="translate(345 1730)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Trebinje</tspan></text>
     <g class="circle" transform="translate(250 1630)">
       <g transform="translate(0 0)" fill="none" stroke-width="3">
         <circle cx="10" cy="10" r="10" stroke="none"/>
@@ -1009,8 +1009,8 @@
       </g>
       <path d="M5,0A5,5,0,1,1,0,5,5,5,0,0,1,5,0Z" transform="translate(5 5)"/>
     </g>
-    <text id="bosnia-text-one" transform="translate(280 1631)" font-size="20" font-family="Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">BOSNIA AND</tspan></text>
-    <text id="bosnia-text-two" transform="translate(280 1650)" font-size="20" font-family="Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">HERZEGOVIN</tspan></text>
+    <text id="bosnia-text-one" transform="translate(280 1631)" font-size="20" font-family="Din Bold, Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">BOSNIA AND</tspan></text>
+    <text id="bosnia-text-two" transform="translate(280 1650)" font-size="20" font-family="Din Bold, Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">HERZEGOVIN</tspan></text>
   </g>
   
   <g class="country" id="Albania" transform="translate(20 -1040)" stroke-linecap="round" stroke-linejoin="round">
@@ -1018,7 +1018,7 @@
       <path d="M 510.9092712402344 1931.73046875 L 510.3654174804688 1931.217041015625 C 510.2527770996094 1931.110717773438 498.976318359375 1920.4609375 487.8482666015625 1909.659423828125 C 481.3073120117188 1903.310302734375 476.0948486328125 1898.150024414062 472.3556518554688 1894.321899414062 C 470.1238708496094 1892.036987304688 468.3937377929688 1890.201904296875 467.2132873535156 1888.867797851562 C 465.2215270996094 1886.616577148438 464.9035949707031 1885.957641601562 464.9119567871094 1885.250366210938 C 464.9152526855469 1884.972534179688 464.9895324707031 1884.703125 465.1231994628906 1884.468139648438 C 465.2188720703125 1884.129638671875 465.5077819824219 1882.828491210938 466.2423706054688 1877.895263671875 C 466.78466796875 1874.253540039062 467.4955444335938 1869.140991210938 468.3553161621094 1862.699584960938 C 469.8045349121094 1851.842651367188 471.6972045898438 1837.064453125 473.9807434082031 1818.775634765625 C 477.869384765625 1787.632202148438 481.5930786132812 1756.69140625 481.6302490234375 1756.382446289062 L 481.6971130371094 1755.82666015625 L 482.1118469238281 1755.450561523438 L 567.6512451171875 1677.876953125 L 569.0457763671875 1676.612182617188 L 569.967041015625 1678.254028320312 L 589.892578125 1713.763061523438 L 590.0844116210938 1714.10498046875 L 590.0844116210938 1714.4970703125 L 590.0844116210938 1782.713623046875 L 634.8738403320312 1818.645141601562 L 635.5478515625 1819.185913085938 L 635.418212890625 1820.040283203125 L 627.9827270507812 1869.0341796875 L 627.9274291992188 1869.398315429688 L 627.7097778320312 1869.695434570312 L 592.78466796875 1917.3779296875 L 592.4254760742188 1917.868408203125 L 591.8260498046875 1917.970336914062 L 511.6466369628906 1931.605102539062 L 510.9092712402344 1931.73046875 Z" stroke="none"/>
       <path d="M 568.6588745117188 1678.988037109375 L 483.1195068359375 1756.561645507812 C 483.1195068359375 1756.561645507812 467.7921142578125 1883.975219726562 466.4408569335938 1885.191772460938 C 465.089599609375 1886.408325195312 511.3951416015625 1930.126342773438 511.3951416015625 1930.126342773438 L 591.5745849609375 1916.491577148438 L 626.4996948242188 1868.80908203125 L 633.9351806640625 1819.815185546875 L 588.5844116210938 1783.433349609375 L 588.5844116210938 1714.4970703125 L 568.6588745117188 1678.988037109375 M 568.6588134765625 1675.988037109375 C 568.8191528320312 1675.988037109375 568.9803466796875 1676.000854492188 569.1410522460938 1676.026977539062 C 570.0425415039062 1676.173828125 570.828125 1676.723388671875 571.2750854492188 1677.52001953125 L 591.20068359375 1713.029052734375 C 591.4522705078125 1713.477416992188 591.5844116210938 1713.98291015625 591.5844116210938 1714.4970703125 L 591.5844116210938 1781.994018554688 L 635.8125 1817.47509765625 C 636.6468505859375 1818.14453125 637.061767578125 1819.207641601562 636.9012451171875 1820.265380859375 L 629.4656982421875 1869.25927734375 C 629.3931274414062 1869.737670898438 629.2058715820312 1870.19140625 628.919921875 1870.581787109375 L 593.9948120117188 1918.264282226562 C 593.5340576171875 1918.893432617188 592.8463134765625 1919.318359375 592.0775146484375 1919.449096679688 L 511.8980712890625 1933.083862304688 C 510.9693603515625 1933.241821289062 510.0205078125 1932.954223632812 509.3356323242188 1932.307739257812 C 509.2229614257812 1932.201293945312 497.9389038085938 1921.54443359375 486.803466796875 1910.735717773438 C 480.2530517578125 1904.37744140625 475.0310668945312 1899.207641601562 471.2825927734375 1895.369995117188 C 469.0336303710938 1893.067504882812 467.2865600585938 1891.21435546875 466.0899047851562 1889.86181640625 C 464.0999145507812 1887.612548828125 463.3961791992188 1886.575073242188 463.4120483398438 1885.232666015625 C 463.41748046875 1884.777954101562 463.522216796875 1884.33447265625 463.7127075195312 1883.932373046875 C 463.941162109375 1883.004760742188 464.6740112304688 1878.97705078125 466.9533081054688 1861.865356445312 C 468.4051513671875 1850.965454101562 470.29150390625 1836.223022460938 472.5599975585938 1818.047485351562 C 476.42333984375 1787.09375 480.104248046875 1756.508666992188 480.1409301757812 1756.203369140625 C 480.2272338867188 1755.486328125 480.5692138671875 1754.824462890625 481.1041870117188 1754.33935546875 L 566.6434936523438 1676.765747070312 C 567.1995849609375 1676.261474609375 567.9194946289062 1675.988037109375 568.6588134765625 1675.988037109375 Z" stroke="none"/>
     </g>
-    <text transform="translate(520 1755)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0"> Tirana</tspan></text>
+    <text transform="translate(520 1755)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0"> Tirana</tspan></text>
     <g class="circle" transform="translate(480 1780)">
       <g transform="translate(0 0)" fill="none" stroke-width="3">
         <circle cx="10" cy="10" r="10" stroke="none"/>
@@ -1026,7 +1026,7 @@
       </g>
       <path d="M5,0A5,5,0,1,1,0,5,5,5,0,0,1,5,0Z" transform="translate(5 5)"/>
     </g>
-    <text transform="translate(510 1783)" font-size="20" font-family="Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">ALBANIA</tspan></text>
+    <text transform="translate(510 1783)" font-size="20" font-family="Din Bold, Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">ALBANIA</tspan></text>
     <g transform="translate(515 1810)">
       <g transform="translate(-7015.6 -3188.42)">
         <path d="M7082.8,3207.92v42.014h18.838V3207.92Z" transform="translate(-48.277 -14.009)" class="color-two"/>
@@ -1061,8 +1061,8 @@
       </g>
       <path d="M5,0A5,5,0,1,1,0,5,5,5,0,0,1,5,0Z" transform="translate(5 5)"/>
     </g>
-    <text transform="translate(430 1673)" font-size="20" font-family="Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">MONTENEGRO</tspan></text>
-    <text transform="translate(470 1710)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Cetinje</tspan></text>
+    <text transform="translate(430 1673)" font-size="20" font-family="Din Bold, Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">MONTENEGRO</tspan></text>
+    <text transform="translate(470 1710)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Cetinje</tspan></text>
     <g transform="translate(405 1715)">
       <g transform="translate(-5815.642 -7166.874)">
         <path d="M5850.126,7191.083c-.054,4.073-.714,15.133-6.3,15.037-3.822.1-5.354-2.19-6.106-6.064-.682,3.7-1.917,6.888-4.354,6.962a3.746,3.746,0,0,1-3.821-2.467c-.757,3.821-2.494,7.566-6.115,7.615-5.206.122-7.793-4.684-7.786-14.089.056-8.348,2.824-16.088,7.354-15.937a5.41,5.41,0,0,1,4.674,3.321c.858-4.274,2.922-7.138,5.211-6.963,2.037.026,3.52,2.115,4.423,4.882,1.185-4.249,3.524-7.291,6.142-7.086C5848.827,7176.447,5850.3,7187.083,5850.126,7191.083Z" transform="translate(0 2.546)" class="color-two"/>
@@ -1090,11 +1090,11 @@
       <path d="M 152.1651458740234 1783.741455078125 L 151.2316131591797 1782.94140625 L 109.2843170166016 1746.987182617188 L 104.1530532836914 1742.588989257812 L 110.9112777709961 1742.588989257812 L 129.8184204101562 1742.588989257812 L 130.6484985351562 1742.588989257812 L 131.313720703125 1743.08544921875 L 163.6779174804688 1767.239990234375 L 194.5536041259766 1769.9052734375 L 194.8487854003906 1774.843383789062 L 153.3687744140625 1783.490600585938 L 152.1651458740234 1783.741455078125 Z" stroke="none"/>
       <path d="M 110.9112701416016 1745.088989257812 L 152.8585815429688 1781.043212890625 L 194.3385925292969 1772.39599609375 L 162.7533569335938 1769.66943359375 L 129.8184204101562 1745.088989257812 L 110.9112701416016 1745.088989257812 M 110.9112701416016 1740.088989257812 L 129.8184204101562 1740.088989257812 C 130.896240234375 1740.088989257812 131.9452209472656 1740.437255859375 132.8090057373047 1741.081909179688 L 164.6024475097656 1764.810424804688 L 194.7686004638672 1767.41455078125 C 197.240234375 1767.6279296875 199.181640625 1769.621215820312 199.3296813964844 1772.09765625 C 199.4777069091797 1774.573974609375 197.7875823974609 1776.784545898438 195.3589782714844 1777.290771484375 L 153.8789825439453 1785.93798828125 C 152.3608856201172 1786.25390625 150.7820129394531 1785.8486328125 149.6046600341797 1784.839477539062 L 107.6573486328125 1748.88525390625 C 106.0686798095703 1747.523559570312 105.4959106445312 1745.316650390625 106.2218475341797 1743.354248046875 C 106.9477844238281 1741.391845703125 108.8188934326172 1740.088989257812 110.9112701416016 1740.088989257812 Z" stroke="none"/>
     </g>
-    <text transform="translate(400 1530)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Osijek</tspan></text>
-    <text transform="translate(265 1560)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Zagreb</tspan></text>
-    <text transform="translate(105 1670)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Rijeka</tspan></text>
-    <text transform="translate(250 1753)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Split</tspan></text>
-    <text transform="translate(135 1775)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Brac</tspan></text>
+    <text transform="translate(400 1530)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Osijek</tspan></text>
+    <text transform="translate(265 1560)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Zagreb</tspan></text>
+    <text transform="translate(105 1670)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Rijeka</tspan></text>
+    <text transform="translate(250 1753)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Split</tspan></text>
+    <text transform="translate(135 1775)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Brac</tspan></text>
     <g transform="translate(-450 1330)">
       <path d="M786.959,194.6,772.3,236.448h28.844Z" transform="translate(10 0)" class="color-six"/>
       <path d="M793.958,186.6,779.3,228.448h28.844Z" transform="translate(20 0)" class="color-six"/>
@@ -1138,7 +1138,7 @@
       </g>
       <path d="M5,0A5,5,0,1,1,0,5,5,5,0,0,1,5,0Z" transform="translate(5 5)"/>
     </g>
-    <text transform="translate(170 1702)" font-size="20" font-family="Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">CROATIA</tspan></text>
+    <text transform="translate(170 1702)" font-size="20" font-family="Din Bold, Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">CROATIA</tspan></text>
   </g>
 
   <g class="country" id="Turkey" transform="translate(10 -1040)" stroke-linecap="round" stroke-linejoin="round">
@@ -1176,8 +1176,8 @@
         <rect width="1.1" height="30" transform="translate(6434.242 7047.914) rotate(-0.286)" class="color-four"/>
       </g>
     </g>
-    <text transform="translate(1070 1680)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Kirklareli</tspan></text>
-    <text transform="translate(1155 1720)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Istanbul</tspan></text>
+    <text transform="translate(1070 1680)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Kirklareli</tspan></text>
+    <text transform="translate(1155 1720)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Istanbul</tspan></text>
     <g class="circle" transform="translate(1214 1773)">
       <g transform="translate(0 0)" fill="none" stroke-width="3">
         <circle cx="10" cy="10" r="10" stroke="none"/>
@@ -1185,7 +1185,7 @@
       </g>
       <path d="M5,0A5,5,0,1,1,0,5,5,5,0,0,1,5,0Z" transform="translate(5 5)"/>
     </g>
-    <text transform="translate(1245 1775)" font-size="20" font-family="Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">TURKEY</tspan></text>
+    <text transform="translate(1245 1775)" font-size="20" font-family="Din Bold, Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">TURKEY</tspan></text>
     <g transform="translate(1065 1770)">
       <g transform="translate(-6480.193 -7221.612)">
         <rect width="59.792" height="56.315" transform="translate(6518.593 7286.468)" class="color-twelve"/>
@@ -1298,9 +1298,9 @@
       </g>
       <path d="M5,0A5,5,0,1,1,0,5,5,5,0,0,1,5,0Z" transform="translate(5 5)"/>
     </g>
-    <text transform="translate(790 1760)" font-size="20" font-family="Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">GREECE</tspan></text>
-    <text transform="translate(715 1800)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Tsepelovo</tspan></text>
-    <text transform="translate(790 1895)" font-size="14" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Athens</tspan></text>
+    <text transform="translate(790 1760)" font-size="20" font-family="Din Bold, Helvetica" letter-spacing="0.025em"><tspan x="0" y="15">GREECE</tspan></text>
+    <text transform="translate(715 1800)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Tsepelovo</tspan></text>
+    <text transform="translate(790 1895)" font-size="14" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em" opacity="0.8"><tspan x="0" y="0">Athens</tspan></text>
     <g transform="translate(680 1800)">
       <g transform="translate(-6085.38 -7245.3)">
         <path d="M6137.241,7261.532v14.727h-51.86v-14.727h8.3v-8.712H6111v8.712Z" transform="translate(0 1.088)" fill="#fff"/>
@@ -1362,15 +1362,15 @@
   </g>
 
   <g transform="translate(1280 470)">
-    <text fill="#2b2e34" font-size="25" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em"><tspan x="0" y="19">Black Sea</tspan></text>
+    <text fill="#2b2e34" font-size="25" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em"><tspan x="0" y="19">Black Sea</tspan></text>
   </g>
 
   <g transform="translate(895 775)">
-    <text fill="#2b2e34" font-size="25" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em"><tspan x="0" y="19">Aegean Sea</tspan></text>
+    <text fill="#2b2e34" font-size="25" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em"><tspan x="0" y="19">Aegean Sea</tspan></text>
   </g>
 
   <g transform="translate(150 795)">
-    <text fill="#2b2e34" font-size="25" font-family="Helvetica-Light, Helvetica" font-weight="300" letter-spacing="-0.03em"><tspan x="0" y="19">Adriatic Sea</tspan></text>
+    <text fill="#2b2e34" font-size="25" font-family="Din Light, Helvetica" font-weight="300" letter-spacing="-0.03em"><tspan x="0" y="19">Adriatic Sea</tspan></text>
   </g>
 
 </svg>

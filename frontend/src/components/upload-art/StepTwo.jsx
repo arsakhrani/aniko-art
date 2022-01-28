@@ -21,7 +21,7 @@ export default function StepTwo() {
   const [price, setPrice] = useState(1000)
   const [errorMessage, setErrorMessage] = useState("")
   const [showBidInput, setShowBidInput] = useState(false)
-  const [minimumBid, setMinimumBid] = useState(100)
+  const [minimumBid, setMinimumBid] = useState(price / 10)
 
   const dispatch = useDispatch()
 
@@ -111,7 +111,7 @@ export default function StepTwo() {
         pictures: images.artImageUpload,
         certificateOfAuthenticity: images.certImageUpload,
         owner: authContext.user._id,
-        minimumBid: showBidInput ? minimumBid - 50 : 0,
+        minimumBid: showBidInput ? minimumBid : 0,
       }
       const artUpload = await discoverService.uploadArt(artwork)
       if (artUpload.success) {
