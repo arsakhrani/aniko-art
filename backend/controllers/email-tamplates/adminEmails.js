@@ -1,14 +1,16 @@
-module.exports.verifyArtistRequest = (name, email, id, face, link) => {
+module.exports.verifyId = (user, approveLink, declineLink) => {
   return `<p>Dear Admin,</p>
   <br>
-  <p>${name}, is requesting artist verification.
+  <p>${user.fullName}, is requesting artist verification.
   Attached, please find images of their id and face.
   If you are happy with the request, 
-  please click <a target="_blank" href=${link}>here</a> to approve their request.</p>
-  User's contact details: ${email}
+  please click <a target="_blank" href=${approveLink}>here</a> to approve their request.</p>
+  <p>Otherwise, to decline their request pleace click <a target="_blank" href=${declineLink}>here</a>.</p>
+  <p>If no action is taken, request will be automatically declined in 24 hours.</p>
+  <p>User's contact details: ${user.email}</p>
   <br>
-  <img src=${id} />
-  <img src=${face} />
+  <img src=${user.idPicture} />
+  <img src=${user.facePicture} />
   <br>
   <p>Warm Regards,</p>
   <p>Your Aniko van Nie // Art Agency Team</p>`;

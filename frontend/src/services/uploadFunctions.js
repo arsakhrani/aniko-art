@@ -27,9 +27,9 @@ export const shortenString = (string) => {
   }
 }
 
-export const uploadImage = async (bannerPicture) => {
-  if (bannerPicture.length === 1) {
-    const upload = await discoverService.uploadImages(bannerPicture)
+export const uploadImage = async (image) => {
+  if (image.length === 1) {
+    const upload = await discoverService.uploadImages(image)
     return upload[0]
   } else {
     return ""

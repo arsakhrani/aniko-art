@@ -76,8 +76,7 @@ export default {
         return { cvUrl: data.url, cvFileName: data.original_filename }
       }
     } catch (e) {
-      console.log(e)
-      return null
+      return { cvUrl: "", cvFileName: "" }
     }
   },
   getAllArtworks: async () => {
@@ -129,6 +128,15 @@ export default {
     if (response.ok) {
       const data = await response.json()
       return data.galleries
+    } else {
+      return null
+    }
+  },
+  getAllPartners: async () => {
+    const response = await fetch("/api/partner/get-all")
+    if (response.ok) {
+      const data = await response.json()
+      return data.partners
     } else {
       return null
     }

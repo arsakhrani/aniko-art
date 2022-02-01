@@ -12,18 +12,13 @@ import {
   BubbleCounter,
   ShippingContainer,
   Para,
-  FileDetails,
 } from "../sections/manage-profile/styles/ManageProfile.styled"
-import VerifyArtist from "./VerifyArtist"
-import { ReactComponent as CheckMark } from "../../assets/icons/verification-check.svg"
-import { ReactComponent as GreenDot } from "../../assets/icons/green-dot.svg"
 import { saveDetails } from "../../state/upload/uploadArtSlice"
 import {
   convertNestedObjectToArray,
-  convertBytesToKB,
   addNewFiles,
-  shortenString,
 } from "../../services/uploadFunctions"
+import FileDescription from "../atoms/FileDescription"
 
 export default function StepOne({ changeStep }) {
   const vw = Math.max(
@@ -31,7 +26,6 @@ export default function StepOne({ changeStep }) {
     window.innerWidth || 0
   )
 
-  const maxFileSize = 2000000
   const date = new Date()
 
   const authContext = useContext(AuthContext)
@@ -180,15 +174,6 @@ export default function StepOne({ changeStep }) {
             onChange={(e) => setCountry(e.target.value)}
             label={"Artist country"}
           />
-          {authContext.user.sellerType === "private" &&
-            !authContext.user.isVerified && <VerifyArtist id={"id-picture"} />}
-          {authContext.user.sellerType === "private" &&
-            authContext.user.isVerified && (
-              <Para>
-                <CheckMark style={{ marginRight: "0.5em" }} />
-                Verified
-              </Para>
-            )}
           <TextInput
             id={"title"}
             value={title}
@@ -273,17 +258,7 @@ export default function StepOne({ changeStep }) {
             onChange={(e) => uploadImage(e)}
             id={"art-image"}
           />
-          {Object.keys(images).map((image) => {
-            let file = images[image]
-            return (
-              <FileDetails key={image}>
-                <GreenDot />
-                <Para>{shortenString(file.name)}</Para>
-                <Para>{convertBytesToKB(file.size)} KB</Para>
-                <span onClick={() => removeFile(image, images)}>x</span>
-              </FileDetails>
-            )
-          })}
+          <FileDescription object={images} removeFile={removeFile} />
         </ShippingContainer>
         <StepLabel>
           <BubbleCounter>3</BubbleCounter>
@@ -295,17 +270,7 @@ export default function StepOne({ changeStep }) {
             onChange={(e) => uploadCertificate(e)}
             id={"certificate-authenticity"}
           />
-          {Object.keys(certificate).map((cert) => {
-            let file = certificate[cert]
-            return (
-              <FileDetails key={cert}>
-                <GreenDot />
-                <Para>{shortenString(file.name)}</Para>
-                <Para>{convertBytesToKB(file.size)} KB</Para>
-                <span onClick={() => removeFile(cert, certificate)}>x</span>
-              </FileDetails>
-            )
-          })}
+          <FileDescription object={certificate} removeFile={removeFile} />
           {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
           <div
             style={{

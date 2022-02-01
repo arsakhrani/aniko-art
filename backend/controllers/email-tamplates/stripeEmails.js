@@ -55,7 +55,7 @@ module.exports.setNewBidBuyer = (name, bid, artwork) => {
   return `<p>Dear ${name},</p>
   <br>
   <p>Thank you for placing your bid of ${bid} on ${artwork.title} by ${artwork.artist}.
-  If the (artist/gallery/privateseller) does not respond within 72 hours after being notified of the offer, 
+  If the (artist/gallery/partner) does not respond within 72 hours after being notified of the offer, 
   the offer will be canceled. Should this happen, 
   a representative from our Team will notify you with the news and will offer you 
   their Art Advisory services free of charge to help you find a similar artwork.

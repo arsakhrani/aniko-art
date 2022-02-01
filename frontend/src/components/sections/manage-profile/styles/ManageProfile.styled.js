@@ -5,21 +5,13 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 10em;
-  padding: 3em 7em;
+  padding: 0em 4em;
   background-color: ${theme.color.grey};
   width: 100vw;
   min-height: 100vh;
 
-  .password-container {
-    width: 90%;
-  }
-
-  @media (max-width: 1310px) {
-    padding: 3em 4em;
-  }
-
   @media (max-width: 1210px) {
-    padding: 2em 2em;
+    padding: 0em 2em;
   }
 
   @media (max-width: 1000px) {
@@ -105,7 +97,7 @@ export const ShippingContainer = styled.div`
   width: 100%;
   padding: 2em;
 
-  div {
+  > div {
     margin-bottom: 1em;
   }
 

@@ -24,27 +24,20 @@ import TextInput from "../components/inputs/TextInput"
 import FileInput from "../components/inputs/FileInput"
 import DropdownInput from "../components/inputs/DropdownInput"
 import discoverService from "../services/discoverService"
-import { ReactComponent as GreenDot } from "../assets/icons/green-dot.svg"
 import { ReactComponent as AudioIcon } from "../assets/icons/audio.svg"
 import { ReactComponent as MuteIcon } from "../assets/icons/mute.svg"
-import { ReactComponent as Close } from "../assets/icons/close.svg"
-import {
-  FileDetails,
-  Para,
-} from "../components/sections/manage-profile/styles/ManageProfile.styled"
 import { countries } from "../services/dropdownValues"
 import ErrorMessage from "../components/atoms/ErrorMessage"
 import {
   convertNestedObjectToArray,
-  convertBytesToKB,
   addNewFiles,
-  shortenString,
   uploadImage,
   uploadCv,
   uploadAudio,
 } from "../services/uploadFunctions"
 import { filterArtworks } from "../services/filterFunctions"
 import { useSelector } from "react-redux"
+import FileDescription from "../components/atoms/FileDescription"
 
 export default function ArtistPortfolioPage() {
   const history = useHistory()
@@ -68,22 +61,23 @@ export default function ArtistPortfolioPage() {
     artist && artist.currentCountry
   )
   const [soundDescription, setSoundDescription] = useState(
+    //maybe move this?
     artist && artist.soundDescription
   )
-  const [website, setWebsite] = useState(artist && artist.website)
-  const [bannerPicture, setBannerPicture] = useState([])
-  const [bannerObject, setBannerObject] = useState({})
-  const [audioObject, setAudioObject] = useState({})
-  const [audioFile, setAudioFile] = useState([])
-  const [cvObject, setCvObject] = useState({})
-  const [cvFile, setCvFile] = useState([])
+  // const [website, setWebsite] = useState(artist && artist.website)
+  // const [bannerPicture, setBannerPicture] = useState([])
+  // const [bannerObject, setBannerObject] = useState({})
+  // const [audioObject, setAudioObject] = useState({})
+  // const [audioFile, setAudioFile] = useState([])
+  // const [cvObject, setCvObject] = useState({})
+  // const [cvFile, setCvFile] = useState([])
   const [errorMessage, setErrorMessage] = useState("")
   const [disableButton, setDisableButton] = useState(false)
   const [muteAudio, setMuteAudio] = useState(false)
-  const [featurePicture, setFeaturePicture] = useState("")
-  const [featurePictureIndex, setFeaturePictureIndex] = useState(
-    artist && artist.featurePicture
-  )
+  // const [featurePicture, setFeaturePicture] = useState("")
+  // const [featurePictureIndex, setFeaturePictureIndex] = useState(
+  //   artist && artist.featurePicture
+  // )
 
   const userPortfolio = artist && user.email === artist.email
 
@@ -91,103 +85,100 @@ export default function ArtistPortfolioPage() {
 
   const filteredArtworks = filterArtworks(artist.artworks, artworkFilters)
 
-  const selectFeaturePicture = (i, src) => {
-    setFeaturePictureIndex(i)
-    setFeaturePicture(src)
-  }
+  // const selectFeaturePicture = (i, src) => {
+  //   setFeaturePictureIndex(i)
+  //   setFeaturePicture(src)
+  // }
 
-  const preloadBanner = (e) => {
-    setErrorMessage("")
-    const { files: newFiles } = e.target
-    if (newFiles.length) {
-      if (newFiles[0].size > 2097152) {
-        setErrorMessage("Please make sure the image file size is under 2MB.")
-      } else {
-        const updatedBanner = addNewFiles(newFiles, e, bannerObject)
-        setBannerObject(updatedBanner)
-        setBannerPicture(convertNestedObjectToArray(updatedBanner))
-      }
-    }
-  }
+  // const preloadBanner = (e) => {
+  //   setErrorMessage("")
+  //   const { files: newFiles } = e.target
+  //   if (newFiles.length) {
+  //     if (newFiles[0].size > 2097152) {
+  //       setErrorMessage("Please make sure the image file size is under 2MB.")
+  //     } else {
+  //       const updatedBanner = addNewFiles(newFiles, e, bannerObject)
+  //       setBannerObject(updatedBanner)
+  //       setBannerPicture(convertNestedObjectToArray(updatedBanner))
+  //     }
+  //   }
+  // }
 
-  const preloadAudio = (e) => {
-    setErrorMessage("")
-    const { files: newFiles } = e.target
-    if (newFiles.length) {
-      if (newFiles[0].size > 1048576) {
-        setErrorMessage("Please make sure the audio file size is under 1MB.")
-      } else {
-        const updatedAudio = addNewFiles(newFiles, e, audioObject)
-        setAudioObject(updatedAudio)
-        setAudioFile(convertNestedObjectToArray(updatedAudio))
-      }
-    }
-  }
+  // const preloadAudio = (e) => {
+  //   setErrorMessage("")
+  //   const { files: newFiles } = e.target
+  //   if (newFiles.length) {
+  //     if (newFiles[0].size > 1048576) {
+  //       setErrorMessage("Please make sure the audio file size is under 1MB.")
+  //     } else {
+  //       const updatedAudio = addNewFiles(newFiles, e, audioObject)
+  //       setAudioObject(updatedAudio)
+  //       setAudioFile(convertNestedObjectToArray(updatedAudio))
+  //     }
+  //   }
+  // }
 
-  const preloadCv = (e) => {
-    setErrorMessage("")
-    const { files: newFiles } = e.target
-    if (newFiles.length) {
-      if (newFiles[0].size > 1048576) {
-        setErrorMessage("Please make sure the CV file size is under 1MB.")
-      } else {
-        const updatedCv = addNewFiles(newFiles, e, cvObject)
-        setCvObject(updatedCv)
-        setCvFile(convertNestedObjectToArray(updatedCv))
-      }
-    }
-  }
+  // const preloadCv = (e) => {
+  //   setErrorMessage("")
+  //   const { files: newFiles } = e.target
+  //   if (newFiles.length) {
+  //     if (newFiles[0].size > 1048576) {
+  //       setErrorMessage("Please make sure the CV file size is under 1MB.")
+  //     } else {
+  //       const updatedCv = addNewFiles(newFiles, e, cvObject)
+  //       setCvObject(updatedCv)
+  //       setCvFile(convertNestedObjectToArray(updatedCv))
+  //     }
+  //   }
+  // }
 
-  const removeFile = (fileName, state) => {
-    delete state[fileName]
-    if (state === bannerObject) {
-      setBannerObject({ ...state })
-      setBannerPicture(convertNestedObjectToArray({ ...state }))
-    } else if (state === audioObject) {
-      setAudioObject({ ...state })
-      setAudioFile(convertNestedObjectToArray({ ...state }))
-    } else if (state === cvObject) {
-      setCvObject({ ...state })
-      setCvFile(convertNestedObjectToArray({ ...state }))
-    }
-  }
+  // const removeFile = (fileName, state) => {
+  //   delete state[fileName]
+  //   if (state === bannerObject) {
+  //     setBannerObject({ ...state })
+  //     setBannerPicture(convertNestedObjectToArray({ ...state }))
+  //   } else if (state === audioObject) {
+  //     setAudioObject({ ...state })
+  //     setAudioFile(convertNestedObjectToArray({ ...state }))
+  //   } else if (state === cvObject) {
+  //     setCvObject({ ...state })
+  //     setCvFile(convertNestedObjectToArray({ ...state }))
+  //   }
+  // }
 
   const validateAndSubmit = async () => {
     setDisableButton(true)
-    if (!website.includes("www.")) {
-      setErrorMessage("Please make sure your website is prefixed with 'www.'")
-      setDisableButton(false)
-    } else {
-      const image = await uploadImage(bannerPicture)
-      const audio = await uploadAudio(audioFile)
-      const { cvUrl, cvFileName } = await uploadCv(cvFile)
+    // if (!website.includes("www.")) {
+    //   setErrorMessage("Please make sure your website is prefixed with 'www.'")
+    //   setDisableButton(false)
+    // } else {
+    const image = await uploadImage(bannerPicture)
+    const audio = await uploadAudio(audioFile)
+    const { cvUrl, cvFileName } = await uploadCv(cvFile)
 
-      const editedArtist = {
-        birthCity,
-        birthCountry,
-        birthYear,
-        currentCity,
-        currentCountry,
-        soundDescription,
-        website,
-        bannerPicture: image || artist.bannerPicture,
-        audioFile: audio || artist.audioFile,
-        cvFile: cvUrl || artist.cvFile,
-        cvFileName: cvFileName || artist.cvFileName,
-        featurePicture: featurePicture,
-      }
-      const artistEdit = await discoverService.editArtist(
-        editedArtist,
-        artistId
-      )
-      if (artistEdit.success) {
-        const allArtists = await discoverService.getAllArtists()
-        setArtists(allArtists)
-        history.go(0)
-      } else {
-        //error handle
-      }
+    const editedArtist = {
+      birthCity,
+      birthCountry,
+      birthYear,
+      currentCity,
+      currentCountry,
+      soundDescription,
+      website,
+      bannerPicture: image || artist.bannerPicture,
+      audioFile: audio || artist.audioFile,
+      cvFile: cvUrl || artist.cvFile,
+      cvFileName: cvFileName || artist.cvFileName,
+      featurePicture: featurePicture,
     }
+    const artistEdit = await discoverService.editArtist(editedArtist, artistId)
+    if (artistEdit.success) {
+      const allArtists = await discoverService.getAllArtists()
+      setArtists(allArtists)
+      history.go(0)
+    } else {
+      //error handle
+    }
+    // }
   }
 
   return (
@@ -274,14 +265,16 @@ export default function ArtistPortfolioPage() {
                   />
                 </InputContainer>
                 <InputContainer>
-                  <TextInput
+                  <TextInput //maybe move
                     id={"audio-description"}
                     onChange={(e) => setSoundDescription(e.target.value)}
                     value={soundDescription}
                     label={"Audio Description"}
                   />
                 </InputContainer>
-                <h3>Select an artwork below to make it your feature image</h3>
+                {
+                  //<h3>Select an artwork below to make it your feature image</h3>}
+                }
                 {errorMessage && <ErrorMessage messageBody={errorMessage} />}
                 <TransparentButton
                   onClick={() => validateAndSubmit()}
@@ -289,95 +282,55 @@ export default function ArtistPortfolioPage() {
                   disabled={disableButton}
                 />
               </div>
-              <div>
-                <InputContainer>
-                  <TextInput
-                    id={"website"}
-                    value={website}
-                    onChange={(e) => setWebsite(e.target.value)}
-                    label={"Website"}
-                  />
-                </InputContainer>
-                <InfoText>Upload your own Portfolio Banner:</InfoText>
-                <InputContainer>
-                  <FileInput
-                    id={"portfolio-banner"}
-                    onChange={(e) => preloadBanner(e)}
-                    multiple={false}
-                    dark={true}
-                  />
-                </InputContainer>
-                {Object.keys(bannerObject).map((pic) => {
-                  let file = bannerObject[pic]
-                  return (
-                    <FileDetails key={pic}>
-                      <GreenDot />
-                      <Para>{shortenString(file.name)}</Para>
-                      <Para>{convertBytesToKB(file.size)} KB</Para>
-                      <Close
-                        width={10}
-                        style={{ cursor: "pointer" }}
-                        stroke={"black"}
-                        onClick={() => removeFile(pic, bannerObject)}
-                      />
-                    </FileDetails>
-                  )
-                })}
-                <InfoText>
-                  Upload an audio file that plays while visiting your portfolio:
-                </InfoText>
-                <InputContainer>
-                  <FileInput
-                    audio={true}
-                    onChange={(e) => preloadAudio(e)}
-                    id={"portfolio-audio"}
-                    multiple={false}
-                    dark={true}
-                  />
-                </InputContainer>
-                {Object.keys(audioObject).map((audio) => {
-                  let file = audioObject[audio]
-                  return (
-                    <FileDetails key={audio}>
-                      <GreenDot />
-                      <Para>{shortenString(file.name)}</Para>
-                      <Para>{convertBytesToKB(file.size)} KB</Para>
-                      <Close
-                        width={10}
-                        style={{ cursor: "pointer" }}
-                        stroke={"black"}
-                        onClick={() => removeFile(audio, audioObject)}
-                      />
-                    </FileDetails>
-                  )
-                })}
-                <InfoText>Upload your CV:</InfoText>
-                <InputContainer>
-                  <FileInput
-                    cv={true}
-                    onChange={(e) => preloadCv(e)}
-                    id={"cv"}
-                    multiple={false}
-                    dark={true}
-                  />
-                </InputContainer>
-                {Object.keys(cvObject).map((cv) => {
-                  let file = cvObject[cv]
-                  return (
-                    <FileDetails key={cv}>
-                      <GreenDot />
-                      <Para>{shortenString(file.name)}</Para>
-                      <Para>{convertBytesToKB(file.size)} KB</Para>
-                      <Close
-                        width={10}
-                        style={{ cursor: "pointer" }}
-                        stroke={"black"}
-                        onClick={() => removeFile(cv, cvObject)}
-                      />
-                    </FileDetails>
-                  )
-                })}
-              </div>
+              {
+                //<div>
+                //   <InputContainer>
+                //     <TextInput
+                //       id={"website"}
+                //       value={website}
+                //       onChange={(e) => setWebsite(e.target.value)}
+                //       label={"Website"}
+                //     />
+                //   </InputContainer>
+                //   <InfoText>Upload your own Portfolio Banner:</InfoText>
+                //   <InputContainer>
+                //     <FileInput
+                //       id={"portfolio-banner"}
+                //       onChange={(e) => preloadBanner(e)}
+                //       multiple={false}
+                //       dark={true}
+                //     />
+                //   </InputContainer>
+                //   <FileDescription
+                //     object={bannerObject}
+                //     removeFile={removeFile}
+                //   />
+                //   <InfoText>
+                //     Upload an audio file that plays while visiting your portfolio:
+                //   </InfoText>
+                //   <InputContainer>
+                //     <FileInput
+                //       audio={true}
+                //       onChange={(e) => preloadAudio(e)}
+                //       id={"portfolio-audio"}
+                //       multiple={false}
+                //       dark={true}
+                //     />
+                //   </InputContainer>
+                //   <FileDescription object={audioObject} removeFile={removeFile} />
+                //   <InfoText>Upload your CV:</InfoText>
+                //   <InputContainer>
+                //     <FileInput
+                //       cv={true}
+                //       onChange={(e) => preloadCv(e)}
+                //       id={"cv"}
+                //       multiple={false}
+                //       dark={true}
+                //     />
+                //   </InputContainer>
+                //   <FileDescription object={cvObject} removeFile={removeFile} />
+                // </div>
+              }
             </InfoBox>
           ) : (
             <InfoBox>

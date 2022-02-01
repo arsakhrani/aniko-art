@@ -4,6 +4,7 @@ const Artwork = require("../models/Artwork");
 const User = require("../models/User");
 const Artist = require("../models/Artist");
 const Gallery = require("../models/Gallery");
+const Partner = require("../models/Partner");
 const nodemailer = require("nodemailer");
 const sendgridTransport = require("nodemailer-sendgrid-transport");
 const stripeEmails = require("./email-tamplates/stripeEmails");
@@ -45,6 +46,12 @@ module.exports.uploadArt = async (req, res) => {
     const gallery = await Gallery.findOne({ email: user.email });
     gallery.artworks.push(newArtwork._id);
     await gallery.save();
+  }
+
+  if (user.sellerType === "partner") {
+    const partner = await Partner.findOne({ email: user.email });
+    partner.artworks.push(newArtwork._id);
+    await partner.save();
   }
 
   res.status(200).json({ success: true, uploadedArtwork: newArtwork });

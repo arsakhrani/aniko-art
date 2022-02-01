@@ -7,6 +7,7 @@ const stripe = require("stripe")(stripeKey);
 const User = require("../models/User");
 const Artist = require("../models/Artist");
 const Gallery = require("../models/Gallery");
+const Partner = require("../models/Partner");
 const SecretCode = require("../models/SecretCode");
 const crypto = require("crypto");
 const JWT = require("jsonwebtoken");
@@ -55,17 +56,39 @@ module.exports.newUser = async (req, res) => {
       };
       const newArtist = new Artist(artist);
       await newArtist.save();
+      newUser.isVerifiedWithId = false;
     }
 
+    const galleryOrPartner = {
+      email: user.email,
+      fullName: user.fullName,
+      country: user.shippingAddress ? user.shippingAddress.country : "",
+      city: user.shippingAddress ? user.shippingAddress.city : "",
+    };
+
     if (user.sellerType === "gallery") {
-      const gallery = {
-        email: user.email,
-        name: user.fullName,
-        country: user.shippingAddress ? user.shippingAddress.country : "",
-        city: user.shippingAddress ? user.shippingAddress.city : "",
-      };
-      const newGallery = new Gallery(gallery);
+      const newGallery = new Gallery(galleryOrPartner);
       await newGallery.save();
+    }
+
+    if (user.sellerType === "partner") {
+      const newPartner = new Partner({
+        ...galleryOrPartner,
+      });
+      await newPartner.save();
+      newUser.isVerifiedWithId = false;
+    }
+
+    if (newUser.isVerifiedWithId === false) {
+      const approveLink = `${serverRootDomain}/api/user/verify-id/${newUser._id}`;
+      const declineLink = `${serverRootDomain}/api/user/decline-id/${newUser._id}`;
+      const emailBody = adminEmails.verifyId(newUser, approveLink, declineLink);
+      transport.sendMail({
+        to: devEmail,
+        from: devEmail,
+        subject: `Verify User (${newUser.sellerType}) ID`,
+        html: emailBody,
+      });
     }
 
     await newUser.save();
@@ -200,14 +223,22 @@ module.exports.editUser = async (req, res, next) => {
   const updatedUser = await User.findById(id);
 
   if (updatedUser) {
+    const formattedUser = {
+      city: user.shippingAddress.city,
+      country: user.shippingAddress.country,
+      fullName: user.fullName,
+      website: user.website,
+    };
+
     if (updatedUser.sellerType === "gallery") {
-      const formattedUser = {
-        city: user.shippingAddress.city,
-        country: user.shippingAddress.country,
-        name: user.fullName,
-        website: user.website,
-      };
       await Gallery.findOneAndUpdate(
+        { email: updatedUser.email },
+        formattedUser
+      );
+    }
+
+    if (updatedUser.sellerType === "partner") {
+      await Partner.findOneAndUpdate(
         { email: updatedUser.email },
         formattedUser
       );
@@ -249,44 +280,40 @@ module.exports.requestArtWork = async (req, res, next) => {
   }
 };
 
-module.exports.verifyArtistRequest = async (req, res, next) => {
+module.exports.declineIdApproval = async (req, res, next) => {
   const { id } = req.params;
-  const { idPicUrl, facePicUrl } = req.body;
-  const user = await User.findById(id);
-  if (user && idPicUrl && facePicUrl) {
-    user.idPicture = idPicUrl;
-    user.facePicUrl = facePicUrl;
-    await user.save();
+  const user = await User.findByIdAndDelete(id);
+  if (user) {
+    if (user.sellerType === "partner") {
+      await Partner.findOneAndDelete({ email: user.email });
+    }
 
-    const link = `${serverRootDomain}/api/user/verify-artist-approve/${user._id}`;
+    if (user.sellerType === "artist") {
+      await Artist.findOneAndDelete({ email: user.email });
+    }
 
-    const emailBody = adminEmails.verifyArtistRequest(
-      user.fullName,
-      user.email,
-      idPicUrl,
-      facePicUrl,
-      link
-    );
+    const emailBody = authEmails.verifyIdDeclined(user.fullName);
     transport.sendMail({
       from: devEmail,
-      to: devEmail,
-      subject: `Verify Artist Request from ${user.fullName}`,
+      to: user.email,
+      subject: `Verification Request Denied`,
       html: emailBody,
     });
-    res.status(200).json({ success: true });
+
+    res.status(200).send("User Deleted");
   } else {
-    res.status(401).json({ success: false });
+    res.status(400).send("Failed");
   }
 };
 
-module.exports.verifyArtistApproval = async (req, res, next) => {
+module.exports.verifyIdApproval = async (req, res, next) => {
   const { id } = req.params;
   const user = await User.findById(id);
   if (user) {
     user.isVerifiedWithId = true;
     await user.save();
 
-    const emailBody = authEmails.verifyArtistApproved(user.fullName);
+    const emailBody = authEmails.verifyIdApproved(user.fullName);
     transport.sendMail({
       from: devEmail,
       to: user.email,
@@ -294,7 +321,7 @@ module.exports.verifyArtistApproval = async (req, res, next) => {
       html: emailBody,
     });
 
-    res.status(200).send("Success");
+    res.status(200).send("Id successfully approved");
   } else {
     res.status(400).send("Failed");
   }

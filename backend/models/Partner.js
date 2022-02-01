@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const gallerySchema = new mongoose.Schema({
+const partnerSchema = new mongoose.Schema({
   city: {
     type: String,
   },
@@ -33,11 +33,8 @@ const gallerySchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
-  taxNumber: {
-    type: String,
-  },
 });
 
-const gallery = mongoose.model("gallery", gallerySchema);
+const partner = mongoose.model("partner", partnerSchema);
 
-module.exports = gallery;
+module.exports = partner;

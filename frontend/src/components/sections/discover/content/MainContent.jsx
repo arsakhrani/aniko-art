@@ -13,10 +13,12 @@ import {
   filterArtists,
   filterArtworks,
   filterGalleries,
+  filterPartners,
 } from "../../../../services/filterFunctions"
 import { ArtworkContext } from "../../../../context/artworkContext"
 import { ArtistContext } from "../../../../context/artistContext"
 import { GalleryContext } from "../../../../context/galleryContext"
+import { PartnerContext } from "../../../../context/partnerContext"
 
 export default function MainContent({ type }) {
   const { artworks } = useContext(ArtworkContext)
@@ -25,11 +27,15 @@ export default function MainContent({ type }) {
 
   const { galleries } = useContext(GalleryContext)
 
+  const { partners } = useContext(PartnerContext)
+
   const artworkFilters = useSelector((state) => state.discoverFilter)
 
   const filteredAritsts = filterArtists(artists, artworkFilters)
 
   const filteredGalleries = filterGalleries(galleries, artworkFilters)
+
+  const filteredPartners = filterPartners(partners, artworkFilters)
 
   const filteredArtworks = filterArtworks(artworks, artworkFilters)
 
@@ -55,6 +61,20 @@ export default function MainContent({ type }) {
             gallery={true}
             key={gallery._id}
             cardInfo={gallery}
+          />
+        ))}
+      </ArtistsAndGalleriesContainer>
+    )
+  }
+
+  if (type === "partners" && filteredPartners.length) {
+    return (
+      <ArtistsAndGalleriesContainer>
+        {filteredPartners.map((partner) => (
+          <ArtistAndGalleryCard
+            gallery={true}
+            key={partner._id}
+            cardInfo={partner}
           />
         ))}
       </ArtistsAndGalleriesContainer>

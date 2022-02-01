@@ -131,7 +131,7 @@ const userSchema = new mongoose.Schema({
     enum: ["buyer", "seller"],
   },
   interests: {
-    privateSales: {
+    partnerSales: {
       type: Boolean,
       default: false,
     },
@@ -146,7 +146,7 @@ const userSchema = new mongoose.Schema({
   },
   sellerType: {
     type: String,
-    enum: ["private", "artist", "gallery", ""],
+    enum: ["partner", "artist", "gallery", ""],
     default: "",
   },
   isVerified: {
@@ -161,7 +161,7 @@ const userSchema = new mongoose.Schema({
   },
   isVerifiedWithId: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   taxNumber: {
     type: String,

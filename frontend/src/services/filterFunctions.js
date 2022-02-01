@@ -3,6 +3,7 @@ import {
   changeArtistsCount,
   changeArtworksCount,
   changeGalleriesCount,
+  changePartnersCount,
 } from "../state/discover/collectionCountSlice"
 
 export const filterArtworks = (artworks, filters) => {
@@ -68,11 +69,32 @@ export const filterGalleries = (galleries, filters) => {
 
     const searchParamMatch =
       !filters.searchParams ||
-      gallery.name.toLowerCase().includes(filters.searchParams.toLowerCase())
+      gallery.fullName
+        .toLowerCase()
+        .includes(filters.searchParams.toLowerCase())
 
     return countryMatch && searchParamMatch
   })
 
   dispatch(changeGalleriesCount(filteredGalleries.length))
   return filteredGalleries
+}
+
+export const filterPartners = (partners, filters) => {
+  const dispatch = useDispatch()
+
+  const filteredPartners = partners.filter((partner) => {
+    const countryMatch = !filters.country || filters.country === partner.country
+
+    const searchParamMatch =
+      !filters.searchParams ||
+      partner.fullName
+        .toLowerCase()
+        .includes(filters.searchParams.toLowerCase())
+
+    return countryMatch && searchParamMatch
+  })
+
+  dispatch(changePartnersCount(filteredPartners.length))
+  return filteredPartners
 }

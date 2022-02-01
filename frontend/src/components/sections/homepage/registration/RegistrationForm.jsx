@@ -21,7 +21,7 @@ export default function RegistrationForm({
   focusLeft,
   focusRight,
 }) {
-  const [privateSalesBuy, setPrivateSalesBuy] = useState(false)
+  const [partnerSalesBuy, setPartnerSalesBuy] = useState(false)
   const [gallerySalesBuy, setGallerySalesBuy] = useState(false)
   const [artistSalesBuy, setArtistSalesBuy] = useState(false)
   const [sellerType, setSellerType] = useState("")
@@ -45,7 +45,7 @@ export default function RegistrationForm({
       setErrorMessage("Please specify the type of seller you are.")
     } else {
       const interests = {
-        privateSales: privateSalesBuy,
+        partnerSales: partnerSalesBuy,
         gallerySales: gallerySalesBuy,
         artistSales: artistSalesBuy,
       }
@@ -67,9 +67,9 @@ export default function RegistrationForm({
 
     if (!leftFrame) {
       if (sellerType) {
-        sellerType === "private" &&
+        sellerType === "partner" &&
           window.open(
-            `${serverRootDomain}/api/user/auth/google/sell/private`,
+            `${serverRootDomain}/api/user/auth/google/sell/partner`,
             "_self"
           )
         sellerType === "gallery" &&
@@ -95,9 +95,9 @@ export default function RegistrationForm({
 
     if (!leftFrame) {
       if (sellerType) {
-        sellerType === "private" &&
+        sellerType === "partner" &&
           window.open(
-            `${serverRootDomain}/api/user/auth/facebook/sell/private`,
+            `${serverRootDomain}/api/user/auth/facebook/sell/partner`,
             "_self"
           )
         sellerType === "gallery" &&
@@ -142,9 +142,9 @@ export default function RegistrationForm({
           <CheckboxContainer>
             <div style={{ paddingBottom: "1em" }}>
               <RadialInput
-                checked={sellerType === "private"}
-                onClick={() => chooseSellerType("private")}
-                label={"Private Sales"}
+                checked={sellerType === "partner"}
+                onClick={() => chooseSellerType("partner")}
+                label={"Partner Sales"}
                 name={"sellerType"}
               />
             </div>
@@ -170,12 +170,12 @@ export default function RegistrationForm({
           <CheckboxContainer>
             <div
               style={{ paddingBottom: "1em" }}
-              onClick={() => setPrivateSalesBuy(!privateSalesBuy)}
+              onClick={() => setPartnerSalesBuy(!partnerSalesBuy)}
             >
               <CheckboxInput
-                checked={privateSalesBuy}
-                label={"Private Sales"}
-                name={"privateSales"}
+                checked={partnerSalesBuy}
+                label={"Partner Sales"}
+                name={"partnerSales"}
               />
             </div>
             <div

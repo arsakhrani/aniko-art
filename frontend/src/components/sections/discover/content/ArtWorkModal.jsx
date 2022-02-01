@@ -27,8 +27,14 @@ export default function ArtWorkModal({ artInfo, closeModal }) {
   const { user } = useContext(AuthContext)
 
   const checkOut = () => {
-    setIsLoading(true)
-    paymentService.redirectToStripe(user, artInfo)
+    if (!user._id) {
+      history.push("/login")
+    } else if (!user.isVerified) {
+      setModalMessage("Please verify your email to continue")
+    } else {
+      setIsLoading(true)
+      paymentService.redirectToStripe(user, artInfo)
+    }
   }
 
   const deleteWork = () => {
@@ -37,23 +43,52 @@ export default function ArtWorkModal({ artInfo, closeModal }) {
     if (attempt) {
       history.go(0)
     } else {
-      //error handle
+      console.log("error handle")
     }
   }
 
   const sendChatRequest = async () => {
-    const response = await discoverService.sendChatRequest(
-      user._id,
-      artInfo.owner
-    )
-    if (response.success) {
-      setModalMessage(
-        "An email has been sent to the admin to approve your request."
-      )
+    if (!user._id) {
+      history.push("/login")
+    } else if (!user.isVerified) {
+      setModalMessage("Please verify your email to continue")
     } else {
-      setModalMessage(
-        "Sorry! We are unable to provide this service at the moment."
+      const response = await discoverService.sendChatRequest(
+        user._id,
+        artInfo.owner
       )
+      if (response.success) {
+        setModalMessage(
+          "An email has been sent to the admin to approve your request."
+        )
+      } else {
+        setModalMessage(
+          "Sorry! We are unable to provide this service at the moment."
+        )
+      }
+    }
+  }
+
+  const setupBid = async () => {
+    if (!user._id) {
+      history.push("/login")
+    } else if (!user.isVerified) {
+      setModalMessage("Please verify your email to continue")
+    } else {
+      setIsLoading(true)
+      const secret = await paymentService.createCheckoutSaveSession(user._id)
+      history.push({
+        pathname: "/create-bid",
+        state: {
+          secret: secret.client_secret,
+          highestBid:
+            artInfo.highestBid > 0
+              ? artInfo.highestBid + artInfo.bidIncrement
+              : artInfo.minimumBid,
+          artworkId: artInfo._id,
+          bidIncrement: artInfo.bidIncrement,
+        },
+      })
     }
   }
 
@@ -142,6 +177,31 @@ export default function ArtWorkModal({ artInfo, closeModal }) {
               </div>
             </div>
           </div>
+          {artInfo.minimumBid && (
+            <div className="bid-grid">
+              <h2>Starting Bid</h2>
+              <h3>
+                ${" "}
+                {artInfo.highestBid
+                  ? artInfo.highestBid + artInfo.bidIncrement
+                  : artInfo.minimumBid}
+              </h3>
+              <PrimaryButton
+                disabled={isLoading}
+                loading={isLoading}
+                buttonText={"BID NOW"}
+                onClick={() => setupBid()}
+              />
+              <div className="sale-info-container">
+                <p>Including</p>
+                <div>
+                  <p>Insurance & shipping</p>
+                  <p>Royalty to the artist for resale rights 2%</p>
+                  <p>Commission 10%</p>
+                </div>
+              </div>
+            </div>
+          )}
         </Info>
         <ImageSelector $number={selectorNumber}>
           {artInfo.pictures.map((pic, index) => (

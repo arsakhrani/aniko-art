@@ -33,6 +33,7 @@ apiRouter.use("/user", routes.userRoutes);
 apiRouter.use("/artwork", routes.artworkRoutes);
 apiRouter.use("/artist", routes.artistRoutes);
 apiRouter.use("/gallery", routes.galleryRoutes);
+apiRouter.use("/partner", routes.partnerRoutes);
 apiRouter.use("/checkout", routes.stripeRoutes);
 
 cron.schedule("0 * * * *", async () => {

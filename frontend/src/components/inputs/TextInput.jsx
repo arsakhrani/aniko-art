@@ -14,6 +14,7 @@ export default function TextInput({
   minLength,
   maxLength,
   min,
+  onkeydown,
 }) {
   return (
     <div className="text-input">
@@ -28,6 +29,7 @@ export default function TextInput({
         id={id}
         name={name}
         type={type}
+        onkeydown={onkeydown}
         value={value}
         required
       />

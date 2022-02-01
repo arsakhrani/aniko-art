@@ -87,7 +87,7 @@ export default function Header({ discover, portfolio, grey }) {
       {discover && (
         <DiscoverHeader
           toggleSearch={() =>
-            toggleSearchBar("Search for artist, artwork, or gallery")
+            toggleSearchBar("Search for artist, artwork, partner, or gallery")
           }
         />
       )}

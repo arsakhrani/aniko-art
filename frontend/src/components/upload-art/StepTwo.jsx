@@ -21,7 +21,7 @@ export default function StepTwo() {
   const [price, setPrice] = useState(1000)
   const [errorMessage, setErrorMessage] = useState("")
   const [showBidInput, setShowBidInput] = useState(false)
-  const [minimumBid, setMinimumBid] = useState(price / 10)
+  const [minimumBid, setMinimumBid] = useState(price * 0.2)
 
   const dispatch = useDispatch()
 

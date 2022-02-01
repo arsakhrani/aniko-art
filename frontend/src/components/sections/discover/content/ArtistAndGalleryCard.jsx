@@ -8,7 +8,12 @@ import PrimaryButton from "../../../atoms/PrimaryButton"
 import { Link } from "react-router-dom"
 import defaultFeatureImage from "../../../../assets/images/default-feature.png"
 
-export default function ArtistAndGalleryCard({ cardInfo, artist, gallery }) {
+export default function ArtistAndGalleryCard({
+  cardInfo,
+  artist,
+  gallery,
+  partner,
+}) {
   return (
     <Container>
       <FeatureImage
@@ -19,11 +24,11 @@ export default function ArtistAndGalleryCard({ cardInfo, artist, gallery }) {
             ? cardInfo.artworks[0].pictures[0]
             : defaultFeatureImage
         }
-        alt={(artist ? cardInfo.fullName : cardInfo.name) + " feature image"}
+        alt={cardInfo.fullName + " feature image"}
       />
       <WrittenContent>
         <div>
-          <h4>{artist ? cardInfo.fullName : cardInfo.name}</h4>
+          <h4>{cardInfo.fullName}</h4>
           <p>{artist ? cardInfo.currentCountry : cardInfo.country}</p>
         </div>
         {artist && (
@@ -34,6 +39,11 @@ export default function ArtistAndGalleryCard({ cardInfo, artist, gallery }) {
         {gallery && (
           <a target="_blank" href={`http://${cardInfo.website}`}>
             <PrimaryButton buttonText={"VIEW WEBSITE"} />
+          </a>
+        )}
+        {partner && (
+          <a target="_blank" href={`http://${cardInfo.website}`}>
+            <PrimaryButton buttonText={"VIEW PARTNERS"} />
           </a>
         )}
       </WrittenContent>

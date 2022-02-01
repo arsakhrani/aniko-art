@@ -19,10 +19,19 @@ module.exports.verifyEmail = (name, link) => {
     <p>Your Aniko van Nie // Art Agency Team</p>`;
 };
 
-module.exports.verifyArtistApproved = (name) => {
+module.exports.verifyIdApproved = (name) => {
   return `<p>Dear ${name},</p>
     <br>
     <p>Congratulations! Your verification request has been approved.</p>
+    <br>
+    <p>Warm Regards,</p>
+    <p>Your Aniko van Nie // Art Agency Team</p>`;
+};
+
+module.exports.verifyIdDeclined = (name) => {
+  return `<p>Dear ${name},</p>
+    <br>
+    <p>Your verification request has been declined and account deleted.</p>
     <br>
     <p>Warm Regards,</p>
     <p>Your Aniko van Nie // Art Agency Team</p>`;

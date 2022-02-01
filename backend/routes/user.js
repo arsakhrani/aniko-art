@@ -17,6 +17,7 @@ const FacebookStrategy = require("passport-facebook").Strategy;
 const User = require("../models/User");
 const Artist = require("../models/Artist");
 const Gallery = require("../models/Gallery");
+const Partner = require("../models/Partner");
 
 const cookieExtractor = (req) => {
   let token = null;
@@ -78,7 +79,6 @@ passport.use(
           googleId: profile.id,
           role: "buyer",
           stripeId: customer.id,
-          isVerified: true,
         };
         const newUser = new User(user);
         await newUser.save();
@@ -89,12 +89,12 @@ passport.use(
 );
 
 passport.use(
-  "google-sell-private",
+  "google-sell-partner",
   new GoogleStrategy(
     {
       clientID: googleClientId,
       clientSecret: googleClientSecret,
-      callbackURL: `${serverRootDomain}/api/user/auth/google/sell/private/callback`,
+      callbackURL: `${serverRootDomain}/api/user/auth/google/sell/partner/callback`,
     },
     async (accessToken, refreshToken, profile, done) => {
       const existingUser = await User.findOne({
@@ -110,10 +110,15 @@ passport.use(
           password: profile.id,
           googleId: profile.id,
           role: "seller",
-          sellerType: "private",
+          sellerType: "partner",
           stripeId: customer.id,
-          isVerified: true,
         };
+        const partner = {
+          fullName: profile.displayName,
+          email: profile.emails[0].value,
+        };
+        const newPartner = Partner(partner);
+        await newPartner.save();
         const newUser = new User(user);
         await newUser.save();
         done(null, newUser);
@@ -146,7 +151,6 @@ passport.use(
           role: "seller",
           sellerType: "artist",
           stripeId: customer.id,
-          isVerified: true,
         };
         const artist = {
           fullName: profile.displayName,
@@ -186,7 +190,6 @@ passport.use(
           role: "seller",
           sellerType: "gallery",
           stripeId: customer.id,
-          isVerified: true,
         };
         const gallery = {
           fullName: profile.displayName,
@@ -226,7 +229,6 @@ passport.use(
           facebookId: profile.id,
           role: "buyer",
           stripeId: customer.id,
-          isVerified: true,
         };
         const newUser = new User(user);
         await newUser.save();
@@ -237,12 +239,12 @@ passport.use(
 );
 
 passport.use(
-  "facebook-sell-private",
+  "facebook-sell-partner",
   new FacebookStrategy(
     {
       clientID: facebookClientId,
       clientSecret: facebookClientSecret,
-      callbackURL: `${serverRootDomain}/api/user/auth/facebook/sell/private/callback`,
+      callbackURL: `${serverRootDomain}/api/user/auth/facebook/sell/partner/callback`,
       profileFields: ["id", "displayName", "email"],
     },
     async (accessToken, refreshToken, profile, done) => {
@@ -259,10 +261,15 @@ passport.use(
           password: profile.id,
           facebookId: profile.id,
           role: "seller",
-          sellerType: "private",
+          sellerType: "partner",
           stripeId: customer.id,
-          isVerified: true,
         };
+        const partner = {
+          fullName: profile.displayName,
+          email: profile.emails[0].value,
+        };
+        const newPartner = Partner(partner);
+        await newPartner.save();
         const newUser = new User(user);
         await newUser.save();
         done(null, newUser);
@@ -296,7 +303,6 @@ passport.use(
           role: "seller",
           sellerType: "gallery",
           stripeId: customer.id,
-          isVerified: true,
         };
         const gallery = {
           fullName: profile.displayName,
@@ -337,7 +343,6 @@ passport.use(
           role: "seller",
           sellerType: "artist",
           stripeId: customer.id,
-          isVerified: true,
         };
         const artist = {
           fullName: profile.displayName,
@@ -392,10 +397,9 @@ router.post(
   wrapAsync(userController.verifyArtistRequest)
 );
 
-router.put(
-  "/verify-artist-approve/:id",
-  wrapAsync(userController.verifyArtistApproval)
-);
+router.get("/verify-id/:id", wrapAsync(userController.verifyIdApproval));
+
+router.get("/decline-id/:id", wrapAsync(userController.declineIdApproval));
 
 router.put("/update/:id", wrapAsync(userController.editUser));
 
@@ -416,16 +420,16 @@ router.get(
 );
 
 router.get(
-  "/auth/google/sell/private",
-  passport.authenticate("google-sell-private", {
+  "/auth/google/sell/partner",
+  passport.authenticate("google-sell-partner", {
     scope: ["profile", "email"],
     session: false,
   })
 );
 
 router.get(
-  "/auth/google/sell/private/callback",
-  passport.authenticate("google-sell-private", { session: false }),
+  "/auth/google/sell/partner/callback",
+  passport.authenticate("google-sell-partner", { session: false }),
   wrapAsync(userController.socialLogin)
 );
 
@@ -472,16 +476,16 @@ router.get(
 );
 
 router.get(
-  "/auth/facebook/sell/private",
-  passport.authenticate("facebook-sell-private", {
+  "/auth/facebook/sell/partner",
+  passport.authenticate("facebook-sell-partner", {
     scope: ["email"],
     session: false,
   })
 );
 
 router.get(
-  "/auth/facebook/sell/private/callback",
-  passport.authenticate("facebook-sell-private", { session: false }),
+  "/auth/facebook/sell/partner/callback",
+  passport.authenticate("facebook-sell-partner", { session: false }),
   wrapAsync(userController.socialLogin)
 );
 

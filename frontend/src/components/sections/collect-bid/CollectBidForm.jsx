@@ -69,6 +69,9 @@ export default function CollectBidForm({
           onChange={(e) => changeBid(e)}
           value={bidAmount}
           label={"Bid amount (euros)"}
+          onkeydown={"return false"}
+          step={bidIncrement}
+          min={highestBid}
         />
       </div>
       <p style={{ color: "red" }}>{errorMessage}</p>

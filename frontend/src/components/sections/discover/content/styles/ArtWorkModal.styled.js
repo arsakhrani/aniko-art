@@ -128,6 +128,17 @@ export const Info = styled.div`
     }
   }
 
+  div.bid-grid {
+    border-top: 1px solid white;
+    margin-top: 1em;
+    margin-right: 2em;
+
+    h2 {
+      font-size: 2em;
+      margin-top: 0.5em;
+    }
+  }
+
   div.buy-art-container {
     display: flex;
     max-height: 45px;

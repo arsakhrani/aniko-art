@@ -9,7 +9,9 @@ export default function Sidebar() {
 
   return (
     <Container>
-      {(type === "artists" || type === "galleries") && <CountryFilter />}
+      {(type === "artists" || type === "galleries" || type === "partners") && (
+        <CountryFilter />
+      )}
       {type === "artworks" && <OtherFilters />}
     </Container>
   )

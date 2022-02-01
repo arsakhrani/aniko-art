@@ -7,6 +7,7 @@ import AuthProvider from "./context/authContext"
 import ArtworksProvider from "./context/artworkContext"
 import ArtistsProvider from "./context/artistContext"
 import GalleriesProvider from "./context/galleryContext"
+import PartnersProvider from "./context/partnerContext"
 import "./index.css"
 
 ReactDOM.render(
@@ -16,7 +17,9 @@ ReactDOM.render(
         <ArtworksProvider>
           <ArtistsProvider>
             <GalleriesProvider>
-              <App />
+              <PartnersProvider>
+                <App />
+              </PartnersProvider>
             </GalleriesProvider>
           </ArtistsProvider>
         </ArtworksProvider>

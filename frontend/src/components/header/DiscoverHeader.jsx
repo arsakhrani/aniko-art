@@ -11,6 +11,8 @@ export default function DiscoverHeader({ toggleSearch }) {
 
   const galleryCount = useSelector((state) => state.collectionCount.galleries)
 
+  const partnerCount = useSelector((state) => state.collectionCount.partners)
+
   const { type } = useParams()
 
   const vw = Math.max(
@@ -30,7 +32,7 @@ export default function DiscoverHeader({ toggleSearch }) {
         <Link to={"/discover/galleries"}>Galleries ({galleryCount})</Link>
       </MenuItem>
       <MenuItem $activeTab={type === "partners"}>
-        <Link to={"/discover/partners"}>Partners</Link>
+        <Link to={"/discover/partners"}>Partners ({partnerCount})</Link>
       </MenuItem>
       <Search
         onClick={() => toggleSearch()}
