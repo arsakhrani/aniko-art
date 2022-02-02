@@ -12,6 +12,7 @@ import { AuthContext } from "../../../../context/authContext"
 import { useHistory } from "react-router"
 import paymentService from "../../../../services/paymentService"
 import ConfirmModal from "./ConfirmModal"
+import NotificationModal from "../../../atoms/NotificationModal"
 
 export default function ArtWorkCard({
   cardInfo,
@@ -23,27 +24,28 @@ export default function ArtWorkCard({
   const [isLoading, setIsLoading] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
   const [showConfirmModal, setShowConfirmModal] = useState(false)
+  const [modalMessage, setModalMessage] = useState("")
 
   const history = useHistory()
 
   const { user } = useContext(AuthContext)
 
   const showModal = (type) => {
-    if (!editMode) {
-      if (!cardInfo.sold) {
-        if (type === "art") {
-          setShowConfirmModal(false)
-          setShowArtModal(true)
-        } else if (type === "confirm") {
-          setShowArtModal(false)
-          setShowConfirmModal(true)
-        }
-        const body = document.getElementsByTagName("body")
-        body[0].classList.add("modal-open")
+    // if (!editMode) {
+    if (!cardInfo.sold) {
+      if (type === "art") {
+        setShowConfirmModal(false)
+        setShowArtModal(true)
+      } else if (type === "confirm") {
+        setShowArtModal(false)
+        setShowConfirmModal(true)
       }
-    } else {
-      selectImage()
+      const body = document.getElementsByTagName("body")
+      body[0].classList.add("modal-open")
     }
+    // } else {
+    //   selectImage()
+    // }
   }
 
   const closeModal = () => {
@@ -55,20 +57,26 @@ export default function ArtWorkCard({
   }
 
   const setupBid = async () => {
-    setIsLoading(true)
-    const secret = await paymentService.createCheckoutSaveSession(user._id)
-    history.push({
-      pathname: "/create-bid",
-      state: {
-        secret: secret.client_secret,
-        highestBid:
-          cardInfo.highestBid > 0
-            ? cardInfo.highestBid + cardInfo.bidIncrement
-            : cardInfo.minimumBid,
-        artworkId: cardInfo._id,
-        bidIncrement: cardInfo.bidIncrement,
-      },
-    })
+    if (!user._id) {
+      history.push("/login")
+    } else if (!user.isVerified) {
+      setModalMessage("Please verify your email to continue")
+    } else {
+      setIsLoading(true)
+      const secret = await paymentService.createCheckoutSaveSession(user._id)
+      history.push({
+        pathname: "/create-bid",
+        state: {
+          secret: secret.client_secret,
+          highestBid:
+            cardInfo.highestBid > 0
+              ? cardInfo.highestBid + cardInfo.bidIncrement
+              : cardInfo.minimumBid,
+          artworkId: cardInfo._id,
+          bidIncrement: cardInfo.bidIncrement,
+        },
+      })
+    }
   }
 
   const isOwner = cardInfo.owner === user._id
@@ -81,6 +89,12 @@ export default function ArtWorkCard({
       {showConfirmModal && (
         <ConfirmModal closeModal={() => closeModal()} artInfo={cardInfo} />
       )}
+      {modalMessage && (
+        <NotificationModal
+          message={modalMessage}
+          closeModal={() => setModalMessage("")}
+        />
+      )}
       <p>LOT {cardInfo.lot}</p>
       <GradientContainer
         onMouseEnter={() => setIsHovering(true)}
@@ -89,7 +103,7 @@ export default function ArtWorkCard({
         $hover={isHovering}
         onClick={() => showModal("art")}
         $pointer={!cardInfo.sold}
-        $featureBorder={featureBorder}
+        // $featureBorder={featureBorder}
       >
         <CoverPicture
           src={cardInfo.pictures[0]}

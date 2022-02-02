@@ -65,10 +65,10 @@ function App() {
           {!isAuthenticated && <Redirect to="/login" />}
         </Route>
         <Route path="/upload-artwork" exact>
-          {isAuthenticated && user.role === "seller" ? (
+          {user.role === "seller" && user.isVerifiedWithId ? (
             <UploadArtworkPage />
           ) : (
-            <Redirect to="/login" />
+            <Redirect to="/" />
           )}
         </Route>
         <Route path="/create-bid" exact>

@@ -177,7 +177,7 @@ export default function ArtWorkModal({ artInfo, closeModal }) {
               </div>
             </div>
           </div>
-          {artInfo.minimumBid && (
+          {artInfo.minimumBid > 0 && (
             <div className="bid-grid">
               <h2>Starting Bid</h2>
               <h3>

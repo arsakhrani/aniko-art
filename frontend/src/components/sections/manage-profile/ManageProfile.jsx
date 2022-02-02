@@ -81,6 +81,14 @@ export default function ManageProfile() {
   const [cvFile, setCvFile] = useState([])
   const [featureObject, setFeatureObject] = useState({})
   const [featureFile, setFeatureFile] = useState([])
+  const [soundDescription, setSoundDescription] = useState(
+    authContext.user.soundDescription || ""
+  )
+  const [birthCity, setBirthCity] = useState(authContext.user.birthCity || "")
+  const [birthCountry, setBirthCountry] = useState(
+    authContext.user.birthCountry || ""
+  )
+  const [birthYear, setBirthYear] = useState(authContext.user.birthYear || null)
 
   const preloadIdImage = (e) => {
     const { files: newFiles } = e.target
@@ -192,6 +200,8 @@ export default function ManageProfile() {
     }
   }
 
+  const currentYear = new Date().getFullYear()
+
   const validate = async () => {
     const banner = await uploadImage(bannerPicture)
     const audio = await uploadAudio(audioFile)
@@ -206,11 +216,15 @@ export default function ManageProfile() {
       phoneNumber,
       insuranceMethod,
       website,
+      soundDescription,
+      birthCity,
+      birthCountry,
+      birthYear,
       bannerPicture: banner || authContext.user.bannerPicture,
       audioFile: audio || authContext.user.audioFile,
       cvFile: cvUrl || authContext.user.cvFile,
       cvFileName: cvFileName || authContext.user.cvFileName,
-      featurePicture: feature || authContext.user.cvFileName,
+      featurePicture: feature || authContext.user.featurePicture,
       idPicture: idImageUpload || authContext.user.idPicture,
       facePicture: faceImageUpload || authContext.user.facePicture,
     }
@@ -498,14 +512,14 @@ export default function ManageProfile() {
       </div>
       <div>
         <h1 style={{ color: theme.color.grey }}>SUPRISE</h1>
-        <StepLabel>
-          <BubbleCounter>{registrationDetails ? "3" : "2"}</BubbleCounter>
-          <span>CHOOSE DISPLAY IMAGES</span>
-        </StepLabel>
-        <ShippingContainer>
-          {((registrationDetails && registrationDetails.sellerType) ||
-            authContext.user.sellerType) && (
-            <div>
+        {((registrationDetails && registrationDetails.sellerType) ||
+          authContext.user.sellerType) && (
+          <div>
+            <StepLabel>
+              <BubbleCounter>{registrationDetails ? "3" : "2"}</BubbleCounter>
+              <span>EDIT PUBLIC PORTFOLIO</span>
+            </StepLabel>
+            <ShippingContainer>
               <Para style={{ marginTop: 0 }}>Upload your feature image:</Para>
               <FileInput
                 id={"feature-image"}
@@ -513,40 +527,84 @@ export default function ManageProfile() {
                 multiple={false}
               />
               <FileDescription object={featureObject} removeFile={removeFile} />
-            </div>
-          )}
-          {((registrationDetails &&
-            registrationDetails.sellerType === "artist") ||
-            authContext.user.sellerType === "artist") && (
-            <div>
-              <Para>Upload your own Portfolio Banner:</Para>
-              <FileInput
-                id={"portfolio-banner"}
-                onChange={(e) => preloadBanner(e)}
-                multiple={false}
-              />
-              <FileDescription object={bannerObject} removeFile={removeFile} />
-              <Para>
-                Upload an audio file that plays while visiting your portfolio:
-              </Para>
-              <FileInput
-                audio={true}
-                onChange={(e) => preloadAudio(e)}
-                id={"portfolio-audio"}
-                multiple={false}
-              />
-              <FileDescription object={audioObject} removeFile={removeFile} />
-              <Para>Upload your CV:</Para>
-              <FileInput
-                cv={true}
-                onChange={(e) => preloadCv(e)}
-                id={"cv"}
-                multiple={false}
-              />
-              <FileDescription object={cvObject} removeFile={removeFile} />
-            </div>
-          )}
-        </ShippingContainer>
+              {((registrationDetails &&
+                registrationDetails.sellerType === "artist") ||
+                authContext.user.sellerType === "artist") && (
+                <div>
+                  <Para>Upload your own Portfolio Banner:</Para>
+                  <FileInput
+                    id={"portfolio-banner"}
+                    onChange={(e) => preloadBanner(e)}
+                    multiple={false}
+                  />
+                  <FileDescription
+                    object={bannerObject}
+                    removeFile={removeFile}
+                  />
+                  <Para>
+                    Upload an audio file that plays while visiting your
+                    portfolio:
+                  </Para>
+                  <FileInput
+                    audio={true}
+                    onChange={(e) => preloadAudio(e)}
+                    id={"portfolio-audio"}
+                    multiple={false}
+                  />
+                  <FileDescription
+                    object={audioObject}
+                    removeFile={removeFile}
+                  />
+                  <div style={{ marginTop: "1em" }}>
+                    <TextInput
+                      id={"audio-description"}
+                      onChange={(e) => setSoundDescription(e.target.value)}
+                      value={soundDescription}
+                      label={"Audio Description"}
+                    />
+                  </div>
+                  <Para>Upload your CV:</Para>
+                  <FileInput
+                    cv={true}
+                    onChange={(e) => preloadCv(e)}
+                    id={"cv"}
+                    multiple={false}
+                  />
+                  <FileDescription object={cvObject} removeFile={removeFile} />
+                  <div style={{ marginTop: "1em" }}>
+                    <TextInput
+                      id={"birth-city"}
+                      onChange={(e) => setBirthCity(e.target.value)}
+                      value={birthCity}
+                      label={"Birth city"}
+                      maxLength={15}
+                    />
+                  </div>
+                  <div style={{ marginTop: "1em" }}>
+                    <DropdownInput
+                      id={"birth-country"}
+                      value={birthCountry}
+                      options={countries}
+                      onChange={(e) => setBirthCountry(e.target.value)}
+                      label={"Birth country"}
+                    />
+                  </div>
+                  <div style={{ marginTop: "1em" }}>
+                    <TextInput
+                      id={"birth-year"}
+                      onChange={(e) => setBirthYear(e.target.value)}
+                      value={birthYear}
+                      type={"number"}
+                      label={"Birth year"}
+                      min={currentYear - 100}
+                      max={currentYear - 18}
+                    />
+                  </div>
+                </div>
+              )}
+            </ShippingContainer>
+          </div>
+        )}
         <StepLabel>
           <BubbleCounter>{registrationDetails ? "4" : "3"}</BubbleCounter>
           <span>CHOOSE AN INSURANCE METHOD</span>

@@ -1,12 +1,15 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import {
   Container,
   StyledLink,
   LineBlocker,
 } from "./styles/DefaultSideMenuLinks.styled"
+import { AuthContext } from "../../context/authContext"
 
 export default function SellerSideMenuLinks() {
   const [number, setNumber] = useState(0)
+
+  const { user } = useContext(AuthContext)
 
   return (
     <Container>
@@ -26,13 +29,15 @@ export default function SellerSideMenuLinks() {
         Manage Profile
       </StyledLink>
       <LineBlocker $number={number} />
-      <StyledLink
-        to={"/upload-artwork"}
-        onMouseEnter={() => setNumber(3)}
-        onMouseLeave={() => setNumber(0)}
-      >
-        Upload Artwork
-      </StyledLink>
+      {user.isVerifiedWithId && (
+        <StyledLink
+          to={"/upload-artwork"}
+          onMouseEnter={() => setNumber(3)}
+          onMouseLeave={() => setNumber(0)}
+        >
+          Upload Artwork
+        </StyledLink>
+      )}
       <LineBlocker $number={number} />
       <StyledLink
         to={"/request-artwork"}

@@ -53,6 +53,16 @@ module.exports.newUser = async (req, res) => {
           ? user.shippingAddress.country
           : "",
         currentCity: user.shippingAddress ? user.shippingAddress.city : "",
+        website: user.website,
+        soundDescription: user.soundDescription,
+        bannerPicture: user.bannerPicture,
+        audioFile: user.audioFile,
+        cvFile: user.cvFile,
+        cvFileName: user.cvFileName,
+        featurePicture: user.featurePicture,
+        birthCity: user.birthCity,
+        birthCountry: user.birthCountry,
+        birthYear: user.birthYear,
       };
       const newArtist = new Artist(artist);
       await newArtist.save();
@@ -64,6 +74,8 @@ module.exports.newUser = async (req, res) => {
       fullName: user.fullName,
       country: user.shippingAddress ? user.shippingAddress.country : "",
       city: user.shippingAddress ? user.shippingAddress.city : "",
+      website: user.website,
+      featurePicture: user.featurePicture,
     };
 
     if (user.sellerType === "gallery") {
@@ -219,33 +231,48 @@ module.exports.authenticated = async (req, res) => {
 module.exports.editUser = async (req, res, next) => {
   const { id } = req.params;
   const user = req.body;
-  await User.findByIdAndUpdate(id, user);
-  const updatedUser = await User.findById(id);
+  const updatedUser = await User.findByIdAndUpdate(id, user);
 
   if (updatedUser) {
-    const formattedUser = {
-      city: user.shippingAddress.city,
-      country: user.shippingAddress.country,
-      fullName: user.fullName,
-      website: user.website,
+    const galleryOrPartner = {
+      fullName: updatedUser.fullName,
+      country: updatedUser.shippingAddress
+        ? updatedUser.shippingAddress.country
+        : "",
+      city: updatedUser.shippingAddress ? updatedUser.shippingAddress.city : "",
+      website: updatedUser.website,
+      featurePicture: updatedUser.featurePicture,
     };
 
-    if (updatedUser.sellerType === "gallery") {
-      await Gallery.findOneAndUpdate(
-        { email: updatedUser.email },
-        formattedUser
-      );
+    if (updatedupdatedUser.sellerType === "gallery") {
+      await Gallery.findOneAndUpdate({ email: updatedUser.email }, updatedUser);
     }
 
     if (updatedUser.sellerType === "partner") {
-      await Partner.findOneAndUpdate(
-        { email: updatedUser.email },
-        formattedUser
-      );
+      await Partner.findOneAndUpdate({ email: updatedUser.email }, updatedUser);
     }
 
     if (updatedUser.sellerType === "artist") {
-      await Artist.findOneAndUpdate({ email: updatedUser.email }, user);
+      const artist = {
+        fullName: updatedUser.fullName,
+        currentCountry: updatedUser.shippingAddress
+          ? updatedUser.shippingAddress.country
+          : "",
+        currentCity: updatedUser.shippingAddress
+          ? updatedUser.shippingAddress.city
+          : "",
+        website: updatedUser.website,
+        soundDescription: updatedUser.soundDescription,
+        bannerPicture: updatedUser.bannerPicture,
+        audioFile: updatedUser.audioFile,
+        cvFile: updatedUser.cvFile,
+        cvFileName: updatedUser.cvFileName,
+        featurePicture: updatedUser.featurePicture,
+        birthCity: updatedUser.birthCity,
+        birthCountry: updatedUser.birthCountry,
+        birthYear: updatedUser.birthYear,
+      };
+      await Artist.findOneAndUpdate({ email: updatedUser.email }, artist);
     }
 
     res.status(200).json({ user: updatedUser, isAuthenticated: true });

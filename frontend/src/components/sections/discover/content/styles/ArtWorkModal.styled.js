@@ -143,7 +143,7 @@ export const Info = styled.div`
     display: flex;
     max-height: 45px;
     width: 100%;
-    margin-top: 3em;
+    margin-top: 1em;
 
     h2 {
       margin-right: 0.2em;

@@ -178,6 +178,33 @@ const userSchema = new mongoose.Schema({
   facebookId: {
     type: String,
   },
+  soundDescription: {
+    type: String,
+  },
+  bannerPicture: {
+    type: String,
+  },
+  audioFile: {
+    type: String,
+  },
+  cvFile: {
+    type: String,
+  },
+  cvFileName: {
+    type: String,
+  },
+  featurePicture: {
+    type: String,
+  },
+  birthCity: {
+    type: String,
+  },
+  birthCountry: {
+    type: String,
+  },
+  birthYear: {
+    type: Number,
+  },
 });
 
 userSchema.pre("save", function (next) {

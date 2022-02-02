@@ -1,9 +1,11 @@
 const Gallery = require("../models/Gallery");
 
 module.exports.getAllGalleries = async (req, res) => {
-  const galleries = await Gallery.find({ activated: true }).sort({
-    created: -1,
-  });
+  const galleries = await Gallery.find({ activated: true })
+    .collation({ locale: "en", strength: 2 })
+    .sort({
+      fullName: 1,
+    });
   res.status(200).json({ galleries });
 };
 
