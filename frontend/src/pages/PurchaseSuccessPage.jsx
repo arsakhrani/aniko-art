@@ -53,7 +53,7 @@ export default function ConfirmModal() {
           disabled={isLoading}
           loading={isLoading}
           buttonText={"OK"}
-          onClick={() => closePage()}
+          onClick={closePage}
         />
       </Modal>
     </ModalContainer>

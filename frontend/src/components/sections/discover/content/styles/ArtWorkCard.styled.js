@@ -43,21 +43,6 @@ export const WrittenContent = styled.div`
     flex-direction: column;
     justify-content: center;
 
-    h4 {
-      font-size: ${theme.fontSize.normal};
-      margin: 0;
-    }
-
-    p {
-      font-size: ${theme.fontSize.small};
-      color: rgba(0, 0, 0, 0.6);
-      margin: 0;
-
-      @media (max-width: ${theme.mediaSize.mobileL}) {
-        text-align: center;
-      }
-    }
-
     span {
       font-size: ${theme.fontSize.small};
     }
@@ -65,6 +50,21 @@ export const WrittenContent = styled.div`
 
   @media (max-width: ${theme.mediaSize.mobileL}) {
     flex-direction: column;
+  }
+`
+
+export const CardHeading = styled.p`
+  font-size: ${theme.fontSize.normal};
+  margin: 0;
+`
+
+export const CardText = styled.p`
+  font-size: ${theme.fontSize.small};
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0;
+
+  @media (max-width: ${theme.mediaSize.mobileL}) {
+    text-align: center;
   }
 `
 

@@ -22,7 +22,13 @@ const partnerSchema = new mongoose.Schema({
   artworks: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Artwork",
+      ref: "artwork",
+    },
+  ],
+  affiliatedArtists: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "artist",
     },
   ],
   activated: {

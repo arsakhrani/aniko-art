@@ -221,7 +221,7 @@ export default function ManagePreferences() {
           }}
         >
           <PrimaryButton
-            onClick={() => validate()}
+            onClick={validate}
             buttonText={"Save and continue"}
             loading={isLoading}
             disabled={isLoading}

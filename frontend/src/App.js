@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom"
 import HomePage from "./pages/HomePage"
 import DiscoverPage from "./pages/DiscoverPage"
 import ArtistPortfolioPage from "./pages/ArtistPortfolioPage"
+import PartnerPortfolioPage from "./pages/PartnerPortfolioPage"
 import RegisterPage from "./pages/RegisterPage"
 import ManageProfilePage from "./pages/ManageProfilePage"
 import ManagePreferencesPage from "./pages/ManagePreferencesPage"
@@ -36,6 +37,11 @@ function App() {
           path="/artist-portfolio/:artistId/:section"
           exact
           component={ArtistPortfolioPage}
+        />
+        <Route
+          path="/partner-portfolio/:partnerId/"
+          exact
+          component={PartnerPortfolioPage}
         />
         <Route path="/register" exact component={RegisterPage}>
           {isAuthenticated && <Redirect to="/" />}

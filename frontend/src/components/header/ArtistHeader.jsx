@@ -51,11 +51,11 @@ export default function DiscoverHeader({ toggleSearch }) {
           </a>
         </MenuItem>
       )}
-      <MenuItem $activeTab={section === "inquiry"} onClick={() => setupEmail()}>
+      <MenuItem $activeTab={section === "inquiry"} onClick={setupEmail}>
         Inquiry
       </MenuItem>
       <Search
-        onClick={() => toggleSearch()}
+        onClick={toggleSearch}
         style={{
           marginLeft: "1em",
           cursor: "pointer",

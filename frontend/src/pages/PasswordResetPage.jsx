@@ -99,7 +99,7 @@ export default function PasswordResetPage() {
         <PrimaryButton
           loading={isLoading}
           disabled={isLoading}
-          onClick={() => updatePassword()}
+          onClick={updatePassword}
           buttonText={"Send"}
         />
       </div>

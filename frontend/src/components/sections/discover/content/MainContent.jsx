@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import {
   ArtistsAndGalleriesContainer,
   ArtworksContainer,
@@ -39,14 +39,23 @@ export default function MainContent({ type }) {
 
   const filteredArtworks = filterArtworks(artworks, artworkFilters)
 
+  const [audio, setAudio] = useState("")
+
+  const selectAudio = (file) => {
+    setAudio(file)
+  }
+
   if (type === "artists" && filteredAritsts.length) {
     return (
       <ArtistsAndGalleriesContainer>
+        {audio && <audio loop={true} autoPlay={true} src={audio} />}
         {filteredAritsts.map((artist) => (
           <ArtistAndGalleryCard
             artist={true}
             key={artist._id}
             cardInfo={artist}
+            playAudio={artist.audioFile && artist.audioFile === audio}
+            selectAudio={selectAudio}
           />
         ))}
       </ArtistsAndGalleriesContainer>
@@ -72,7 +81,7 @@ export default function MainContent({ type }) {
       <ArtistsAndGalleriesContainer>
         {filteredPartners.map((partner) => (
           <ArtistAndGalleryCard
-            gallery={true}
+            partner={true}
             key={partner._id}
             cardInfo={partner}
           />

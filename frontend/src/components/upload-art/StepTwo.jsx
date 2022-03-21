@@ -210,10 +210,7 @@ export default function StepTwo() {
             </div>
           )}
           <div>
-            <PrimaryButton
-              onClick={() => validateAndSubmit()}
-              buttonText={"SUBMIT"}
-            />
+            <PrimaryButton onClick={validateAndSubmit} buttonText={"SUBMIT"} />
           </div>
         </div>
       </StepContainer>

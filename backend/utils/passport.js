@@ -11,7 +11,6 @@ const cookieExtractor = (req) => {
   return token;
 };
 
-//authorization
 passport.use(
   new JwtStrategy(
     {
@@ -28,7 +27,6 @@ passport.use(
   )
 );
 
-//authentication
 passport.use(
   new LocalStrategy((email, password, done) => {
     User.findOne({ email }, (err, user) => {

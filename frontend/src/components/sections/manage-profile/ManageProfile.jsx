@@ -36,36 +36,24 @@ export default function ManageProfile() {
 
   const history = useHistory()
 
-  const authContext = useContext(AuthContext)
+  const { user, setUser, setIsAuthenticated } = useContext(AuthContext)
 
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [taxNumber, setTaxNumber] = useState("")
   const [termsAndConditions, setTermsAndConditions] = useState(false)
-  const [fullName, setFullName] = useState(authContext.user.fullName || "")
-  const [website, setWebsite] = useState(authContext.user.website || "")
+  const [fullName, setFullName] = useState(user.fullName || "")
+  const [website, setWebsite] = useState(user.website || "")
   const [shippingAddress, setShippingAddress] = useState({
-    street: authContext.user.shippingAddress
-      ? authContext.user.shippingAddress.street
-      : "",
-    city: authContext.user.shippingAddress
-      ? authContext.user.shippingAddress.city
-      : "",
-    country: authContext.user.shippingAddress
-      ? authContext.user.shippingAddress.country
-      : "",
-    postCode: authContext.user.shippingAddress
-      ? authContext.user.shippingAddress.postCode
-      : "",
-    specialInstructions: authContext.user.shippingAddress
-      ? authContext.user.shippingAddress.specialInstructions
-      : "",
+    street: user.shippingAddress?.street || "",
+    city: user.shippingAddress?.city || "",
+    country: user.shippingAddress?.country || "",
+    postCode: user.shippingAddress?.postCode || "",
+    specialInstructions: user.shippingAddress?.specialInstructions || "",
   })
-  const [phoneNumber, setPhoneNumber] = useState(
-    authContext.user.phoneNumber || ""
-  )
+  const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber || "")
   const [insuranceMethod, setInsuranceMethod] = useState(
-    authContext.user.insuranceMethod || ""
+    user.insuranceMethod || ""
   )
   const [errorMessage, setErrorMessage] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -82,13 +70,11 @@ export default function ManageProfile() {
   const [featureObject, setFeatureObject] = useState({})
   const [featureFile, setFeatureFile] = useState([])
   const [soundDescription, setSoundDescription] = useState(
-    authContext.user.soundDescription || ""
+    user.soundDescription || ""
   )
-  const [birthCity, setBirthCity] = useState(authContext.user.birthCity || "")
-  const [birthCountry, setBirthCountry] = useState(
-    authContext.user.birthCountry || ""
-  )
-  const [birthYear, setBirthYear] = useState(authContext.user.birthYear || null)
+  const [birthCity, setBirthCity] = useState(user.birthCity || "")
+  const [birthCountry, setBirthCountry] = useState(user.birthCountry || "")
+  const [birthYear, setBirthYear] = useState(user.birthYear || null)
 
   const preloadIdImage = (e) => {
     const { files: newFiles } = e.target
@@ -210,7 +196,7 @@ export default function ManageProfile() {
     const idImageUpload = await uploadImage(idImageArray)
     const faceImageUpload = await uploadImage(faceImageArray)
 
-    const user = {
+    const userDetails = {
       fullName,
       shippingAddress,
       phoneNumber,
@@ -220,13 +206,13 @@ export default function ManageProfile() {
       birthCity,
       birthCountry,
       birthYear,
-      bannerPicture: banner || authContext.user.bannerPicture,
-      audioFile: audio || authContext.user.audioFile,
-      cvFile: cvUrl || authContext.user.cvFile,
-      cvFileName: cvFileName || authContext.user.cvFileName,
-      featurePicture: feature || authContext.user.featurePicture,
-      idPicture: idImageUpload || authContext.user.idPicture,
-      facePicture: faceImageUpload || authContext.user.facePicture,
+      bannerPicture: banner || user.bannerPicture,
+      audioFile: audio || user.audioFile,
+      cvFile: cvUrl || user.cvFile,
+      cvFileName: cvFileName || user.cvFileName,
+      featurePicture: feature || user.featurePicture,
+      idPicture: idImageUpload || user.idPicture,
+      facePicture: faceImageUpload || user.facePicture,
     }
 
     if (registrationDetails) {
@@ -247,7 +233,7 @@ export default function ManageProfile() {
         setErrorMessage("")
         setIsLoading(true)
         const newUser = {
-          ...user,
+          ...userDetails,
           password,
           taxNumber,
           email: registrationDetails.email,
@@ -260,8 +246,8 @@ export default function ManageProfile() {
           setErrorMessage("email address is already taken")
           setIsLoading(false)
         } else {
-          authContext.setUser(registerUser.user)
-          authContext.setIsAuthenticated(true)
+          setUser(registerUser.user)
+          setIsAuthenticated(true)
 
           if (registrationDetails.sellerType === "artist") {
             history.push("/discover/artists")
@@ -279,16 +265,16 @@ export default function ManageProfile() {
         }
       }
     } else {
-      const updateUser = await authService.update(user, authContext.user._id)
+      const updateUser = await authService.update(userDetails, user._id)
       if (updateUser.isAuthenticated) {
-        authContext.setUser(updateUser.user)
-        if (authContext.user.sellerType === "artist") {
+        setUser(updateUser.user)
+        if (user.sellerType === "artist") {
           history.push("/discover/artists")
           history.go(0)
-        } else if (authContext.user.sellerType === "gallery") {
+        } else if (user.sellerType === "gallery") {
           history.push("/discover/galleries")
           history.go(0)
-        } else if (authContext.user.sellerType === "partner") {
+        } else if (user.sellerType === "partner") {
           history.push("/discover/partners")
           history.go(0)
         } else {
@@ -338,14 +324,14 @@ export default function ManageProfile() {
                   <Para>Upload ID ( JPG, PNG, PDF ) MAX. 2MB</Para>
                   <FileInput
                     multiple={false}
-                    onChange={(e) => preloadIdImage(e)}
+                    onChange={preloadIdImage}
                     id={"id-image"}
                   />
                   <FileDescription object={idImage} removeFile={removeFile} />
                   <Para>Upload Face ( JPG, PNG, PDF ) MAX. 2MB</Para>
                   <FileInput
                     multiple={false}
-                    onChange={(e) => preloadFaceImage(e)}
+                    onChange={preloadFaceImage}
                     id={"face-image"}
                   />
                   <FileDescription object={faceImage} removeFile={removeFile} />
@@ -377,7 +363,7 @@ export default function ManageProfile() {
               label={
                 (registrationDetails &&
                   registrationDetails.sellerType === "gallery") ||
-                authContext.user.sellerType === "gallery"
+                user.sellerType === "gallery"
                   ? "Gallery name *"
                   : "Full name *"
               }
@@ -429,7 +415,7 @@ export default function ManageProfile() {
           <div>
             {(registrationDetails &&
               registrationDetails.sellerType === "gallery") ||
-            authContext.user.sellerType === "gallery" ? (
+            user.sellerType === "gallery" ? (
               <DropdownInput
                 value={shippingAddress.country}
                 onChange={(e) =>
@@ -513,7 +499,7 @@ export default function ManageProfile() {
       <div>
         <h1 style={{ color: theme.color.grey }}>SUPRISE</h1>
         {((registrationDetails && registrationDetails.sellerType) ||
-          authContext.user.sellerType) && (
+          user.sellerType) && (
           <div>
             <StepLabel>
               <BubbleCounter>{registrationDetails ? "3" : "2"}</BubbleCounter>
@@ -523,18 +509,18 @@ export default function ManageProfile() {
               <Para style={{ marginTop: 0 }}>Upload your feature image:</Para>
               <FileInput
                 id={"feature-image"}
-                onChange={(e) => preloadFeature(e)}
+                onChange={preloadFeature}
                 multiple={false}
               />
               <FileDescription object={featureObject} removeFile={removeFile} />
               {((registrationDetails &&
                 registrationDetails.sellerType === "artist") ||
-                authContext.user.sellerType === "artist") && (
+                user.sellerType === "artist") && (
                 <div>
                   <Para>Upload your own Portfolio Banner:</Para>
                   <FileInput
                     id={"portfolio-banner"}
-                    onChange={(e) => preloadBanner(e)}
+                    onChange={preloadBanner}
                     multiple={false}
                   />
                   <FileDescription
@@ -547,7 +533,7 @@ export default function ManageProfile() {
                   </Para>
                   <FileInput
                     audio={true}
-                    onChange={(e) => preloadAudio(e)}
+                    onChange={preloadAudio}
                     id={"portfolio-audio"}
                     multiple={false}
                   />
@@ -566,7 +552,7 @@ export default function ManageProfile() {
                   <Para>Upload your CV:</Para>
                   <FileInput
                     cv={true}
-                    onChange={(e) => preloadCv(e)}
+                    onChange={preloadCv}
                     id={"cv"}
                     multiple={false}
                   />
@@ -652,7 +638,7 @@ export default function ManageProfile() {
           }}
         >
           <PrimaryButton
-            onClick={() => validate()}
+            onClick={validate}
             buttonText={"Save and continue"}
             loading={isLoading}
             disabled={isLoading}

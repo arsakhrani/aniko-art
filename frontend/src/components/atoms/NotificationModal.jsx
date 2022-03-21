@@ -11,7 +11,7 @@ export default function NotificationModal({ message, closeModal }) {
     <ModalContainer>
       <Modal>
         <ConfirmText>{message}</ConfirmText>
-        <PrimaryButton buttonText={"OK"} onClick={() => closeModal()} />
+        <PrimaryButton buttonText={"OK"} onClick={closeModal} />
       </Modal>
     </ModalContainer>
   )

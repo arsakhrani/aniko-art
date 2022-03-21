@@ -3,6 +3,7 @@ import theme from "../../../../common/theme"
 
 export const Container = styled.div`
   height: 58vh;
+  position: relative;
 `
 
 export const FeatureImage = styled.img`
@@ -21,16 +22,15 @@ export const WrittenContent = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-
-    h4 {
-      font-size: ${theme.fontSize.normal};
-      margin: 0;
-    }
-
-    p {
-      font-size: ${theme.fontSize.xSmall};
-      color: rgba(0, 0, 0, 0.6);
-      margin: 0;
-    }
   }
+`
+export const CardHeading = styled.p`
+  font-size: ${theme.fontSize.normal};
+  margin: 0;
+`
+
+export const CardText = styled.p`
+  font-size: ${theme.fontSize.xSmall};
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0;
 `

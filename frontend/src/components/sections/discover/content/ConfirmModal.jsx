@@ -42,7 +42,7 @@ export default function ConfirmModal({ closeModal, artInfo }) {
               top: 15,
               right: 15,
             }}
-            onClick={() => closeModal()}
+            onClick={closeModal}
           />
         )}
         <ConfirmText>
@@ -55,13 +55,13 @@ export default function ConfirmModal({ closeModal, artInfo }) {
             <TransparentButton
               disabled={isLoading}
               buttonText={"NO"}
-              onClick={() => closeModal()}
+              onClick={closeModal}
             />
             <PrimaryButton
               disabled={isLoading}
               loading={isLoading}
               buttonText={"YES"}
-              onClick={() => acceptBid()}
+              onClick={acceptBid}
             />
           </ButtonContainer>
         )}

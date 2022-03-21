@@ -1,5 +1,7 @@
 import styled from "styled-components"
 import theme from "../../common/theme"
+import fullLogo from "../../../assets/icons/logo/black/long.png"
+import shortLogo from "../../../assets/icons/logo/black/short.png"
 
 export const Container = styled.header`
   display: ${(props) => props.$discover && "grid"};
@@ -8,16 +10,6 @@ export const Container = styled.header`
     "brand discover"
     "searchbar searchbar";
   background-color: ${(props) => (props.$grey ? theme.color.grey : "")};
-
-  h1 {
-    font-size: ${theme.fontSize.medium};
-    padding-left: 1em;
-    padding-top: 0.1em;
-    cursor: pointer;
-    margin: 0;
-    grid-area: brand;
-    display: inline-block;
-  }
 
   p.logout-login-button {
     margin-right: 6em;
@@ -36,10 +28,6 @@ export const Container = styled.header`
       `
       "discover discover"
       "searchbar searchbar"`};
-
-    h1 {
-      display: ${(props) => props.$discover && "none"};
-    }
 
     p.logout-login-button {
       font-size: ${(props) => props.$discover && "0.8rem"};

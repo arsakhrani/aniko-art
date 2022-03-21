@@ -9,6 +9,7 @@ import ArtistsProvider from "./context/artistContext"
 import GalleriesProvider from "./context/galleryContext"
 import PartnersProvider from "./context/partnerContext"
 import "./index.css"
+import IntroPage from "./pages/IntroPage"
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,7 +19,7 @@ ReactDOM.render(
           <ArtistsProvider>
             <GalleriesProvider>
               <PartnersProvider>
-                <App />
+                <IntroPage />
               </PartnersProvider>
             </GalleriesProvider>
           </ArtistsProvider>

@@ -57,10 +57,7 @@ export default function Values() {
             {valuesArray[index].heading}
           </h2>
           <div></div>
-          <p
-            onMouseOver={() => stopBodyScroll()}
-            onMouseLeave={() => allowBodyScroll()}
-          >
+          <p onMouseOver={stopBodyScroll} onMouseLeave={allowBodyScroll}>
             {valuesArray[index].detailsStart}
             <span key={index + "a"}>{valuesArray[index].detailsHighlight}</span>
             {valuesArray[index].detailsMid && valuesArray[index].detailsMid}

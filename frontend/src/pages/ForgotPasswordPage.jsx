@@ -35,7 +35,7 @@ export default function ForgotPasswordPage() {
     <Container>
       <h1>Aniko van Nie Art Agency</h1>
       <p>Enter the email address associated with your account.</p>
-      <form onSubmit={(e) => sendEmail(e)}>
+      <form onSubmit={sendEmail}>
         <TextInput
           id={"forgot-password-email"}
           label={"Email"}

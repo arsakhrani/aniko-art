@@ -9,6 +9,8 @@ import {
   GalleryPicture,
   ImageSelector,
   ChatBlock,
+  SubTitle,
+  OtherText,
 } from "./styles/ArtWorkModal.styled"
 import { AuthContext } from "../../../../context/authContext"
 import { ReactComponent as Close } from "../../../../assets/icons/close.svg"
@@ -129,39 +131,38 @@ export default function ArtWorkModal({ artInfo, closeModal }) {
               top: 20,
               right: 25,
             }}
-            onClick={() => closeModal()}
+            onClick={closeModal}
           />
-
           <div className="basic-grid">
             <h2>{artInfo.artist}</h2>
-            <h3>LOT {artInfo.lot}</h3>
-            <ChatBlock onClick={() => sendChatRequest()}>
-              <span>+ CHAT WITH ARTIS</span>T
+            <SubTitle>LOT {artInfo.lot}</SubTitle>
+            <ChatBlock onClick={sendChatRequest}>
+              <span>+ CHAT WITH OWNE</span>R
             </ChatBlock>
-            <p>{artInfo.title}</p>
-            <p>{artInfo.medium}</p>
-            <p>
+            <OtherText>{artInfo.title}</OtherText>
+            <OtherText>{artInfo.medium}</OtherText>
+            <OtherText>
               {artInfo.dimensionsIn.length}x{artInfo.dimensionsIn.width}x
               {artInfo.dimensionsIn.depth} in
-            </p>
-            <p>
+            </OtherText>
+            <OtherText>
               {artInfo.dimensionsCm.length}x{artInfo.dimensionsCm.width}x
               {artInfo.dimensionsCm.depth} cm
-            </p>
+            </OtherText>
           </div>
           <div className="purchase-grid">
             <div className="buy-art-container">
               <h2>$ {artInfo.price}</h2>
               {!isOwner ? (
                 <PrimaryButton
-                  onClick={() => checkOut()}
+                  onClick={checkOut}
                   buttonText={"BUY DIRECTLY"}
                   loading={isLoading}
                   disabled={isLoading}
                 />
               ) : (
                 <PrimaryButton
-                  onClick={() => deleteWork()}
+                  onClick={deleteWork}
                   buttonText={"DELETE WORK"}
                   loading={isLoading}
                   disabled={isLoading}
@@ -169,11 +170,13 @@ export default function ArtWorkModal({ artInfo, closeModal }) {
               )}
             </div>
             <div className="sale-info-container">
-              <p>Including</p>
+              <OtherText>Including</OtherText>
               <div>
-                <p>Insurance & shipping</p>
-                <p>Royalty to the artist for resale rights 2%</p>
-                <p>Commission 10%</p>
+                <OtherText>Insurance & shipping</OtherText>
+                <OtherText>
+                  Royalty to the artist for resale rights 2%
+                </OtherText>
+                <OtherText>Commission 10%</OtherText>
               </div>
             </div>
           </div>
@@ -193,11 +196,13 @@ export default function ArtWorkModal({ artInfo, closeModal }) {
                 onClick={() => setupBid()}
               />
               <div className="sale-info-container">
-                <p>Including</p>
+                <OtherText>Including</OtherText>
                 <div>
-                  <p>Insurance & shipping</p>
-                  <p>Royalty to the artist for resale rights 2%</p>
-                  <p>Commission 10%</p>
+                  <OtherText>Insurance & shipping</OtherText>
+                  <OtherText>
+                    Royalty to the artist for resale rights 2%
+                  </OtherText>
+                  <OtherText>Commission 10%</OtherText>
                 </div>
               </div>
             </div>

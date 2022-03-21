@@ -28,21 +28,12 @@ export default function StepOne({ changeStep }) {
 
   const date = new Date()
 
-  const authContext = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
 
   const uploadDetails = useSelector((state) => state.uploadDetails.value)
 
   const [artist, setArtist] = useState(
-    uploadDetails.artist ||
-      (authContext.user.sellerType === "artist"
-        ? authContext.user.fullName
-        : "")
-  )
-  const [gallery, setGallery] = useState(
-    uploadDetails.gallery ||
-      (authContext.user.sellerType === "gallery"
-        ? authContext.user.fullName
-        : "")
+    uploadDetails.artist || (user.sellerType === "artist" ? user.fullName : "")
   )
 
   const [country, setCountry] = useState(uploadDetails.country || "")
@@ -64,6 +55,12 @@ export default function StepOne({ changeStep }) {
   const [certificateArray, setCertificateArray] = useState(
     uploadDetails.certificateArray || []
   )
+
+  const changeArtist = (value) => {
+    if (user.sellerType !== "artist") {
+      setArtist(value)
+    }
+  }
 
   const dispatch = useDispatch()
 
@@ -88,7 +85,7 @@ export default function StepOne({ changeStep }) {
     } else {
       const details = {
         artist,
-        gallery,
+        gallery: user.sellerType === "gallery" ? user.fullName : "",
         country,
         title,
         unit,
@@ -153,18 +150,10 @@ export default function StepOne({ changeStep }) {
           <span>ADD ARTIST'S INFORMATION</span>
         </StepLabel>
         <ShippingContainer>
-          {authContext.user.sellerType === "gallery" && (
-            <TextInput
-              id={"gallery"}
-              value={gallery}
-              onChange={(e) => setGallery(e.target.value)}
-              label={"Gallery name"}
-            />
-          )}
           <TextInput
             id={"artist"}
             value={artist}
-            onChange={(e) => setArtist(e.target.value)}
+            onChange={(e) => changeArtist(e.target.value)}
             label={"Artist name"}
           />
           <DropdownInput
@@ -253,11 +242,7 @@ export default function StepOne({ changeStep }) {
         </StepLabel>
         <ShippingContainer>
           <Para>Upload images ( JPG, PNG, PDF ) MAX. 2MB</Para>
-          <FileInput
-            multiple={true}
-            onChange={(e) => uploadImage(e)}
-            id={"art-image"}
-          />
+          <FileInput multiple={true} onChange={uploadImage} id={"art-image"} />
           <FileDescription object={images} removeFile={removeFile} />
         </ShippingContainer>
         <StepLabel>
@@ -267,7 +252,7 @@ export default function StepOne({ changeStep }) {
         <ShippingContainer>
           <Para>Upload image ( JPG, PNG, PDF )</Para>
           <FileInput
-            onChange={(e) => uploadCertificate(e)}
+            onChange={uploadCertificate}
             id={"certificate-authenticity"}
           />
           <FileDescription object={certificate} removeFile={removeFile} />
@@ -279,10 +264,7 @@ export default function StepOne({ changeStep }) {
               flexDirection: "row-reverse",
             }}
           >
-            <PrimaryButton
-              onClick={(e) => validateAndNext(e)}
-              buttonText={"SUBMIT"}
-            />
+            <PrimaryButton onClick={validateAndNext} buttonText={"SUBMIT"} />
           </div>
         </ShippingContainer>
       </div>

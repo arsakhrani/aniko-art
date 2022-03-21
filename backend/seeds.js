@@ -18,8 +18,11 @@ const removeArtists = async () => {
 
 const removeGallery = async () => {
   await Gallery.deleteMany({});
+  console.log("deleted");
 };
 
 const removePartner = async () => {
   await Partner.deleteMany({});
 };
+
+removeGallery();

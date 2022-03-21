@@ -23,6 +23,7 @@ export default function LogInPage() {
       password: e.target.password.value,
     }
     const loginUser = await authService.login(userCreds)
+    console.log(loginUser)
     const { isAuthenticated, user } = loginUser
     if (isAuthenticated) {
       authContext.setUser(user)
@@ -47,7 +48,7 @@ export default function LogInPage() {
   return (
     <div>
       <Header />
-      <form onSubmit={(e) => login(e)}>
+      <form onSubmit={login}>
         <Container>
           <h1>Log In</h1>
           <div>
@@ -86,12 +87,12 @@ export default function LogInPage() {
             <TransparentButton
               logo={"google"}
               buttonText={"Continue with Google"}
-              onClick={() => googleLogin()}
+              onClick={googleLogin}
             />
             <TransparentButton
               logo={"facebook"}
               buttonText={"Continue with Facebook"}
-              onClick={() => facebookLogin()}
+              onClick={facebookLogin}
             />
           </SocialContainer>
           <p style={{ marginTop: "2em" }}>

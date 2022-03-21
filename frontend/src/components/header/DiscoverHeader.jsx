@@ -35,7 +35,7 @@ export default function DiscoverHeader({ toggleSearch }) {
         <Link to={"/discover/partners"}>Partners ({partnerCount})</Link>
       </MenuItem>
       <Search
-        onClick={() => toggleSearch()}
+        onClick={toggleSearch}
         style={{
           marginLeft: "1em",
           cursor: "pointer",

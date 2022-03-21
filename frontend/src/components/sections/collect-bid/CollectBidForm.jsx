@@ -66,10 +66,10 @@ export default function CollectBidForm({
         <TextInput
           id={"bid-amount"}
           type={"number"}
-          onChange={(e) => changeBid(e)}
+          onChange={changeBid}
           value={bidAmount}
           label={"Bid amount (euros)"}
-          onkeydown={"return false"}
+          onKeyDown={"return false"}
           step={bidIncrement}
           min={highestBid}
         />

@@ -20,6 +20,7 @@ export const MenuItem = styled.span`
     border-right: 1px solid ${theme.color.orange};
     cursor: pointer;
     font-size: ${theme.fontSize.small};
+    font-family: "Crimson Text", serif;
 
     a {
       color: ${(props) => props.$activeTab && theme.color.orange};

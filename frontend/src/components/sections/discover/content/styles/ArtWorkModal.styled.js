@@ -94,22 +94,14 @@ export const Info = styled.div`
   h2 {
     font-size: ${theme.fontSize.xxLarge};
     margin: 0;
+    color: white;
   }
 
   h3 {
     font-size: ${theme.fontSize.normal};
     margin-top: 0;
     margin-bottom: 0.5em;
-  }
-
-  p {
-    font-size: ${theme.fontSize.xSmall};
-    margin: 0;
-    opacity: 0.8;
-
-    &:first-of-type {
-      margin-top: 2em;
-    }
+    color: white;
   }
 
   div.basic-grid {
@@ -136,6 +128,7 @@ export const Info = styled.div`
     h2 {
       font-size: 2em;
       margin-top: 0.5em;
+      color: white;
     }
   }
 
@@ -147,6 +140,7 @@ export const Info = styled.div`
 
     h2 {
       margin-right: 0.2em;
+      color: white;
     }
 
     @media (max-width: 850px) {
@@ -219,5 +213,22 @@ export const ChatBlock = styled.div`
 
   span {
     border-bottom: solid 1px ${theme.color.orange};
+  }
+`
+
+export const SubTitle = styled.p`
+  font-size: ${theme.fontSize.normal};
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  color: white;
+`
+
+export const OtherText = styled.p`
+  font-size: ${theme.fontSize.xSmall};
+  margin: 0;
+  opacity: 0.8;
+
+  &:first-of-type {
+    margin-top: 2em;
   }
 `

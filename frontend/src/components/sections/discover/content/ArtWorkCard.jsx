@@ -5,6 +5,8 @@ import {
   PriceLink,
   GradientContainer,
   SoldLabel,
+  CardHeading,
+  CardText,
 } from "./styles/ArtWorkCard.styled"
 import PrimaryButton from "../../../atoms/PrimaryButton"
 import ArtWorkModal from "./ArtWorkModal"
@@ -31,7 +33,6 @@ export default function ArtWorkCard({
   const { user } = useContext(AuthContext)
 
   const showModal = (type) => {
-    // if (!editMode) {
     if (!cardInfo.sold) {
       if (type === "art") {
         setShowConfirmModal(false)
@@ -43,9 +44,6 @@ export default function ArtWorkCard({
       const body = document.getElementsByTagName("body")
       body[0].classList.add("modal-open")
     }
-    // } else {
-    //   selectImage()
-    // }
   }
 
   const closeModal = () => {
@@ -84,10 +82,10 @@ export default function ArtWorkCard({
   return (
     <div>
       {showArtModal && (
-        <ArtWorkModal closeModal={() => closeModal()} artInfo={cardInfo} />
+        <ArtWorkModal closeModal={closeModal} artInfo={cardInfo} />
       )}
       {showConfirmModal && (
-        <ConfirmModal closeModal={() => closeModal()} artInfo={cardInfo} />
+        <ConfirmModal closeModal={closeModal} artInfo={cardInfo} />
       )}
       {modalMessage && (
         <NotificationModal
@@ -103,7 +101,6 @@ export default function ArtWorkCard({
         $hover={isHovering}
         onClick={() => showModal("art")}
         $pointer={!cardInfo.sold}
-        // $featureBorder={featureBorder}
       >
         <CoverPicture
           src={cardInfo.pictures[0]}
@@ -113,10 +110,10 @@ export default function ArtWorkCard({
       </GradientContainer>
       <WrittenContent>
         <div>
-          <h4>{cardInfo.artist}</h4>
-          <p>
+          <CardHeading>{cardInfo.artist}</CardHeading>
+          <CardText>
             {cardInfo.title}, {cardInfo.year}
-          </p>
+          </CardText>
           <span>{cardInfo.gallery}</span>
         </div>
         {!isOwner && !cardInfo.sold && cardInfo.minimumBid > 0 && (

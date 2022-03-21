@@ -123,7 +123,7 @@ export default function RequestArtwork() {
           <PrimaryButton
             loading={isLoading}
             disabled={isLoading}
-            onClick={() => sendRequest()}
+            onClick={sendRequest}
             buttonText={"Submit"}
           />
         </div>

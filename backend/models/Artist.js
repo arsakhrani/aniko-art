@@ -46,6 +46,12 @@ const artistSchema = new mongoose.Schema({
       ref: "artwork",
     },
   ],
+  exhibitions: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "exhibition",
+    },
+  ],
   activated: {
     type: Boolean,
     default: true,

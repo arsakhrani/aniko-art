@@ -51,6 +51,16 @@ module.exports.uploadArt = async (req, res) => {
   if (user.sellerType === "partner") {
     const partner = await Partner.findOne({ email: user.email });
     partner.artworks.push(newArtwork._id);
+
+    const partneredArtist = new Artist({
+      email: user.email,
+      fullName: artwork.artist,
+      birthCountry: artwork.country,
+    });
+    partneredArtist.artworks.push(newArtwork._id);
+    await partneredArtist.save();
+
+    partner.affiliatedArtists.push(partneredArtist._id);
     await partner.save();
   }
 
@@ -197,5 +207,6 @@ module.exports.deleteArt = async (req, res, next) => {
   const { id } = req.params;
   const artwork = await Artwork.findByIdAndDelete(id);
   //send emails to affected parties.
+  //remove from artwork list of artist.
   res.status(200).json({ success: true });
 };

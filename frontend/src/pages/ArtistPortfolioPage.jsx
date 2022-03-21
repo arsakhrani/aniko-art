@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 import Header from "../components/header/Header"
 import Footer from "../components/footer/Footer"
-import { useHistory, useParams } from "react-router"
+import { useParams } from "react-router"
 import { ArtistContext } from "../context/artistContext"
 import PrimaryButton from "../components/atoms/PrimaryButton"
 import {
@@ -22,10 +22,9 @@ import { filterArtworks } from "../services/filterFunctions"
 import { useSelector } from "react-redux"
 
 export default function ArtistPortfolioPage() {
-  const history = useHistory()
   const { artistId } = useParams()
   const { section } = useParams()
-  const { artists, setArtists } = useContext(ArtistContext)
+  const { artists } = useContext(ArtistContext)
 
   const artworkFilters = useSelector((state) => state.discoverFilter)
 
@@ -139,11 +138,7 @@ export default function ArtistPortfolioPage() {
                 columnClassName="artworks-masonry-grid_column"
               >
                 {filteredArtworks.map((artwork, index) => (
-                  <ArtWorkCard
-                    editMode={editMode}
-                    key={artwork._id}
-                    cardInfo={artwork}
-                  />
+                  <ArtWorkCard key={artwork._id} cardInfo={artwork} />
                 ))}
               </Masonry>
             ) : (

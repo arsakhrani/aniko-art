@@ -7,8 +7,12 @@ export default {
         "Content-Type": "application/json",
       },
     })
-    const data = await response.json()
-    return data
+    if (response.ok) {
+      const data = await response.json()
+      return data
+    } else {
+      return {}
+    }
   },
   register: async (user) => {
     const response = await fetch("/api/user/register", {

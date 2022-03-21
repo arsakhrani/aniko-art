@@ -11,6 +11,7 @@ export const StyledLink = styled(Link)`
   font-size: 3em;
   cursor: pointer;
   border-bottom: 2px solid black;
+  font-family: "Crimson Text", serif;
 
   @media (max-width: ${theme.mediaSize.tablet}) {
     font-size: 2em;

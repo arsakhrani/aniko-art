@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1"
+	 xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 841.9 595.3"
+	 style="enable-background:new 0 0 841.9 595.3;" >
+<style type="text/css">
+	.st1{fill:#FCFCFC;}
+	.st2{fill:none;stroke:#FCFCFC;stroke-width:0.3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st9{fill:#FFFFFF;}
+	.st10{fill:#FDFDFD;stroke:#FCFCFC;stroke-width:0.6549;stroke-miterlimit:10;}
+	.st11{fill:#FDFDFD;}
+</style>
+	<g>
+		
+			<image style="overflow:visible;" width="5184" height="3456" transform="matrix(0.1624 0 0 0.1726 0 -1.2369)">
+		</image>
+		<g>
+			<path class="st1" d="M430.9,287.5l-6.7,20.4l-13.2,0l7.1-20.3L430.9,287.5 M433.6,285.4l-16.9,0c0,0-0.1,0.1-0.1,0.1l-8.4,24.2
+				c0.1,0.1,0.1,0.1,0.2,0.2l17.2,0c0.1-0.1,0.1-0.1,0.2-0.2l8-24.2C433.7,285.5,433.6,285.5,433.6,285.4L433.6,285.4z"/>
+		</g>
+		<line class="st2" x1="0" y1="0" x2="416.7" y2="285.4"/>
+		<line class="st2" x1="433.6" y1="285.4" x2="841.9" y2="0"/>
+		<line class="st2" x1="425.5" y1="309.9" x2="841.9" y2="595.3"/>
+		<line class="st2" x1="0" y1="595.3" x2="408.3" y2="309.9"/>
+	</g>
+</svg>

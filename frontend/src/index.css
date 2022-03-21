@@ -1,12 +1,6 @@
 @import url(sanitize.css);
 
 @font-face {
-  font-family: "Crimson Text";
-  src: local("Crimson Text"),
-    url(./assets/fonts/Crimson_Text/CrimsonText-Regular.ttf) format("truetype");
-}
-
-@font-face {
   font-family: "Din Light";
   src: local("Din Next Rounded"),
     url(./assets/fonts/Din_Next_Rounded/DINNextRoundedLTPro-Light.otf)
@@ -14,17 +8,11 @@
 }
 
 @font-face {
-  font-family: "Din Bold";
-  src: local("Din Next Rounded"),
-    url(./assets/fonts/Din_Next_Rounded/DINNextRoundedLTPro-Regular.otf)
-      format("truetype");
-}
-
-/* TEST */
-@font-face {
-  font-family: "Object Light";
-  src: local("Object Light"),
-    url(./assets/fonts/Test/Object-UltraLight.ttf) format("truetype");
+  font-family: "Crimson Text";
+  src: local("Crimson Text"),
+    url(./assets/fonts/Crimson_Text/CrimsonText-Regular.ttf) format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 body {
@@ -47,7 +35,10 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Object Light", serif;
+  font-family: "Crimson Text", serif;
+  color: #343331;
+  font-weight: normal;
+  font-style: normal;
 }
 
 a {

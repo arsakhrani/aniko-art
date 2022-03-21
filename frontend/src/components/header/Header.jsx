@@ -10,12 +10,17 @@ import {
   TopLine,
   BottomLine,
   SearchBarContainer,
+  BrandContainer,
 } from "./styles/Header.styled"
 import { AuthContext } from "../../context/authContext"
 import authService from "../../services/authService"
 import TextInput from "../inputs/TextInput"
 import { changeSearchParams } from "../../state/discover/discoverFilterSlice"
 import { useDispatch } from "react-redux"
+import { ReactComponent as FullLogo } from "../../assets/icons/logo/black/long.svg"
+import { ReactComponent as ShortLogo } from "../../assets/icons/logo/black/short.svg"
+import fullLogo from "../../assets/icons/logo/black/long.png"
+import shortLogo from "../../assets/icons/logo/black/short.png"
 
 export default function Header({ discover, portfolio, grey }) {
   const [toggleMenu, setToggleMenu] = useState(false)
@@ -43,6 +48,11 @@ export default function Header({ discover, portfolio, grey }) {
 
   const { isAuthenticated, setIsAuthenticated, setUser } =
     useContext(AuthContext)
+
+  const vw = Math.max(
+    document.documentElement.clientWidth || 0,
+    window.innerWidth || 0
+  )
 
   const openMenu = () => {
     setToggleMenu(!toggleMenu)
@@ -83,7 +93,22 @@ export default function Header({ discover, portfolio, grey }) {
       $discover={discover || portfolio}
       $grey={grey}
     >
-      <h1 onClick={() => history.push("/")}>Aniko</h1>
+      {vw > 768 &&
+        (isAuthenticated ? (
+          <ShortLogo
+            style={{ gridArea: "brand" }}
+            onClick={() => history.push("/")}
+            height="3em"
+            style={{ cursor: "pointer" }}
+          />
+        ) : (
+          <FullLogo
+            style={{ gridArea: "brand" }}
+            onClick={() => history.push("/")}
+            height="3em"
+            style={{ cursor: "pointer" }}
+          />
+        ))}
       {discover && (
         <DiscoverHeader
           toggleSearch={() =>
@@ -99,7 +124,7 @@ export default function Header({ discover, portfolio, grey }) {
         />
       )}
       {isAuthenticated ? (
-        <p className={"logout-login-button"} onClick={() => logOutUser()}>
+        <p className={"logout-login-button"} onClick={logOutUser}>
           LOGOUT
         </p>
       ) : (
@@ -110,7 +135,7 @@ export default function Header({ discover, portfolio, grey }) {
       <MenuContainer
         onMouseEnter={() => setExpanded(true)}
         onMouseLeave={() => setExpanded(false)}
-        onClick={() => openMenu()}
+        onClick={openMenu}
       >
         <TopLine $toggleMenu={toggleMenu} $expanded={expanded} />
         <MidLine $toggleMenu={toggleMenu} $expanded={expanded} />
@@ -119,7 +144,7 @@ export default function Header({ discover, portfolio, grey }) {
       {searchBar && (
         <SearchBarContainer>
           <TextInput
-            onChange={(e) => setSearchParams(e)}
+            onChange={setSearchParams}
             id={"search-input"}
             label={labelType}
           />

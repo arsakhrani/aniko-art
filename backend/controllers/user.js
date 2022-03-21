@@ -49,10 +49,8 @@ module.exports.newUser = async (req, res) => {
       const artist = {
         fullName: user.fullName,
         email: user.email,
-        currentCountry: user.shippingAddress
-          ? user.shippingAddress.country
-          : "",
-        currentCity: user.shippingAddress ? user.shippingAddress.city : "",
+        currentCountry: user.shippingAddress?.country || "",
+        currentCity: user.shippingAddress?.city || "",
         website: user.website,
         soundDescription: user.soundDescription,
         bannerPicture: user.bannerPicture,
@@ -72,8 +70,8 @@ module.exports.newUser = async (req, res) => {
     const galleryOrPartner = {
       email: user.email,
       fullName: user.fullName,
-      country: user.shippingAddress ? user.shippingAddress.country : "",
-      city: user.shippingAddress ? user.shippingAddress.city : "",
+      country: user.shippingAddress?.country || "",
+      city: user.shippingAddress?.city || "",
       website: user.website,
       featurePicture: user.featurePicture,
     };
@@ -84,9 +82,7 @@ module.exports.newUser = async (req, res) => {
     }
 
     if (user.sellerType === "partner") {
-      const newPartner = new Partner({
-        ...galleryOrPartner,
-      });
+      const newPartner = new Partner(galleryOrPartner);
       await newPartner.save();
       newUser.isVerifiedWithId = false;
     }
@@ -106,7 +102,7 @@ module.exports.newUser = async (req, res) => {
     await newUser.save();
 
     const code = crypto.randomBytes(16).toString("hex");
-    const secret = new SecretCode({ user: registeredUser._id, code });
+    const secret = new SecretCode({ user: newUser._id, code });
     const secretCode = await secret.save();
     const verificationLink = `${serverRootDomain}/api/user/verify-email/${secretCode.code}`;
     const emailBody = authEmails.verifyEmail(user.fullName, verificationLink);
@@ -236,31 +232,31 @@ module.exports.editUser = async (req, res, next) => {
   if (updatedUser) {
     const galleryOrPartner = {
       fullName: updatedUser.fullName,
-      country: updatedUser.shippingAddress
-        ? updatedUser.shippingAddress.country
-        : "",
-      city: updatedUser.shippingAddress ? updatedUser.shippingAddress.city : "",
+      country: updatedUser.shippingAddress?.country || "",
+      city: updatedUser.shippingAddress?.city || "",
       website: updatedUser.website,
       featurePicture: updatedUser.featurePicture,
     };
 
-    if (updatedupdatedUser.sellerType === "gallery") {
-      await Gallery.findOneAndUpdate({ email: updatedUser.email }, updatedUser);
+    if (updatedUser.sellerType === "gallery") {
+      await Gallery.findOneAndUpdate(
+        { email: updatedUser.email },
+        galleryOrPartner
+      );
     }
 
     if (updatedUser.sellerType === "partner") {
-      await Partner.findOneAndUpdate({ email: updatedUser.email }, updatedUser);
+      await Partner.findOneAndUpdate(
+        { email: updatedUser.email },
+        galleryOrPartner
+      );
     }
 
     if (updatedUser.sellerType === "artist") {
       const artist = {
         fullName: updatedUser.fullName,
-        currentCountry: updatedUser.shippingAddress
-          ? updatedUser.shippingAddress.country
-          : "",
-        currentCity: updatedUser.shippingAddress
-          ? updatedUser.shippingAddress.city
-          : "",
+        currentCountry: updatedUser.shippingAddress?.country || "",
+        currentCity: updatedUser.shippingAddress?.city || "",
         website: updatedUser.website,
         soundDescription: updatedUser.soundDescription,
         bannerPicture: updatedUser.bannerPicture,

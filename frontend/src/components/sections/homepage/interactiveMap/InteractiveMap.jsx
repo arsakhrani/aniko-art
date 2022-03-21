@@ -8,7 +8,6 @@ import { changeCountry } from "../../../../state/discover/discoverFilterSlice"
 
 export default function InteractiveMap() {
   const [flag, setFlag] = useState(true)
-  //const [allowAnimation, setAllowAnimation] = useState(true)
   const [firstCycle, setFirstCycle] = useState(true)
 
   const history = useHistory()
@@ -37,10 +36,8 @@ export default function InteractiveMap() {
     if (animated.length > 0) {
       animated[0].classList.remove("animated")
     }
-    //if (allowAnimation) {
     const randomIndex = Math.floor(Math.random() * (countries.length - 1))
     countries[randomIndex].classList.add("animated")
-    //}
     const timeOut = setTimeout(() => {
       setFirstCycle(false)
       setFlag(!flag)
@@ -70,12 +67,7 @@ export default function InteractiveMap() {
           style={{ height: 1, width: 135, backgroundColor: "#F2A16B" }}
         ></div>
       </div>
-      <Continent
-        width="100vw"
-        height="100vh"
-        //onMouseLeave={() => setAllowAnimation(true)}
-        //onMouseEnter={() => setAllowAnimation(false)}
-      />
+      <Continent width="100vw" height="100vh" />
     </div>
   )
 }
