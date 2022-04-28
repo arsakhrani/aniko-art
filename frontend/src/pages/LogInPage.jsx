@@ -23,7 +23,6 @@ export default function LogInPage() {
       password: e.target.password.value,
     }
     const loginUser = await authService.login(userCreds)
-    console.log(loginUser)
     const { isAuthenticated, user } = loginUser
     if (isAuthenticated) {
       authContext.setUser(user)

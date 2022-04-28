@@ -105,6 +105,10 @@ const artworkSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  createdByAdmin: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const artwork = mongoose.model("artwork", artworkSchema);

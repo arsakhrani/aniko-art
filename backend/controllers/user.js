@@ -3,6 +3,7 @@ const stripeKey = process.env.STRIPE_SECRET_KEY;
 const devEmail = process.env.DEV_EMAIL;
 const clientRootDomain = process.env.ROOT_DOMAIN_CLIENT;
 const serverRootDomain = process.env.ROOT_DOMAIN_SERVER;
+const apiKey = process.env.ADMIN_API_KEY;
 const stripe = require("stripe")(stripeKey);
 const User = require("../models/User");
 const Artist = require("../models/Artist");
@@ -119,6 +120,34 @@ module.exports.newUser = async (req, res) => {
   }
 };
 
+module.exports.transferUser = async (req, res) => {
+  const { email, password, id, entityType } = req.body;
+  const newUser = new User({ email, password });
+  const customer = await stripe.customers.create();
+  newUser.stripeId = customer.id;
+
+  if (entityType === "artist") {
+    const artist = await Artist.findByIdAndUpdate(id, { email });
+    await artist.save();
+  }
+
+  if (entityType === "gallery") {
+    const gallery = await Gallery.findByIdAndUpdate(id, { email });
+    await gallery.save;
+  }
+
+  if (entityType === "partner") {
+    const partner = await Partner.findByIdAndUpdate(id, { email });
+    await partner.save;
+  }
+
+  await newUser.save();
+
+  const token = signToken(newUser._id);
+  res.cookie("access_token", token, { httpOnly: true, sameSite: true });
+  res.status(200).json({ user: newUser, isAuthenticated: true });
+};
+
 module.exports.verifyEmail = async (req, res, next) => {
   const { code } = req.params;
   const secret = await SecretCode.findOne({ code });
@@ -197,6 +226,70 @@ module.exports.saveNewPassword = async (req, res, next) => {
     res.status(200).json({ user, isAuthenticated: true, success: true });
   } else {
     res.status(401).json({ success: false });
+  }
+};
+
+module.exports.sendTransferEmail = async (req, res, next) => {
+  const { id } = req.params;
+  if (req.query.key === apiKey) {
+    const { email, entityType } = req.body;
+
+    const emailCheck = await User.findOne({ email });
+    if (emailCheck) {
+      res.status(401).json({ message: "Email is taken", success: false });
+    } else {
+      if (entityType === "artist") {
+        const artistCheck = Artist.findById(id);
+        if (!artistCheck) {
+          res
+            .status(401)
+            .json({ message: "Entity does not exist", success: false });
+        }
+      }
+
+      if (entityType === "gallery") {
+        const galleryCheck = Gallery.findById(id);
+        if (!galleryCheck) {
+          res
+            .status(401)
+            .json({ message: "Entity does not exist", success: false });
+        }
+      }
+
+      if (entityType === "partner") {
+        const partnerCheck = Partner.findById(id);
+        if (!partnerCheck) {
+          res
+            .status(401)
+            .json({ message: "Entity does not exist", success: false });
+        }
+      }
+
+      const code = crypto.randomBytes(20).toString("hex");
+      const secret = new SecretCode({ user: id, code, email });
+      const secretCode = await secret.save();
+      const transferAccountLink = `${clientRootDomain}/transfer-account/${secretCode.code}/${id}/${entityType}`;
+      const emailBody = authEmails.transferAccount(transferAccountLink);
+      transport.sendMail({
+        from: devEmail,
+        to: email,
+        subject: "Aniko van Nie Art Agency Account Transfer",
+        html: emailBody,
+      });
+      res.status(200).json({ success: true });
+    }
+  } else {
+    res.status(403).json({ success: false });
+  }
+};
+
+module.exports.verifyTransferCode = async (req, res, next) => {
+  const { code } = req.params;
+  const secret = await SecretCode.findOne({ code });
+  if (secret) {
+    res.json({ success: true, email: secret.email });
+  } else {
+    res.status(403).send({ success: false });
   }
 };
 

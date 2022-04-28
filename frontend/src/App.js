@@ -19,6 +19,9 @@ import TermsAndConditionsPage from "./pages/TermsAndConditionsPage"
 import ForgotPasswordPage from "./pages/ForgotPasswordPage"
 import PasswordResetPage from "./pages/PasswordResetPage"
 import PurchaseSuccessPage from "./pages/PurchaseSuccessPage"
+import AddExhibitionPage from "./pages/AddExhibitionPage"
+import AdminPage from "./pages/AdminPage"
+import TransferAccountPage from "./pages/TransferAccountPage"
 
 function App() {
   const { isAuthenticated, user } = useContext(AuthContext)
@@ -77,6 +80,13 @@ function App() {
             <Redirect to="/" />
           )}
         </Route>
+        <Route path="/add-exhibition/:artistId" exact>
+          {user.sellerType === "artist" && user.isVerifiedWithId ? (
+            <AddExhibitionPage />
+          ) : (
+            <Redirect to="/" />
+          )}
+        </Route>
         <Route path="/create-bid" exact>
           {isAuthenticated ? <CollectBidPage /> : <Redirect to="/login" />}
         </Route>
@@ -96,9 +106,15 @@ function App() {
           exact
           component={PasswordResetPage}
         />
+        <Route
+          path="/transfer-account/:code/:id/:entityType"
+          exact
+          component={TransferAccountPage}
+        />
         <Route path="/purchase-success/:artworkId/:buyerId" exact>
           {!isAuthenticated ? <Redirect to="/" /> : <PurchaseSuccessPage />}
         </Route>
+        <Route path="/admin" exact component={AdminPage} />
         <Route path="*" component={NotFoundPage} />
       </Switch>
     </BrowserRouter>

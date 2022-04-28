@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 import Header from "../components/header/Header"
 import Footer from "../components/footer/Footer"
-import { useParams } from "react-router"
+import { useHistory, useParams } from "react-router"
 import { ArtistContext } from "../context/artistContext"
 import PrimaryButton from "../components/atoms/PrimaryButton"
 import {
@@ -12,6 +12,7 @@ import {
   NoArtistContainer,
   WebsiteButtonContainer,
 } from "./styles/ArtistPortfolioPage.styled"
+import { ArtistsAndGalleriesContainer } from "../components/sections/discover/content/styles/MainContent.styled"
 import Masonry from "react-masonry-css"
 import "../components/sections/discover/content/styles/masonry.css"
 import ArtWorkCard from "../components/sections/discover/content/ArtWorkCard"
@@ -20,6 +21,7 @@ import { ReactComponent as AudioIcon } from "../assets/icons/audio.svg"
 import { ReactComponent as MuteIcon } from "../assets/icons/mute.svg"
 import { filterArtworks } from "../services/filterFunctions"
 import { useSelector } from "react-redux"
+import { AuthContext } from "../context/authContext"
 
 export default function ArtistPortfolioPage() {
   const { artistId } = useParams()
@@ -33,6 +35,12 @@ export default function ArtistPortfolioPage() {
   const [muteAudio, setMuteAudio] = useState(false)
 
   const filteredArtworks = filterArtworks(artist.artworks, artworkFilters)
+
+  const { user } = useContext(AuthContext)
+
+  const isOwner = user.email === artist.email
+
+  const history = useHistory()
 
   return (
     <div>
@@ -145,10 +153,39 @@ export default function ArtistPortfolioPage() {
               <h3>There are currently no artworks to display.</h3>
             ))}
           {section === "exhibitions" &&
-            (artist.exhibitions ? (
-              <h3>here are some exhibitions</h3>
+            (artist.exhibitions.length ? (
+              <ArtistsAndGalleriesContainer>
+                {artist.exhibitions.map((exhibition) => (
+                  <ArtistAndGalleryCard
+                    exhibition={true}
+                    key={exhibition._id}
+                    cardInfo={exhibition}
+                  />
+                ))}
+              </ArtistsAndGalleriesContainer>
             ) : (
-              <h3>There are currently no exhibitions to display.</h3>
+              <div>
+                <h3>There are currently no exhibitions to display.</h3>
+                {isOwner && (
+                  <div>
+                    <p>
+                      Click{" "}
+                      <span
+                        onClick={() =>
+                          history.push(`/add-exhibition/${artistId}`)
+                        }
+                        style={{
+                          textDecoration: "underline",
+                          cursor: "pointer",
+                        }}
+                      >
+                        here
+                      </span>{" "}
+                      to add an exhibition
+                    </p>
+                  </div>
+                )}
+              </div>
             ))}
         </Container>
       )}

@@ -25,8 +25,6 @@ export default function StepTwo() {
 
   const dispatch = useDispatch()
 
-  let futureFeature = false
-
   const authContext = useContext(AuthContext)
 
   const history = useHistory()
@@ -178,11 +176,6 @@ export default function StepTwo() {
             />
           </div>
           <Para>*We only offer from 1000 euro and up</Para>
-          {futureFeature && (
-            <Para>
-              <CheckboxInput label={"Let Aniko.Art decide the price for you"} />
-            </Para>
-          )}
           <Para>
             ( The price will include{" "}
             <span style={{ cursor: "pointer" }}>insurance</span> and{" "}

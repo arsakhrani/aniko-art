@@ -189,6 +189,7 @@ export default function ManageProfile() {
   const currentYear = new Date().getFullYear()
 
   const validate = async () => {
+    setIsLoading(true)
     const banner = await uploadImage(bannerPicture)
     const audio = await uploadAudio(audioFile)
     const { cvUrl, cvFileName } = await uploadCv(cvFile)
@@ -219,19 +220,23 @@ export default function ManageProfile() {
       const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
       if (password !== confirmPassword) {
         setErrorMessage("passwords do not match")
+        setIsLoading(false)
       } else if (!regex.test(password)) {
         setErrorMessage(
           "password must be eight characters with at least one letter and one number"
         )
+        setIsLoading(false)
       } else if (!termsAndConditions) {
         setErrorMessage("you must agree to terms and conditions")
+        setIsLoading(false)
       } else if (!fullName) {
         setErrorMessage("Please enter a name")
+        setIsLoading(false)
       } else if (registrationDetails.sellerType === "gallery" && !taxNumber) {
         setErrorMessage("Please enter a valid tax number")
+        setIsLoading(false)
       } else {
         setErrorMessage("")
-        setIsLoading(true)
         const newUser = {
           ...userDetails,
           password,

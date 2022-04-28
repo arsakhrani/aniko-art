@@ -189,12 +189,14 @@ export default function ArtWorkModal({ artInfo, closeModal }) {
                   ? artInfo.highestBid + artInfo.bidIncrement
                   : artInfo.minimumBid}
               </h3>
-              <PrimaryButton
-                disabled={isLoading}
-                loading={isLoading}
-                buttonText={"BID NOW"}
-                onClick={() => setupBid()}
-              />
+              {!isOwner && (
+                <PrimaryButton
+                  disabled={isLoading}
+                  loading={isLoading}
+                  buttonText={"BID NOW"}
+                  onClick={() => setupBid()}
+                />
+              )}
               <div className="sale-info-container">
                 <OtherText>Including</OtherText>
                 <div>

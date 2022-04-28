@@ -4,12 +4,12 @@ import PrimaryButton from "../components/atoms/PrimaryButton"
 import TextInput from "../components/inputs/TextInput"
 import { Container } from "./styles/ForgotPasswordPage.styled"
 import { useParams, useHistory } from "react-router-dom"
-import authService from "../services/authService"
 import ErrorMessage from "../components/atoms/ErrorMessage"
 import { AuthContext } from "../context/authContext"
+import adminService from "../services/adminService"
 
-export default function PasswordResetPage() {
-  const { code } = useParams()
+export default function TransferAccountPage() {
+  const { code, id, entityType } = useParams()
   const history = useHistory()
 
   const [isLoading, setIsLoading] = useState(false)
@@ -19,7 +19,7 @@ export default function PasswordResetPage() {
   const [email, setEmail] = useState("")
 
   const initialize = async () => {
-    const response = await authService.verifyCode(code)
+    const response = await adminService.verifyTransferCode(code)
     if (response.success) {
       setEmail(response.email)
     } else {
@@ -47,8 +47,10 @@ export default function PasswordResetPage() {
       const details = {
         email,
         password,
+        id,
+        entityType,
       }
-      const response = await authService.updatePassword(details)
+      const response = await adminService.transferUser(details)
       if (!response.success) {
         setErrorMessage(
           "A problem occured. Please request a new reset password link."
@@ -65,7 +67,7 @@ export default function PasswordResetPage() {
   return (
     <Container>
       <h1>Aniko.Art</h1>
-      <p>Please enter a new password for your account.</p>
+      <p>Please enter a password for your account.</p>
       <div>
         <div style={{ marginBottom: "2em", marginTop: "1em" }}>
           <TextInput

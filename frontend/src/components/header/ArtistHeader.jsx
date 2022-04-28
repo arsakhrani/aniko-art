@@ -41,10 +41,10 @@ export default function DiscoverHeader({ toggleSearch }) {
       </MenuItem>
       <MenuItem $activeTab={section === "exhibitions"}>
         <Link to={`/artist-portfolio/${artistId}/exhibitions`}>
-          Exhibitions (20)
+          Exhibitions ({artist.exhibitions.length})
         </Link>
       </MenuItem>
-      {artist.cvFile && (
+      {artist.cvFileName && (
         <MenuItem $activeTab={section === "cv"}>
           <a href={getCvLink()} download target="_blank">
             CV

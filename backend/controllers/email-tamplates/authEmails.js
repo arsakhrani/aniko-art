@@ -36,3 +36,13 @@ module.exports.verifyIdDeclined = (name) => {
     <p>Warm Regards,</p>
     <p>Your Aniko van Nie // Art Agency Team</p>`;
 };
+
+module.exports.transferAccount = (link) => {
+  return `<p>Dear Sir/Madam,</p>
+    <br>
+    <p>You are recieving this because Aniko.Art has invited you to take over an account.
+    If you accept, please click <a target="_blank" href=${link}>here</a> to set up your account.</p>
+    <br>
+    <p>Warm Regards,</p>
+    <p>Your Aniko van Nie // Art Agency Team</p>`;
+};

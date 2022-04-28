@@ -5,15 +5,18 @@ const exhibitionSchema = new mongoose.Schema({
     type: String,
   },
   startDate: {
-    type: String,
+    type: Date,
   },
   endDate: {
-    type: Number,
+    type: Date,
   },
   type: {
     type: String,
   },
   country: {
+    type: String,
+  },
+  website: {
     type: String,
   },
   pictures: [String],

@@ -1,5 +1,6 @@
 const sendgridKey = process.env.TWILIO_SENDGRID_KEY;
 const devEmail = process.env.DEV_EMAIL;
+const apiKey = process.env.ADMIN_API_KEY;
 const Artwork = require("../models/Artwork");
 const User = require("../models/User");
 const Artist = require("../models/Artist");
@@ -67,9 +68,63 @@ module.exports.uploadArt = async (req, res) => {
   res.status(200).json({ success: true, uploadedArtwork: newArtwork });
 };
 
+module.exports.adminUploadArt = async (req, res) => {
+  const key = req.query.key;
+  if (key === apiKey) {
+    const artwork = req.body;
+    const newArtwork = new Artwork(artwork);
+    newArtwork.size = artwork.dimensionsCm.length * artwork.dimensionsCm.width;
+    const number = await Artwork.countDocuments();
+    newArtwork.lot = number + 1;
+    if (newArtwork.price < 1001) {
+      newArtwork.bidIncrement = 125;
+    } else if (newArtwork.price < 4001) {
+      newArtwork.bidIncrement = 250;
+    } else if (newArtwork.price < 50001) {
+      newArtwork.bidIncrement = 500;
+    } else {
+      newArtwork.bidIncrement = 1000;
+    }
+    newArtwork.createdByAdmin = true;
+
+    await newArtwork.save();
+
+    if (artwork.entityType === "artist") {
+      const artist = await Artist.findById(artwork.owner);
+      if (artist) {
+        artist.artworks.push(newArtwork._id);
+        await artist.save();
+      }
+    }
+
+    if (artwork.entityType === "gallery") {
+      const gallery = await Gallery.findById(artwork.owner);
+      if (gallery) {
+        gallery.artworks.push(newArtwork._id);
+        await gallery.save();
+      }
+    }
+
+    res.status(200).json({ success: true, uploadedArtwork: newArtwork });
+  } else {
+    res.status(401).json({ success: false });
+  }
+};
+
 module.exports.getAllArt = async (req, res) => {
   const artworks = await Artwork.find({ sold: false }).sort({ created: -1 });
   res.status(200).json({ artworks });
+};
+
+module.exports.getAdminArt = async (req, res) => {
+  if (req.query.key === apiKey) {
+    const artworks = await Artwork.find({ createdByAdmin: true }).sort({
+      created: -1,
+    });
+    res.status(200).json({ artworks });
+  } else {
+    res.status(401).json({ success: false });
+  }
 };
 
 module.exports.setNewBid = async (req, res) => {
@@ -209,4 +264,15 @@ module.exports.deleteArt = async (req, res, next) => {
   //send emails to affected parties.
   //remove from artwork list of artist.
   res.status(200).json({ success: true });
+};
+
+module.exports.deleteAdminArt = async (req, res, next) => {
+  if (req.query.key == apiKey) {
+    const { id } = req.params;
+    await Artwork.findByIdAndDelete(id);
+
+    res.status(200).json({ success: true });
+  } else {
+    res.status(401).json({ success: false });
+  }
 };

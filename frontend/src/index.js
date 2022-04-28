@@ -19,7 +19,7 @@ ReactDOM.render(
           <ArtistsProvider>
             <GalleriesProvider>
               <PartnersProvider>
-                <IntroPage />
+                <App />
               </PartnersProvider>
             </GalleriesProvider>
           </ArtistsProvider>

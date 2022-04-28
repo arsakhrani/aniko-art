@@ -405,6 +405,18 @@ router.put("/update/:id", wrapAsync(userController.editUser));
 
 router.put("/request-artwork/:id", wrapAsync(userController.requestArtWork));
 
+router.post(
+  "/send-transfer-emai/:id",
+  wrapAsync(userController.sendTransferEmail)
+);
+
+router.get(
+  "/verify-transfer-code/:code",
+  wrapAsync(userController.verifyTransferCode)
+);
+
+router.post("/execute-transfer-user/", wrapAsync(userController.transferUser));
+
 router.get(
   "/auth/google/buy",
   passport.authenticate("google-buy", {

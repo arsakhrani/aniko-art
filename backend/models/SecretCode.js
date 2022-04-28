@@ -6,6 +6,9 @@ const secretCodeSchema = new mongoose.Schema({
     required: true,
     ref: "User",
   },
+  email: {
+    type: String,
+  },
   code: {
     type: String,
     required: true,
