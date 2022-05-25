@@ -79,6 +79,7 @@ passport.use(
           googleId: profile.id,
           role: "buyer",
           stripeId: customer.id,
+          isVerified: true,
         };
         const newUser = new User(user);
         await newUser.save();
@@ -112,6 +113,7 @@ passport.use(
           role: "seller",
           sellerType: "partner",
           stripeId: customer.id,
+          isVerified: true,
         };
         const partner = {
           fullName: profile.displayName,
@@ -151,6 +153,7 @@ passport.use(
           role: "seller",
           sellerType: "artist",
           stripeId: customer.id,
+          isVerified: true,
         };
         const artist = {
           fullName: profile.displayName,
@@ -190,6 +193,7 @@ passport.use(
           role: "seller",
           sellerType: "gallery",
           stripeId: customer.id,
+          isVerified: true,
         };
         const gallery = {
           fullName: profile.displayName,
@@ -229,6 +233,7 @@ passport.use(
           facebookId: profile.id,
           role: "buyer",
           stripeId: customer.id,
+          isVerified: true,
         };
         const newUser = new User(user);
         await newUser.save();
@@ -263,6 +268,7 @@ passport.use(
           role: "seller",
           sellerType: "partner",
           stripeId: customer.id,
+          isVerified: true,
         };
         const partner = {
           fullName: profile.displayName,
@@ -303,6 +309,7 @@ passport.use(
           role: "seller",
           sellerType: "gallery",
           stripeId: customer.id,
+          isVerified: true,
         };
         const gallery = {
           fullName: profile.displayName,
@@ -343,6 +350,7 @@ passport.use(
           role: "seller",
           sellerType: "artist",
           stripeId: customer.id,
+          isVerified: true,
         };
         const artist = {
           fullName: profile.displayName,

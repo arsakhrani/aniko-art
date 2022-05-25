@@ -35,7 +35,7 @@ module.exports.adminEditPartner = async (req, res, next) => {
   if (key === apiKey) {
     const partner = req.body;
     await Partner.findByIdAndUpdate(id, partner);
-    attampt = true;
+    attempt = true;
   }
   if (attempt) {
     res.status(200).json({ success: true });
@@ -50,7 +50,7 @@ module.exports.adminDeletePartner = async (req, res, next) => {
   let attempt = false;
   if (key === apiKey) {
     const deletedPartner = await Partner.findByIdAndUpdate(id);
-    if (deletedPartner) attampt = true;
+    if (deletedPartner) attempt = true;
   }
   if (attempt) {
     res.status(200).json({ success: true });

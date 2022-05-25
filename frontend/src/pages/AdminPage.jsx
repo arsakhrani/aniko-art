@@ -6,6 +6,7 @@ import AdminEdit from "../components/sections/admin/AdminEdit"
 import AdminLogin from "../components/sections/admin/AdminLogin"
 import AdminCreateArt from "../components/sections/admin/AdminCreateArt"
 import AdminDeleteArt from "../components/sections/admin/AdminDeleteArt"
+import AdminTransfer from "../components/sections/admin/AdminTransfer"
 
 export default function AdminPage() {
   const [task, setTask] = useState("")
@@ -47,6 +48,7 @@ export default function AdminPage() {
         )}
         {task === "createArtwork" && <AdminCreateArt setTask={changeTask} />}
         {task === "deleteArtwork" && <AdminDeleteArt setTask={changeTask} />}
+        {task === "transferAccount" && <AdminTransfer seTask={changeTask} />}
       </div>
     )
   }

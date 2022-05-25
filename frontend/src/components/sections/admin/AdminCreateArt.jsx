@@ -44,6 +44,8 @@ export default function AdminCreateArt({ setTask, task }) {
   const [imagesArray, setImagesArray] = useState([])
   const [certificateArray, setCertificateArray] = useState([])
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const [artistList, setArtistList] = useState([])
   const [galleryList, setGalleryList] = useState([])
   const [entityType, setEntityType] = useState("")
@@ -151,14 +153,8 @@ export default function AdminCreateArt({ setTask, task }) {
       title,
       medium,
       year,
-      dimensionsCm:
-        uploadDetails.unit === "cm"
-          ? enteredMeasurements
-          : convertedMeasurements,
-      dimensionsIn:
-        uploadDetails.unit === "in"
-          ? enteredMeasurements
-          : convertedMeasurements,
+      dimensionsCm: unit === "cm" ? enteredMeasurements : convertedMeasurements,
+      dimensionsIn: unit === "in" ? enteredMeasurements : convertedMeasurements,
       price,
       pictures: images.artImageUpload,
       certificateOfAuthenticity: images.certImageUpload,
@@ -347,7 +343,12 @@ export default function AdminCreateArt({ setTask, task }) {
               onClick={() => setTask("")}
               buttonText={"Cancel"}
             />
-            <PrimaryButton onClick={validate} buttonText={"Submit"} />
+            <PrimaryButton
+              loading={isLoading}
+              disabled={isLoading}
+              onClick={validate}
+              buttonText={"Submit"}
+            />
           </div>
         </ShippingContainer>
       )}

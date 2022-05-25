@@ -86,7 +86,8 @@ module.exports.informAdminOfSaleProcess = () => {
 module.exports.chatRequest = (buyer, seller) => {
   return `<p>Dear Admin,</p>
   <br>
-  <p>BLAA</p>
+  <p>${buyer.fullName} has requested to chat with ${seller.fullName}.</p>
+  <p>If you approved please put ${buyer.email} in touch with ${seller.email}.</p>
   <br>
   <p>Warm Regards,</p>
   <p>Your Aniko van Nie // Art Agency Team</p>`;

@@ -98,6 +98,7 @@
 .radial-input label {
   position: relative;
   bottom: 3px;
+  cursor: pointer;
 }
 
 .radial-input span {

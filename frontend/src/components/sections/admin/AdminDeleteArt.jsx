@@ -80,7 +80,10 @@ export default function AdminDeleteArt({ setTask, task }) {
             </Para>
             {errorMessage && <ErrorMessage messageBody={errorMessage} />}
             <div style={{ display: "flex", justifyContent: "space-around" }}>
-              <TransparentButton onClick={setTask("")} buttonText={"Cancel"} />
+              <TransparentButton
+                onClick={() => setTask("")}
+                buttonText={"Cancel"}
+              />
               <PrimaryButton onClick={validate} buttonText={"Delete"} />
             </div>
           </ShippingContainer>

@@ -72,6 +72,11 @@ export default function AdminDelete({ setTask, task }) {
     }
   })
 
+  const changeEntity = (e) => {
+    const selection = list.find((item) => item.fullName === e.target.value)
+    setEntity(selection)
+  }
+
   return (
     <Container>
       {!list.length && (
@@ -89,9 +94,7 @@ export default function AdminDelete({ setTask, task }) {
       {list.length > 0 && !entity && (
         <div>
           <DropdownInput
-            onChange={(e) =>
-              setEntity(list.find((item) => item.fullName === e.target.value))
-            }
+            onChange={changeEntity}
             value={dropdownSelection}
             options={[{ value: "", text: "" }, ...dropdownOptions]}
             label={"Select an entity to delete:"}
@@ -106,7 +109,10 @@ export default function AdminDelete({ setTask, task }) {
             <Para>Delete {entity.fullName}?</Para>
             {errorMessage && <ErrorMessage messageBody={errorMessage} />}
             <div style={{ display: "flex", justifyContent: "space-around" }}>
-              <TransparentButton onClick={setTask("")} buttonText={"Cancel"} />
+              <TransparentButton
+                onClick={() => setTask("")}
+                buttonText={"Cancel"}
+              />
               <PrimaryButton onClick={validate} buttonText={"Delete"} />
             </div>
           </ShippingContainer>
