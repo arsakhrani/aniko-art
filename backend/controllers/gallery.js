@@ -4,10 +4,12 @@ const adminEmail = process.env.DEV_EMAIL;
 
 module.exports.getAllGalleries = async (req, res) => {
   const galleries = await Gallery.find({ activated: true })
+    .populate("artworks")
     .collation({ locale: "en", strength: 2 })
     .sort({
       fullName: 1,
     });
+  console.log(galleries);
   res.status(200).json({ galleries });
 };
 

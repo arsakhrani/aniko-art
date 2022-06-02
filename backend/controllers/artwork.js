@@ -244,7 +244,10 @@ module.exports.finalizeSale = async (req, res) => {
 module.exports.chatRequest = async (req, res, next) => {
   const { buyerId, sellerId } = req.body;
   const buyer = await User.findById(buyerId);
-  const seller = await User.findById(sellerId);
+  let seller = await Artist.findById(sellerId);
+  if (!seller) {
+    seller = await Gallery.findById(sellerId);
+  }
 
   const adminEmailBody = adminEmails.chatRequest(buyer, seller);
 

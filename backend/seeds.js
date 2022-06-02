@@ -19,12 +19,33 @@ mongoose
     console.log(err);
   });
 
-const fixUser = async () => {
-  const user = await User.findOneAndUpdate(
-    { isVerified: false },
-    { isVerified: true }
-  );
-  console.log(user);
+const deleteUsers = async () => {
+  await User.deleteMany({});
+  console.log("Users Deleted");
 };
 
-fixUser();
+const deletArtists = async () => {
+  await Artist.deleteMany({});
+  console.log("Artsits Deleted");
+};
+
+const deletGalleries = async () => {
+  await Gallery.deleteMany({});
+  console.log("Galleries Deleted");
+};
+
+const deleteArtworks = async () => {
+  await Artwork.deleteMany({});
+  console.log("Artworks Deleted");
+};
+
+const deletePartners = async () => {
+  await Partner.deleteMany({});
+  console.log("Partners Deleted");
+};
+
+deleteUsers();
+deletArtists();
+deletGalleries();
+deleteArtworks();
+deletePartners();

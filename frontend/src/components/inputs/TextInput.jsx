@@ -29,7 +29,7 @@ export default function TextInput({
         id={id}
         name={name}
         type={type}
-        onkeydown={onKeyDown}
+        onKeyDown={onKeyDown}
         value={value}
         required
       />
