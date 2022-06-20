@@ -22,6 +22,7 @@ import PurchaseSuccessPage from "./pages/PurchaseSuccessPage"
 import AddExhibitionPage from "./pages/AddExhibitionPage"
 import AdminPage from "./pages/AdminPage"
 import TransferAccountPage from "./pages/TransferAccountPage"
+import ScrollToTop from "./ScrollToTop"
 
 function App() {
   const { isAuthenticated, user } = useContext(AuthContext)
@@ -30,6 +31,7 @@ function App() {
   )
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Switch>
         <Route path="/" exact component={HomePage} />
         <Route path="/discover/:type" exact component={DiscoverPage} />

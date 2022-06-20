@@ -19,8 +19,6 @@ import { changeSearchParams } from "../../state/discover/discoverFilterSlice"
 import { useDispatch } from "react-redux"
 import { ReactComponent as FullLogo } from "../../assets/icons/logo/black/long.svg"
 import { ReactComponent as ShortLogo } from "../../assets/icons/logo/black/short.svg"
-import fullLogo from "../../assets/icons/logo/black/long.png"
-import shortLogo from "../../assets/icons/logo/black/short.png"
 
 export default function Header({ discover, portfolio, grey }) {
   const [toggleMenu, setToggleMenu] = useState(false)
@@ -96,17 +94,15 @@ export default function Header({ discover, portfolio, grey }) {
       {vw > 768 &&
         (isAuthenticated ? (
           <ShortLogo
-            style={{ gridArea: "brand" }}
+            style={{ gridArea: "brand", cursor: "pointer" }}
             onClick={() => history.push("/")}
             height="3em"
-            style={{ cursor: "pointer" }}
           />
         ) : (
           <FullLogo
-            style={{ gridArea: "brand" }}
+            style={{ gridArea: "brand", cursor: "pointer" }}
             onClick={() => history.push("/")}
             height="3em"
-            style={{ cursor: "pointer" }}
           />
         ))}
       {discover && (

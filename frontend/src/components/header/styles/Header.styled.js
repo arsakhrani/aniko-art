@@ -1,7 +1,5 @@
 import styled from "styled-components"
 import theme from "../../common/theme"
-import fullLogo from "../../../assets/icons/logo/black/long.png"
-import shortLogo from "../../../assets/icons/logo/black/short.png"
 
 export const Container = styled.header`
   display: ${(props) => props.$discover && "grid"};
@@ -9,7 +7,7 @@ export const Container = styled.header`
   grid-template-areas:
     "brand discover"
     "searchbar searchbar";
-  background-color: ${(props) => (props.$grey ? theme.color.grey : "")};
+  background-color: ${(props) => (props.$grey ? theme.color.grey : "white")};
 
   p.logout-login-button {
     margin-right: 6em;
@@ -19,7 +17,7 @@ export const Container = styled.header`
     position: absolute;
     right: 1em;
     top: 0;
-    margin-top: 10px;
+    margin-top: 15px;
   }
 
   @media (max-width: ${theme.mediaSize.tablet}) {

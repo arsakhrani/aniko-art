@@ -6,7 +6,7 @@ module.exports.verifyId = (user, approveLink, declineLink) => {
   If you are happy with the request, 
   please click <a target="_blank" href=${approveLink}>here</a> to approve their request.</p>
   <p>Otherwise, to decline their request pleace click <a target="_blank" href=${declineLink}>here</a>.</p>
-  <p>If no action is taken, request will be automatically declined in 24 hours.</p>
+  <p>If no action is taken, request will be automatically declined in 72 hours.</p>
   <p>User's contact details: ${user.email}</p>
   <br>
   <img src=${user.idPicture} />

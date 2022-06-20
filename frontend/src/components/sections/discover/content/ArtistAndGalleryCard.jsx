@@ -76,7 +76,7 @@ export default function ArtistAndGalleryCard({
         )}
         {partner && (
           <Link to={`/partner-portfolio/${cardInfo._id}`}>
-            <PrimaryButton buttonText={"VIEW PARTNERS"} />
+            <PrimaryButton buttonText={"VIEW ARTISTS"} />
           </Link>
         )}
       </WrittenContent>

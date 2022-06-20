@@ -50,7 +50,7 @@ export default function InteractiveMap() {
   return (
     <div style={{ height: "100vh", display: vw < 1000 && "none" }}>
       <div style={styles.titleBox}>
-        <h1 style={{ fontSize: 44, marginBottom: 0 }}>Showroom</h1>
+        <h1 style={{ fontSize: 60, marginBottom: 0 }}>Showroom</h1>
         <Link to="/discover/artworks">
           <p
             style={{
@@ -76,7 +76,7 @@ const styles = {
   titleBox: {
     position: "absolute",
     width: "35%",
-    height: "20%",
+    height: "23%",
     display: "flex",
     flexDirection: "column",
     paddingLeft: "6em",

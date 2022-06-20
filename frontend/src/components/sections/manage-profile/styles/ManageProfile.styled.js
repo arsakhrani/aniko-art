@@ -80,6 +80,7 @@ export const BubbleCounter = styled.div`
   align-items: center;
   font-size: 0.8em;
   margin-right: 1em;
+  padding-top: 2px;
 `
 
 export const StepLabel = styled.div`

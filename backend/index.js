@@ -38,8 +38,8 @@ apiRouter.use("/checkout", routes.stripeRoutes);
 
 cron.schedule("0 * * * *", async () => {
   console.log("running a task every hour");
-  //await cronJobs.expireActiveBids()
-  //await cronJobs.processPurchases()
+  await cronJobs.expireActiveBids();
+  await cronJobs.processPurchases();
 });
 
 app.listen(port, () => {

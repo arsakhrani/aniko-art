@@ -33,13 +33,13 @@ export const Form = styled.form`
 
   h2 {
     font-size: 60px;
-    margin-bottom: 0;
-    margin-top: 0.1em;
+    margin-bottom: 0.2em;
+    margin-top: 0.5em;
   }
 
   p {
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 
     @media (max-width: 900px) {
       font-size: 0.8em;
@@ -74,6 +74,7 @@ export const SocialContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   margin-top: 4em;
+  margin-bottom: 2.5em;
 
   @media (max-width: 1320px) {
     flex-direction: column;
