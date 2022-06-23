@@ -21,11 +21,11 @@ import DropdownInput from "../../inputs/DropdownInput"
 import { countries } from "../../../services/dropdownValues"
 import theme from "../../common/theme"
 import {
-  addNewFiles,
-  convertNestedObjectToArray,
   uploadAudio,
   uploadCv,
   uploadImage,
+  preloadFile,
+  removeFile,
 } from "../../../services/uploadFunctions"
 import FileDescription from "../../atoms/FileDescription"
 
@@ -75,116 +75,6 @@ export default function ManageProfile() {
   const [birthCity, setBirthCity] = useState(user.birthCity || "")
   const [birthCountry, setBirthCountry] = useState(user.birthCountry || "")
   const [birthYear, setBirthYear] = useState(user.birthYear || null)
-
-  const preloadIdImage = (e) => {
-    const { files: newFiles } = e.target
-    if (newFiles.length) {
-      if (newFiles[0].size > 2097152) {
-        setErrorMessage("Please make sure the image file size is under 2MB.")
-      } else {
-        const updatedImages = addNewFiles(newFiles, e, idImage)
-        setIdImage(updatedImages)
-        setIdImageArray(convertNestedObjectToArray(updatedImages))
-      }
-    }
-  }
-
-  const preloadFaceImage = (e) => {
-    const { files: newFiles } = e.target
-    if (newFiles.length) {
-      if (newFiles[0].size > 2097152) {
-        setErrorMessage("Please make sure the image file size is under 2MB.")
-      } else {
-        const updatedImages = addNewFiles(newFiles, e, faceImage)
-        setFaceImage(updatedImages)
-        setFaceImageArray(convertNestedObjectToArray(updatedImages))
-      }
-    }
-  }
-
-  const preloadBanner = (e) => {
-    setErrorMessage("")
-    const { files: newFiles } = e.target
-    if (newFiles.length) {
-      if (newFiles[0].size > 2097152) {
-        setErrorMessage("Please make sure the image file size is under 2MB.")
-      } else {
-        const updatedBanner = addNewFiles(newFiles, e, bannerObject)
-        setBannerObject(updatedBanner)
-        setBannerPicture(convertNestedObjectToArray(updatedBanner))
-      }
-    }
-  }
-
-  const preloadAudio = (e) => {
-    setErrorMessage("")
-    const { files: newFiles } = e.target
-    if (newFiles.length) {
-      if (newFiles[0].size > 1048576) {
-        setErrorMessage("Please make sure the audio file size is under 1MB.")
-      } else {
-        const updatedAudio = addNewFiles(newFiles, e, audioObject)
-        setAudioObject(updatedAudio)
-        setAudioFile(convertNestedObjectToArray(updatedAudio))
-      }
-    }
-  }
-
-  const preloadCv = (e) => {
-    setErrorMessage("")
-    const { files: newFiles } = e.target
-    if (newFiles.length) {
-      if (newFiles[0].size > 1048576) {
-        setErrorMessage("Please make sure the CV file size is under 1MB.")
-      } else {
-        const updatedCv = addNewFiles(newFiles, e, cvObject)
-        setCvObject(updatedCv)
-        setCvFile(convertNestedObjectToArray(updatedCv))
-      }
-    }
-  }
-
-  const preloadFeature = (e) => {
-    setErrorMessage("")
-    const { files: newFiles } = e.target
-    if (newFiles.length) {
-      if (newFiles[0].size > 1048576) {
-        setErrorMessage("Please make sure the image file size is under 1MB.")
-      } else {
-        const feature = addNewFiles(newFiles, e, cvObject)
-        setFeatureObject(feature)
-        setFeatureFile(convertNestedObjectToArray(feature))
-      }
-    }
-  }
-
-  const removeFile = (fileName, state) => {
-    delete state[fileName]
-    if (state === idImage) {
-      setIdImage({ ...state })
-      setIdImageArray(convertNestedObjectToArray({ ...state }))
-    }
-    if (state === faceImage) {
-      setFaceImage({ ...state })
-      setFaceImageArray(convertNestedObjectToArray({ ...state }))
-    }
-    if (state === bannerObject) {
-      setBannerObject({ ...state })
-      setBannerPicture(convertNestedObjectToArray({ ...state }))
-    }
-    if (state === audioObject) {
-      setAudioObject({ ...state })
-      setAudioFile(convertNestedObjectToArray({ ...state }))
-    }
-    if (state === cvObject) {
-      setCvObject({ ...state })
-      setCvFile(convertNestedObjectToArray({ ...state }))
-    }
-    if (state === featureObject) {
-      setFeatureObject({ ...state })
-      setFeatureFile(convertNestedObjectToArray({ ...state }))
-    }
-  }
 
   const currentYear = new Date().getFullYear()
 
@@ -329,17 +219,45 @@ export default function ManageProfile() {
                   <Para>Upload ID ( JPG, PNG, PDF ) MAX. 2MB</Para>
                   <FileInput
                     multiple={false}
-                    onChange={preloadIdImage}
+                    onChange={(e) =>
+                      preloadFile(
+                        e,
+                        idImage,
+                        (val) => setIdImageArray(val),
+                        (val) => setIdImage(val),
+                        (val) => setErrorMessage(val),
+                        2097152
+                      )
+                    }
                     id={"id-image"}
                   />
-                  <FileDescription object={idImage} removeFile={removeFile} />
+                  <FileDescription
+                    object={idImage}
+                    arraySetter={(val) => setIdImageArray(val)}
+                    objectSetter={(val) => setIdImage(val)}
+                    removeFile={removeFile}
+                  />
                   <Para>Upload Face ( JPG, PNG, PDF ) MAX. 2MB</Para>
                   <FileInput
                     multiple={false}
-                    onChange={preloadFaceImage}
+                    onChange={(e) =>
+                      preloadFile(
+                        e,
+                        faceImage,
+                        (val) => setFaceImageArray(val),
+                        (val) => setFaceImage(val),
+                        (val) => setErrorMessage(val),
+                        2097152
+                      )
+                    }
                     id={"face-image"}
                   />
-                  <FileDescription object={faceImage} removeFile={removeFile} />
+                  <FileDescription
+                    object={faceImage}
+                    arraySetter={(val) => setFaceImageArray(val)}
+                    objectSetter={(val) => setFaceImage(val)}
+                    removeFile={removeFile}
+                  />
                 </div>
               )}
               {errorMessage && <ErrorMessage messageBody={errorMessage} />}
@@ -514,10 +432,24 @@ export default function ManageProfile() {
               <Para style={{ marginTop: 0 }}>Upload your feature image:</Para>
               <FileInput
                 id={"feature-image"}
-                onChange={preloadFeature}
+                onChange={(e) =>
+                  preloadFile(
+                    e,
+                    featureObject,
+                    (val) => setFeatureFile(val),
+                    (val) => setFeatureObject(val),
+                    (val) => setErrorMessage(val),
+                    1048576
+                  )
+                }
                 multiple={false}
               />
-              <FileDescription object={featureObject} removeFile={removeFile} />
+              <FileDescription
+                object={featureObject}
+                arraySetter={(val) => setFeatureFile(val)}
+                objectSetter={(val) => setFeatureObject(val)}
+                removeFile={removeFile}
+              />
               {((registrationDetails &&
                 registrationDetails.sellerType === "artist") ||
                 user.sellerType === "artist") && (
@@ -525,11 +457,22 @@ export default function ManageProfile() {
                   <Para>Upload your own Portfolio Banner:</Para>
                   <FileInput
                     id={"portfolio-banner"}
-                    onChange={preloadBanner}
+                    onChange={(e) =>
+                      preloadFile(
+                        e,
+                        bannerObject,
+                        (val) => setBannerPicture(val),
+                        (val) => setBannerObject(val),
+                        (val) => setErrorMessage(val),
+                        2097152
+                      )
+                    }
                     multiple={false}
                   />
                   <FileDescription
                     object={bannerObject}
+                    arraySetter={(val) => setBannerPicture(val)}
+                    objectSetter={(val) => setBannerObject(val)}
                     removeFile={removeFile}
                   />
                   <Para>
@@ -538,12 +481,23 @@ export default function ManageProfile() {
                   </Para>
                   <FileInput
                     audio={true}
-                    onChange={preloadAudio}
+                    onChange={(e) =>
+                      preloadFile(
+                        e,
+                        audioObject,
+                        (val) => setAudioFile(val),
+                        (val) => setAudioObject(val),
+                        (val) => setErrorMessage(val),
+                        1048576
+                      )
+                    }
                     id={"portfolio-audio"}
                     multiple={false}
                   />
                   <FileDescription
                     object={audioObject}
+                    arraySetter={(val) => setAudioFile(val)}
+                    objectSetter={(val) => setAudioObject(val)}
                     removeFile={removeFile}
                   />
                   <div style={{ marginTop: "1em" }}>
@@ -557,11 +511,25 @@ export default function ManageProfile() {
                   <Para>Upload your CV:</Para>
                   <FileInput
                     cv={true}
-                    onChange={preloadCv}
+                    onChange={(e) =>
+                      preloadFile(
+                        e,
+                        cvObject,
+                        (val) => setCvFile(val),
+                        (val) => setCvObject(val),
+                        (val) => setErrorMessage(val),
+                        1048576
+                      )
+                    }
                     id={"cv"}
                     multiple={false}
                   />
-                  <FileDescription object={cvObject} removeFile={removeFile} />
+                  <FileDescription
+                    object={cvObject}
+                    arraySetter={(val) => setCvFile(val)}
+                    objectSetter={(val) => setCvObject(val)}
+                    removeFile={removeFile}
+                  />
                   <div style={{ marginTop: "1em" }}>
                     <TextInput
                       id={"birth-city"}

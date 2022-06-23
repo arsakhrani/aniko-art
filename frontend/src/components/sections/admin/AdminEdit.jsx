@@ -14,6 +14,8 @@ import {
   uploadAudio,
   uploadCv,
   uploadImage,
+  preloadFile,
+  removeFile,
 } from "../../../services/uploadFunctions"
 import {
   Container,
@@ -64,84 +66,6 @@ export default function AdminEdit({ setTask, task }) {
   }, [])
 
   const history = useHistory()
-
-  const email = process.env.REACT_APP_DEV_EMAIL
-
-  const preloadBanner = (e) => {
-    setErrorMessage("")
-    const { files: newFiles } = e.target
-    if (newFiles.length) {
-      if (newFiles[0].size > 2097152) {
-        setErrorMessage("Please make sure the image file size is under 2MB.")
-      } else {
-        const updatedBanner = addNewFiles(newFiles, e, bannerObject)
-        setBannerObject(updatedBanner)
-        setBannerPicture(convertNestedObjectToArray(updatedBanner))
-      }
-    }
-  }
-
-  const preloadAudio = (e) => {
-    setErrorMessage("")
-    const { files: newFiles } = e.target
-    if (newFiles.length) {
-      if (newFiles[0].size > 1048576) {
-        setErrorMessage("Please make sure the audio file size is under 1MB.")
-      } else {
-        const updatedAudio = addNewFiles(newFiles, e, audioObject)
-        setAudioObject(updatedAudio)
-        setAudioFile(convertNestedObjectToArray(updatedAudio))
-      }
-    }
-  }
-
-  const preloadCv = (e) => {
-    setErrorMessage("")
-    const { files: newFiles } = e.target
-    if (newFiles.length) {
-      if (newFiles[0].size > 1048576) {
-        setErrorMessage("Please make sure the CV file size is under 1MB.")
-      } else {
-        const updatedCv = addNewFiles(newFiles, e, cvObject)
-        setCvObject(updatedCv)
-        setCvFile(convertNestedObjectToArray(updatedCv))
-      }
-    }
-  }
-
-  const preloadFeature = (e) => {
-    setErrorMessage("")
-    const { files: newFiles } = e.target
-    if (newFiles.length) {
-      if (newFiles[0].size > 1048576) {
-        setErrorMessage("Please make sure the image file size is under 1MB.")
-      } else {
-        const feature = addNewFiles(newFiles, e, cvObject)
-        setFeatureObject(feature)
-        setFeatureFile(convertNestedObjectToArray(feature))
-      }
-    }
-  }
-
-  const removeFile = (fileName, state) => {
-    delete state[fileName]
-    if (state === bannerObject) {
-      setBannerObject({ ...state })
-      setBannerPicture(convertNestedObjectToArray({ ...state }))
-    }
-    if (state === audioObject) {
-      setAudioObject({ ...state })
-      setAudioFile(convertNestedObjectToArray({ ...state }))
-    }
-    if (state === cvObject) {
-      setCvObject({ ...state })
-      setCvFile(convertNestedObjectToArray({ ...state }))
-    }
-    if (state === featureObject) {
-      setFeatureObject({ ...state })
-      setFeatureFile(convertNestedObjectToArray({ ...state }))
-    }
-  }
 
   const currentYear = new Date().getFullYear()
 
@@ -313,10 +237,24 @@ export default function AdminEdit({ setTask, task }) {
             <Para style={{ marginTop: 0 }}>Upload a feature image:</Para>
             <FileInput
               id={"feature-image"}
-              onChange={preloadFeature}
+              onChange={(e) =>
+                preloadFile(
+                  e,
+                  featureObject,
+                  (val) => setFeatureFile(val),
+                  (val) => setFeatureObject(val),
+                  (val) => setErrorMessage(val),
+                  1048576
+                )
+              }
               multiple={false}
             />
-            <FileDescription object={featureObject} removeFile={removeFile} />
+            <FileDescription
+              object={featureObject}
+              arraySetter={(val) => setFeatureFile(val)}
+              objectSetter={(val) => setFeatureObject(val)}
+              removeFile={removeFile}
+            />
             {errorMessage && <ErrorMessage messageBody={errorMessage} />}
             <div
               style={{
@@ -342,20 +280,48 @@ export default function AdminEdit({ setTask, task }) {
               <Para>Upload a Portfolio Banner:</Para>
               <FileInput
                 id={"portfolio-banner"}
-                onChange={preloadBanner}
+                onChange={(e) =>
+                  preloadFile(
+                    e,
+                    bannerObject,
+                    (val) => setBannerPicture(val),
+                    (val) => setBannerObject(val),
+                    (val) => setErrorMessage(val),
+                    2097152
+                  )
+                }
                 multiple={false}
               />
-              <FileDescription object={bannerObject} removeFile={removeFile} />
+              <FileDescription
+                object={bannerObject}
+                arraySetter={(val) => setBannerPicture(val)}
+                objectSetter={(val) => setBannerObject(val)}
+                removeFile={removeFile}
+              />
               <Para>
                 Upload an audio file that plays while visiting the portfolio:
               </Para>
               <FileInput
                 audio={true}
-                onChange={preloadAudio}
+                onChange={(e) =>
+                  preloadFile(
+                    e,
+                    audioObject,
+                    (val) => setAudioFile(val),
+                    (val) => setAudioObject(val),
+                    (val) => setErrorMessage(val),
+                    1048576
+                  )
+                }
                 id={"portfolio-audio"}
                 multiple={false}
               />
-              <FileDescription object={audioObject} removeFile={removeFile} />
+              <FileDescription
+                object={audioObject}
+                arraySetter={(val) => setAudioFile(val)}
+                objectSetter={(val) => setAudioObject(val)}
+                removeFile={removeFile}
+              />
               <div style={{ marginTop: "1em" }}>
                 <TextInput
                   id={"audio-description"}
@@ -367,11 +333,25 @@ export default function AdminEdit({ setTask, task }) {
               <Para>Upload a CV:</Para>
               <FileInput
                 cv={true}
-                onChange={preloadCv}
+                onChange={(e) =>
+                  preloadFile(
+                    e,
+                    cvObject,
+                    (val) => setCvFile(val),
+                    (val) => setCvObject(val),
+                    (val) => setErrorMessage(val),
+                    1048576
+                  )
+                }
                 id={"cv"}
                 multiple={false}
               />
-              <FileDescription object={cvObject} removeFile={removeFile} />
+              <FileDescription
+                object={cvObject}
+                arraySetter={(val) => setCvFile(val)}
+                objectSetter={(val) => setCvObject(val)}
+                removeFile={removeFile}
+              />
               <div style={{ marginTop: "1em" }}>
                 <TextInput
                   id={"birth-city"}

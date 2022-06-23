@@ -53,3 +53,35 @@ export const uploadCv = async (cvFile) => {
     return ""
   }
 }
+
+export const preloadFile = (
+  e,
+  objectState,
+  arraySetter,
+  objectSetter,
+  errorSetter,
+  maxFileSize
+) => {
+  errorSetter("")
+  const { files: newFiles } = e.target
+  if (newFiles.length) {
+    if (newFiles[0].size > maxFileSize) {
+      errorSetter("Please make sure the image file size is under 2MB.")
+    } else {
+      const updatedImages = addNewFiles(newFiles, e, objectState)
+      objectSetter(updatedImages)
+      arraySetter(convertNestedObjectToArray(updatedImages))
+    }
+  }
+}
+
+export const removeFile = (
+  fileName,
+  objectState,
+  arraySetter,
+  objectSetter
+) => {
+  delete objectState[fileName]
+  objectSetter({ ...objectState })
+  arraySetter(convertNestedObjectToArray({ ...objectState }))
+}

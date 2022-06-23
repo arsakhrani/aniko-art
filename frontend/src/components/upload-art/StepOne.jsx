@@ -17,6 +17,8 @@ import { saveDetails } from "../../state/upload/uploadArtSlice"
 import {
   convertNestedObjectToArray,
   addNewFiles,
+  preloadFile,
+  removeFile,
 } from "../../services/uploadFunctions"
 import FileDescription from "../atoms/FileDescription"
 
@@ -101,44 +103,6 @@ export default function StepOne({ changeStep }) {
       }
       dispatch(saveDetails(details))
       changeStep(2)
-    }
-  }
-
-  const removeFile = (fileName, state) => {
-    delete state[fileName]
-    if (state === images) {
-      setImages({ ...state })
-      setImagesArray(convertNestedObjectToArray({ ...state }))
-    }
-    if (state === certificate) {
-      setCertificate({ ...state })
-      setCertificateArray(convertNestedObjectToArray({ ...state }))
-    }
-  }
-
-  const uploadImage = (e) => {
-    const { files: newFiles } = e.target
-    if (newFiles.length) {
-      if (newFiles[0].size > 2097152) {
-        setErrorMessage("Please make sure the image file size is under 2MB.")
-      } else {
-        const updatedImages = addNewFiles(newFiles, e, images)
-        setImages(updatedImages)
-        setImagesArray(convertNestedObjectToArray(updatedImages))
-      }
-    }
-  }
-
-  const uploadCertificate = (e) => {
-    const { files: newFiles } = e.target
-    if (newFiles.length) {
-      if (newFiles[0].size > 2097152) {
-        setErrorMessage("Please make sure the image file size is under 2MB.")
-      } else {
-        const updatedCertificate = addNewFiles(newFiles, e, certificate)
-        setCertificate(updatedCertificate)
-        setCertificateArray(convertNestedObjectToArray(updatedCertificate))
-      }
     }
   }
 
@@ -242,8 +206,26 @@ export default function StepOne({ changeStep }) {
         </StepLabel>
         <ShippingContainer>
           <Para>Upload images ( JPG, PNG, PDF ) MAX. 2MB</Para>
-          <FileInput multiple={true} onChange={uploadImage} id={"art-image"} />
-          <FileDescription object={images} removeFile={removeFile} />
+          <FileInput
+            multiple={true}
+            onChange={(e) =>
+              preloadFile(
+                e,
+                cvObject,
+                (val) => setImagesArray(val),
+                (val) => setImages(val),
+                (val) => setErrorMessage(val),
+                2097152
+              )
+            }
+            id={"art-image"}
+          />
+          <FileDescription
+            object={cvObject}
+            arraySetter={(val) => setCvFile(val)}
+            objectSetter={(val) => setCvObject(val)}
+            removeFile={removeFile}
+          />
         </ShippingContainer>
         <StepLabel>
           <BubbleCounter>3</BubbleCounter>
@@ -252,10 +234,25 @@ export default function StepOne({ changeStep }) {
         <ShippingContainer>
           <Para>Upload image ( JPG, PNG, PDF )</Para>
           <FileInput
-            onChange={uploadCertificate}
+            onChange={(e) =>
+              preloadFile(
+                e,
+                cvObject,
+                (val) => setCertificateArray(val),
+                (val) => setCertificate(val),
+                (val) => setErrorMessage(val),
+                2097152
+              )
+            }
             id={"certificate-authenticity"}
+            multiple={false}
           />
-          <FileDescription object={certificate} removeFile={removeFile} />
+          <FileDescription
+            object={cvObject}
+            arraySetter={(val) => setCvFile(val)}
+            objectSetter={(val) => setCvObject(val)}
+            removeFile={removeFile}
+          />
           {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
           <div
             style={{

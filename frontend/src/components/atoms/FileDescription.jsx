@@ -7,7 +7,12 @@ import {
 import { ReactComponent as GreenDot } from "../../assets/icons/green-dot.svg"
 import { ReactComponent as Close } from "../../assets/icons/close.svg"
 
-export default function FileDescription({ object, removeFile }) {
+export default function FileDescription({
+  object,
+  removeFile,
+  arraySetter,
+  objectSetter,
+}) {
   return Object.keys(object).map((property) => {
     let file = object[property]
     return (
@@ -19,7 +24,9 @@ export default function FileDescription({ object, removeFile }) {
           width={10}
           stroke={"black"}
           style={{ cursor: "pointer" }}
-          onClick={() => removeFile(property, object)}
+          onClick={() =>
+            removeFile(property, object, arraySetter, objectSetter)
+          }
         />
       </FileDetails>
     )
