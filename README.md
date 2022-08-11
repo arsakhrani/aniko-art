@@ -4,19 +4,6 @@ Art auction platform which connects buyers and sellers interested in specificall
 
 ### Screenshots
 
-### Project Status
-
-The project is still in production.
-Milestones:
-[x] Complete front end skeleton
-[] Complete front end functionality
-[x] Add image upload
-[] Add automatic email functions
-[] Add stripe payments
-[] Add mobile responsiveness
-
-[] Add live auction function
-
 ### Installation and Setup Instructions
 
 Clone down this repository. You will need node, and npm installed globally on your machine.
@@ -51,5 +38,4 @@ The technologies implemented in this project include Express, Node, React, Redux
 ### Contributors
 
 - Aniko Van Nie - Product Owner
-- - UX/UI Design
 - Ashneil Sakhrani - Web Development
